@@ -1,6 +1,6 @@
-from src.service.users import get_by_username, add_user
-from src.data_containers.user import *
-from src.helpers.crypt import check_password
+from service.users import get_by_username, add_user
+from data_containers.user import *
+from helpers.crypt import check_password
 
 
 def sign_in(username, password) -> User | None:

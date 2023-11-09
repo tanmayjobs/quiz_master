@@ -1,8 +1,4 @@
-from helpers.constants import load_constants
-
-
 def main():
-    load_constants()
     print('Hello, world!')
 
 

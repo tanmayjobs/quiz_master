@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-from src.helpers.constants import SQLQueries
+from constants.__init__ import SQLQueries
 
 class DatabaseAccess:
     def __enter__(self) -> sqlite3.Cursor:
