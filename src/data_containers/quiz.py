@@ -1,5 +1,3 @@
-from project.data_containers.user import UserRole
-
 
 class Question:
     def __init__(self, question: str, marks: int, options: list[str], correct_options: list[str]):

@@ -1,0 +1,105 @@
+screens:
+  home:
+    player: "\n\t\tPress:\n\t\t- '1' to Play random quiz\n\t\t- '2' to Explore quizzes\n\t\t- '3' to My records\n\t\t- '4' to Sign Out\n\t\tEnter your choice:"
+    creator: "\n\t\tPress:\n\t\t- '1' to Play random quiz\n\t\t- '2' to Explore quizzes\n\t\t- '3' to My records\n\t\t- '4' to Manage My Quiz\n\t\t- '5' to Sign Out\n\t\tEnter your choice:"
+    admin: "\n\t\tPress:\n\t\t- '1' to Add a creator\n\t\t- '2' to Remove a user\n\t\t- '3' to Remove a quiz\n\t\t- '4' to Sign Out\n\t\tEnter your choice:"
+
+  authentication: "\n\t\tPress:\n\t\t- '1' to Sign In\n\t\t- '2' to Sign Out\n\t\t- '3' to Exit\n\t\tEnter your choice:"
+
+roles:
+  - player
+  - creator
+  - admin
+
+entities:
+  - User
+  - Quiz
+
+messages:
+  quiz_name: "You've selected {} quiz to play!"
+  quiz_type: "{} is about {}."
+
+inputs:
+  username: "Enter username:"
+  password: "Enter password:"
+  quiz_id: "Enter quiz id:"
+  quiz_name: "Enter quiz name:"
+  question: "Enter question:"
+  option: "Enter option:"
+  more: "Do you want to add more:"
+  explore_quizzes: "Enter keyword to search quiz(leave empty to get all quizzes):"
+
+output:
+  user_created: "User created successfully..."
+  sign_in: "Signed in system as {}"
+  sign_out: "Signed out from the system"
+  invalid_choice: "Invalid Choice."
+
+errors:
+  user_404: "User not found"
+  quiz_404: "Quiz not found"
+  permission: "Permissions denied!"
+  lookup: "{} not found!"
+
+sql_queries:
+  create_auth_table: |
+    CREATE TABLE IF NOT EXISTS authentication(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        password_hash TEXT NOT NULL,
+        user_role INTEGER CHECK (user_role IN (0, 1)) DEFAULT 1,
+        is_deleted BOOL NOT NULL DEFAULT False,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+  create_quiz_table: |
+    CREATE TABLE IF NOT EXISTS quizzes(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        creator_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        is_deleted BOOL NOT NULL DEFAULT False,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(creator_id) REFERENCES authentication(id)
+    );
+
+  create_question_table: |
+    CREATE TABLE IF NOT EXISTS questions(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        quiz_id INTEGER NOT NULL,
+        question TEXT NOT NULL,
+        FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
+    );
+
+  create_option_table: |
+    CREATE TABLE IF NOT EXISTS options(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        question_id INTEGER NOT NULL,
+        option INTEGER NOT NULL,
+        is_correct BOOL NOT NULL DEFAULT FALSE,
+        FOREIGN KEY(question_id) REFERENCES questions(id)
+    );
+
+  create_quiz_score_table: |
+    CREATE TABLE IF NOT EXISTS options(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        player_id INTEGER NOT NULL,
+        quiz_id INTEGER NOT NULL,
+        player_score INTEGER NOT NULL DEFAULT 0,
+        FOREIGN KEY(player_id) REFERENCES authentication(id),
+        FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
+    );
+
+  create_type_table: |
+    CREATE TABLE IF NOT EXISTS types(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT UNIQUE NOT NULL
+    );
+
+  create_quiz_type_mapping_table: |
+    CREATE TABLE IF NOT EXISTS options(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        quiz_id INTEGER NOT NULL,
+        type_id INTEGER NOT NULL,
+        FOREIGN KEY(quiz_id) REFERENCES quizzes(id),
+        FOREIGN KEY(type_id) REFERENCES types(id)
+    );
