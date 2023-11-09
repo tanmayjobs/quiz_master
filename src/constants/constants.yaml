@@ -36,8 +36,9 @@ output:
   invalid_choice: "Invalid Choice."
 
 errors:
-  user_404: "User not found"
-  quiz_404: "Quiz not found"
+  user_404: "User not found!"
+  username_already_exists: "Username already exists!"
+  quiz_404: "Quiz not found!"
   permission: "Permissions denied!"
   lookup: "{} not found!"
 
