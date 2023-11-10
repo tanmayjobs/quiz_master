@@ -3,10 +3,6 @@ class Messages:
     QUIZ_TYPE = None
 
     @classmethod
-    def __new__(cls, *args, **kwargs):
-        cls.__init__(cls, *args, **kwargs)
-
-    @classmethod
-    def __init__(cls, json_data):
-        cls.QUIZ_NAME = json_data["quiz_name"]
-        cls.QUIZ_TYPE = json_data["quiz_type"]
+    def __init__(cls, data):
+        cls.QUIZ_NAME = data["quiz_name"]
+        cls.QUIZ_TYPE = data["quiz_type"]

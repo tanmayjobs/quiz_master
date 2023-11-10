@@ -1,4 +1,4 @@
-from src.data_containers.user import UserRole, User
+from data_containers.user import UserRole, User
 
 
 def get_all_users() -> list['User']:
@@ -14,5 +14,5 @@ def remove_user(user: User) -> None:
     ...  # Remove the user from the database.
 
 
-def get_by_username(username: str) -> 'User' | None:
+def get_by_username(username: str):
     return  # Get user using username.

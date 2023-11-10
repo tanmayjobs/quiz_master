@@ -1,5 +1,5 @@
-from src.data_containers.user import UserRole
-from src.data_containers.quiz import Quiz
+from data_containers.user import UserRole
+from data_containers.quiz import Quiz
 
 
 def get_by_creator(user) -> list['Quiz']:

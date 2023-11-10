@@ -1,5 +1,8 @@
+from screens.authentication import authentication_screen
+
+
 def main():
-    print('Hello, world!')
+    authentication_screen()
 
 
 if __name__ == '__main__':

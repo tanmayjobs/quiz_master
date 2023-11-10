@@ -1,4 +1,4 @@
-from src.helpers.common import show_message
+from helpers.common import show_message
 
 
 def quiz_screen(user, quiz):

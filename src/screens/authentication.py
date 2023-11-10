@@ -1,26 +1,34 @@
-from src.controller.authentication import sign_in, sign_up
-from src.helpers.constants import ScreenTexts, Output, Error
-from src.helpers.common import invalid_choice, exit, show_message
-from src.screens.home import home_screen
+from controller.authentication import sign_in, sign_up
+from constants import ScreenTexts, OutputTexts, Errors, InputTexts
+from helpers.common import invalid_choice, quit, show_message, password_input, new_line
+from helpers.menu_loop import menu_loop
+from screens.home import home_screen
 
 
 def sign_in_screen():
-    username, password = ..., ...
+    new_line()
+    username, password = input(InputTexts.USERNAME), password_input()
     user = sign_in(username, password)
 
     if user:
-        home_screen()
+        home_screen(user)
+    else:
+        show_message(Errors.INVALID_CREDENTIALS)
+    new_line()
 
 
 def sign_up_screen():
-    username, password = ..., ...
+    new_line()
+    username, password = input(InputTexts.USERNAME), password_input()
     is_user_added = sign_up(username, password)
+
     if is_user_added:
-        show_message(Output.USER_CREATED)
+        show_message(OutputTexts.USER_CREATED)
     else:
-        show_message(Error.USERNAME_ALREADY_EXISTS)
+        show_message(Errors.USERNAME_ALREADY_EXISTS)
 
 
+@menu_loop
 def authentication_screen():
     user_choice = input(ScreenTexts.AUTHENTICATION)
 
@@ -35,7 +43,7 @@ def authentication_screen():
                 sign_up_screen()
 
             case 3:
-                exit()
+                quit()
 
             case other:
                 invalid_choice()

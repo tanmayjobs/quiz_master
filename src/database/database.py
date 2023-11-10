@@ -3,6 +3,7 @@ import os
 
 from constants.__init__ import SQLQueries
 
+
 class DatabaseAccess:
     def __enter__(self) -> sqlite3.Cursor:
         self.connection = sqlite3.connect("src/database/data.db")

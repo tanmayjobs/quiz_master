@@ -1,10 +1,10 @@
 screens:
   home:
-    player: "\n\t\tPress:\n\t\t- '1' to Play random quiz\n\t\t- '2' to Explore quizzes\n\t\t- '3' to My records\n\t\t- '4' to Sign Out\n\t\tEnter your choice:"
-    creator: "\n\t\tPress:\n\t\t- '1' to Play random quiz\n\t\t- '2' to Explore quizzes\n\t\t- '3' to My records\n\t\t- '4' to Manage My Quiz\n\t\t- '5' to Sign Out\n\t\tEnter your choice:"
-    admin: "\n\t\tPress:\n\t\t- '1' to Add a creator\n\t\t- '2' to Remove a user\n\t\t- '3' to Remove a quiz\n\t\t- '4' to Sign Out\n\t\tEnter your choice:"
+    player: "\nPress:\n- '1' to Play random quiz\n- '2' to Explore quizzes\n- '3' to My records\n- '4' to Sign Out\nEnter your choice:"
+    creator: "\nPress:\n- '1' to Play random quiz\n- '2' to Explore quizzes\n- '3' to My records\n- '4' to Manage My Quiz\n- '5' to Sign Out\nEnter your choice:"
+    admin: "\nPress:\n- '1' to Add a creator\n- '2' to Remove a user\n- '3' to Remove a quiz\n- '4' to Sign Out\nEnter your choice:"
 
-  authentication: "\n\t\tPress:\n\t\t- '1' to Sign In\n\t\t- '2' to Sign Out\n\t\t- '3' to Exit\n\t\tEnter your choice:"
+  authentication: "\nPress:\n- '1' to Sign In\n- '2' to Sign Up\n- '3' to Exit\nEnter your choice:"
 
 roles:
   - player
@@ -29,13 +29,14 @@ inputs:
   more: "Do you want to add more:"
   explore_quizzes: "Enter keyword to search quiz(leave empty to get all quizzes):"
 
-output:
+outputs:
   user_created: "User created successfully..."
   sign_in: "Signed in system as {}"
   sign_out: "Signed out from the system"
   invalid_choice: "Invalid Choice."
 
 errors:
+  invalid_credentials: "Invalid username or password!"
   user_404: "User not found!"
   username_already_exists: "Username already exists!"
   quiz_404: "Quiz not found!"

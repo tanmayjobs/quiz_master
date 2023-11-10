@@ -1,6 +1,6 @@
-from src.helpers.constants import ScreenTexts
-from src.helpers.common import invalid_choice
-from src.data_containers.user import UserRole
+from constants import ScreenTexts
+from helpers.common import invalid_choice
+from data_containers.user import UserRole
 
 
 def player_home_screen(user):
