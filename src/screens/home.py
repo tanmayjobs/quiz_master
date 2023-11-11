@@ -1,8 +1,10 @@
 from constants import ScreenTexts
 from helpers.common import invalid_choice
+from helpers.menu_loop import menu_loop
 from data_containers.user import UserRole
 
 
+@menu_loop
 def player_home_screen(user):
     user_choice = input(ScreenTexts.PLAYER_HOME)
 
@@ -22,13 +24,15 @@ def player_home_screen(user):
 
             case 4:
                 ...  # sign out
-                return
+                return True
 
             case other:
                 invalid_choice()
 
     else:
         invalid_choice()
+
+    return False
 
 
 def creator_home_screen(user):
@@ -53,13 +57,15 @@ def creator_home_screen(user):
 
             case 5:
                 ...  # sign out
-                return
+                return True
 
             case other:
                 invalid_choice()
 
     else:
         invalid_choice()
+
+    return False
 
 
 def admin_home_screen(user):
@@ -81,7 +87,7 @@ def admin_home_screen(user):
 
             case 4:
                 ...  # sign out
-                return
+                return True
 
             case other:
                 invalid_choice()
@@ -89,16 +95,18 @@ def admin_home_screen(user):
     else:
         invalid_choice()
 
+    return False
+
 
 def home_screen(user):
 
     match user.role:
 
         case UserRole.PLAYER:
-            player_home_screen()
+            player_home_screen(user)
 
         case UserRole.CREATOR:
-            creator_home_screen()
+            creator_home_screen(user)
 
         case UserRole.ADMIN:
-            admin_home_screen()
+            admin_home_screen(user)

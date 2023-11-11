@@ -49,7 +49,7 @@ sql_queries:
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
         password_hash TEXT NOT NULL,
-        user_role INTEGER CHECK (user_role IN (0, 1)) DEFAULT 1,
+        user_role INTEGER CHECK (user_role IN (0, 1, 2)) DEFAULT 1,
         is_deleted BOOL NOT NULL DEFAULT False,
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
@@ -105,3 +105,19 @@ sql_queries:
         FOREIGN KEY(quiz_id) REFERENCES quizzes(id),
         FOREIGN KEY(type_id) REFERENCES types(id)
     );
+
+  get_all_users: |
+    SELECT * FROM authentication;
+
+  get_user: |
+    SELECT * FROM authentication
+    WHERE username = ? AND is_deleted = False;
+
+  add_user: |
+    INSERT INTO authentication(username, password_hash, user_role)
+    VALUES(?, ?, ?);
+
+  remove_user: |
+    UPDATE authentication
+    SET is_deleted = True
+    WHERE user_id = ?;

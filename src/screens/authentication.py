@@ -50,3 +50,5 @@ def authentication_screen():
 
     else:
         invalid_choice()
+
+    return False

@@ -1,12 +1,17 @@
-from service.users import get_by_username, add_user
+from services.users import get_by_username, add_user
 from data_containers.user import *
 from helpers.crypt import check_password
 
 
 def sign_in(username, password) -> User | None:
-    user = get_by_username(username)
+    user_data = get_by_username(username)
 
-    if not user or check_password(password, user.password_hash):
+    if not user_data:
+        return None
+
+    user = User.parse_database(user_data)
+
+    if not check_password(password, user.password_hash):
         return None
 
     return user

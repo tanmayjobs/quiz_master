@@ -1,6 +1,9 @@
 def menu_loop(menu):
-    def looped_menu():
+    def looped_menu(*args, **kwargs):
         while True:
-            menu()
+            go_back = menu(*args, **kwargs)
 
-    return looped_menu()
+            if go_back:
+                break
+
+    return looped_menu
