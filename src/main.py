@@ -1,4 +1,4 @@
-from screens.authentication import authentication_screen
+from screens.authentication.authentication import authentication_screen
 
 
 def main():

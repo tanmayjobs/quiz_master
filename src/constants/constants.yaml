@@ -18,6 +18,7 @@ entities:
 messages:
   quiz_name: "You've selected {} quiz to play!"
   quiz_type: "{} is about {}."
+  creator_info: "Enter the following details for the creator you want to add-"
 
 inputs:
   username: "Enter username:"
@@ -30,7 +31,8 @@ inputs:
   explore_quizzes: "Enter keyword to search quiz(leave empty to get all quizzes):"
 
 outputs:
-  user_created: "User created successfully..."
+  user_added: "User added successfully..."
+  creator_added: "Creator added successfully..."
   sign_in: "Signed in system as {}"
   sign_out: "Signed out from the system"
   invalid_choice: "Invalid Choice."
@@ -40,7 +42,8 @@ errors:
   user_404: "User not found!"
   username_already_exists: "Username already exists!"
   quiz_404: "Quiz not found!"
-  permission: "Permissions denied!"
+  performer_required: "Performer is required for this action!"
+  permission: "You do not have enough permissions to perform this action!"
   lookup: "{} not found!"
 
 sql_queries:
@@ -121,3 +124,19 @@ sql_queries:
     UPDATE authentication
     SET is_deleted = True
     WHERE user_id = ?;
+
+  get_random_quiz: |
+    SELECT * FROM quizzes
+    ORDER BY RANDOM() LIMIT 1;
+
+  add_quiz: |
+    INSERT INTO quizzes(creator_id, name)
+    VALUES(?, ?);
+
+  add_question: |
+    INSERT INTO questions(quiz_id, question)
+    VALUES(?, ?);
+
+  add_option: |
+    INSERT INTO options(question_id, option, is_correct)
+    VALUES(?, ?, ?);
