@@ -13,7 +13,7 @@ class LastTransaction:
                                rowcount=cursor.rowcount)
 
 
-def get(query, params, only_one=False):
+def get(query, params=tuple(), only_one=False):
     with database_access.DatabaseAccess() as dao:
         data = dao.execute(query, params)
         data = data.fetchone() if only_one else data.fetchall()

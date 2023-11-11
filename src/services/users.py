@@ -1,12 +1,12 @@
 from constants import SQLQueries
-from data_containers.user import UserRole, User
+from data_containers.user import UserRole
 from database.operations import *
 from sqlite3 import IntegrityError
 from helpers.crypt import hash_password
 
 
-def get_all_users() -> list['User']:
-    data = get(SQLQueries.GET_ALL_USERS, None)
+def get_all_users() -> list:
+    data = get(SQLQueries.GET_ALL_USERS)
     return data
 
 
@@ -21,8 +21,8 @@ def add_user(username: str, password: str, role: UserRole) -> bool:
     return True
 
 
-def remove_user(user: User) -> None:
-    remove(SQLQueries.REMOVE_USER, (user.user_id, ))
+def remove_user(user_id: str) -> None:
+    remove(SQLQueries.REMOVE_USER, (user_id, ))
 
 
 def get_by_username(username: str):

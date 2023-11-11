@@ -1,6 +1,6 @@
 from constants import ScreenTexts
 
-from helpers.common import invalid_choice
+from helpers.common import invalid_choice, new_line
 from helpers.menu_loop import menu_loop
 
 from screens.home.admin.add_creator import add_creator_screen
@@ -10,6 +10,7 @@ from screens.home.common import remove_quiz_screen
 
 @menu_loop
 def admin_home_screen(user):
+    new_line()
     user_choice = input(ScreenTexts.ADMIN_HOME)
 
     if user_choice.isdigit():
