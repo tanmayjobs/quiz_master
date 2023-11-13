@@ -13,4 +13,4 @@ class ScreenTexts:
         cls.CREATOR_HOME = data["home"]["creator"]
         cls.ADMIN_HOME = data["home"]["admin"]
         cls.MANAGE_QUIZZES = data["manage_quizzes"]
-        cls.MANAGE_QUIZ = data["manage_quizzes"]
+        cls.MANAGE_QUIZ = data["manage_quiz"]

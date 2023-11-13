@@ -12,6 +12,7 @@ strings:
   admin: "Admin"
   creator: "Creator"
   player: "Player"
+  quiz: "Quiz"
   id: "Id"
   username: "Username"
   role: "Role"
@@ -67,8 +68,10 @@ outputs:
   invalid_choice: "Invalid Choice."
   user_info: "{user_id:5}\t{username:20}\t{user_role:20}"
   type_info: "{type_id:5}\t{type_name:20}"
+  quiz_info: "{quiz_id:5}\t{quiz_name:20}\t{quiz_types:40}"
   user_removed: "User removed successfully..."
   quiz_removed: "Quiz removed successfully..."
+  zero_quizzes: "No quizzes found! :("
 
 errors:
   invalid_credentials: "Invalid username or password!"
@@ -161,12 +164,17 @@ sql_queries:
 
   get_random_quiz: |
     SELECT * FROM quizzes
-    WHERE is_deleted != True
+    WHERE is_deleted == False
     ORDER BY RANDOM() LIMIT 1;
 
   add_quiz: |
     INSERT INTO quizzes(creator_id, name)
     VALUES(?, ?);
+
+  remove_quiz: |
+    UPDATE quizzes
+    SET is_deleted = True
+    WHERE id = ?;
 
   add_question: |
     INSERT INTO questions(quiz_id, question)
@@ -186,3 +194,15 @@ sql_queries:
   add_type: |
     INSERT OR IGNORE INTO types (name)
     VALUES (?);
+
+  get_quizzes_by_creator: |
+    SELECT quiz.id, quiz.name, quiz.creator_id, auth.username
+    FROM quizzes as quiz
+    INNER JOIN authentication as auth ON quiz.creator_id = auth.id
+    WHERE quiz.creator_id = ? AND quiz.is_deleted = False;
+
+  get_quiz_types: |
+    SELECT types.* FROM quiz_type_mapping
+    INNER JOIN types ON type_id = types.id
+    INNER JOIN quizzes ON quiz_id = quizzes.id
+    WHERE quizzes.id = ? AND quizzes.is_deleted = False;

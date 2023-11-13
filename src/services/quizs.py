@@ -6,11 +6,14 @@ from data_containers.user import UserRole
 from data_containers.quiz import Quiz
 
 
-def get_by_creator(user) -> list['Quiz']:
-    if user.role != UserRole.CREATOR:
-        raise PermissionError
+def get_by_creator(user) -> list:
+    quizzes = database.get(SQLQueries.GET_QUIZZES_BY_CREATOR, (user.user_id,))
+    return quizzes
 
-    ...  # Get quizzes by creator.
+
+def get_quiz_types(quiz):
+    all_types = database.get(SQLQueries.GET_QUIZ_TYPES, (quiz.quiz_id,))
+    return all_types
 
 
 def get_all_quizzes(user) -> list[Quiz]:
@@ -30,11 +33,8 @@ def add(quiz: Quiz) -> None:
         database.add(SQLQueries.ADD_QUIZ_TYPE, (quiz_id, quiz_type.type_id,))
 
 
-def remove(self, user) -> None:
-    if self.creator_id != user.user_id and user.role != UserRole.ADMIN:
-        raise PermissionError
-
-    ...  # Remove the quiz from the database.
+def remove(quiz) -> None:
+    database.remove(SQLQueries.REMOVE_QUIZ, (quiz.quiz_id,))
 
 
 def all_quiz_types() -> list:

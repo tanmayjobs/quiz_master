@@ -1,13 +1,10 @@
 from constants import ScreenTexts
 from helpers.common import newline, invalid_choice
 from helpers.menu_loop import menu_loop
+from screens.home.common import select_quiz_screen
 from screens.home.creator.manage_quizzes.add_quiz import add_quiz_screen
 from screens.home.creator.manage_quizzes.modify_quiz.modify_quiz import modify_quiz_screen
 from screens.home.creator.manage_quizzes.remove_quiz import remove_quiz
-
-
-def select_modify_quiz(creator):
-    ...
 
 
 @menu_loop
@@ -27,7 +24,8 @@ def manage_quizzes_screen(creator):
                 remove_quiz(creator)
 
             case 3:
-                select_modify_quiz(creator)
+                selected_quiz = select_quiz_screen(creator)
+                modify_quiz_screen(creator, selected_quiz)
 
             case 4:
                 return True

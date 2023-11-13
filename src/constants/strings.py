@@ -2,6 +2,7 @@ class Strings:
     ADMIN = None
     CREATOR = None
     PLAYER = None
+    QUIZ = None
     ID = None
     USERNAME = None
     ROLE = None
@@ -23,6 +24,7 @@ class Strings:
         cls.ADMIN = data["admin"]
         cls.CREATOR = data["creator"]
         cls.PLAYER = data["player"]
+        cls.QUIZ = data["quiz"]
         cls.ID = data["id"]
         cls.USERNAME = data["username"]
         cls.ROLE = data["role"]

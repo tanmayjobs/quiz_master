@@ -2,6 +2,7 @@ import sys
 import pwinput
 
 from constants import OutputTexts, InputTexts, Strings
+from data_containers.quiz import Quiz
 from data_containers.types import QuizType
 from data_containers.user import UserRole
 
@@ -29,6 +30,16 @@ def show_type(index, each_type: QuizType):
         OutputTexts.TYPE_INFO.format(
             type_id=str(each_type.type_id),
             type_name=each_type.type_name
+        )
+    )
+
+
+def show_quiz(index, quiz: Quiz):
+    print(
+        OutputTexts.QUIZ_INFO.format(
+            quiz_id=str(quiz.quiz_id),
+            quiz_name=quiz.quiz_name,
+            quiz_types=','.join(quiz_type.type_name for quiz_type in quiz.types),
         )
     )
 

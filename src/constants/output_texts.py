@@ -6,8 +6,10 @@ class OutputTexts:
     CREATOR_ADDED = None
     USER_INFO = None
     TYPE_INFO = None
+    QUIZ_INFO = None
     USER_REMOVED = None
     QUIZ_REMOVED = None
+    ZERO_QUIZZES = None
 
     @classmethod
     def __init__(cls, data):
@@ -17,5 +19,7 @@ class OutputTexts:
         cls.CREATOR_ADDED = data["creator_added"]
         cls.USER_INFO = data["user_info"]
         cls.TYPE_INFO = data["type_info"]
+        cls.QUIZ_INFO = data["quiz_info"]
         cls.USER_REMOVED = data["user_removed"]
         cls.QUIZ_REMOVED = data["quiz_removed"]
+        cls.ZERO_QUIZZES = data["zero_quizzes"]

@@ -3,6 +3,7 @@ class InputTexts:
     USERNAME = None
     PASSWORD = None
     USER_ID = None
+    QUIZ_ID = None
     TYPE_IDS = None
     QUIZ_NAME = None
     QUESTION = None
@@ -16,6 +17,7 @@ class InputTexts:
         cls.USERNAME = data["username"]
         cls.PASSWORD = data["password"]
         cls.USER_ID = data["user_id"]
+        cls.QUIZ_ID = data["quiz_id"]
         cls.TYPE_IDS = data["type_ids"]
         cls.QUIZ_NAME = data["quiz_name"]
         cls.QUESTION = data["question"]
