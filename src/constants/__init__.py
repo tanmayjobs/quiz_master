@@ -3,6 +3,7 @@ import yaml
 
 from constants.messages import Messages
 from constants.input_texts import InputTexts
+from constants.numbers import Numbers
 from constants.output_texts import OutputTexts
 from constants.screen_texts import ScreenTexts
 from constants.sql_queries import SQLQueries
@@ -20,3 +21,4 @@ with open("constants/constants.yaml", "r") as constants_file:
     SQLQueries(yaml_data["sql_queries"])
     Errors(yaml_data["errors"])
     Strings(yaml_data["strings"])
+    Numbers(yaml_data["numbers"])

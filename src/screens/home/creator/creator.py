@@ -1,10 +1,12 @@
 from constants import ScreenTexts
-from helpers.common import invalid_choice
+from helpers.common import invalid_choice, newline
 from helpers.menu_loop import menu_loop
+from screens.home.creator.manage_quizzes.manage_quizzes import manage_quizzes_screen
 
 
 @menu_loop
 def creator_home_screen(user):
+    newline()
     user_choice = input(ScreenTexts.CREATOR_HOME)
 
     if user_choice.isdigit():
@@ -22,10 +24,9 @@ def creator_home_screen(user):
                 ...
 
             case 4:
-                ...
+                manage_quizzes_screen(user)
 
             case 5:
-                ...  # sign out
                 return True
 
             case other:

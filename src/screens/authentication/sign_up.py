@@ -1,10 +1,10 @@
 from controller.user import sign_up
 from constants import OutputTexts, Errors, InputTexts
-from helpers.common import show_message, password_input, new_line
+from helpers.common import show_message, password_input, newline
 
 
 def sign_up_screen():
-    new_line()
+    newline()
     username, password = input(InputTexts.USERNAME), password_input()
     is_user_added = sign_up(username, password)
 

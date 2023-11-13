@@ -7,10 +7,18 @@ class SQLQueries:
     CREATE_TYPE_TABLE = None
     CREATE_QUIZ_TYPE_MAPPING_TABLE = None
 
+    GET_ALL_TYPES = None
+    ADD_QUIZ_TYPE = None
+    ADD_TYPE = None
+
     GET_ALL_USERS = None
     GET_USER = None
     ADD_USER = None
     REMOVE_USER = None
+
+    ADD_QUIZ = None
+    ADD_QUESTION = None
+    ADD_OPTION = None
 
     @classmethod
     def __init__(cls, data):
@@ -22,7 +30,12 @@ class SQLQueries:
         cls.CREATE_TYPE_TABLE = data["create_type_table"]
         cls.CREATE_QUIZ_TYPE_MAPPING_TABLE = data["create_quiz_type_mapping_table"]
 
+        cls.GET_ALL_TYPES = data["get_all_types"]
+        cls.ADD_QUIZ_TYPE = data["add_quiz_type"]
+        cls.ADD_TYPE = data["add_type"]
+
         cls.GET_ALL_USERS = data["get_all_users"]
         cls.GET_USER = data["get_user"]
         cls.ADD_USER = data["add_user"]
+        cls.ADD_QUIZ = data["add_quiz"]
         cls.REMOVE_USER = data["remove_user"]

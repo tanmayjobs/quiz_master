@@ -1,6 +1,12 @@
+from dataclasses import dataclass
 
+
+@dataclass
 class QuizRecord:
-    def __init__(self, player_id, quiz_id, player_score):
-        self.player_id = player_id
-        self.quiz_id = quiz_id
-        self.player_score = player_score
+    player_id: int
+    player_name: str
+
+    quiz_id: int
+    quiz_name: str
+
+    player_score: int

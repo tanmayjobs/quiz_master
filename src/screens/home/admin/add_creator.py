@@ -1,11 +1,11 @@
 from constants import InputTexts, OutputTexts, Errors, Messages
 from controller.user import add_creator
 from helpers.common import show_message
-from helpers.common import new_line, password_input
+from helpers.common import newline, password_input
 
 
 def add_creator_screen(user):
-    new_line()
+    newline()
     show_message(Messages.CREATOR_INFO)
 
     username, password = input(InputTexts.USERNAME), password_input()

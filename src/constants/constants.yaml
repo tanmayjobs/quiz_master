@@ -5,14 +5,35 @@ screens:
     admin: "Press:\n- '1' to Add a creator\n- '2' to Remove a user\n- '3' to Remove a quiz\n- '4' to Sign Out\nEnter your choice:"
 
   authentication: "Press:\n- '1' to Sign In\n- '2' to Sign Up\n- '3' to Exit\nEnter your choice:"
+  manage_quizzes: "Press:\n- '1' to Add quiz\n- '2' to Remove quiz\n- '3' to Modify a Quiz\n- '4' to Go Back\nEnter your choice:"
+  manage_quiz: "Press:\n- '1' to Add question\n- '2' to Remove question\n- '3' to Go Back\nEnter your choice:"
 
 strings:
   admin: "Admin"
   creator: "Creator"
   player: "Player"
-  user_id: "Id"
+  id: "Id"
   username: "Username"
   role: "Role"
+  question: "Question"
+  option: "Option"
+  a: "A"
+  quiz_name: "quiz_name"
+  all_questions: "all_questions"
+  movie: "Movie"
+  music: "Music"
+  book: "Book"
+  performer: "performer"
+  type: "Type"
+
+numbers:
+  zero: 0
+  one: 1
+  two: 2
+  four: 4
+  five: 5
+  six: 6
+  ten: 10
 
 entities:
   - User
@@ -28,19 +49,24 @@ inputs:
   password: "Enter password:"
   user_id: "Enter user id:"
   quiz_id: "Enter quiz id:"
+  type_ids: "Enter type ids (comma separated values):"
   quiz_name: "Enter quiz name:"
   question: "Enter question:"
-  option: "Enter option:"
-  more: "Do you want to add more:"
+  option: "Enter option {}:"
+  number_of_questions: "Enter the number of questions (between 1 and 10):"
+  number_of_options: "Enter the number of options (between 2 and 6):"
+  correct_option: "Enter correct option (1, 2, 3 or 4):"
   explore_quizzes: "Enter keyword to search quiz(leave empty to get all quizzes):"
 
 outputs:
   user_added: "User added successfully..."
+  quiz_added: "Quiz added successfully..."
   creator_added: "Creator added successfully..."
   sign_in: "Signed in system as {}"
   sign_out: "Signed out from the system"
   invalid_choice: "Invalid Choice."
   user_info: "{user_id:5}\t{username:20}\t{user_role:20}"
+  type_info: "{type_id:5}\t{type_name:20}"
   user_removed: "User removed successfully..."
   quiz_removed: "Quiz removed successfully..."
 
@@ -108,7 +134,7 @@ sql_queries:
     );
 
   create_quiz_type_mapping_table: |
-    CREATE TABLE IF NOT EXISTS options(
+    CREATE TABLE IF NOT EXISTS quiz_type_mapping(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         quiz_id INTEGER NOT NULL,
         type_id INTEGER NOT NULL,
@@ -149,3 +175,14 @@ sql_queries:
   add_option: |
     INSERT INTO options(question_id, option, is_correct)
     VALUES(?, ?, ?);
+
+  add_quiz_type: |
+    INSERT INTO quiz_type_mapping(quiz_id, type_id)
+    VALUES(?, ?);
+
+  get_all_types: |
+    SELECT * FROM types;
+
+  add_type: |
+    INSERT OR IGNORE INTO types (name)
+    VALUES (?);
