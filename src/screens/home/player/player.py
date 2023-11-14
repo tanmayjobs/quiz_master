@@ -1,10 +1,11 @@
 from constants import ScreenTexts
-from helpers.common import invalid_choice
+from helpers.common import invalid_choice, newline
 from helpers.menu_loop import menu_loop
 
 
 @menu_loop
 def player_home_screen(user):
+    newline()
     user_choice = input(ScreenTexts.PLAYER_HOME)
 
     if user_choice.isdigit():

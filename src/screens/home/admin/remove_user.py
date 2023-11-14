@@ -34,6 +34,11 @@ def remove_user_screen(user):
     newline()
 
     all_users = get_all_users(performer=user)
+
+    if not all_users:
+        show_message(OutputTexts.NOT_YET.format(Strings.USER))
+        return
+
     show_all_users(all_users)
 
     user_for_removal = select_user(all_users)

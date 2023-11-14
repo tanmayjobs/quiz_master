@@ -14,6 +14,7 @@ class OutputTexts:
     QUESTION_REMOVED = None
     ZERO_QUIZZES = None
     NOT_YET = None
+    SIGN_OUT = None
 
     @classmethod
     def __init__(cls, data):
@@ -31,3 +32,4 @@ class OutputTexts:
         cls.QUESTION_REMOVED = data["question_removed"]
         cls.ZERO_QUIZZES = data["zero_quizzes"]
         cls.NOT_YET = data["not_yet"]
+        cls.SIGN_OUT = data["sign_out"]

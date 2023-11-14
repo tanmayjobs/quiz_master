@@ -33,6 +33,7 @@ strings:
   array: "[{}]"
   type_id: "type_id"
   type_name: "type_name"
+  user: "User"
 
 
 numbers:

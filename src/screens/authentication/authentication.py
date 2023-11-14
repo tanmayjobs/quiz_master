@@ -1,8 +1,8 @@
 from screens.authentication.sign_in import sign_in_screen
 from screens.authentication.sign_up import sign_up_screen
 
-from constants import ScreenTexts
-from helpers.common import invalid_choice, quit_application, newline
+from constants import ScreenTexts, OutputTexts
+from helpers.common import invalid_choice, quit_application, newline, show_message
 from helpers.menu_loop import menu_loop
 
 
@@ -17,6 +17,8 @@ def authentication_screen():
         match user_choice:
             case 1:
                 sign_in_screen()
+                newline()
+                show_message(OutputTexts.SIGN_OUT)
 
             case 2:
                 sign_up_screen()

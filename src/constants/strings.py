@@ -4,6 +4,7 @@ class Strings:
     PLAYER = None
     QUIZ = None
     ID = None
+    USER = None
     USERNAME = None
     ROLE = None
     QUESTION = None
@@ -36,6 +37,7 @@ class Strings:
         cls.PLAYER = data["player"]
         cls.QUIZ = data["quiz"]
         cls.ID = data["id"]
+        cls.USER = data["user"]
         cls.USERNAME = data["username"]
         cls.ROLE = data["role"]
         cls.QUESTION = data["question"]
