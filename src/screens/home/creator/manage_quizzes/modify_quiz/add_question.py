@@ -39,7 +39,7 @@ def add_question_screen(creator, quiz):
         correct_option = correct_option_screen()
 
     options[correct_option - 1].is_correct = True
-    question = Question(question_text, options)
+    question = Question(-1, question_text, options)
 
     add_question(quiz, question, performer=creator)
 

@@ -4,7 +4,7 @@ from helpers.menu_loop import menu_loop
 from screens.home.common import select_quiz_screen
 from screens.home.creator.manage_quizzes.add_quiz import add_quiz_screen
 from screens.home.creator.manage_quizzes.modify_quiz.modify_quiz import modify_quiz_screen
-from screens.home.creator.manage_quizzes.remove_quiz import remove_quiz
+from screens.home.creator.manage_quizzes.remove_quiz import remove_quiz_screen
 
 
 @menu_loop
@@ -21,11 +21,13 @@ def manage_quizzes_screen(creator):
                 add_quiz_screen(creator)
 
             case 2:
-                remove_quiz(creator)
+                remove_quiz_screen(creator)
 
             case 3:
                 selected_quiz = select_quiz_screen(creator)
-                modify_quiz_screen(creator, selected_quiz)
+
+                if selected_quiz:
+                    modify_quiz_screen(creator, selected_quiz)
 
             case 4:
                 return True

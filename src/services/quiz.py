@@ -15,14 +15,6 @@ def get_quiz_types(quiz):
     return all_types
 
 
-def get_all_quizzes(user) -> list[Quiz]:
-    if user.role != UserRole.ADMIN:
-        raise PermissionError
-
-    ...  # Get all quizzes.
-    return []
-
-
 def add(quiz: Quiz) -> None:
 
     quiz_id = database.add(SQLQueries.ADD_QUIZ, (quiz.creator_id, quiz.quiz_name))
@@ -49,5 +41,14 @@ def add_question(quiz, question):
         database.add(SQLQueries.ADD_OPTION, (question_id, option.option_text, option.is_correct))
 
 
+def remove_question(question):
+    database.remove(SQLQueries.REMOVE_OPTION_BY_QUESTION, (question.question_id,))
+    database.remove(SQLQueries.REMOVE_QUESTION, (question.question_id,))
+
+
 def get_quiz_question(quiz):
     return database.get(SQLQueries.GET_QUIZ_QUESTIONS, (quiz.quiz_id,))
+
+
+def get_all_quizzes():
+    return database.get(SQLQueries.GET_ALL_QUIZZES)

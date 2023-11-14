@@ -25,6 +25,11 @@ class SQLQueries:
     GET_QUIZ_TYPES = None
     GET_QUIZ_QUESTIONS = None
 
+    REMOVE_QUESTION = None
+    REMOVE_OPTION_BY_QUESTION = None
+
+    GET_ALL_QUIZZES = None
+
     @classmethod
     def __init__(cls, data):
         cls.CREATE_AUTH_TABLE = data["create_auth_table"]
@@ -51,3 +56,8 @@ class SQLQueries:
         cls.GET_QUIZ_QUESTIONS = data["get_quiz_questions"]
         cls.ADD_QUESTION = data["add_question"]
         cls.ADD_OPTION = data["add_option"]
+
+        cls.REMOVE_QUESTION = data["remove_question"]
+        cls.REMOVE_OPTION_BY_QUESTION = data["remove_option_by_question"]
+
+        cls.GET_ALL_QUIZZES = data["get_all_quizzes"]

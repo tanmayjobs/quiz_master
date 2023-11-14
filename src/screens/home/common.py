@@ -3,10 +3,6 @@ from controller.quiz import get_creator_quizzes
 from helpers.common import newline, invalid_choice, show_quiz, show_message
 
 
-def remove_quiz_screen(user):
-    ...
-
-
 def show_all_quizzes(all_quizzes):
     show_message(
         OutputTexts.QUIZ_INFO.format(
@@ -39,7 +35,7 @@ def select_quiz_screen(creator):
     all_quizzes = get_creator_quizzes(performer=creator)
 
     if not all_quizzes:
-        show_message()
+        show_message(OutputTexts.NOT_YET.format(Strings.QUIZ))
         return
 
     show_all_quizzes(all_quizzes)

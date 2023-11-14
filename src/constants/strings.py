@@ -26,6 +26,9 @@ class Strings:
 
     ARRAY = None
 
+    TYPE_ID = None
+    TYPE_NAME = None
+
     @classmethod
     def __init__(cls, data):
         cls.ADMIN = data["admin"]
@@ -54,3 +57,6 @@ class Strings:
         cls.IS_CORRECT = data["is_correct"]
 
         cls.ARRAY = data["array"]
+
+        cls.TYPE_ID = data["type_id"]
+        cls.TYPE_NAME = data["type_name"]

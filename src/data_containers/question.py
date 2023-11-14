@@ -9,5 +9,6 @@ class Option:
 
 @dataclass
 class Question:
+    question_id: int
     question_text: str
     options: list[Option]

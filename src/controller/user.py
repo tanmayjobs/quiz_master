@@ -1,5 +1,5 @@
-import services.users as user_services
-from helpers.rbac import admin_only
+import services.user as user_services
+from helpers.rbac import accessed_by
 from data_containers.user import *
 from helpers.crypt import check_password
 
@@ -23,13 +23,13 @@ def sign_up(username, password) -> bool:
     return is_user_added
 
 
-@admin_only
+@accessed_by(UserRole.ADMIN)
 def add_creator(username, password, **kwargs) -> bool:
     is_user_added = user_services.add_user(username, password, UserRole.CREATOR)
     return is_user_added
 
 
-@admin_only
+@accessed_by(UserRole.ADMIN)
 def get_all_users(**kwargs) -> list[User]:
     all_user_data = user_services.get_all_users()
     all_users = [User.parse_database(user_data) for user_data in all_user_data]
@@ -37,6 +37,6 @@ def get_all_users(**kwargs) -> list[User]:
     return all_users
 
 
-@admin_only
+@accessed_by(UserRole.ADMIN)
 def remove_user(user, **kwargs) -> None:
     user_services.remove_user(user.user_id)

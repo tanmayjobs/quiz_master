@@ -6,7 +6,7 @@ from helpers.common import newline, show_message, show_user, invalid_choice
 def show_all_users(all_users):
     show_message(
         OutputTexts.USER_INFO.format(
-            user_id=Strings.USER_ID,
+            user_id=Strings.ID,
             username=Strings.USERNAME,
             user_role=Strings.ROLE
         )

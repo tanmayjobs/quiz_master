@@ -49,6 +49,7 @@ def quiz_type_screen():
 
     if not selected_types:
         invalid_choice()
+        newline()
         return None
 
     return selected_types

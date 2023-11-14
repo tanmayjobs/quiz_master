@@ -31,6 +31,8 @@ strings:
   question_id: 0
   is_correct: "is_correct"
   array: "[{}]"
+  type_id: "type_id"
+  type_name: "type_name"
 
 
 numbers:
@@ -56,6 +58,7 @@ inputs:
   password: "Enter password:"
   user_id: "Enter user id:"
   quiz_id: "Enter quiz id:"
+  question_id: "Enter question id:"
   type_ids: "Enter type ids (comma separated values):"
   quiz_name: "Enter quiz name:"
   question: "Enter question:"
@@ -79,7 +82,9 @@ outputs:
   question_info: "{question_id:5}\t{question_text:80}"
   user_removed: "User removed successfully..."
   quiz_removed: "Quiz removed successfully..."
+  question_removed: "Question removed successfully..."
   zero_quizzes: "No quizzes found! :("
+  not_yet: "There are no {} yet!"
 
 errors:
   invalid_credentials: "Invalid username or password!"
@@ -88,7 +93,6 @@ errors:
   quiz_404: "Quiz not found!"
   performer_required: "Performer is required for this action!"
   permission: "You do not have enough permissions to perform this action!"
-  lookup: "{} not found!"
 
 sql_queries:
   create_auth_table: |
@@ -203,6 +207,18 @@ sql_queries:
     INSERT OR IGNORE INTO types (name)
     VALUES (?);
 
+  remove_question_by_quiz: |
+    DELETE FROM questions
+    WHERE quiz_id = ?;
+
+  remove_question: |
+    DELETE FROM questions
+    WHERE id = ?;
+
+  remove_option_by_question: |
+    DELETE FROM options
+    WHERE question_id = ?;
+
   get_quizzes_by_creator: |
     SELECT quiz.id, quiz.name, quiz.creator_id, auth.username
     FROM quizzes as quiz
@@ -229,3 +245,22 @@ sql_queries:
     INNER JOIN options AS o ON q.id = o.question_id
     INNER JOIN quizzes AS quiz ON q.quiz_id = quiz.id
     WHERE quiz.id = ? GROUP BY q.id, q.question;
+
+  get_all_quizzes: |
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.is_deleted = False
+    GROUP BY quiz.id, quiz.name, quiz.creator_id, auth.username;
