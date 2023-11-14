@@ -11,4 +11,3 @@ class Option:
 class Question:
     question_text: str
     options: list[Option]
-    marks: int

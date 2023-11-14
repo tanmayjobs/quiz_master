@@ -51,3 +51,7 @@ def select_quiz_screen(creator):
         return
 
     return selected_quiz
+
+
+def show_question_info():
+    ...

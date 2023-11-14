@@ -19,6 +19,13 @@ class Strings:
 
     PERFORMER = None
 
+    OPTIONS_JSON = None
+    QUESTION_TEXT = None
+    QUESTION_ID = None
+    IS_CORRECT = None
+
+    ARRAY = None
+
     @classmethod
     def __init__(cls, data):
         cls.ADMIN = data["admin"]
@@ -40,3 +47,10 @@ class Strings:
         cls.BOOK = data["book"]
 
         cls.PERFORMER = data["performer"]
+
+        cls.OPTIONS_JSON = data["options_json"]
+        cls.QUESTION_TEXT = data["question_text"]
+        cls.QUESTION_ID = data["question_id"]
+        cls.IS_CORRECT = data["is_correct"]
+
+        cls.ARRAY = data["array"]

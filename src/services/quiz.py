@@ -1,6 +1,5 @@
 import database.operations as database
 from constants import SQLQueries
-from data_containers.types import QuizType
 
 from data_containers.user import UserRole
 from data_containers.quiz import Quiz
@@ -40,3 +39,15 @@ def remove(quiz) -> None:
 def all_quiz_types() -> list:
     all_types = database.get(SQLQueries.GET_ALL_TYPES)
     return all_types
+
+
+def add_question(quiz, question):
+    question_id = database.add(SQLQueries.ADD_QUESTION, (quiz.quiz_id, question.question_text))
+    question_id = question_id.last_id
+
+    for option in question.options:
+        database.add(SQLQueries.ADD_OPTION, (question_id, option.option_text, option.is_correct))
+
+
+def get_quiz_question(quiz):
+    return database.get(SQLQueries.GET_QUIZ_QUESTIONS, (quiz.quiz_id,))

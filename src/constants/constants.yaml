@@ -26,6 +26,12 @@ strings:
   book: "Book"
   performer: "performer"
   type: "Type"
+  options_json: 2
+  question_text: 1
+  question_id: 0
+  is_correct: "is_correct"
+  array: "[{}]"
+
 
 numbers:
   zero: 0
@@ -63,12 +69,14 @@ outputs:
   user_added: "User added successfully..."
   quiz_added: "Quiz added successfully..."
   creator_added: "Creator added successfully..."
+  question_added: "Question added successfully..."
   sign_in: "Signed in system as {}"
   sign_out: "Signed out from the system"
   invalid_choice: "Invalid Choice."
   user_info: "{user_id:5}\t{username:20}\t{user_role:20}"
   type_info: "{type_id:5}\t{type_name:20}"
   quiz_info: "{quiz_id:5}\t{quiz_name:20}\t{quiz_types:40}"
+  question_info: "{question_id:5}\t{question_text:80}"
   user_removed: "User removed successfully..."
   quiz_removed: "Quiz removed successfully..."
   zero_quizzes: "No quizzes found! :("
@@ -206,3 +214,18 @@ sql_queries:
     INNER JOIN types ON type_id = types.id
     INNER JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = ? AND quizzes.is_deleted = False;
+
+  get_quiz_questions: |
+    SELECT
+    q.id AS question_id,
+    q.question AS question_text,
+    GROUP_CONCAT(
+        json_object(
+            'option', o.option,
+            'is_correct', o.is_correct
+        )
+    ) AS options_json
+    FROM questions AS q
+    INNER JOIN options AS o ON q.id = o.question_id
+    INNER JOIN quizzes AS quiz ON q.quiz_id = quiz.id
+    WHERE quiz.id = ? GROUP BY q.id, q.question;

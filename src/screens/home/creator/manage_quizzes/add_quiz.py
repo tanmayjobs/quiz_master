@@ -7,59 +7,6 @@ from data_containers.user import User
 from helpers.common import newline, invalid_choice, show_message, show_user, show_type
 
 
-def create_options():
-    options = []
-
-    for option_no in range(Numbers.ONE, Numbers.FIVE):
-        option = input(InputTexts.OPTION.format(option_no))
-        options.append(option)
-
-    return options
-
-
-def correct_option_screen():
-    correct_option = input(InputTexts.CORRECT_OPTION)
-
-    if correct_option.isdigit():
-        correct_option = int(correct_option)
-
-        if correct_option < Numbers.ONE or correct_option > Numbers.FOUR:
-            invalid_choice()
-
-        else:
-            return correct_option
-    else:
-        invalid_choice()
-
-
-def create_question_screen():
-    newline()
-
-    question = Question(options={})
-
-    question_val = input(InputTexts.QUESTION)
-    question.question = question_val
-
-    options = create_options()
-    correct_option = None
-
-    while not correct_option:
-        correct_option = correct_option_screen()
-
-    for index, option in enumerate(options, start=Numbers.ONE):
-        question.add_option(option, index == correct_option)
-
-    return question
-
-
-def create_questions(number_of_questions):
-    all_questions = []
-    for _ in range(number_of_questions):
-        create_question_screen()
-
-    return all_questions
-
-
 def show_all_types(all_types):
     show_message(
         OutputTexts.TYPE_INFO.format(

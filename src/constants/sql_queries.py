@@ -23,6 +23,7 @@ class SQLQueries:
 
     GET_QUIZZES_BY_CREATOR = None
     GET_QUIZ_TYPES = None
+    GET_QUIZ_QUESTIONS = None
 
     @classmethod
     def __init__(cls, data):
@@ -47,3 +48,6 @@ class SQLQueries:
 
         cls.GET_QUIZZES_BY_CREATOR = data["get_quizzes_by_creator"]
         cls.GET_QUIZ_TYPES = data["get_quiz_types"]
+        cls.GET_QUIZ_QUESTIONS = data["get_quiz_questions"]
+        cls.ADD_QUESTION = data["add_question"]
+        cls.ADD_OPTION = data["add_option"]
