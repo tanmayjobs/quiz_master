@@ -32,6 +32,7 @@ class SQLQueries:
     GET_ALL_QUIZZES = None
 
     ADD_QUIZ_SCORE = None
+    GET_PLAYER_SCORES = None
 
     @classmethod
     def __init__(cls, data):
@@ -67,3 +68,4 @@ class SQLQueries:
 
         cls.GET_ALL_QUIZZES = data["get_all_quizzes"]
         cls.ADD_QUIZ_SCORE = data["add_quiz_score"]
+        cls.GET_PLAYER_SCORES = data["get_player_scores"]

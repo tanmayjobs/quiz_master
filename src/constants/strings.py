@@ -10,6 +10,7 @@ class Strings:
     QUESTION = None
     OPTION = None
     TYPE = None
+    RESULT = None
     A = None
     QUIZ_NAME = None
     ALL_QUESTIONS = None
@@ -43,6 +44,7 @@ class Strings:
         cls.QUESTION = data["question"]
         cls.OPTION = data["option"]
         cls.TYPE = data["type"]
+        cls.RESULT = data["result"]
         cls.A = data["a"]
         cls.QUIZ_NAME = data["quiz_name"]
         cls.ALL_QUESTIONS = data["all_questions"]

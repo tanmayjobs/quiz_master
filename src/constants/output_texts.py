@@ -9,6 +9,7 @@ class OutputTexts:
     TYPE_INFO = None
     QUIZ_INFO = None
     QUESTION_INFO = None
+    RECORD_INFO = None
     USER_REMOVED = None
     QUIZ_REMOVED = None
     QUESTION_REMOVED = None
@@ -16,6 +17,7 @@ class OutputTexts:
     NOT_YET = None
     SIGN_OUT = None
     QUIZ_RESULT = None
+    NO_QUIZ_RECORDS = None
 
     @classmethod
     def __init__(cls, data):
@@ -28,6 +30,7 @@ class OutputTexts:
         cls.TYPE_INFO = data["type_info"]
         cls.QUIZ_INFO = data["quiz_info"]
         cls.QUESTION_INFO = data["question_info"]
+        cls.RECORD_INFO = data["record_info"]
         cls.USER_REMOVED = data["user_removed"]
         cls.QUIZ_REMOVED = data["quiz_removed"]
         cls.QUESTION_REMOVED = data["question_removed"]
@@ -35,3 +38,4 @@ class OutputTexts:
         cls.NOT_YET = data["not_yet"]
         cls.SIGN_OUT = data["sign_out"]
         cls.QUIZ_RESULT = data["quiz_result"]
+        cls.NO_QUIZ_RECORDS = data["no_quiz_records"]

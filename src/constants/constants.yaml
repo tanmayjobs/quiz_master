@@ -26,6 +26,7 @@ strings:
   book: "Book"
   performer: "performer"
   type: "Type"
+  result: "Result"
   options_json: 2
   question_text: 1
   question_id: 0
@@ -73,7 +74,7 @@ inputs:
 
 outputs:
   user_added: "User added successfully..."
-  quiz_added: "Quiz added successfully..."
+  quiz_added: "Quiz added successfully.\nYou should head to Modify Quiz section to add some questions, just a suggestion..."
   creator_added: "Creator added successfully..."
   question_added: "Question added successfully..."
   sign_in: "Signed in system as {}"
@@ -83,12 +84,14 @@ outputs:
   type_info: "{type_id:5}\t{type_name:20}"
   quiz_info: "{quiz_id:5}\t{quiz_name:20}\t{quiz_types:40}"
   question_info: "{question_id:5}\t{question_text:80}"
+  record_info: "{record_id:5}\t{quiz_name:20}\t{result:10}"
   user_removed: "User removed successfully..."
   quiz_removed: "Quiz removed successfully..."
   question_removed: "Question removed successfully..."
   zero_quizzes: "No quizzes found! :("
   not_yet: "There are no {} yet!"
   quiz_result: "You scored {result:0.2f}% in {quiz_name} quiz."
+  no_quiz_records: "You haven't played any quizzes yet!"
 
 errors:
   invalid_credentials: "Invalid username or password!"
@@ -143,6 +146,7 @@ sql_queries:
         quiz_id INTEGER NOT NULL,
         player_score INTEGER NOT NULL DEFAULT 0,
         total_score INTEGER NOT NULL DEFAULT 0,
+        played_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(player_id) REFERENCES authentication(id),
         FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
     );
@@ -301,3 +305,16 @@ sql_queries:
   add_quiz_score: |
     INSERT INTO quiz_score_table(player_id, quiz_id, player_score, total_score)
     VALUES(?, ?, ?, ?);
+
+  get_player_scores: |
+    SELECT
+    authentication.id,
+    authentication.username,
+    quizzes.id,
+    quizzes.name,
+    player_score,
+    total_score
+    FROM quiz_score_table
+    INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
+    INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
+    WHERE player_id = ?;

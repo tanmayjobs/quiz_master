@@ -4,6 +4,7 @@ import pwinput
 from constants import OutputTexts, InputTexts, Strings
 from data_containers.question import Question
 from data_containers.quiz import Quiz
+from data_containers.quiz_record import QuizRecord
 from data_containers.types import QuizType
 from data_containers.user import UserRole
 
@@ -41,6 +42,17 @@ def show_quiz(index, quiz: Quiz):
             quiz_id=str(index),
             quiz_name=quiz.quiz_name,
             quiz_types=','.join(quiz_type.type_name for quiz_type in quiz.types),
+        )
+    )
+
+
+def show_record(index, record: QuizRecord):
+    result = (record.player_score / record.total_score) * 100
+    print(
+        OutputTexts.RECORD_INFO.format(
+            record_id=str(index),
+            quiz_name=record.quiz_name,
+            result=str(float("{0:.2f}".format(result))),
         )
     )
 
