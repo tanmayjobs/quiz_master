@@ -53,6 +53,7 @@ messages:
   quiz_name: "You've selected {} quiz to play!"
   quiz_type: "{} is about {}."
   creator_info: "Enter the following details for the creator you want to add-"
+  working_on_quiz: "Creator is still working on this quiz."
 
 inputs:
   username: "Enter username:"
@@ -68,6 +69,7 @@ inputs:
   number_of_options: "Enter the number of options (between 2 and 6):"
   correct_option: "Enter correct option (1, 2, 3 or 4):"
   explore_quizzes: "Enter keyword to search quiz(leave empty to get all quizzes):"
+  question_prompt: "Question {}. {}\n\nOption 1.{}\nOption 2.{}\nOption 3.{}\nOption 4.{}\nWhat's your guess(1, 2, 3 or 4):"
 
 outputs:
   user_added: "User added successfully..."
@@ -134,11 +136,12 @@ sql_queries:
     );
 
   create_quiz_score_table: |
-    CREATE TABLE IF NOT EXISTS options(
+    CREATE TABLE IF NOT EXISTS quiz_score_table(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         player_id INTEGER NOT NULL,
         quiz_id INTEGER NOT NULL,
         player_score INTEGER NOT NULL DEFAULT 0,
+        total_score INTEGER NOT NULL DEFAULT 0,
         FOREIGN KEY(player_id) REFERENCES authentication(id),
         FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
     );
@@ -176,8 +179,23 @@ sql_queries:
     WHERE id = ?;
 
   get_random_quiz: |
-    SELECT * FROM quizzes
-    WHERE is_deleted == False
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.is_deleted = False
+    GROUP BY quiz.id, quiz.name, quiz.creator_id, auth.username
     ORDER BY RANDOM() LIMIT 1;
 
   add_quiz: |
@@ -221,10 +239,23 @@ sql_queries:
     WHERE question_id = ?;
 
   get_quizzes_by_creator: |
-    SELECT quiz.id, quiz.name, quiz.creator_id, auth.username
-    FROM quizzes as quiz
-    INNER JOIN authentication as auth ON quiz.creator_id = auth.id
-    WHERE quiz.creator_id = ? AND quiz.is_deleted = False;
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.creator_id = ? AND quiz.is_deleted = False
+    GROUP BY quiz.id, quiz.name, quiz.creator_id, auth.username;
 
   get_quiz_types: |
     SELECT types.* FROM quiz_type_mapping

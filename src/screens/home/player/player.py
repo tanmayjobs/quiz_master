@@ -1,10 +1,11 @@
 from constants import ScreenTexts
 from helpers.common import invalid_choice, newline
 from helpers.menu_loop import menu_loop
+from screens.home.common import play_quiz_screen, play_random_quiz
 
 
 @menu_loop
-def player_home_screen(user):
+def player_home_screen(player):
     newline()
     user_choice = input(ScreenTexts.PLAYER_HOME)
 
@@ -14,7 +15,7 @@ def player_home_screen(user):
         match user_choice:
 
             case 1:
-                ...
+                play_random_quiz(player)
 
             case 2:
                 ...

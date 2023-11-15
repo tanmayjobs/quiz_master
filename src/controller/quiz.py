@@ -18,12 +18,7 @@ def add_quiz(quiz: Quiz, **_):
 def get_creator_quizzes(**kwargs):
     creator = kwargs.get(Strings.PERFORMER)
     all_quizzes_data = quizzes.get_by_creator(creator)
-    all_quizzes = [Quiz(*quiz, []) for quiz in all_quizzes_data]
-
-    for quiz in all_quizzes:
-        types_data = quizzes.get_quiz_types(quiz)
-        all_types = [QuizType(*each_type) for each_type in types_data]
-        quiz.types = all_types
+    all_quizzes = _map_quizzes(all_quizzes_data)
 
     return all_quizzes
 
@@ -98,19 +93,40 @@ def _get_types(types_json):
     return types
 
 
-@accessed_by(UserRole.ADMIN)
-def get_all_quizzes(**_):
-    all_quizzes_data = quizzes.get_all_quizzes()
+def _map_quiz(quiz_data):
+    quiz_id, quiz_name, creator_id, creator_name, types = quiz_data
+    types = Strings.ARRAY.format(types)
+    types_json = json.loads(types)
+
+    types = _get_types(types_json)
+
+    quiz = Quiz(quiz_id, quiz_name, creator_id, creator_name, types)
+    return quiz
+
+
+def _map_quizzes(all_quizzes_data):
     all_quizzes = []
 
     for quiz_data in all_quizzes_data:
-        quiz_id, quiz_name, creator_id, creator_name, types = quiz_data
-        types = Strings.ARRAY.format(types)
-        types_json = json.loads(types)
-
-        types = _get_types(types_json)
-
-        quiz = Quiz(quiz_id, quiz_name, creator_id, creator_name, types)
+        quiz = _map_quiz(quiz_data)
         all_quizzes.append(quiz)
 
     return all_quizzes
+
+
+@accessed_by(UserRole.ADMIN)
+def get_all_quizzes(**_):
+    all_quizzes_data = quizzes.get_all_quizzes()
+    all_quizzes = _map_quizzes(all_quizzes_data)
+
+    return all_quizzes
+
+
+def add_quiz_record(quiz_record):
+    ...
+
+
+def get_random_quiz():
+    quiz_data = quizzes.get_random_quiz()
+    quiz = _map_quiz(quiz_data)
+    return quiz

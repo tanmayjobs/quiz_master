@@ -52,3 +52,7 @@ def get_quiz_question(quiz):
 
 def get_all_quizzes():
     return database.get(SQLQueries.GET_ALL_QUIZZES)
+
+
+def get_random_quiz():
+    return database.get(SQLQueries.GET_RANDOM_QUIZ, only_one=True)

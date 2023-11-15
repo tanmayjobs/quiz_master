@@ -17,8 +17,6 @@ def authentication_screen():
         match user_choice:
             case 1:
                 sign_in_screen()
-                newline()
-                show_message(OutputTexts.SIGN_OUT)
 
             case 2:
                 sign_up_screen()

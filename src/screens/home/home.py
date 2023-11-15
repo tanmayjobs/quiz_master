@@ -1,3 +1,5 @@
+from constants import OutputTexts
+from helpers.common import newline, show_message
 from screens.home.player.player import player_home_screen
 from screens.home.creator.creator import creator_home_screen
 from screens.home.admin.admin import admin_home_screen
@@ -16,3 +18,6 @@ def home_screen(user):
 
         case UserRole.ADMIN:
             admin_home_screen(user)
+
+    newline()
+    show_message(OutputTexts.SIGN_OUT)
