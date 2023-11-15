@@ -54,5 +54,14 @@ def get_all_quizzes():
     return database.get(SQLQueries.GET_ALL_QUIZZES)
 
 
+def filter_all_quizzes(search_key):
+    return database.get(
+        SQLQueries.FILTER_ALL_QUIZZES, (
+            search_key,
+            search_key
+        )
+    )
+
+
 def get_random_quiz():
     return database.get(SQLQueries.GET_RANDOM_QUIZ, only_one=True)

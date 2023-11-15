@@ -130,3 +130,10 @@ def get_random_quiz():
 
     quiz = _map_quiz(quiz_data)
     return quiz
+
+
+def filter_all_quizzes(search_key):
+    all_quizzes_data = quizzes.filter_all_quizzes(search_key)
+    all_quizzes = _map_quizzes(all_quizzes_data)
+
+    return all_quizzes

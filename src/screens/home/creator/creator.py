@@ -1,7 +1,7 @@
 from constants import ScreenTexts
 from helpers.common import invalid_choice, newline
 from helpers.menu_loop import menu_loop
-from screens.home.common import play_random_quiz, show_records_screen
+from screens.home.common import play_random_quiz, show_records_screen, explore_quiz_screen
 from screens.home.creator.manage_quizzes.manage_quizzes import manage_quizzes_screen
 
 
@@ -19,7 +19,7 @@ def creator_home_screen(creator):
                 play_random_quiz(creator)
 
             case 2:
-                ...
+                explore_quiz_screen(creator)
 
             case 3:
                 show_records_screen(creator)

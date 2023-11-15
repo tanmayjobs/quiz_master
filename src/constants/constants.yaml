@@ -62,6 +62,7 @@ inputs:
   user_id: "Enter user id:"
   quiz_id: "Enter quiz id:"
   question_id: "Enter question id:"
+  keyword: "Enter keyword to search(name of the quiz or types associated):"
   type_ids: "Enter type ids (comma separated values):"
   quiz_name: "Enter quiz name:"
   question: "Enter question:"
@@ -92,6 +93,7 @@ outputs:
   not_yet: "There are no {} yet!"
   quiz_result: "You scored {result:0.2f}% in {quiz_name} quiz."
   no_quiz_records: "You haven't played any quizzes yet!"
+  no_quizzes: "No quizzes found for '{}'."
 
 errors:
   invalid_credentials: "Invalid username or password!"
@@ -300,6 +302,25 @@ sql_queries:
     INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
     INNER JOIN types AS t ON t.id = qt.type_id
     WHERE quiz.is_deleted = False
+    GROUP BY quiz.id, quiz.name, quiz.creator_id, auth.username;
+
+  filter_all_quizzes: |
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.is_deleted = False and (quiz.name like ? or t.name like ?) 
     GROUP BY quiz.id, quiz.name, quiz.creator_id, auth.username;
 
   add_quiz_score: |

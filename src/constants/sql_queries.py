@@ -30,6 +30,7 @@ class SQLQueries:
     REMOVE_OPTION_BY_QUESTION = None
 
     GET_ALL_QUIZZES = None
+    FILTER_ALL_QUIZZES = None
 
     ADD_QUIZ_SCORE = None
     GET_PLAYER_SCORES = None
@@ -69,3 +70,5 @@ class SQLQueries:
         cls.GET_ALL_QUIZZES = data["get_all_quizzes"]
         cls.ADD_QUIZ_SCORE = data["add_quiz_score"]
         cls.GET_PLAYER_SCORES = data["get_player_scores"]
+
+        cls.FILTER_ALL_QUIZZES = data["filter_all_quizzes"]

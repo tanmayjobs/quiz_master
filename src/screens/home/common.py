@@ -1,5 +1,6 @@
 from constants import OutputTexts, Strings, InputTexts, Messages, Numbers
-from controller.quiz import get_creator_quizzes, get_quiz_questions, get_random_quiz
+from controller.quiz import get_creator_quizzes, get_quiz_questions, get_random_quiz, get_all_quizzes, \
+    filter_all_quizzes
 from controller.quiz_record import add_quiz_record, get_player_records
 from data_containers.question import Option
 from data_containers.quiz import Quiz
@@ -35,7 +36,7 @@ def select_quiz(all_quizzes):
     return all_quizzes[index]
 
 
-def select_quiz_screen(creator):
+def select_creator_quiz_screen(creator):
     newline()
     all_quizzes = get_creator_quizzes(performer=creator)
 
@@ -157,3 +158,37 @@ def show_records_screen(player):
         return
 
     show_player_records(player_records)
+
+
+def select_quiz_screen(all_quizzes, search_key=""):
+    newline()
+
+    if not all_quizzes:
+        if search_key:
+            show_message(OutputTexts.NO_QUIZZES.format(search_key))
+        else:
+            show_message(OutputTexts.NOT_YET.format(Strings.QUIZ))
+        return
+
+    show_all_quizzes(all_quizzes)
+
+    selected_quiz = select_quiz(all_quizzes)
+
+    if not selected_quiz:
+        invalid_choice()
+        return
+
+    return selected_quiz
+
+
+def explore_quiz_screen(player):
+    newline()
+    search_key = input(InputTexts.KEYWORD)
+
+    all_quizzes = filter_all_quizzes(search_key)
+    selected_quiz = select_quiz_screen(all_quizzes, search_key)
+
+    if not selected_quiz:
+        return
+
+    play_quiz_screen(player, selected_quiz)

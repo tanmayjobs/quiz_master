@@ -13,6 +13,7 @@ class InputTexts:
     NUMBER_OF_QUESTIONS = None
     NUMBER_OF_OPTIONS = None
     QUESTION_PROMPT = None
+    KEYWORD = None
 
     @classmethod
     def __init__(cls, data):
@@ -29,3 +30,4 @@ class InputTexts:
         cls.NUMBER_OF_QUESTIONS = data["number_of_questions"]
         cls.NUMBER_OF_OPTIONS = data["number_of_options"]
         cls.QUESTION_PROMPT = data["question_prompt"]
+        cls.KEYWORD = data["keyword"]

@@ -18,6 +18,7 @@ class OutputTexts:
     SIGN_OUT = None
     QUIZ_RESULT = None
     NO_QUIZ_RECORDS = None
+    NO_QUIZZES = None
 
     @classmethod
     def __init__(cls, data):
@@ -39,3 +40,4 @@ class OutputTexts:
         cls.SIGN_OUT = data["sign_out"]
         cls.QUIZ_RESULT = data["quiz_result"]
         cls.NO_QUIZ_RECORDS = data["no_quiz_records"]
+        cls.NO_QUIZZES = data["no_quizzes"]
