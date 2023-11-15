@@ -31,6 +31,8 @@ class SQLQueries:
 
     GET_ALL_QUIZZES = None
 
+    ADD_QUIZ_SCORE = None
+
     @classmethod
     def __init__(cls, data):
         cls.CREATE_AUTH_TABLE = data["create_auth_table"]
@@ -64,3 +66,4 @@ class SQLQueries:
         cls.REMOVE_OPTION_BY_QUESTION = data["remove_option_by_question"]
 
         cls.GET_ALL_QUIZZES = data["get_all_quizzes"]
+        cls.ADD_QUIZ_SCORE = data["add_quiz_score"]

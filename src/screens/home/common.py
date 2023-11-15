@@ -1,6 +1,10 @@
 from constants import OutputTexts, Strings, InputTexts, Messages, Numbers
 from controller.quiz import get_creator_quizzes, get_quiz_questions, get_random_quiz
+from controller.quiz_record import add_quiz_record
 from data_containers.question import Option
+from data_containers.quiz import Quiz
+from data_containers.quiz_record import QuizRecord
+from data_containers.user import User
 from helpers.common import newline, invalid_choice, show_quiz, show_message
 
 
@@ -74,6 +78,7 @@ def play_quiz(all_questions):
     player_score = 0
 
     for question_no, question in enumerate(all_questions, start=1):
+        newline()
         answer: Option | None = None
 
         while not answer:
@@ -84,7 +89,7 @@ def play_quiz(all_questions):
     return player_score
 
 
-def play_quiz_screen(player, quiz):
+def play_quiz_screen(player: User, quiz: Quiz):
     newline()
     show_message(Messages.QUIZ_NAME.format(quiz.quiz_name))
     newline()
@@ -95,9 +100,34 @@ def play_quiz_screen(player, quiz):
         show_message(Messages.WORKING_ON_QUIZ)
         return
 
+    total_score = len(all_questions)
     player_score = play_quiz(all_questions)
+
+    quiz_record = QuizRecord(
+        player.user_id,
+        player.username,
+        quiz.quiz_id,
+        quiz.quiz_name,
+        player_score,
+        total_score,
+    )
+    add_quiz_record(quiz_record)
+
+    newline()
+    show_message(
+        OutputTexts.QUIZ_RESULT.format(
+            result=(player_score / total_score) * 100,
+            quiz_name=quiz.quiz_name
+        )
+    )
 
 
 def play_random_quiz(player):
     quiz = get_random_quiz()
+
+    if not quiz:
+        newline()
+        show_message(OutputTexts.NOT_YET.format(Strings.QUIZ))
+        return
+
     play_quiz_screen(player, quiz)

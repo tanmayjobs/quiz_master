@@ -10,3 +10,4 @@ class QuizRecord:
     quiz_name: str
 
     player_score: int
+    total_score: int

@@ -88,6 +88,7 @@ outputs:
   question_removed: "Question removed successfully..."
   zero_quizzes: "No quizzes found! :("
   not_yet: "There are no {} yet!"
+  quiz_result: "You scored {result:0.2f}% in {quiz_name} quiz."
 
 errors:
   invalid_credentials: "Invalid username or password!"
@@ -296,3 +297,7 @@ sql_queries:
     INNER JOIN types AS t ON t.id = qt.type_id
     WHERE quiz.is_deleted = False
     GROUP BY quiz.id, quiz.name, quiz.creator_id, auth.username;
+
+  add_quiz_score: |
+    INSERT INTO quiz_score_table(player_id, quiz_id, player_score, total_score)
+    VALUES(?, ?, ?, ?);

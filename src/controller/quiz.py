@@ -122,11 +122,11 @@ def get_all_quizzes(**_):
     return all_quizzes
 
 
-def add_quiz_record(quiz_record):
-    ...
-
-
 def get_random_quiz():
     quiz_data = quizzes.get_random_quiz()
+
+    if not quiz_data:
+        return None
+
     quiz = _map_quiz(quiz_data)
     return quiz
