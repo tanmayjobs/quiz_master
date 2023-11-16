@@ -1,11 +1,12 @@
 from constants import OutputTexts, Strings, InputTexts, Messages, Numbers
-from controller.quiz import get_creator_quizzes, get_quiz_questions, get_random_quiz, get_all_quizzes, \
-    filter_all_quizzes
+from controller.quiz import get_creator_quizzes, get_quiz_questions, get_random_quiz, filter_all_quizzes
 from controller.quiz_record import add_quiz_record, get_player_records
+
 from data_containers.question import Option
 from data_containers.quiz import Quiz
 from data_containers.quiz_record import QuizRecord
 from data_containers.user import User
+
 from helpers.common import newline, invalid_choice, show_quiz, show_message, show_record
 
 

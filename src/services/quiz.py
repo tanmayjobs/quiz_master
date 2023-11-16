@@ -1,7 +1,6 @@
 import database.operations as database
-from constants import SQLQueries
 
-from data_containers.user import UserRole
+from constants import SQLQueries
 from data_containers.quiz import Quiz
 
 

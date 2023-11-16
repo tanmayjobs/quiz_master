@@ -1,7 +1,7 @@
 import bcrypt
 
 
-def hash_password(password: str) -> str:
+def hash_password(password: str):
     password_bytes = password.encode()
     salt = bcrypt.gensalt()
     password_hash = bcrypt.hashpw(password_bytes, salt)
@@ -9,5 +9,5 @@ def hash_password(password: str) -> str:
     return password_hash
 
 
-def check_password(password: str, hashed_password: str):
+def check_password(password: str, hashed_password):
     return bcrypt.checkpw(password.encode(), hashed_password)

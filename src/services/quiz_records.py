@@ -8,10 +8,6 @@ def get_player_scores(player: User):
     return database.get(SQLQueries.GET_PLAYER_SCORES, (player.user_id,))
 
 
-def get_by_quiz_id(quiz_id):
-    ...  # Get all records for a quiz.
-
-
 def add(quiz_record: QuizRecord):
     database.add(
         SQLQueries.ADD_QUIZ_SCORE,

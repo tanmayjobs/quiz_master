@@ -1,5 +1,4 @@
 from constants import LogText
-from helpers.common import show_message
 from screens.authentication.authentication import authentication_screen
 from log.logger import Logger, INFO
 

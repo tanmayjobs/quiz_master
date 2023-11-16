@@ -3,7 +3,7 @@ from logging import INFO, DEBUG, WARN, CRITICAL, ERROR
 
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="logs/server.log",
+    filename="log/server.log",
     filemode="a+",
     format="%(asctime)s %(levelname)-10s %(message)s",
     datefmt="%d-%m-%Y %H:%M:%S",

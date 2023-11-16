@@ -1,6 +1,7 @@
 from controller.user import sign_in
-from constants import Errors, InputTexts
+from constants import Errors, InputTexts, LogText
 from helpers.common import show_message, password_input, newline
+from log.logger import Logger, WARN
 from screens.home.home import home_screen
 
 
@@ -12,4 +13,5 @@ def sign_in_screen():
     if user:
         home_screen(user)
     else:
+        Logger.log(WARN, LogText.INVALID_CREDENTIALS)
         show_message(Errors.INVALID_CREDENTIALS)

@@ -344,3 +344,4 @@ log_text:
   system_start: "Initializing System..."
   system_exit: "System Exit..."
   system_error: "System had an unexpected error...\n{}"
+  invalid_credentials: "Invalid credentials tried by user {}"

@@ -1,8 +1,8 @@
 from screens.authentication.sign_in import sign_in_screen
 from screens.authentication.sign_up import sign_up_screen
 
-from constants import ScreenTexts, OutputTexts
-from helpers.common import invalid_choice, quit_application, newline, show_message
+from constants import ScreenTexts
+from helpers.common import invalid_choice, quit_application, newline
 from helpers.menu_loop import menu_loop
 
 

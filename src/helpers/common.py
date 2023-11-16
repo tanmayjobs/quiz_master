@@ -1,7 +1,7 @@
 import sys
 import pwinput
 
-from constants import OutputTexts, InputTexts, Strings
+from constants import OutputTexts, InputTexts
 from data_containers.question import Question
 from data_containers.quiz import Quiz
 from data_containers.quiz_record import QuizRecord
