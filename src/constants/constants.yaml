@@ -339,3 +339,8 @@ sql_queries:
     INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
     INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
     WHERE player_id = ?;
+
+log_text:
+  system_start: "Initializing System..."
+  system_exit: "System Exit..."
+  system_error: "System had an unexpected error...\n{}"

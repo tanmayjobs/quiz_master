@@ -1,6 +1,7 @@
 
 import yaml
 
+from constants.log_text import LogText
 from constants.messages import Messages
 from constants.input_texts import InputTexts
 from constants.numbers import Numbers
@@ -22,3 +23,4 @@ with open("constants/constants.yaml", "r") as constants_file:
     Errors(yaml_data["errors"])
     Strings(yaml_data["strings"])
     Numbers(yaml_data["numbers"])
+    LogText(yaml_data["log_text"])

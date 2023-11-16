@@ -1,4 +1,7 @@
+from constants import LogText
+from helpers.common import show_message
 from screens.authentication.authentication import authentication_screen
+from log.logger import Logger, INFO
 
 
 def main():
@@ -6,4 +9,13 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    Logger.log(INFO, LogText.SYSTEM_START)
+
+    try:
+        main()
+
+    except Exception as err:
+        Logger.log(INFO, LogText.SYSTEM_ERROR.format(err))
+
+    finally:
+        Logger.log(INFO, LogText.SYSTEM_EXIT)
