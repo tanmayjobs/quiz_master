@@ -17,3 +17,10 @@ def get_player_records(**kwargs):
     player_scores = [QuizRecord(*score_data) for score_data in player_scores_data]
 
     return player_scores
+
+
+def quiz_top_records(quiz_id, number_of_records= 5):
+    top_records_data = quiz_records.quiz_top_scores(quiz_id, number_of_records)
+    top_records = [QuizRecord(*score_data) for score_data in top_records_data]
+
+    return top_records

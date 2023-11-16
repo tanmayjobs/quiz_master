@@ -1,6 +1,6 @@
 from constants import OutputTexts, Strings, InputTexts, Messages, Numbers
 from controller.quiz import get_creator_quizzes, get_quiz_questions, get_random_quiz, filter_all_quizzes
-from controller.quiz_record import add_quiz_record, get_player_records
+from controller.quiz_record import add_quiz_record, get_player_records, quiz_top_records
 
 from data_containers.question import Option
 from data_containers.quiz import Quiz
@@ -100,6 +100,25 @@ def play_quiz(all_questions):
     return player_score
 
 
+def show_quiz_result(quiz_record: QuizRecord):
+    newline()
+    show_message(
+        OutputTexts.QUIZ_RESULT.format(
+            result=(quiz_record.player_score / quiz_record.total_score) * 100,
+            quiz_name=quiz_record.quiz_name
+        )
+    )
+
+    newline()
+
+    top_records = quiz_top_records(quiz_record.quiz_id)
+
+    if top_records:
+        show_message(Messages.TOP_RECORD)
+        show_records_screen(top_records)
+        newline()
+
+
 def play_quiz_screen(player: User, quiz: Quiz):
     newline()
     newline()
@@ -129,15 +148,9 @@ def play_quiz_screen(player: User, quiz: Quiz):
         player_score,
         total_score
     )
-    add_quiz_record(quiz_record)
 
-    newline()
-    show_message(
-        OutputTexts.QUIZ_RESULT.format(
-            result=(player_score / total_score) * 100,
-            quiz_name=quiz.quiz_name
-        )
-    )
+    add_quiz_record(quiz_record)
+    show_quiz_result(quiz_record)
 
 
 def play_random_quiz(player):
@@ -151,7 +164,7 @@ def play_random_quiz(player):
     play_quiz_screen(player, quiz)
 
 
-def show_player_records(player_records):
+def show_records_screen(player_records):
     show_message(
         OutputTexts.RECORD_INFO.format(
             record_id=Strings.ID,
@@ -174,7 +187,7 @@ def show_player_records_screen(player):
         show_message(OutputTexts.NO_QUIZ_RECORDS)
         return
 
-    show_player_records(player_records)
+    show_records_screen(player_records)
 
 
 def select_quiz_screen(all_quizzes, search_key=""):

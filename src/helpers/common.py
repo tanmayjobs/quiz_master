@@ -52,6 +52,7 @@ def show_record(index, record: QuizRecord):
         OutputTexts.RECORD_INFO.format(
             record_id=str(index),
             quiz_name=record.quiz_name,
+            player_name=record.player_name,
             result=Strings.RESULT_PERCENTAGE.format(result),
             played_at=record.played_at
         )

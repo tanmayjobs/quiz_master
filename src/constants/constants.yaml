@@ -61,6 +61,7 @@ messages:
   greet: "Hello {username}, hope you're doing fine..."
   incorrect_guess: "Your guess was incorrect, answer is {option_text}."
   correct_guess: "You guess is correct, {option_text} is the correct answer of this question."
+  top_record: "These are the top records for this quiz."
 
 inputs:
   username: "Enter username:"
@@ -91,7 +92,7 @@ outputs:
   type_info: "{type_id:5}\t{type_name:20}"
   quiz_info: "{quiz_id:5}\t{quiz_name:20}\t{quiz_types:40}"
   question_info: "{question_id:5}\t{question_text:80}"
-  record_info: "{record_id:5}\t{quiz_name:20}\t{result:10}\t{played_at:20}"
+  record_info: "{record_id:5}\t{quiz_name:20}\t{player_name:20}\t{result:10}\t{played_at:20}"
   user_removed: "User removed successfully..."
   quiz_removed: "Quiz removed successfully..."
   question_removed: "Question removed successfully..."
@@ -110,7 +111,7 @@ errors:
   quiz_404: "Quiz not found!"
   performer_required: "Performer is required for this action!"
   permission: "You do not have enough permissions to perform this action!"
-  unexpected_error: "Unexpected Error Occurred"
+  unexpected_error: "Unexpected Error Occurred!!\nExiting the System. Please contact the administrator."
 
 sql_queries:
   create_auth_table: |
@@ -354,6 +355,21 @@ sql_queries:
     INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
     WHERE player_id = ?
     ORDER BY played_at DESC;
+
+  top_quiz_scores: |
+    SELECT
+    authentication.id,
+    authentication.username,
+    quizzes.id,
+    quizzes.name,
+    player_score,
+    total_score,
+    played_at
+    FROM quiz_score_table
+    INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
+    INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
+    WHERE quizzes.id = ?
+    ORDER BY played_at DESC LIMIT ?;
 
 log_text:
   system_start: "Initializing System..."
