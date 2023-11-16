@@ -156,6 +156,7 @@ def show_player_records(player_records):
         OutputTexts.RECORD_INFO.format(
             record_id=Strings.ID,
             quiz_name=Strings.QUIZ,
+            player_name=Strings.PLAYER,
             result=Strings.RESULT,
             played_at=Strings.PLAYED_AT
         )
@@ -165,7 +166,7 @@ def show_player_records(player_records):
         show_record(index, quiz)
 
 
-def show_records_screen(player):
+def show_player_records_screen(player):
     newline()
     player_records = get_player_records(performer=player)
 
