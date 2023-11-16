@@ -27,9 +27,13 @@ class Strings:
     IS_CORRECT = None
 
     ARRAY = None
+    FILTER = None
 
     TYPE_ID = None
     TYPE_NAME = None
+
+    PLAYED_AT = None
+    RESULT_PERCENTAGE = None
 
     @classmethod
     def __init__(cls, data):
@@ -61,6 +65,10 @@ class Strings:
         cls.IS_CORRECT = data["is_correct"]
 
         cls.ARRAY = data["array"]
+        cls.FILTER = data["filter"]
 
         cls.TYPE_ID = data["type_id"]
         cls.TYPE_NAME = data["type_name"]
+
+        cls.PLAYED_AT = data["played_at"]
+        cls.RESULT_PERCENTAGE = data["result_percentage"]

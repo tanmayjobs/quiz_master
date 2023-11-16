@@ -11,3 +11,5 @@ class QuizRecord:
 
     player_score: int
     total_score: int
+
+    played_at: str = ""

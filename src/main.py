@@ -1,4 +1,5 @@
-from constants import LogText
+from constants import LogText, Errors
+from helpers.common import show_message
 from screens.authentication.authentication import authentication_screen
 from log.logger import Logger, INFO
 
@@ -14,6 +15,7 @@ if __name__ == '__main__':
         main()
 
     except Exception as err:
+        show_message(Errors.UNEXPECTED_ERROR)
         Logger.log(INFO, LogText.SYSTEM_ERROR.format(err))
 
     finally:

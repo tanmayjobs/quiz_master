@@ -1,10 +1,15 @@
 import services.user as user_services
+
 from helpers.rbac import accessed_by
 from data_containers.user import *
 from helpers.crypt import check_password
 
 
 def sign_in(username, password) -> User | None:
+
+    if not username.strip() or not password:
+        raise ValueError
+
     user_data = user_services.get_by_username(username)
 
     if not user_data:
@@ -24,13 +29,13 @@ def sign_up(username, password) -> bool:
 
 
 @accessed_by(UserRole.ADMIN)
-def add_creator(username, password, **kwargs) -> bool:
+def add_creator(username, password, **_) -> bool:
     is_user_added = user_services.add_user(username, password, UserRole.CREATOR)
     return is_user_added
 
 
 @accessed_by(UserRole.ADMIN)
-def get_all_users(**kwargs) -> list[User]:
+def get_all_users(**_) -> list[User]:
     all_user_data = user_services.get_all_users()
     all_users = [User.parse_database(user_data) for user_data in all_user_data]
 
@@ -38,5 +43,5 @@ def get_all_users(**kwargs) -> list[User]:
 
 
 @accessed_by(UserRole.ADMIN)
-def remove_user(user, **kwargs) -> None:
+def remove_user(user, **_) -> None:
     user_services.remove_user(user.user_id)

@@ -1,6 +1,6 @@
 import database.operations as database
 
-from constants import SQLQueries
+from constants import SQLQueries, Strings
 from data_containers.quiz import Quiz
 
 
@@ -56,8 +56,8 @@ def get_all_quizzes():
 def filter_all_quizzes(search_key):
     return database.get(
         SQLQueries.FILTER_ALL_QUIZZES, (
-            search_key,
-            search_key
+            Strings.FILTER.format(search_key=search_key),
+            Strings.FILTER.format(search_key=search_key),
         )
     )
 

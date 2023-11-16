@@ -1,12 +1,12 @@
 import sys
 import pwinput
 
-from constants import OutputTexts, InputTexts
+from constants import OutputTexts, InputTexts, Messages, Strings
 from data_containers.question import Question
 from data_containers.quiz import Quiz
 from data_containers.quiz_record import QuizRecord
 from data_containers.types import QuizType
-from data_containers.user import UserRole
+from data_containers.user import UserRole, User
 
 
 def invalid_choice():
@@ -52,7 +52,8 @@ def show_record(index, record: QuizRecord):
         OutputTexts.RECORD_INFO.format(
             record_id=str(index),
             quiz_name=record.quiz_name,
-            result=str(float("{0:.2f}".format(result))),
+            result=Strings.RESULT_PERCENTAGE.format(result),
+            played_at=record.played_at
         )
     )
 
@@ -78,3 +79,9 @@ def quit_application():
     newline()
     print("Bye!")
     sys.exit(0)
+
+
+def greet_user(user: User):
+    newline()
+    newline()
+    show_message(Messages.GREET.format(username=user.username))

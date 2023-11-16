@@ -88,20 +88,34 @@ def play_quiz(all_questions):
         while not answer:
             answer = ask_question(question_no, question)
 
-        player_score += 1 if answer.is_correct else 0
+        if answer.is_correct:
+            player_score += 1
+            show_message(Messages.CORRECT_GUESS.format(option_text=answer.option_text))
+
+        else:
+            show_message(Messages.INCORRECT_GUESS.format(option_text=answer.option_text))
+
+        newline()
 
     return player_score
 
 
 def play_quiz_screen(player: User, quiz: Quiz):
     newline()
-    show_message(Messages.QUIZ_NAME.format(quiz.quiz_name))
     newline()
+
+    show_message(
+        Messages.QUIZ_NAME.format(
+            quiz_name=quiz.quiz_name,
+            creator_name=quiz.creator_name
+        )
+    )
 
     all_questions = get_quiz_questions(quiz)
 
     if not all_questions:
         show_message(Messages.WORKING_ON_QUIZ)
+        explore_quiz_screen(player)
         return
 
     total_score = len(all_questions)
@@ -113,7 +127,7 @@ def play_quiz_screen(player: User, quiz: Quiz):
         quiz.quiz_id,
         quiz.quiz_name,
         player_score,
-        total_score,
+        total_score
     )
     add_quiz_record(quiz_record)
 
@@ -143,6 +157,7 @@ def show_player_records(player_records):
             record_id=Strings.ID,
             quiz_name=Strings.QUIZ,
             result=Strings.RESULT,
+            played_at=Strings.PLAYED_AT
         )
     )
 
