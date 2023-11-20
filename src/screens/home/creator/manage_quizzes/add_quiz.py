@@ -3,7 +3,7 @@ from controller.quiz import add_quiz, all_quiz_types
 from data_containers.quiz import Quiz
 from data_containers.user import User
 
-from helpers.common import newline, invalid_choice, show_message, show_type
+from screens.common import newline, invalid_choice, show_message, show_type
 
 
 def show_all_types(all_types):

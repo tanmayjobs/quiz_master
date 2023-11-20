@@ -1,7 +1,7 @@
 from constants import ScreenTexts
 
-from helpers.common import invalid_choice, newline
-from helpers.menu_loop import menu_loop
+from screens.common import invalid_choice, newline
+from utils.menu_loop import menu_loop
 
 from screens.home.admin.add_creator import add_creator_screen
 from screens.home.admin.remove_quiz import remove_quiz_screen

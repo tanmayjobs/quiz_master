@@ -1,27 +1,22 @@
 import os
 
 from constants import SQLQueries, Strings
-from . import _database_access_object as database_access
+from .db import Database
 
 if not os.path.exists("database/storage/"):
     os.mkdir("database/storage/")
 
-with database_access.DatabaseAccess() as dao:
-    dao.execute(SQLQueries.CREATE_AUTH_TABLE)
-    dao.execute(SQLQueries.CREATE_QUIZ_TABLE)
-    dao.execute(SQLQueries.CREATE_QUESTION_TABLE)
-    dao.execute(SQLQueries.CREATE_OPTION_TABLE)
-    dao.execute(SQLQueries.CREATE_QUIZ_SCORE_TABLE)
-    dao.execute(SQLQueries.CREATE_TYPE_TABLE)
-    dao.execute(SQLQueries.CREATE_QUIZ_TYPE_MAPPING_TABLE)
+database = Database()
 
-    dao.executemany(
-        SQLQueries.ADD_TYPE,
-        [
-            (Strings.MOVIE,),
-            (Strings.MUSIC,),
-            (Strings.BOOK,)
-        ]
-    )
+database.create(SQLQueries.CREATE_AUTH_TABLE)
+database.create(SQLQueries.CREATE_QUIZ_TABLE)
+database.create(SQLQueries.CREATE_QUESTION_TABLE)
+database.create(SQLQueries.CREATE_OPTION_TABLE)
+database.create(SQLQueries.CREATE_QUIZ_SCORE_TABLE)
+database.create(SQLQueries.CREATE_TYPE_TABLE)
+database.create(SQLQueries.CREATE_QUIZ_TYPE_MAPPING_TABLE)
 
-__all__ = ['operations']
+database.add(SQLQueries.ADD_TYPE,(Strings.MOVIE,),)
+database.add(SQLQueries.ADD_TYPE,(Strings.BOOK,),)
+database.add(SQLQueries.ADD_TYPE,(Strings.MUSIC,),)
+database.add(SQLQueries.ADD_TYPE,(Strings.OTHER,),)

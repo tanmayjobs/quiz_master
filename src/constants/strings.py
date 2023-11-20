@@ -18,6 +18,7 @@ class Strings:
     MOVIE = None
     MUSIC = None
     BOOK = None
+    OTHER = None
 
     PERFORMER = None
 
@@ -34,6 +35,8 @@ class Strings:
 
     PLAYED_AT = None
     RESULT_PERCENTAGE = None
+
+    PASSWORD_REGEX = None
 
     @classmethod
     def __init__(cls, data):
@@ -56,6 +59,7 @@ class Strings:
         cls.MOVIE = data["movie"]
         cls.MUSIC = data["music"]
         cls.BOOK = data["book"]
+        cls.OTHER = data["other"]
 
         cls.PERFORMER = data["performer"]
 
@@ -72,3 +76,5 @@ class Strings:
 
         cls.PLAYED_AT = data["played_at"]
         cls.RESULT_PERCENTAGE = data["result_percentage"]
+
+        cls.PASSWORD_REGEX = data["password_regex"]

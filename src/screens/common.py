@@ -1,5 +1,6 @@
 import sys
 import pwinput
+import re
 
 from constants import OutputTexts, InputTexts, Messages, Strings
 from data_containers.question import Question
@@ -30,7 +31,7 @@ def show_user(index, user):
 def show_type(index, each_type: QuizType):
     print(
         OutputTexts.TYPE_INFO.format(
-            type_id=str(each_type.type_id),
+            type_id=str(index),
             type_name=each_type.type_name
         )
     )
@@ -68,6 +69,23 @@ def show_question(index, question: Question):
     )
 
 
+def show_questions_all_info(index, question: Question):
+    correct_option = [option for option in question.options if option.is_correct]
+    correct_option = correct_option[0]
+
+    print(
+        OutputTexts.QUESTION_ALL_INFO.format(
+            question_id=str(index),
+            question_text=question.question_text,
+            option_1=question.options[0].option_text,
+            option_2=question.options[1].option_text,
+            option_3=question.options[2].option_text,
+            option_4=question.options[3].option_text,
+            correct_option=correct_option.option_text
+        )
+    )
+
+
 def password_input():
     return pwinput.pwinput(InputTexts.PASSWORD)
 
@@ -86,3 +104,7 @@ def greet_user(user: User):
     newline()
     newline()
     show_message(Messages.GREET.format(username=user.username))
+
+
+def validate_password(password):
+    return re.match(Strings.PASSWORD_REGEX, password)

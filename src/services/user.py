@@ -1,9 +1,9 @@
-import database.operations as database
+from database import database
 
 from constants import SQLQueries
 from data_containers.user import UserRole
 from sqlite3 import IntegrityError
-from helpers.crypt import hash_password
+from utils.crypt import hash_password
 
 
 def get_all_users() -> list:
@@ -13,6 +13,7 @@ def get_all_users() -> list:
 
 def add_user(username: str, password: str, role: UserRole) -> bool:
     password_hash = hash_password(password)
+
     try:
         database.add(SQLQueries.ADD_USER, (username, password_hash, role))
 

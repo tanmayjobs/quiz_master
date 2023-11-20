@@ -6,7 +6,7 @@ screens:
 
   authentication: "Press:\n- '1' to Sign In\n- '2' to Sign Up\n- '3' to Exit\nEnter your choice:"
   manage_quizzes: "Press:\n- '1' to Add quiz\n- '2' to Remove quiz\n- '3' to Modify a Quiz\n- '4' to Go Back\nEnter your choice:"
-  manage_quiz: "Press:\n- '1' to Add question\n- '2' to Remove question\n- '3' to Go Back\nEnter your choice:"
+  manage_quiz: "Press:\n- '1' to List questions\n- '2' to Add question\n- '3' to Remove question\n- '4' to Go Back\nEnter your choice:"
 
 strings:
   admin: "Admin"
@@ -24,6 +24,7 @@ strings:
   movie: "Movie"
   music: "Music"
   book: "Book"
+  other: "Other"
   performer: "performer"
   type: "Type"
   result: "Result"
@@ -38,6 +39,7 @@ strings:
   filter: "%{search_key}%"
   played_at: "Played At"
   result_percentage: "{0:.2f}%"
+  password_regex: '^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!#$%&? "]).*$'
 
 
 numbers:
@@ -92,6 +94,7 @@ outputs:
   type_info: "{type_id:5}\t{type_name:20}"
   quiz_info: "{quiz_id:5}\t{quiz_name:20}\t{quiz_types:40}"
   question_info: "{question_id:5}\t{question_text:80}"
+  question_all_info: "Question {question_id}.{question_text}\nOption 1.{option_1}\nOption 2.{option_1}\nOption 3.{option_3}\nOption 4.{option_4}\nCorrect Option.{correct_option}"
   record_info: "{record_id:5}\t{quiz_name:20}\t{player_name:20}\t{result:10}\t{played_at:20}"
   user_removed: "User removed successfully..."
   quiz_removed: "Quiz removed successfully..."
@@ -103,6 +106,7 @@ outputs:
   no_quizzes: "No quizzes found for '{}'."
 
 errors:
+  weak_password: "Password is too weak."
   username_empty: "Username can't be empty!"
   password_empty: "Password can't be empty!"
   invalid_credentials: "Invalid username or password!"
@@ -362,13 +366,14 @@ sql_queries:
     authentication.username,
     quizzes.id,
     quizzes.name,
-    player_score,
+    MAX(player_score),
     total_score,
     played_at
     FROM quiz_score_table
     INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
     INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
     WHERE quizzes.id = ?
+    GROUP BY quizzes.id, authentication.id
     ORDER BY player_score DESC LIMIT ?;
 
 log_text:

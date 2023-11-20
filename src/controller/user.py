@@ -1,31 +1,7 @@
 import services.user as user_services
 
-from helpers.rbac import accessed_by
+from utils.rbac import accessed_by
 from data_containers.user import *
-from helpers.crypt import check_password
-
-
-def sign_in(username, password) -> User | None:
-
-    if not username.strip() or not password:
-        raise ValueError
-
-    user_data = user_services.get_by_username(username)
-
-    if not user_data:
-        return None
-
-    user = User.parse_database(user_data)
-
-    if not check_password(password, user.password_hash):
-        return None
-
-    return user
-
-
-def sign_up(username, password) -> bool:
-    is_user_added = user_services.add_user(username, password, UserRole.PLAYER)
-    return is_user_added
 
 
 @accessed_by(UserRole.ADMIN)

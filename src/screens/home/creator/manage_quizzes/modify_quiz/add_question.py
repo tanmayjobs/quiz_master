@@ -1,7 +1,7 @@
 from constants import InputTexts, Numbers, OutputTexts
 from controller.quiz import add_question
 from data_containers.question import Question, Option
-from helpers.common import newline, invalid_choice, show_message
+from screens.common import newline, invalid_choice, show_message
 
 
 def correct_option_screen():
@@ -25,11 +25,18 @@ def correct_option_screen():
 
 def add_question_screen(creator, quiz):
     newline()
-    question_text = input(InputTexts.QUESTION)
+    question_text = None
+
+    while not question_text:
+        question_text = input(InputTexts.QUESTION)
+
     options = []
 
     for option_no in range(Numbers.ONE, Numbers.FIVE):
-        option_text = input(InputTexts.OPTION.format(option_no))
+        option_text = None
+
+        while not option_text:
+            option_text = input(InputTexts.OPTION.format(option_no)).strip()
 
         option = Option(option_text, False)
         options.append(option)
@@ -38,8 +45,8 @@ def add_question_screen(creator, quiz):
     while not correct_option:
         correct_option = correct_option_screen()
 
-    options[correct_option - 1].is_correct = True
-    question = Question(-1, question_text, options)
+    options[correct_option - Numbers.ONE].is_correct = True
+    question = Question(Numbers.ZERO, question_text, options)
 
     add_question(quiz, question, performer=creator)
 

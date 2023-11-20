@@ -1,4 +1,4 @@
-import database.operations as database
+from database import database
 
 from constants import SQLQueries, Strings
 from data_containers.quiz import Quiz

@@ -2,7 +2,7 @@ import services.quiz_records as quiz_records
 from constants import Strings
 from data_containers.quiz_record import QuizRecord
 from data_containers.user import UserRole
-from helpers.rbac import accessed_by
+from utils.rbac import accessed_by
 
 
 def add_quiz_record(quiz_record):

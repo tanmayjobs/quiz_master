@@ -7,7 +7,7 @@ from data_containers.quiz import Quiz
 from data_containers.quiz_record import QuizRecord
 from data_containers.user import User
 
-from helpers.common import newline, invalid_choice, show_quiz, show_message, show_record
+from screens.common import newline, invalid_choice, show_quiz, show_message, show_record
 
 
 def show_all_quizzes(all_quizzes):
@@ -84,6 +84,7 @@ def play_quiz(all_questions):
     for question_no, question in enumerate(all_questions, start=1):
         newline()
         answer: Option | None = None
+        correct_option = [option for option in question.options if option.is_correct][0]
 
         while not answer:
             answer = ask_question(question_no, question)
@@ -93,7 +94,7 @@ def play_quiz(all_questions):
             show_message(Messages.CORRECT_GUESS.format(option_text=answer.option_text))
 
         else:
-            show_message(Messages.INCORRECT_GUESS.format(option_text=answer.option_text))
+            show_message(Messages.INCORRECT_GUESS.format(option_text=correct_option.option_text))
 
         newline()
 

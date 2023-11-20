@@ -1,6 +1,6 @@
 from constants import OutputTexts
 from controller.quiz import remove_quiz
-from helpers.common import show_message, newline
+from screens.common import show_message, newline
 from screens.home.common import select_creator_quiz_screen
 
 

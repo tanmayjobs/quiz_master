@@ -1,6 +1,6 @@
 from constants import OutputTexts, InputTexts, Strings
 from controller.user import get_all_users, remove_user
-from helpers.common import newline, show_message, show_user, invalid_choice
+from screens.common import newline, show_message, show_user, invalid_choice
 
 
 def show_all_users(all_users):

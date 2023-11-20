@@ -1,7 +1,7 @@
 from constants import OutputTexts, Strings, InputTexts
 from controller.quiz import get_quiz_questions, remove_question
 from data_containers.question import Question
-from helpers.common import newline, show_message, show_question, invalid_choice
+from screens.common import newline, show_message, show_question, invalid_choice
 
 
 def select_question(all_question):
@@ -18,9 +18,11 @@ def select_question(all_question):
     return all_question[index]
 
 
-def show_questions_info(all_questions: list[Question]):
+def show_questions_info(all_questions: list[Question], all_info=False):
+    info_message = OutputTexts.QUESTION_INFO if not all_info else OutputTexts.QUESTION_ALL_INFO
+
     show_message(
-        OutputTexts.QUESTION_INFO.format(
+        info_message.format(
             question_id=Strings.ID,
             question_text=Strings.QUESTION
         )

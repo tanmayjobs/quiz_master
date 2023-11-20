@@ -1,7 +1,7 @@
 from constants import LogText, Errors
-from helpers.common import show_message, newline
+from screens.common import show_message, newline
 from screens.authentication.authentication import authentication_screen
-from log.logger import Logger, INFO
+from log.logger import Logger, INFO, ERROR
 
 
 def main():
@@ -19,7 +19,7 @@ if __name__ == '__main__':
         newline()
         show_message(Errors.UNEXPECTED_ERROR)
 
-        Logger.log(INFO, LogText.SYSTEM_ERROR.format(err))
+        Logger.log(ERROR, LogText.SYSTEM_ERROR.format(err))
 
     finally:
         Logger.log(INFO, LogText.SYSTEM_EXIT)

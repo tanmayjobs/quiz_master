@@ -1,6 +1,5 @@
-import database.operations as database
+from database import database
 from constants import SQLQueries
-from data_containers.quiz import Quiz
 from data_containers.quiz_record import QuizRecord
 from data_containers.user import User
 
