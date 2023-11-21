@@ -1,6 +1,7 @@
 from controller.quiz import QuizHandler
 from controller.quiz_record import QuizRecordHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
+from screens.common import CommonScreens
 from screens.quiz import QuizScreen
 from utils.menu_loop import menu_loop
 
@@ -25,8 +26,7 @@ class PlayerScreen:
         search_key = input(InputTexts.KEYWORD)
 
         all_quizzes = QuizHandler.filter_all_quizzes(search_key)
-        # TODO: Implement a select quiz screen in common screens
-        selected_quiz = ...
+        selected_quiz = CommonScreens.select_from_list(all_quizzes)
 
         if not selected_quiz:
             return

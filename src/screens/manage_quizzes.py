@@ -2,6 +2,7 @@ from controller.quiz import QuizHandler
 from data_containers.quiz import Quiz
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
 from screens.common import CommonScreens
+from screens.modify_quiz import ModifyQuizScreen
 from utils.menu_loop import menu_loop
 
 
@@ -24,9 +25,7 @@ class ManageQuizScreen:
                 case 3:
                     selected_quiz = self._select_quiz_screen()
                     if selected_quiz:
-                        # TODO: Implement Modify Screen
-                        # modify_quiz_screen(self, selected_quiz)
-                        ...
+                        ModifyQuizScreen.modify_quiz_screen()
                 case 4:
                     return True
                 case other:

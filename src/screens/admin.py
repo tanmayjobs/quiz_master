@@ -3,6 +3,7 @@ import pwinput
 from controller.quiz import QuizHandler
 from controller.user import UserHandler
 from helpers.constants import ScreenTexts, OutputTexts, Messages, InputTexts, Errors, Strings
+from screens.common import CommonScreens
 from utils.crypt import validate_password
 from utils.menu_loop import menu_loop
 
@@ -38,10 +39,9 @@ class AdminScreen:
             print(OutputTexts.NOT_YET.format(Strings.USER))
             return
 
-        # TODO: Implement the next two methods
-        # show_all_users(all_users)
-        # user_for_removal = select_user(all_users)
-        user_for_removal = ...
+        CommonScreens.show_users(all_users)
+        user_for_removal = CommonScreens.select_from_list(all_users, InputTexts.USER_ID)
+
         if not user_for_removal:
             print(OutputTexts.INVALID_CHOICE)
             return
@@ -50,13 +50,13 @@ class AdminScreen:
 
     def remove_quiz_screen(self):
         all_quizzes = QuizHandler(self.user).get_all_quizzes()
-        # TODO: Implement the next method in common screen
-        # quiz_to_remove = select_quiz_screen(all_quizzes)
-        quiz_to_remove = ...
+        CommonScreens.show_quizzes(all_quizzes)
+        quiz_to_remove = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
+
         if not quiz_to_remove:
+            print(OutputTexts.INVALID_CHOICE)
             return
         QuizHandler(self.user, quiz_to_remove).remove_quiz()
-
         print()
         print(OutputTexts.QUIZ_REMOVED)
 
