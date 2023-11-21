@@ -27,5 +27,5 @@ class UserHandler:
         return all_users
 
     @accessed_by(UserRole.ADMIN)
-    def remove_user(self, user) -> None:
-        database.remove(SQLQueries.REMOVE_USER, (user.user_id,))
+    def remove_user(self, user_id) -> None:
+        database.remove(SQLQueries.REMOVE_USER, (user_id,))

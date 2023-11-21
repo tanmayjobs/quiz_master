@@ -45,7 +45,7 @@ class PlayerScreen:
         # show_records_screen(player_records)
 
     @menu_loop
-    def player_home_screen(self):
+    def home_screen(self):
         print()
         user_choice = input(ScreenTexts.PLAYER_HOME)
 

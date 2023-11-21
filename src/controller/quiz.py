@@ -62,6 +62,8 @@ class QuizHandler:
 
     @accessed_by(UserRole.ADMIN, UserRole.CREATOR)
     def remove_quiz(self):
+        if not self.quiz:
+            raise ValueError
         database.remove(SQLQueries.REMOVE_QUIZ, (self.quiz.quiz_id,))
 
     @staticmethod

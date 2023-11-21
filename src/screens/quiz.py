@@ -2,7 +2,6 @@ from controller.questions import QuestionHandler
 from controller.quiz_record import QuizRecordHandler
 from data_containers.quiz_record import QuizRecord
 from helpers.constants import Messages, OutputTexts, Strings, Numbers
-from screens.player import PlayerScreen
 
 
 class QuizScreen:
@@ -48,7 +47,6 @@ class QuizScreen:
         all_questions = QuestionHandler(user, quiz).get_quiz_questions()
         if not all_questions:
             print(Messages.WORKING_ON_QUIZ)
-            PlayerScreen.explore_quiz_screen(user)
             return
 
         total_score = len(all_questions)

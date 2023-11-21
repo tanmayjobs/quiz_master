@@ -8,18 +8,13 @@ class UserRole:
 
     @staticmethod
     def to_string(role_val):
-
         match role_val:
-
             case UserRole.ADMIN:
                 return Strings.ADMIN
-
             case UserRole.CREATOR:
                 return Strings.CREATOR
-
             case UserRole.PLAYER:
                 return Strings.PLAYER
-
             case other:
                 raise ValueError
 
