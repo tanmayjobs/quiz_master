@@ -1,11 +1,10 @@
-from constants import LogText, Errors
-from screens.common import show_message, newline
-from screens.authentication.authentication import authentication_screen
-from log.logger import Logger, INFO, ERROR
+from helpers.constants import LogText, Errors
+from screens.authentication import AuthenticationScreen
+from helpers.log.logger import Logger, INFO, ERROR
 
 
 def main():
-    authentication_screen()
+    AuthenticationScreen.menu_screen()
 
 
 if __name__ == '__main__':
@@ -15,9 +14,9 @@ if __name__ == '__main__':
         main()
 
     except Exception as err:
-        newline()
-        newline()
-        show_message(Errors.UNEXPECTED_ERROR)
+        print()
+        print()
+        print(Errors.UNEXPECTED_ERROR)
 
         Logger.log(ERROR, LogText.SYSTEM_ERROR.format(err))
 

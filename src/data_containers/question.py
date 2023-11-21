@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from constants import InputTexts, Strings, Numbers
+from helpers.constants import InputTexts, Strings, Numbers
 
 
 @dataclass

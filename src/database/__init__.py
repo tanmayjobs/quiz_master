@@ -1,6 +1,6 @@
 import os
 
-from constants import SQLQueries, Strings
+from helpers.constants import SQLQueries, Strings
 from .db import Database
 
 if not os.path.exists("database/storage/"):

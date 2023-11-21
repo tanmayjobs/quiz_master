@@ -1,84 +1,72 @@
-import services.quiz as quizzes
-
-from constants import Strings
-from data_containers.question import Question
+from helpers.constants import Strings, SQLQueries
 from data_containers.quiz import Quiz
 from data_containers.types import QuizType
 from data_containers.user import UserRole
+from database import database
 from utils.rbac import accessed_by
 
 
-@accessed_by(UserRole.CREATOR)
-def add_quiz(quiz: Quiz, **_):
-    quizzes.add(quiz)
+class QuizHandler:
 
+    def __init__(self, user, quiz=None):
+        self.user = user    # User whose trying to perform the operation
+        self.quiz = quiz    # Quiz on which the operations are performed
 
-@accessed_by(UserRole.CREATOR)
-def get_creator_quizzes(**kwargs):
-    creator = kwargs.get(Strings.PERFORMER)
+    @accessed_by(UserRole.CREATOR)
+    def add_quiz(self):
+        quiz_id = database.add(SQLQueries.ADD_QUIZ, (self.quiz.creator_id, self.quiz.quiz_name))
+        quiz_id = quiz_id.last_id
 
-    all_quizzes_data = quizzes.get_by_creator(creator)
-    all_quizzes = [Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data]
+        for quiz_type in self.quiz.types:
+            database.add(SQLQueries.ADD_QUIZ_TYPE, (quiz_id, quiz_type.type_id,))
 
-    return all_quizzes
+    @staticmethod
+    def get_random_quiz():
+        quiz_data = database.get(SQLQueries.GET_RANDOM_QUIZ, only_one=True)
 
+        if not quiz_data:
+            return None
+        quiz = Quiz.parse_json(quiz_data)
 
-@accessed_by(UserRole.ADMIN, UserRole.CREATOR)
-def remove_quiz(quiz, **_):
-    quizzes.remove(quiz)
+        return quiz
 
+    @accessed_by(UserRole.CREATOR)
+    def get_user_quizzes(self):
+        all_quizzes_data = database.get(SQLQueries.GET_USER_QUIZZES, (self.user.user_id,))
+        all_quizzes = [Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data]
 
-@accessed_by(UserRole.CREATOR)
-def add_question(quiz, question, **_):
-    quizzes.add_question(quiz, question)
+        return all_quizzes
 
+    @accessed_by(UserRole.ADMIN)
+    def get_all_quizzes(self):
+        all_quizzes_data = database.get(SQLQueries.GET_ALL_QUIZZES)
+        all_quizzes = [Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data]
 
-def get_quiz_questions(quiz):
-    questions_data = quizzes.get_quiz_question(quiz)
+        return all_quizzes
 
-    questions = [
-        Question.parse_json(question_data)
-        for question_data in questions_data
-    ]
+    @staticmethod
+    def filter_all_quizzes(search_key):
+        all_quizzes_data = database.get(
+            SQLQueries.FILTER_ALL_QUIZZES, (
+                Strings.FILTER.format(search_key=search_key),
+                Strings.FILTER.format(search_key=search_key),
+            )
+        )
 
-    return questions
+        all_quizzes = [
+            Quiz.parse_json(quiz_data)
+            for quiz_data in all_quizzes_data
+        ]
 
+        return all_quizzes
 
-def all_quiz_types():
-    all_types_data = quizzes.all_quiz_types()
-    all_types = [QuizType(*each_type) for each_type in all_types_data]
+    @accessed_by(UserRole.ADMIN, UserRole.CREATOR)
+    def remove_quiz(self):
+        database.remove(SQLQueries.REMOVE_QUIZ, (self.quiz.quiz_id,))
 
-    return all_types
+    @staticmethod
+    def defined_quiz_types():
+        all_types_data = database.get(SQLQueries.GET_ALL_TYPES)
+        all_types = [QuizType(*each_type) for each_type in all_types_data]
 
-
-@accessed_by(UserRole.CREATOR)
-def remove_question(question, **_):
-    quizzes.remove_question(question)
-
-
-@accessed_by(UserRole.ADMIN)
-def get_all_quizzes(**_):
-    all_quizzes_data = quizzes.get_all_quizzes()
-    all_quizzes = [Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data]
-
-    return all_quizzes
-
-
-def get_random_quiz():
-    quiz_data = quizzes.get_random_quiz()
-
-    if not quiz_data:
-        return None
-
-    quiz = Quiz.parse_json(quiz_data)
-    return quiz
-
-
-def filter_all_quizzes(search_key):
-    all_quizzes_data = quizzes.filter_all_quizzes(search_key)
-    all_quizzes = [
-        Quiz.parse_json(quiz_data)
-        for quiz_data in all_quizzes_data
-    ]
-
-    return all_quizzes
+        return all_types

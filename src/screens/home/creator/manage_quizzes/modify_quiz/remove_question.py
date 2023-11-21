@@ -1,10 +1,10 @@
-from constants import OutputTexts, Strings, InputTexts
-from controller.quiz import get_quiz_questions, remove_question
+from controller.questions import QuestionHandler
+from helpers.constants import OutputTexts, Strings, InputTexts
 from data_containers.question import Question
-from screens.common import newline, show_message, show_question, invalid_choice
+from screens.common import show_question
 
 
-def select_question(all_question):
+def select_question(all_question) -> Question:
     index = input(InputTexts.QUESTION_ID)
 
     if not index.isdigit():
@@ -21,7 +21,7 @@ def select_question(all_question):
 def show_questions_info(all_questions: list[Question], all_info=False):
     info_message = OutputTexts.QUESTION_INFO if not all_info else OutputTexts.QUESTION_ALL_INFO
 
-    show_message(
+    print(
         info_message.format(
             question_id=Strings.ID,
             question_text=Strings.QUESTION
@@ -32,13 +32,13 @@ def show_questions_info(all_questions: list[Question], all_info=False):
         show_question(index, question)
 
 
-def remove_question_screen(creator, quiz):
-    newline()
+def remove_question_screen(user, quiz):
+    print()
 
-    all_questions = get_quiz_questions(quiz)
+    all_questions = QuestionHandler(quiz.quiz_id).get_quiz_questions()
 
     if not all_questions:
-        show_message(OutputTexts.NOT_YET.format(Strings.QUESTION))
+        print(OutputTexts.NOT_YET.format(Strings.QUESTION))
         return
 
     show_questions_info(all_questions)
@@ -46,9 +46,9 @@ def remove_question_screen(creator, quiz):
     selected_question = select_question(all_questions)
 
     if not selected_question:
-        invalid_choice()
+        print(OutputTexts.INVALID_CHOICE)
         return
 
-    remove_question(selected_question, performer=creator)
-    newline()
-    show_message(OutputTexts.QUESTION_REMOVED)
+    QuestionHandler(quiz.quiz_id, user).remove_question(selected_question.question_id)
+    print()
+    print(OutputTexts.QUESTION_REMOVED)

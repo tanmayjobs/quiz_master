@@ -1,4 +1,7 @@
+import re
 import bcrypt
+
+from helpers.constants import Strings
 
 
 def hash_password(password: str):
@@ -11,3 +14,7 @@ def hash_password(password: str):
 
 def check_password(password: str, hashed_password):
     return bcrypt.checkpw(password.encode(), hashed_password)
+
+
+def validate_password(password):
+    return re.match(Strings.PASSWORD_REGEX, password)

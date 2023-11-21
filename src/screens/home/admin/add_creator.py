@@ -1,26 +1,27 @@
-from constants import InputTexts, OutputTexts, Errors, Messages
-from controller.user import add_creator
-from screens.common import show_message, validate_password
-from screens.common import newline, password_input
+from controller.user import UserHandler
+from data_containers.user import UserRole
+from helpers.constants import InputTexts, OutputTexts, Errors, Messages
+from screens.common import validate_password
+from screens.common import password_input
 
 
 def add_creator_screen(user):
-    newline()
-    show_message(Messages.CREATOR_INFO)
+    print()
+    print(Messages.CREATOR_INFO)
 
     username, password = input(InputTexts.USERNAME), password_input()
 
     if not username:
-        show_message(Errors.USERNAME_EMPTY)
+        print(Errors.USERNAME_EMPTY)
         return
 
     if not validate_password(password):
-        show_message(Errors.WEAK_PASSWORD)
+        print(Errors.WEAK_PASSWORD)
         return
 
-    is_user_added = add_creator(username, password, performer=user)
+    is_user_added = UserHandler(user).add_user(username, password)
 
     if is_user_added:
-        show_message(OutputTexts.CREATOR_ADDED)
+        print(OutputTexts.CREATOR_ADDED)
     else:
-        show_message(Errors.USERNAME_ALREADY_EXISTS)
+        print(Errors.USERNAME_ALREADY_EXISTS)

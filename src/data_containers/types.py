@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from constants import Strings
+from helpers.constants import Strings
 
 
 @dataclass

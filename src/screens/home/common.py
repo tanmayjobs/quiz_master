@@ -1,17 +1,18 @@
-from constants import OutputTexts, Strings, InputTexts, Messages, Numbers
-from controller.quiz import get_creator_quizzes, get_quiz_questions, get_random_quiz, filter_all_quizzes
-from controller.quiz_record import add_quiz_record, get_player_records, quiz_top_records
+from controller.questions import QuestionHandler
+from controller.quiz import QuizHandler
+from controller.quiz_record import QuizRecordHandler
+from helpers.constants import OutputTexts, Strings, InputTexts, Messages, Numbers
 
 from data_containers.question import Option
 from data_containers.quiz import Quiz
 from data_containers.quiz_record import QuizRecord
 from data_containers.user import User
 
-from screens.common import newline, invalid_choice, show_quiz, show_message, show_record
+from screens.common import show_quiz, show_record
 
 
 def show_all_quizzes(all_quizzes):
-    show_message(
+    print(
         OutputTexts.QUIZ_INFO.format(
             quiz_id=Strings.ID,
             quiz_name=Strings.QUIZ,
@@ -37,12 +38,12 @@ def select_quiz(all_quizzes):
     return all_quizzes[index]
 
 
-def select_creator_quiz_screen(creator):
-    newline()
-    all_quizzes = get_creator_quizzes(performer=creator)
+def select_creator_quiz_screen(user):
+    print()
+    all_quizzes = QuizHandler(user).get_user_quizzes()
 
     if not all_quizzes:
-        show_message(OutputTexts.NOT_YET.format(Strings.QUIZ))
+        print(OutputTexts.NOT_YET.format(Strings.QUIZ))
         return
 
     show_all_quizzes(all_quizzes)
@@ -50,7 +51,7 @@ def select_creator_quiz_screen(creator):
     selected_quiz = select_quiz(all_quizzes)
 
     if not selected_quiz:
-        invalid_choice()
+        print(OutputTexts.INVALID_CHOICE)
         return
 
     return selected_quiz
@@ -70,19 +71,19 @@ def ask_question(question_no, question):
             return question.options[answer - Numbers.ONE]
 
         else:
-            invalid_choice()
+            print(OutputTexts.INVALID_CHOICE)
 
     else:
-        invalid_choice()
+        print(OutputTexts.INVALID_CHOICE)
 
-    newline()
+    print()
 
 
 def play_quiz(all_questions):
     player_score = 0
 
     for question_no, question in enumerate(all_questions, start=1):
-        newline()
+        print()
         answer: Option | None = None
         correct_option = [option for option in question.options if option.is_correct][0]
 
@@ -91,50 +92,50 @@ def play_quiz(all_questions):
 
         if answer.is_correct:
             player_score += 1
-            show_message(Messages.CORRECT_GUESS.format(option_text=answer.option_text))
+            print(Messages.CORRECT_GUESS.format(option_text=answer.option_text))
 
         else:
-            show_message(Messages.INCORRECT_GUESS.format(option_text=correct_option.option_text))
+            print(Messages.INCORRECT_GUESS.format(option_text=correct_option.option_text))
 
-        newline()
+        print()
 
     return player_score
 
 
 def show_quiz_result(quiz_record: QuizRecord):
-    newline()
-    show_message(
+    print()
+    print(
         OutputTexts.QUIZ_RESULT.format(
             result=(quiz_record.player_score / quiz_record.total_score) * 100,
             quiz_name=quiz_record.quiz_name
         )
     )
 
-    newline()
+    print()
 
-    top_records = quiz_top_records(quiz_record.quiz_id)
+    top_records = QuizRecordHandler.quiz_top_records(quiz_record.quiz_id)
 
     if top_records:
-        show_message(Messages.TOP_RECORD)
+        print(Messages.TOP_RECORD)
         show_records_screen(top_records)
-        newline()
+        print()
 
 
 def play_quiz_screen(player: User, quiz: Quiz):
-    newline()
-    newline()
+    print()
+    print()
 
-    show_message(
+    print(
         Messages.QUIZ_NAME.format(
             quiz_name=quiz.quiz_name,
             creator_name=quiz.creator_name
         )
     )
 
-    all_questions = get_quiz_questions(quiz)
+    all_questions = QuestionHandler(quiz.quiz_id).get_quiz_questions()
 
     if not all_questions:
-        show_message(Messages.WORKING_ON_QUIZ)
+        print(Messages.WORKING_ON_QUIZ)
         explore_quiz_screen(player)
         return
 
@@ -150,23 +151,23 @@ def play_quiz_screen(player: User, quiz: Quiz):
         total_score
     )
 
-    add_quiz_record(quiz_record)
+    QuizRecordHandler.add_quiz_record(quiz_record)
     show_quiz_result(quiz_record)
 
 
 def play_random_quiz(player):
-    quiz = get_random_quiz()
+    quiz = QuizHandler.get_random_quiz()
 
     if not quiz:
-        newline()
-        show_message(OutputTexts.NOT_YET.format(Strings.QUIZ))
+        print()
+        print(OutputTexts.NOT_YET.format(Strings.QUIZ))
         return
 
     play_quiz_screen(player, quiz)
 
 
 def show_records_screen(player_records):
-    show_message(
+    print(
         OutputTexts.RECORD_INFO.format(
             record_id=Strings.ID,
             quiz_name=Strings.QUIZ,
@@ -180,25 +181,25 @@ def show_records_screen(player_records):
         show_record(index, quiz)
 
 
-def show_player_records_screen(player):
-    newline()
-    player_records = get_player_records(performer=player)
+def show_player_records_screen(user):
+    print()
+    player_records = QuizRecordHandler.get_user_records(user)
 
     if not player_records:
-        show_message(OutputTexts.NO_QUIZ_RECORDS)
+        print(OutputTexts.NO_QUIZ_RECORDS)
         return
 
     show_records_screen(player_records)
 
 
 def select_quiz_screen(all_quizzes, search_key=""):
-    newline()
+    print()
 
     if not all_quizzes:
         if search_key:
-            show_message(OutputTexts.NO_QUIZZES.format(search_key))
+            print(OutputTexts.NO_QUIZZES.format(search_key))
         else:
-            show_message(OutputTexts.NOT_YET.format(Strings.QUIZ))
+            print(OutputTexts.NOT_YET.format(Strings.QUIZ))
         return
 
     show_all_quizzes(all_quizzes)
@@ -206,17 +207,17 @@ def select_quiz_screen(all_quizzes, search_key=""):
     selected_quiz = select_quiz(all_quizzes)
 
     if not selected_quiz:
-        invalid_choice()
+        print(OutputTexts.INVALID_CHOICE)
         return
 
     return selected_quiz
 
 
 def explore_quiz_screen(player):
-    newline()
+    print()
     search_key = input(InputTexts.KEYWORD)
 
-    all_quizzes = filter_all_quizzes(search_key)
+    all_quizzes = QuizHandler.filter_all_quizzes(search_key)
     selected_quiz = select_quiz_screen(all_quizzes, search_key)
 
     if not selected_quiz:

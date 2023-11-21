@@ -1,7 +1,7 @@
 import json
 from dataclasses import dataclass
 
-from constants import Strings
+from helpers.constants import Strings
 from data_containers.types import QuizType
 
 

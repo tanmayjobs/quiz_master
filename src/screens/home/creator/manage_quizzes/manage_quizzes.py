@@ -1,15 +1,14 @@
-from constants import ScreenTexts
-from screens.common import newline, invalid_choice
+from helpers.constants import ScreenTexts, OutputTexts
 from utils.menu_loop import menu_loop
-from screens.home.common import select_creator_quiz_screen
-from screens.home.creator.manage_quizzes.add_quiz import add_quiz_screen
-from screens.home.creator.manage_quizzes.modify_quiz.modify_quiz import modify_quiz_screen
-from screens.home.creator.manage_quizzes.remove_quiz import remove_quiz_screen
+from screens.home_screen.common import select_creator_quiz_screen
+from screens.home_screen.creator.manage_quizzes.add_quiz import add_quiz_screen
+from screens.home_screen.creator.manage_quizzes.modify_quiz.modify_quiz import modify_quiz_screen
+from screens.home_screen.creator.manage_quizzes.remove_quiz import remove_quiz_screen
 
 
 @menu_loop
 def manage_quizzes_screen(creator):
-    newline()
+    print()
     user_choice = input(ScreenTexts.MANAGE_QUIZZES)
 
     if user_choice.isdigit():
@@ -33,9 +32,9 @@ def manage_quizzes_screen(creator):
                 return True
 
             case other:
-                invalid_choice()
+                print(OutputTexts.INVALID_CHOICE)
 
     else:
-        invalid_choice()
+        print(OutputTexts.INVALID_CHOICE)
 
     return False

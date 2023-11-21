@@ -1,31 +1,41 @@
-import services.user as user_services
+from sqlite3 import IntegrityError
 
+from helpers.constants import SQLQueries
 from data_containers.user import *
-from utils.crypt import check_password
+from database import database
+from utils.crypt import check_password, hash_password
 
 
-def sign_in(username, password) -> User | None:
+class AuthHandler:
 
-    if not username.strip() or not password:
-        return None
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
-    user_data = user_services.get_by_username(username)
+    def sign_in(self) -> User | None:
+        if not self.username.strip() or not self.password:
+            return None
 
-    if not user_data:
-        return None
+        user_data = database.get(SQLQueries.GET_USER, (self.username,), True)
+        if not user_data:
+            return None
 
-    user = User.parse_database(user_data)
+        user = User.parse_database(user_data)
+        if not check_password(self.password, user.password_hash):
+            return None
 
-    if not check_password(password, user.password_hash):
-        return None
+        return user
 
-    return user
+    def sign_up(self) -> bool:
 
+        if not self.username.strip() or not self.password:
+            return False
 
-def sign_up(username, password) -> bool:
+        password_hash = hash_password(self.password)
 
-    if not username.strip() or not password:
-        return False
-
-    is_user_added = user_services.add_user(username, password, UserRole.PLAYER)
-    return is_user_added
+        try:
+            is_user_added = database.add(SQLQueries.ADD_USER, (self.username, password_hash, UserRole.PLAYER))
+        except IntegrityError:
+            is_user_added = False
+        finally:
+            return is_user_added

@@ -1,11 +1,10 @@
-from constants import InputTexts, Numbers, OutputTexts
-from controller.quiz import add_question
+from controller.questions import QuestionHandler
+from helpers.constants import InputTexts, Numbers, OutputTexts
 from data_containers.question import Question, Option
-from screens.common import newline, invalid_choice, show_message
 
 
 def correct_option_screen():
-    newline()
+    print()
     correct_option = input(InputTexts.CORRECT_OPTION)
 
     if correct_option.isdigit():
@@ -15,16 +14,16 @@ def correct_option_screen():
             return correct_option
 
         else:
-            invalid_choice()
+            print(OutputTexts.INVALID_CHOICE)
 
     else:
-        invalid_choice()
+        print(OutputTexts.INVALID_CHOICE)
 
     return None
 
 
-def add_question_screen(creator, quiz):
-    newline()
+def add_question_screen(user, quiz):
+    print()
     question_text = None
 
     while not question_text:
@@ -48,6 +47,6 @@ def add_question_screen(creator, quiz):
     options[correct_option - Numbers.ONE].is_correct = True
     question = Question(Numbers.ZERO, question_text, options)
 
-    add_question(quiz, question, performer=creator)
+    QuestionHandler(quiz.quiz_id, user).add_question(question)
 
-    show_message(OutputTexts.QUESTION_ADDED)
+    print(OutputTexts.QUESTION_ADDED)

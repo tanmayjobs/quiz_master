@@ -1,4 +1,4 @@
-from constants import Strings
+from helpers.constants import Strings
 
 
 class UserRole:

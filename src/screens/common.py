@@ -2,20 +2,12 @@ import sys
 import pwinput
 import re
 
-from constants import OutputTexts, InputTexts, Messages, Strings
+from helpers.constants import OutputTexts, InputTexts, Messages, Strings
 from data_containers.question import Question
 from data_containers.quiz import Quiz
 from data_containers.quiz_record import QuizRecord
 from data_containers.types import QuizType
 from data_containers.user import UserRole, User
-
-
-def invalid_choice():
-    print(OutputTexts.INVALID_CHOICE)
-
-
-def show_message(msg):
-    print(msg)
 
 
 def show_user(index, user):
@@ -90,21 +82,13 @@ def password_input():
     return pwinput.pwinput(InputTexts.PASSWORD)
 
 
-def newline():
-    print()
-
-
 def quit_application():
-    newline()
+    print()
     print("Bye!")
     sys.exit(0)
 
 
 def greet_user(user: User):
-    newline()
-    newline()
-    show_message(Messages.GREET.format(username=user.username))
-
-
-def validate_password(password):
-    return re.match(Strings.PASSWORD_REGEX, password)
+    print()
+    print()
+    print(Messages.GREET.format(username=user.username))

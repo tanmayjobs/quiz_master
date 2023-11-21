@@ -1,17 +1,16 @@
-from constants import OutputTexts
-from controller.quiz import get_all_quizzes, remove_quiz
-from screens.common import newline, show_message
-from screens.home.common import select_quiz_screen
+from controller.quiz import QuizHandler
+from helpers.constants import OutputTexts
+from screens.home_screen.common import select_quiz_screen
 
 
-def remove_quiz_screen(admin):
-    all_quizzes = get_all_quizzes(performer=admin)
+def remove_quiz_screen(user):
+    all_quizzes = QuizHandler(user).get_all_quizzes()
     quiz_to_remove = select_quiz_screen(all_quizzes)
 
     if not quiz_to_remove:
         return
 
-    remove_quiz(quiz_to_remove, performer=admin)
+    QuizHandler(user, quiz_to_remove).remove_quiz()
 
-    newline()
-    show_message(OutputTexts.QUIZ_REMOVED)
+    print()
+    print(OutputTexts.QUIZ_REMOVED)
