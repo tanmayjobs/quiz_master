@@ -14,7 +14,7 @@ class QuizHandler:
 
     @accessed_by(UserRole.CREATOR)
     def add_quiz(self):
-        quiz_id = database.add(SQLQueries.ADD_QUIZ, (self.quiz.creator_id, self.quiz.quiz_name))
+        quiz_id = database.add(SQLQueries.ADD_QUIZ, (self.user.user_id, self.quiz.quiz_name))
         quiz_id = quiz_id.last_id
 
         for quiz_type in self.quiz.types:
@@ -26,6 +26,7 @@ class QuizHandler:
 
         if not quiz_data:
             return None
+
         quiz = Quiz.parse_json(quiz_data)
 
         return quiz

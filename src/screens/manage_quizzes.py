@@ -25,7 +25,7 @@ class ManageQuizScreen:
                 case 3:
                     selected_quiz = self._select_quiz_screen()
                     if selected_quiz:
-                        ModifyQuizScreen.modify_quiz_screen()
+                        ModifyQuizScreen(self.user, selected_quiz).modify_quiz_screen()
                 case 4:
                     return True
                 case other:

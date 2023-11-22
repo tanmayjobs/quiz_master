@@ -8,17 +8,11 @@ import os
 from helpers.constants import SQLQueries, Strings, Config
 from .db import Database
 
-if os.getcwd().endswith('src'):
-    db_path = os.path.dirname(os.path.abspath(__file__)) + Config.SQL_FILE_PATH
-    uri = False
-
-    if not os.path.exists(db_path):
-        os.mkdir(db_path)
-
-    db_path += f'/{Config.SQL_FILE_NAME}'
-else:
-    db_path = 'file::memory:?cache=shared'
-    uri = True
+db_path = os.path.dirname(os.path.abspath(__file__)) + Config.SQL_FILE_PATH
+uri = False
+if not os.path.exists(db_path):
+    os.mkdir(db_path)
+db_path += f'/{Config.SQL_FILE_NAME}'
 
 database = Database(db_path, uri)
 
