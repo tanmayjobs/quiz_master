@@ -1,29 +1,5 @@
-def setup_module():
-    ...
-
-
-def test_sign_in_positive():
-    ...
-
-
-def test_sign_in_negative_empty_username():
-    ...
-
-
-def test_sign_in_negative_empty_password():
-    ...
-
-
-def test_sign_in_negative_wrong_username():
-    ...
-
-
-def test_sign_in_negative_wrong_password():
-    ...
-
-
-def test_sign_up_positive():
-    ...
+from data_containers.user import User
+from src.controller.auth import AuthHandler
 
 
 def test_sign_up_negative_weak_password():
@@ -32,3 +8,39 @@ def test_sign_up_negative_weak_password():
 
 def test_sign_up_negative_duplicate_username():
     ...
+
+
+def test_sign_up_positive():
+    ...
+
+
+def test_sign_in_negative_empty_username():
+    username = ""
+    password = "Batman@123"
+    assert AuthHandler(username, password).sign_in() is None
+
+
+def test_sign_in_negative_empty_password():
+    username = "batman"
+    password = ""
+    assert AuthHandler(username, password).sign_in() is None
+
+
+def test_sign_in_negative_wrong_username():
+    username = "batman1"
+    password = "Batman@123"
+    assert AuthHandler(username, password).sign_in() is None
+
+
+def test_sign_in_negative_wrong_password():
+    username = "batman"
+    password = "Batman@1234"
+    assert AuthHandler(username, password).sign_in() is None
+
+
+def test_sign_in_positive():
+    username = "batman"
+    password = "Batman@123"
+
+    user = AuthHandler(username, password).sign_in()
+    assert isinstance(user, User)

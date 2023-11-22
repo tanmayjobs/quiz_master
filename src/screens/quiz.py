@@ -1,5 +1,6 @@
 from controller.questions import QuestionHandler
 from controller.quiz_record import QuizRecordHandler
+from data_containers.question import Option
 from data_containers.quiz_record import QuizRecord
 from helpers.constants import Messages, OutputTexts, Strings, Numbers
 
@@ -13,7 +14,7 @@ class QuizScreen:
             answer = None
             correct_option = [option for option in question.options if option.is_correct][0]
 
-            while not answer:
+            while not isinstance(answer, Option):
                 answer = input(question.prompt(question_no))
                 if answer.isdigit():
                     answer = int(answer)
@@ -44,7 +45,7 @@ class QuizScreen:
             )
         )
 
-        all_questions = QuestionHandler(user, quiz).get_quiz_questions()
+        all_questions = QuestionHandler(quiz.quiz_id, user).get_quiz_questions()
         if not all_questions:
             print(Messages.WORKING_ON_QUIZ)
             return

@@ -27,15 +27,13 @@ class AuthHandler:
         return user
 
     def sign_up(self) -> bool:
-
         if not self.username.strip() or not self.password:
             return False
-
         password_hash = hash_password(self.password)
 
         try:
             is_user_added = database.add(SQLQueries.ADD_USER, (self.username, password_hash, UserRole.PLAYER))
         except IntegrityError:
             is_user_added = False
-        finally:
-            return is_user_added
+
+        return is_user_added

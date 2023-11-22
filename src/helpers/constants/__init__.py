@@ -1,6 +1,7 @@
-
+import os
 import yaml
 
+from helpers.constants.config import Config
 from helpers.constants.log_text import LogText
 from helpers.constants.messages import Messages
 from helpers.constants.input_texts import InputTexts
@@ -12,9 +13,10 @@ from helpers.constants.errors import Errors
 from helpers.constants.strings import Strings
 
 
-with open("helpers/constants/constants.yaml", "r") as constants_file:
+with open(os.path.dirname(os.path.abspath(__file__)) + "/constants.yaml", "r") as constants_file:
     yaml_data = yaml.safe_load(constants_file)
 
+    Config(yaml_data["config"])
     Messages(yaml_data["messages"])
     InputTexts(yaml_data["inputs"])
     OutputTexts(yaml_data["outputs"])

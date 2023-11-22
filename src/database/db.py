@@ -1,13 +1,17 @@
+import os
 import sqlite3
 
 from data_containers.last_transaction import LastTransaction
+from helpers.log.logger import Logger, DEBUG
 
 
 class Database:
-    FILE_PATH = "database/storage/data.sqlite3"
 
-    def __init__(self):
-        self.connection = sqlite3.connect(Database.FILE_PATH)
+    def __init__(self, db_path, uri):
+        Logger.log(DEBUG, db_path)
+        self.db_path = db_path
+        self.uri = uri
+        self.connection = sqlite3.connect(db_path, uri=uri)
         self.cursor = self.connection.cursor()
 
     def get(self, query, params=(), only_one=False):
@@ -16,17 +20,17 @@ class Database:
 
         return data
 
-    def add(self, query, params):
+    def add(self, query, params=()):
         self.cursor.execute(query, params)
         self.connection.commit()
 
         return LastTransaction.from_cursor(self.cursor)
 
-    def remove(self, query, params):
+    def remove(self, query, params=()):
         self.cursor.execute(query, params)
         self.connection.commit()
 
-    def update(self, query, params):
+    def update(self, query, params=()):
         self.cursor.execute(query, params)
         self.connection.commit()
 

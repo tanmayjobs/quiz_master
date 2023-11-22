@@ -1,3 +1,20 @@
+application:
+  name: "Enigma"
+  version: "0.0.1"
+  entry_point: "main.py"
+
+config:
+  sql:
+    file_path: "/storage"
+    file_name: "data.sqlite3"
+    db_path: "/storage/data.sqlite3"
+
+  logs:
+    file_path: "helpers/log/server.log"
+    filemode: "a+"
+    format: "%(asctime)s %(levelname)-10s %(message)s"
+    datefmt: "%d-%m-%Y %H:%M:%S"
+
 screens:
   home:
     player: "Press:\n- '1' to Play random quiz\n- '2' to Explore quizzes\n- '3' to All attempts\n- '4' to Sign Out\nEnter your choice:"

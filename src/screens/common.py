@@ -106,15 +106,25 @@ class CommonScreens:
         )
 
     @staticmethod
-    def show_record(index, record: QuizRecord):
-        result = (record.player_score / record.total_score) * 100
+    def show_records(records: list[QuizRecord]):
         print(
             OutputTexts.RECORD_INFO.format(
-                record_id=str(index),
-                quiz_name=record.quiz_name,
-                player_name=record.player_name,
-                result=Strings.RESULT_PERCENTAGE.format(result),
-                played_at=record.played_at
+                record_id=Strings.ID,
+                quiz_name=Strings.QUIZ_NAME,
+                player_name=Strings.PLAYER,
+                result=Strings.RESULT,
+                played_at=Strings.PLAYED_AT,
             )
         )
+        for index, record in enumerate(records, start=1):
+            result = (record.player_score / record.total_score) * 100
+            print(
+                OutputTexts.RECORD_INFO.format(
+                    record_id=str(index),
+                    quiz_name=record.quiz_name,
+                    player_name=record.player_name,
+                    result=Strings.RESULT_PERCENTAGE.format(result),
+                    played_at=record.played_at
+                )
+            )
 

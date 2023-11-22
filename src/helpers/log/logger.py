@@ -1,12 +1,14 @@
 import logging
 from logging import INFO, DEBUG, WARN, CRITICAL, ERROR
 
+from helpers.constants import Config
+
 logging.basicConfig(
-    level=logging.DEBUG,
-    filename="helpers/log/server.log",
-    filemode="a+",
-    format="%(asctime)s %(levelname)-10s %(message)s",
-    datefmt="%d-%m-%Y %H:%M:%S",
+    level=logging.NOTSET,
+    filename=Config.LOGS_FILE_PATH,
+    filemode=Config.LOG_FILEMODE,
+    format=Config.LOG_FORMAT,
+    datefmt=Config.LOG_DATEFMT,
 )
 
 

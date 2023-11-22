@@ -26,9 +26,11 @@ class PlayerScreen:
         search_key = input(InputTexts.KEYWORD)
 
         all_quizzes = QuizHandler.filter_all_quizzes(search_key)
-        selected_quiz = CommonScreens.select_from_list(all_quizzes)
+        CommonScreens.show_quizzes(all_quizzes)
+        selected_quiz = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
 
         if not selected_quiz:
+            print(OutputTexts.INVALID_CHOICE)
             return
 
         QuizScreen.play_screen(self.user, selected_quiz)
@@ -41,35 +43,25 @@ class PlayerScreen:
             print(OutputTexts.NO_QUIZ_RECORDS)
             return
 
-        # TODO: Implement a show records screen in common screens
-        # show_records_screen(player_records)
+        CommonScreens.show_records(player_records)
 
     @menu_loop
     def home_screen(self):
         print()
         user_choice = input(ScreenTexts.PLAYER_HOME)
-
         if user_choice.isdigit():
-
             user_choice = int(user_choice)
             match user_choice:
-
                 case 1:
                     self._play_random_quiz()
-
                 case 2:
                     self._explore_quiz()
-
                 case 3:
                     self._show_player_records_screen()
-
                 case 4:
                     return True
-
                 case other:
                     print(OutputTexts.INVALID_CHOICE)
-
         else:
             print(OutputTexts.INVALID_CHOICE)
-
         return False
