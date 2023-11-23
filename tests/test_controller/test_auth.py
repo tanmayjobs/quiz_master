@@ -8,29 +8,32 @@ from helpers.enums import UserRole
 from src.controller.auth import AuthHandler
 
 
-@pytest.fixture
-def mock_db_context_positive():
-    mock_db_context = MagicMock(spec=DBContext)
-    mock_db_context.get.return_value = (
+@pytest.fixture()
+def mock_db_context():
+    mock_db_ctx = MagicMock(spec=DBContext)
+    mock_db_ctx.connection = MagicMock(spec=sqlite3.Connection)
+    mock_db_ctx.return_value = mock_db_ctx
+    mock_db_ctx.__enter__.return_value = mock_db_ctx
+    return mock_db_ctx
+
+
+@pytest.fixture()
+def mock_db_context_positive(mock_db_context):
+    mock_db_context_positive = mock_db_context
+    mock_db_context_positive.get.return_value = (
         0, "batman",
         b"$2b$12$PzZeVB9WVJnMqFexMAc1F.LJokCF.lJU5pPFpT9oOsKzD5nPIigEK",
         UserRole.PLAYER)
-    mock_db_context.add.return_value = True
-    mock_db_context.connection = MagicMock(spec=sqlite3.Connection)
-    mock_db_context.return_value = mock_db_context
-    mock_db_context.__enter__.return_value = mock_db_context
-    return mock_db_context
+    mock_db_context_positive.add.return_value = True
+    return mock_db_context_positive
 
 
-@pytest.fixture
-def mock_db_context_negative():
-    mock_db_context = MagicMock(spec=DBContext)
-    mock_db_context.get.return_value = ()
-    mock_db_context.add.return_value = False
-    mock_db_context.connection = MagicMock(spec=sqlite3.Connection)
-    mock_db_context.return_value = mock_db_context
-    mock_db_context.__enter__.return_value = mock_db_context
-    return mock_db_context
+@pytest.fixture()
+def mock_db_context_negative(mock_db_context):
+    mock_db_context_negative = mock_db_context
+    mock_db_context_negative.get.return_value = ()
+    mock_db_context_negative.add.return_value = False
+    return mock_db_context_negative
 
 
 def test_sign_up_positive(mock_db_context_positive):
