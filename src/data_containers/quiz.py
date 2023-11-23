@@ -22,9 +22,7 @@ class Quiz:
         types_json = json.loads(types)
 
         types = [
-            QuizType.parse_json(
-                each_type_json
-            )
+            QuizType.parse_json(each_type_json)
             for each_type_json in types_json
         ]
 

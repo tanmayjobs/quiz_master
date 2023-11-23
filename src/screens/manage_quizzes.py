@@ -7,6 +7,7 @@ from utils.menu_loop import menu_loop
 
 
 class ManageQuizScreen:
+
     def __init__(self, user):
         self.user = user
 
@@ -25,7 +26,8 @@ class ManageQuizScreen:
                 case 3:
                     selected_quiz = self._select_quiz_screen()
                     if selected_quiz:
-                        ModifyQuizScreen(self.user, selected_quiz).modify_quiz_screen()
+                        ModifyQuizScreen(self.user,
+                                         selected_quiz).modify_quiz_screen()
                 case 4:
                     return True
                 case other:
@@ -43,7 +45,8 @@ class ManageQuizScreen:
             return
 
         CommonScreens.show_quizzes(all_quizzes)
-        selected_quiz = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
+        selected_quiz = CommonScreens.select_from_list(all_quizzes,
+                                                       InputTexts.QUIZ_ID)
 
         if not selected_quiz:
             print(OutputTexts.INVALID_CHOICE)
@@ -78,13 +81,11 @@ class ManageQuizScreen:
         while not quiz_types:
             quiz_types = self._select_quiz_type()
 
-        quiz = Quiz(
-            quiz_id=None,
-            quiz_name=quiz_name,
-            creator_id=self.user.user_id,
-            creator_name=self.user.username,
-            types=quiz_types
-        )
+        quiz = Quiz(quiz_id=None,
+                    quiz_name=quiz_name,
+                    creator_id=self.user.user_id,
+                    creator_name=self.user.username,
+                    types=quiz_types)
 
         QuizHandler(self.user, quiz).add_quiz()
 

@@ -2,7 +2,7 @@ from sqlite3 import IntegrityError
 
 from helpers.constants import SQLQueries
 from data_containers.user import *
-from database import database
+from database import database, DBContext
 from utils.crypt import check_password, hash_password
 
 
@@ -16,7 +16,9 @@ class AuthHandler:
         if not self.username.strip() or not self.password:
             return None
 
-        user_data = database.get(SQLQueries.GET_USER, (self.username,), True)
+        with DBContext(database) as dao:
+            user_data = dao.get(SQLQueries.GET_USER, (self.username, ), True)
+
         if not user_data:
             return None
 
@@ -32,7 +34,10 @@ class AuthHandler:
         password_hash = hash_password(self.password)
 
         try:
-            is_user_added = database.add(SQLQueries.ADD_USER, (self.username, password_hash, UserRole.PLAYER))
+            with DBContext(database) as dao:
+                is_user_added = dao.add(
+                    SQLQueries.ADD_USER,
+                    (self.username, password_hash, UserRole.PLAYER))
         except IntegrityError:
             is_user_added = False
 

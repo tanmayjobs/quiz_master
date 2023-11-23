@@ -9,16 +9,12 @@ def main():
 
 if __name__ == '__main__':
     Logger.log(INFO, LogText.SYSTEM_START)
-
     try:
         main()
-
     except Exception as err:
         print()
         print()
         print(Errors.UNEXPECTED_ERROR)
-
         Logger.log(ERROR, LogText.SYSTEM_ERROR.format(err))
-
     finally:
         Logger.log(INFO, LogText.SYSTEM_EXIT)

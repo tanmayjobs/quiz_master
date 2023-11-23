@@ -6,7 +6,5 @@ class LastTransaction:
 
     @staticmethod
     def from_cursor(cursor):
-        return LastTransaction(
-            last_id=cursor.lastrowid,
-            rows_changed=cursor.rowcount
-        )
+        return LastTransaction(last_id=cursor.lastrowid,
+                               rows_changed=cursor.rowcount)

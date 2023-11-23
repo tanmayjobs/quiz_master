@@ -1,6 +1,5 @@
 import sys
 from logging import WARN
-
 import pwinput
 
 from controller.auth import AuthHandler
@@ -14,9 +13,10 @@ from utils.menu_loop import menu_loop
 class AuthenticationScreen:
 
     @staticmethod
-    def _sign_in():
+    def sign_in():
         print()
-        username, password = input(InputTexts.USERNAME).strip(), pwinput.pwinput(InputTexts.PASSWORD)
+        username, password = input(
+            InputTexts.USERNAME).strip(), pwinput.pwinput(InputTexts.PASSWORD)
 
         if not username:
             print(Errors.USERNAME_EMPTY)
@@ -39,9 +39,10 @@ class AuthenticationScreen:
             print(Errors.INVALID_CREDENTIALS)
 
     @staticmethod
-    def _sign_up():
+    def sign_up():
         print()
-        username, password = input(InputTexts.USERNAME), pwinput.pwinput(InputTexts.PASSWORD)
+        username, password = input(InputTexts.USERNAME), pwinput.pwinput(
+            InputTexts.PASSWORD)
         username = username.strip()
 
         if not username:
@@ -70,10 +71,10 @@ class AuthenticationScreen:
 
             match user_choice:
                 case 1:
-                    AuthenticationScreen._sign_in()
+                    AuthenticationScreen.sign_in()
 
                 case 2:
-                    AuthenticationScreen._sign_up()
+                    AuthenticationScreen.sign_up()
 
                 case 3:
                     print()

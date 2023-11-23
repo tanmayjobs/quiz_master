@@ -17,4 +17,3 @@ class UserRole:
                 return Strings.PLAYER
             case other:
                 raise ValueError
-

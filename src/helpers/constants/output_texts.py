@@ -1,4 +1,3 @@
-
 class OutputTexts:
     INVALID_CHOICE = None
     USER_ADDED = None

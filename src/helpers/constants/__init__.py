@@ -12,8 +12,8 @@ from helpers.constants.sql_queries import SQLQueries
 from helpers.constants.errors import Errors
 from helpers.constants.strings import Strings
 
-
-with open(os.path.dirname(os.path.abspath(__file__)) + "/constants.yaml", "r") as constants_file:
+with open(os.path.dirname(os.path.abspath(__file__)) + "/constants.yaml",
+          "r") as constants_file:
     yaml_data = yaml.safe_load(constants_file)
 
     Config(yaml_data["config"])

@@ -3,7 +3,9 @@ from data_containers.user import UserRole, User
 
 
 def accessed_by(*roles: tuple[UserRole]):
+
     def wrapper(func):
+
         def secured_function(self, *args, **kwargs):
 
             if not isinstance(self.user, User):

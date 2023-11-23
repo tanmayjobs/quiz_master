@@ -44,7 +44,8 @@ class SQLQueries:
         cls.CREATE_OPTION_TABLE = data["create_option_table"]
         cls.CREATE_QUIZ_SCORE_TABLE = data["create_quiz_score_table"]
         cls.CREATE_TYPE_TABLE = data["create_type_table"]
-        cls.CREATE_QUIZ_TYPE_MAPPING_TABLE = data["create_quiz_type_mapping_table"]
+        cls.CREATE_QUIZ_TYPE_MAPPING_TABLE = data[
+            "create_quiz_type_mapping_table"]
 
         cls.GET_ALL_TYPES = data["get_all_types"]
         cls.ADD_QUIZ_TYPE = data["add_quiz_type"]

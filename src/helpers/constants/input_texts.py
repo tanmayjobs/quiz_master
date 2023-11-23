@@ -1,4 +1,3 @@
-
 class InputTexts:
     USERNAME = None
     PASSWORD = None

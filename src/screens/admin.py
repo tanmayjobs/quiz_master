@@ -9,13 +9,15 @@ from utils.menu_loop import menu_loop
 
 
 class AdminScreen:
+
     def __init__(self, user):
         self.user = user
 
     def add_creator_screen(self):
         print()
         print(Messages.CREATOR_INFO)
-        username, password = input(InputTexts.USERNAME), pwinput.pwinput(InputTexts.PASSWORD)
+        username, password = input(InputTexts.USERNAME), pwinput.pwinput(
+            InputTexts.PASSWORD)
 
         if not username:
             print(Errors.USERNAME_EMPTY)
@@ -40,7 +42,8 @@ class AdminScreen:
             return
 
         CommonScreens.show_users(all_users)
-        user_for_removal = CommonScreens.select_from_list(all_users, InputTexts.USER_ID)
+        user_for_removal = CommonScreens.select_from_list(
+            all_users, InputTexts.USER_ID)
 
         if not user_for_removal:
             print(OutputTexts.INVALID_CHOICE)
@@ -51,7 +54,8 @@ class AdminScreen:
     def remove_quiz_screen(self):
         all_quizzes = QuizHandler(self.user).get_all_quizzes()
         CommonScreens.show_quizzes(all_quizzes)
-        quiz_to_remove = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
+        quiz_to_remove = CommonScreens.select_from_list(
+            all_quizzes, InputTexts.QUIZ_ID)
 
         if not quiz_to_remove:
             print(OutputTexts.INVALID_CHOICE)
