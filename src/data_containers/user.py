@@ -1,31 +1,10 @@
-from constants import Strings
-
-
-class UserRole:
-    ADMIN = 0
-    CREATOR = 1
-    PLAYER = 2
-
-    @staticmethod
-    def to_string(role_val):
-
-        match role_val:
-
-            case UserRole.ADMIN:
-                return Strings.ADMIN
-
-            case UserRole.CREATOR:
-                return Strings.CREATOR
-
-            case UserRole.PLAYER:
-                return Strings.PLAYER
-
-            case other:
-                raise ValueError
+from helpers.enums import UserRole
 
 
 class User:
-    def __init__(self, user_id: int, username: str, password_hash: str, role: UserRole):
+
+    def __init__(self, user_id: int, username: str, password_hash: str,
+                 role: UserRole):
         self.__user_id = user_id
         self.username = username
         self.__password_hash = password_hash

@@ -1,0 +1,405 @@
+application:
+  name: "Enigma"
+  version: "0.0.1"
+  entry_point: "main.py"
+
+config:
+  sql:
+    file_path: "/storage"
+    file_name: "data.sqlite3"
+    db_path: "/storage/data.sqlite3"
+
+  logs:
+    file_path: "helpers/log/server.log"
+    filemode: "a+"
+    format: "%(asctime)s %(levelname)-10s %(message)s"
+    datefmt: "%d-%m-%Y %H:%M:%S"
+
+screens:
+  home:
+    player: "Press:\n- '1' to Play random quiz\n- '2' to Explore quizzes\n- '3' to All attempts\n- '4' to Sign Out\nEnter your choice:"
+    creator: "Press:\n- '1' to Play random quiz\n- '2' to Explore quizzes\n- '3' to All attempts\n- '4' to Manage My Quiz\n- '5' to Sign Out\nEnter your choice:"
+    admin: "Press:\n- '1' to Add a creator\n- '2' to Remove a user\n- '3' to Remove a quiz\n- '4' to Sign Out\nEnter your choice:"
+
+  authentication: "Press:\n- '1' to Sign In\n- '2' to Sign Up\n- '3' to Exit\nEnter your choice:"
+  manage_quizzes: "Press:\n- '1' to Add quiz\n- '2' to Remove quiz\n- '3' to Modify a Quiz\n- '4' to Go Back\nEnter your choice:"
+  manage_quiz: "Press:\n- '1' to List questions\n- '2' to Add question\n- '3' to Remove question\n- '4' to Go Back\nEnter your choice:"
+
+regex_patterns:
+  password: '^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!#$%&? "]).*$'
+  username: '[a-zA-Z]+[a-zA-Z0-9]*'
+  alpha_num_q3: '[a-zA-Z0-9]+[a-zA-Z0-9\"\?]*'
+  correct_option: '[1-4]'
+
+strings:
+  admin: "Admin"
+  creator: "Creator"
+  player: "Player"
+  quiz: "Quiz"
+  id: "Id"
+  username: "Username"
+  role: "Role"
+  question: "Question"
+  option: "Option"
+  a: "A"
+  quiz_name: "quiz_name"
+  all_questions: "all_questions"
+  movie: "Movie"
+  music: "Music"
+  book: "Book"
+  other: "Other"
+  performer: "performer"
+  type: "Type"
+  result: "Result"
+  options_json: 2
+  question_text: 1
+  question_id: 0
+  is_correct: "is_correct"
+  array: "[{}]"
+  type_id: "type_id"
+  type_name: "type_name"
+  user: "User"
+  filter: "%{search_key}%"
+  played_at: "Played At"
+  result_percentage: "{0:.2f}%"
+
+numbers:
+  zero: 0
+  one: 1
+  two: 2
+  four: 4
+  five: 5
+  six: 6
+  ten: 10
+
+entities:
+  - User
+  - Quiz
+
+messages:
+  quiz_name: "Playing quiz '{quiz_name}' by {creator_name}!"
+  quiz_type: "{} is about {}."
+  creator_info: "Enter the following details for the creator you want to add-"
+  working_on_quiz: "OOPS, Creator is still working on this quiz.\nWhy don't you explore some other quizzes."
+  greet: "Hello {username}, hope you're doing fine..."
+  incorrect_guess: "Your guess was incorrect, answer is {option_text}."
+  correct_guess: "You guess is correct, {option_text} is the correct answer of this question."
+  top_record: "These are the top records for this quiz."
+
+inputs:
+  username: "Enter username:"
+  password: "Enter password:"
+  user_id: "Enter user id:"
+  quiz_id: "Enter quiz id:"
+  question_id: "Enter question id:"
+  keyword: "Enter keyword to search(name of the quiz or types associated):"
+  type_ids: "Enter type ids (comma separated values):"
+  quiz_name: "Enter quiz name:"
+  question: "Enter question:"
+  option: "Enter option {}:"
+  number_of_questions: "Enter the number of questions (between 1 and 10):"
+  number_of_options: "Enter the number of options (between 2 and 6):"
+  correct_option: "Enter correct option (1, 2, 3 or 4):"
+  explore_quizzes: "Enter keyword to search quiz(leave empty to get all quizzes):"
+  question_prompt: "Question {}.{}\nOption 1.{}\nOption 2.{}\nOption 3.{}\nOption 4.{}\n\nWhat's your guess(1, 2, 3 or 4):"
+
+outputs:
+  user_added: "User added successfully..."
+  quiz_added: "Quiz added successfully.\nYou should head to Modify Quiz section to add some questions, just a suggestion..."
+  creator_added: "Creator added successfully..."
+  question_added: "Question added successfully..."
+  sign_in: "Signed in system as {}..."
+  sign_out: "Signed out from the system..."
+  invalid_choice: "Invalid Choice."
+  user_info: "{user_id:5}\t{username:20}\t{user_role:20}"
+  type_info: "{type_id:5}\t{type_name:20}"
+  quiz_info: "{quiz_id:5}\t{quiz_name:20}\t{quiz_types:40}"
+  question_info: "{question_id:5}\t{question_text:80}"
+  question_all_info: "Question {question_id}.{question_text}\nOption 1.{option_1}\nOption 2.{option_2}\nOption 3.{option_3}\nOption 4.{option_4}\nCorrect Option.{correct_option}"
+  record_info: "{record_id:5}\t{quiz_name:20}\t{player_name:20}\t{result:10}\t{played_at:20}"
+  user_removed: "User removed successfully..."
+  quiz_removed: "Quiz removed successfully..."
+  question_removed: "Question removed successfully..."
+  zero_quizzes: "No quizzes found! :("
+  not_yet: "There are no {} yet!"
+  quiz_result: "You scored {result:0.2f}% in {quiz_name} quiz.\nYou can check all of your scores in My Records section."
+  no_quiz_records: "You haven't played any quizzes yet!"
+  no_quizzes: "No quizzes found for '{}'."
+
+errors:
+  weak_password: "Password is too weak."
+  username_empty: "Username can't be empty!"
+  password_empty: "Password can't be empty!"
+  invalid_credentials: "Invalid username or password!"
+  user_404: "User not found!"
+  username_already_exists: "Username already exists!"
+  quiz_404: "Quiz not found!"
+  performer_required: "Performer is required for this action!"
+  permission: "You do not have enough permissions to perform this action!"
+  unexpected_error: "Unexpected Error Occurred!!\nExiting the System. Please contact the administrator."
+  invalid_input: "Invalid input!"
+
+sql_queries:
+  create_auth_table: |
+    CREATE TABLE IF NOT EXISTS authentication(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        password_hash TEXT NOT NULL,
+        user_role INTEGER CHECK (user_role IN (0, 1, 2)) DEFAULT 1,
+        is_deleted BOOL NOT NULL DEFAULT False,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+  create_quiz_table: |
+    CREATE TABLE IF NOT EXISTS quizzes(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        creator_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        is_deleted BOOL NOT NULL DEFAULT False,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(creator_id) REFERENCES authentication(id)
+    );
+
+  create_question_table: |
+    CREATE TABLE IF NOT EXISTS questions(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        quiz_id INTEGER NOT NULL,
+        question TEXT NOT NULL,
+        FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
+    );
+
+  create_option_table: |
+    CREATE TABLE IF NOT EXISTS options(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        question_id INTEGER NOT NULL,
+        option INTEGER NOT NULL,
+        is_correct BOOL NOT NULL DEFAULT FALSE,
+        FOREIGN KEY(question_id) REFERENCES questions(id)
+    );
+
+  create_quiz_score_table: |
+    CREATE TABLE IF NOT EXISTS quiz_score_table(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        player_id INTEGER NOT NULL,
+        quiz_id INTEGER NOT NULL,
+        player_score INTEGER NOT NULL DEFAULT 0,
+        total_score INTEGER NOT NULL DEFAULT 0,
+        played_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(player_id) REFERENCES authentication(id),
+        FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
+    );
+
+  create_type_table: |
+    CREATE TABLE IF NOT EXISTS types(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT UNIQUE NOT NULL
+    );
+
+  create_quiz_type_mapping_table: |
+    CREATE TABLE IF NOT EXISTS quiz_type_mapping(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        quiz_id INTEGER NOT NULL,
+        type_id INTEGER NOT NULL,
+        FOREIGN KEY(quiz_id) REFERENCES quizzes(id),
+        FOREIGN KEY(type_id) REFERENCES types(id)
+    );
+
+  get_all_users: |
+    SELECT * FROM authentication
+    WHERE user_role != 0 and is_deleted != True;
+
+  get_user: |
+    SELECT * FROM authentication
+    WHERE username = ? AND is_deleted = False;
+
+  add_user: |
+    INSERT INTO authentication(username, password_hash, user_role)
+    VALUES(?, ?, ?);
+
+  remove_user: |
+    UPDATE authentication
+    SET is_deleted = True
+    WHERE id = ?;
+
+  get_random_quiz: |
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.is_deleted = False
+    GROUP BY quiz.id
+    ORDER BY RANDOM() LIMIT 1;
+
+  add_quiz: |
+    INSERT INTO quizzes(creator_id, name)
+    VALUES(?, ?);
+
+  remove_quiz: |
+    UPDATE quizzes
+    SET is_deleted = True
+    WHERE id = ?;
+
+  add_question: |
+    INSERT INTO questions(quiz_id, question)
+    VALUES(?, ?);
+
+  add_option: |
+    INSERT INTO options(question_id, option, is_correct)
+    VALUES(?, ?, ?);
+
+  add_quiz_type: |
+    INSERT INTO quiz_type_mapping(quiz_id, type_id)
+    VALUES(?, ?);
+
+  get_all_types: |
+    SELECT * FROM types;
+
+  add_type: |
+    INSERT OR IGNORE INTO types (name)
+    VALUES (?);
+
+  remove_question_by_quiz: |
+    DELETE FROM questions
+    WHERE quiz_id = ?;
+
+  remove_question: |
+    DELETE FROM questions
+    WHERE id = ?;
+
+  remove_option_by_question: |
+    DELETE FROM options
+    WHERE question_id = ?;
+
+  get_user_quizzes: |
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.creator_id = ? AND quiz.is_deleted = False
+    GROUP BY quiz.id
+    ORDER BY quiz.created_at;
+
+  get_quiz_types: |
+    SELECT types.* FROM quiz_type_mapping
+    INNER JOIN types ON type_id = types.id
+    INNER JOIN quizzes ON quiz_id = quizzes.id
+    WHERE quizzes.id = ? AND quizzes.is_deleted = False;
+
+  get_quiz_questions: |
+    SELECT
+    q.id AS question_id,
+    q.question AS question_text,
+    GROUP_CONCAT(
+        json_object(
+            'option', o.option,
+            'is_correct', o.is_correct
+        )
+    ) AS options_json
+    FROM questions AS q
+    INNER JOIN options AS o ON q.id = o.question_id
+    INNER JOIN quizzes AS quiz ON q.quiz_id = quiz.id
+    WHERE quiz.id = ? GROUP BY q.id
+    ORDER BY RANDOM();
+
+  get_all_quizzes: |
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.is_deleted = False
+    GROUP BY quiz.id;
+
+  filter_all_quizzes: |
+    SELECT
+    quiz.id,
+    quiz.name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'type_id', t.id,
+            'type_name', t.name
+        )
+    ) AS concatenated_types
+    FROM quizzes AS quiz
+    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN types AS t ON t.id = qt.type_id
+    WHERE quiz.is_deleted = False
+    AND (quiz.name LIKE ? OR t.name LIKE ?)
+    GROUP BY quiz.id
+    ORDER BY quiz.created_at DESC;
+
+  add_quiz_score: |
+    INSERT INTO quiz_score_table(player_id, quiz_id, player_score, total_score)
+    VALUES(?, ?, ?, ?);
+
+  get_player_scores: |
+    SELECT
+    authentication.id,
+    authentication.username,
+    quizzes.id,
+    quizzes.name,
+    player_score,
+    total_score,
+    played_at
+    FROM quiz_score_table
+    INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
+    INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
+    WHERE player_id = ?
+    ORDER BY played_at DESC;
+
+  top_quiz_scores: |
+    SELECT
+    authentication.id,
+    authentication.username,
+    quizzes.id,
+    quizzes.name,
+    MAX(player_score),
+    total_score,
+    played_at
+    FROM quiz_score_table
+    INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
+    INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
+    WHERE quizzes.id = ?
+    GROUP BY quizzes.id, authentication.id
+    ORDER BY player_score DESC LIMIT ?;
+
+log_text:
+  system_start: "Initializing System..."
+  system_exit: "System Exit..."
+  system_error: "System had an unexpected error...\n{}"
+  invalid_credentials: "Invalid credentials tried by user {}"

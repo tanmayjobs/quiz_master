@@ -1,139 +1,89 @@
-import services.quiz as quizzes
-import json
-
-from constants import Strings, Numbers
-from data_containers.question import Option, Question
+from helpers.constants import Strings, SQLQueries
 from data_containers.quiz import Quiz
 from data_containers.types import QuizType
 from data_containers.user import UserRole
-from helpers.rbac import accessed_by
+from database import database, DBContext
+from utils.rbac import accessed_by
 
 
-@accessed_by(UserRole.CREATOR)
-def add_quiz(quiz: Quiz, **_):
-    quizzes.add(quiz)
+class QuizHandler:
 
+    def __init__(self, user, quiz=None):
+        self.user = user  # User whose trying to perform the operation
+        self.quiz = quiz  # Quiz on which the operations are performed
 
-@accessed_by(UserRole.CREATOR)
-def get_creator_quizzes(**kwargs):
-    creator = kwargs.get(Strings.PERFORMER)
-    all_quizzes_data = quizzes.get_by_creator(creator)
-    all_quizzes = _map_quizzes(all_quizzes_data)
+    @accessed_by(UserRole.CREATOR)
+    def add_quiz(self):
+        with DBContext(database) as dao:
+            quiz_id = dao.add(SQLQueries.ADD_QUIZ,
+                                   (self.user.user_id, self.quiz.quiz_name))
+            quiz_id = quiz_id.last_id
 
-    return all_quizzes
+            for quiz_type in self.quiz.types:
+                dao.add(SQLQueries.ADD_QUIZ_TYPE, (
+                    quiz_id,
+                    quiz_type.type_id,
+                ))
 
+    @staticmethod
+    def get_random_quiz():
+        with DBContext(database) as dao:
+            quiz_data = dao.get(SQLQueries.GET_RANDOM_QUIZ, only_one=True)
 
-@accessed_by(UserRole.ADMIN, UserRole.CREATOR)
-def remove_quiz(quiz, **_):
-    quizzes.remove(quiz)
+        if not quiz_data:
+            return None
 
+        quiz = Quiz.parse_json(quiz_data)
 
-@accessed_by(UserRole.CREATOR)
-def add_question(quiz, question, **_):
-    quizzes.add_question(quiz, question)
+        return quiz
 
+    @accessed_by(UserRole.CREATOR)
+    def get_user_quizzes(self):
+        with DBContext(database) as dao:
+            all_quizzes_data = dao.get(SQLQueries.GET_USER_QUIZZES,
+                                            (self.user.user_id, ))
+        all_quizzes = [
+            Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
+        ]
 
-def _map_options(options_json):
-    options = []
+        return all_quizzes
 
-    for option_data in options_json:
-        option = Option(
-            option_text=option_data[Strings.OPTION.lower()],
-            is_correct=option_data[Strings.IS_CORRECT],
-        )
-        options.append(option)
+    @accessed_by(UserRole.ADMIN)
+    def get_all_quizzes(self):
+        with DBContext(database) as dao:
+            all_quizzes_data = dao.get(SQLQueries.GET_ALL_QUIZZES)
+        all_quizzes = [
+            Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
+        ]
 
-    return options
+        return all_quizzes
 
+    @staticmethod
+    def filter_all_quizzes(search_key):
+        with DBContext(database) as dao:
+            all_quizzes_data = dao.get(SQLQueries.FILTER_ALL_QUIZZES, (
+                Strings.FILTER.format(search_key=search_key),
+                Strings.FILTER.format(search_key=search_key),
+            ))
 
-def get_quiz_questions(quiz):
-    questions_data = quizzes.get_quiz_question(quiz)
-    questions = []
+        all_quizzes = [
+            Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
+        ]
 
-    for question_data in questions_data:
+        return all_quizzes
 
-        question_id = question_data[Numbers.ZERO]
-        question_text = question_data[Strings.QUESTION_TEXT]
-        option_json = json.loads(Strings.ARRAY.format(question_data[Strings.OPTIONS_JSON]))
-        options = _map_options(option_json)
+    @accessed_by(UserRole.ADMIN, UserRole.CREATOR)
+    def remove_quiz(self):
+        if not self.quiz:
+            raise ValueError
 
-        question = Question(
-            question_id,
-            question_text,
-            options
-        )
-        questions.append(question)
+        with DBContext(database) as dao:
+            dao.remove(SQLQueries.REMOVE_QUIZ, (self.quiz.quiz_id, ))
 
-    return questions
+    @staticmethod
+    def defined_quiz_types():
+        with DBContext(database) as dao:
+            all_types_data = dao.get(SQLQueries.GET_ALL_TYPES)
+        all_types = [QuizType(*each_type) for each_type in all_types_data]
 
-
-def all_quiz_types():
-    all_types_data = quizzes.all_quiz_types()
-    all_types = [QuizType(*each_type) for each_type in all_types_data]
-
-    return all_types
-
-
-@accessed_by(UserRole.CREATOR)
-def remove_question(question, **_):
-    quizzes.remove_question(question)
-
-
-def _get_types(types_json):
-    types = []
-
-    for type_json in types_json:
-        each_type = QuizType(
-            type_json[Strings.TYPE_ID],
-            type_json[Strings.TYPE_NAME]
-        )
-
-        types.append(each_type)
-
-    return types
-
-
-def _map_quiz(quiz_data):
-    quiz_id, quiz_name, creator_id, creator_name, types = quiz_data
-    types = Strings.ARRAY.format(types)
-    types_json = json.loads(types)
-
-    types = _get_types(types_json)
-
-    quiz = Quiz(quiz_id, quiz_name, creator_id, creator_name, types)
-    return quiz
-
-
-def _map_quizzes(all_quizzes_data):
-    all_quizzes = []
-
-    for quiz_data in all_quizzes_data:
-        quiz = _map_quiz(quiz_data)
-        all_quizzes.append(quiz)
-
-    return all_quizzes
-
-
-@accessed_by(UserRole.ADMIN)
-def get_all_quizzes(**_):
-    all_quizzes_data = quizzes.get_all_quizzes()
-    all_quizzes = _map_quizzes(all_quizzes_data)
-
-    return all_quizzes
-
-
-def get_random_quiz():
-    quiz_data = quizzes.get_random_quiz()
-
-    if not quiz_data:
-        return None
-
-    quiz = _map_quiz(quiz_data)
-    return quiz
-
-
-def filter_all_quizzes(search_key):
-    all_quizzes_data = quizzes.filter_all_quizzes(search_key)
-    all_quizzes = _map_quizzes(all_quizzes_data)
-
-    return all_quizzes
+        return all_types

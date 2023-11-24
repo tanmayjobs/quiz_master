@@ -1,19 +1,35 @@
-import services.quiz_records as quiz_records
-from constants import Strings
+from helpers.constants import SQLQueries
 from data_containers.quiz_record import QuizRecord
-from data_containers.user import UserRole
-from helpers.rbac import accessed_by
+from database import database, DBContext
 
 
-def add_quiz_record(quiz_record):
-    quiz_records.add(quiz_record)
+class QuizRecordHandler:
 
+    @staticmethod
+    def add_quiz_record(quiz_record):
+        with DBContext(database) as dao:
+            dao.add(SQLQueries.ADD_QUIZ_SCORE,
+                     (quiz_record.player_id, quiz_record.quiz_id,
+                      quiz_record.player_score, quiz_record.total_score))
 
-@accessed_by(UserRole.PLAYER, UserRole.CREATOR)
-def get_player_records(**kwargs):
-    player = kwargs.get(Strings.PERFORMER)
+    @staticmethod
+    def get_user_records(user):
+        with DBContext(database) as dao:
+            player_scores_data = dao.get(SQLQueries.GET_PLAYER_SCORES,
+                                          (user.user_id, ))
+        player_scores = [
+            QuizRecord(*score_data) for score_data in player_scores_data
+        ]
 
-    player_scores_data = quiz_records.get_player_scores(player)
-    player_scores = [QuizRecord(*score_data) for score_data in player_scores_data]
+        return player_scores
 
-    return player_scores
+    @staticmethod
+    def quiz_top_records(quiz_id, number_of_records=5):
+        with DBContext(database) as dao:
+            top_records_data = dao.get(SQLQueries.TOP_QUIZ_SCORES,
+                                        (quiz_id, number_of_records))
+        top_records = [
+            QuizRecord(*score_data) for score_data in top_records_data
+        ]
+
+        return top_records

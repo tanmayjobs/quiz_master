@@ -1,47 +1,41 @@
-import services.user as user_services
+from helpers.constants import SQLQueries
+from database import database, DBContext
+from utils.crypt import hash_password
 
-from helpers.rbac import accessed_by
+from utils.rbac import accessed_by
 from data_containers.user import *
-from helpers.crypt import check_password
 
 
-def sign_in(username, password) -> User | None:
+class UserHandler:
 
-    if not username.strip() or not password:
-        raise ValueError
+    def __init__(self, user):
+        self.user = user  # User who is trying to perform the operation
 
-    user_data = user_services.get_by_username(username)
+    @accessed_by(UserRole.ADMIN)
+    def add_user(self,
+                 username,
+                 password,
+                 role: UserRole = UserRole.CREATOR) -> bool:
 
-    if not user_data:
-        return None
+        password_hash = hash_password(password)
+        with DBContext(database) as dao:
+            is_user_added = dao.add(SQLQueries.ADD_USER,
+                                     (username, password_hash, role))
 
-    user = User.parse_database(user_data)
+        return is_user_added
 
-    if not check_password(password, user.password_hash):
-        return None
+    @accessed_by(UserRole.ADMIN)
+    def get_all_users(self) -> list[User]:
+        with DBContext(database) as dao:
+            all_user_data = dao.get(SQLQueries.GET_ALL_USERS)
 
-    return user
+        all_users = [
+            User.parse_database(user_data) for user_data in all_user_data
+        ]
 
+        return all_users
 
-def sign_up(username, password) -> bool:
-    is_user_added = user_services.add_user(username, password, UserRole.PLAYER)
-    return is_user_added
-
-
-@accessed_by(UserRole.ADMIN)
-def add_creator(username, password, **_) -> bool:
-    is_user_added = user_services.add_user(username, password, UserRole.CREATOR)
-    return is_user_added
-
-
-@accessed_by(UserRole.ADMIN)
-def get_all_users(**_) -> list[User]:
-    all_user_data = user_services.get_all_users()
-    all_users = [User.parse_database(user_data) for user_data in all_user_data]
-
-    return all_users
-
-
-@accessed_by(UserRole.ADMIN)
-def remove_user(user, **_) -> None:
-    user_services.remove_user(user.user_id)
+    @accessed_by(UserRole.ADMIN)
+    def remove_user(self, user_id) -> None:
+        with DBContext(database) as dao:
+            dao.remove(SQLQueries.REMOVE_USER, (user_id, ))
