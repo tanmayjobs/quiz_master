@@ -6,7 +6,7 @@ import pytest
 @pytest.mark.parametrize("username", ["", "1", "111", "??121", "batman?123"])
 def test_get_username(username, monkeypatch):
     correct_username = "batman"
-    with patch("builtins.input", side_effect= [username, correct_username]):
+    with patch("builtins.input", side_effect=[username, correct_username]):
         assert correct_username == Validators.get_username()
 
 

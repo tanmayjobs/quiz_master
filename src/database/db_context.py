@@ -14,8 +14,9 @@ class DBContext:
         self.cursor = self.database.connection.cursor()
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.database.connection.commit()
+    def __exit__(self, *error_details):
+        if not any(error_details):
+            self.database.connection.commit()
 
     def get(self, query, params=(), only_one=False):
         data = self.cursor.execute(query, params)
