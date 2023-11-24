@@ -4,6 +4,11 @@ from database import database, DBContext
 
 
 class QuizRecordHandler:
+    """
+    This handler deals with quiz records.
+    Doesn't require any parameters as it have only static methods.
+    Implements add record, get top record, get all records of a user.
+    """
 
     @staticmethod
     def add_quiz_record(quiz_record):

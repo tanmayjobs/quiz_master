@@ -1,4 +1,4 @@
-from src.controller.quiz import QuizHandler
+from src.handler.quiz import QuizHandler
 
 
 def add_quiz_positive(monkeypatch):

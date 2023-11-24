@@ -1,4 +1,4 @@
-from controller.questions import QuestionHandler
+from handler.questions import QuestionHandler
 from data_containers.question import Option, Question
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts, Numbers
 from screens.common import CommonScreens

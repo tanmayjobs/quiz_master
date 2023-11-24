@@ -7,6 +7,10 @@ from utils.crypt import check_password, hash_password
 
 
 class AuthHandler:
+    """
+    This handler is used for authentication process.
+    It takes username and password as parameters and provide sign in and sign up functionality.
+    """
 
     def __init__(self, username, password):
         self.username = username

@@ -7,6 +7,10 @@ from data_containers.user import *
 
 
 class UserHandler:
+    """
+    This handler deals with users and requires a user.
+    This handler is generally used by admin to create, remove and list users.
+    """
 
     def __init__(self, user):
         self.user = user  # User who is trying to perform the operation

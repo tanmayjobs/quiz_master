@@ -1,7 +1,7 @@
 import pwinput
 
-from controller.quiz import QuizHandler
-from controller.user import UserHandler
+from handler.quiz import QuizHandler
+from handler.user import UserHandler
 from helpers.constants import ScreenTexts, OutputTexts, Messages, InputTexts, Errors, Strings
 from screens.common import CommonScreens
 from utils.crypt import validate_password

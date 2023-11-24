@@ -1,12 +1,15 @@
 import re
-
 import pwinput
 
-from helpers.constants import Strings, InputTexts, OutputTexts, Errors
+from helpers.constants import InputTexts, Errors
 from helpers.constants.regex_patterns import RegexPatterns
 
 
 class Validators:
+    """
+    This class provides a way out of invalid user inputs.
+    Each method uses regex to validate the user input based on the needs.
+    """
     @staticmethod
     def get_username():
         username = ''

@@ -1,12 +1,10 @@
 import sys
 from logging import WARN
-import pwinput
 
-from controller.auth import AuthHandler
-from helpers.constants import ScreenTexts, OutputTexts, InputTexts, Errors, Messages, LogText
-from helpers.log.logger import Logger
+from handler.auth import AuthHandler
+from helpers.constants import ScreenTexts, OutputTexts, Errors, Messages, LogText
+from helpers.log.logger import Logger, INFO
 from screens.home import home_screen
-from utils.crypt import validate_password
 from utils.menu_loop import menu_loop
 from utils.validators import Validators
 
@@ -42,6 +40,7 @@ class AuthenticationScreen:
     @staticmethod
     @menu_loop
     def menu_screen():
+        Logger.log(INFO, __name__)
         print()
         user_choice = input(ScreenTexts.AUTHENTICATION)
 

@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 from data_containers.user import User
 from database import DBContext
 from helpers.enums import UserRole
-from src.controller.auth import AuthHandler
+from src.handler.auth import AuthHandler
 from utils.crypt import hash_password
 
 
