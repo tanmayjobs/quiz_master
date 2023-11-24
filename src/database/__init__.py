@@ -29,27 +29,27 @@ db_path += f'/{Config.SQL_FILE_NAME}'
 
 database = Database(db_path, uri)
 with DBContext(database) as dao:
-    dao.create(SQLQueries.CREATE_AUTH_TABLE)
-    dao.create(SQLQueries.CREATE_QUIZ_TABLE)
-    dao.create(SQLQueries.CREATE_QUESTION_TABLE)
-    dao.create(SQLQueries.CREATE_OPTION_TABLE)
-    dao.create(SQLQueries.CREATE_QUIZ_SCORE_TABLE)
-    dao.create(SQLQueries.CREATE_TYPE_TABLE)
-    dao.create(SQLQueries.CREATE_QUIZ_TYPE_MAPPING_TABLE)
+    dao.write(SQLQueries.CREATE_AUTH_TABLE)
+    dao.write(SQLQueries.CREATE_QUIZ_TABLE)
+    dao.write(SQLQueries.CREATE_QUESTION_TABLE)
+    dao.write(SQLQueries.CREATE_OPTION_TABLE)
+    dao.write(SQLQueries.CREATE_QUIZ_SCORE_TABLE)
+    dao.write(SQLQueries.CREATE_TYPE_TABLE)
+    dao.write(SQLQueries.CREATE_QUIZ_TYPE_MAPPING_TABLE)
 
-    dao.add(
+    dao.write(
         SQLQueries.ADD_TYPE,
         (Strings.MOVIE,),
     )
-    dao.add(
+    dao.write(
         SQLQueries.ADD_TYPE,
         (Strings.BOOK,),
     )
-    dao.add(
+    dao.write(
         SQLQueries.ADD_TYPE,
         (Strings.MUSIC,),
     )
-    dao.add(
+    dao.write(
         SQLQueries.ADD_TYPE,
         (Strings.OTHER,),
     )

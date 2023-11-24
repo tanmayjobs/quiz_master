@@ -26,12 +26,12 @@ class QuizHandler:
             raise ValueError
 
         with DBContext(database) as dao:
-            quiz_id = dao.add(SQLQueries.ADD_QUIZ,
-                                   (self.user.user_id, self.quiz.quiz_name))
+            quiz_id = dao.write(SQLQueries.ADD_QUIZ,
+                                (self.user.user_id, self.quiz.quiz_name))
             quiz_id = quiz_id.last_id
 
             for quiz_type in self.quiz.types:
-                dao.add(SQLQueries.ADD_QUIZ_TYPE, (
+                dao.write(SQLQueries.ADD_QUIZ_TYPE, (
                     quiz_id,
                     quiz_type.type_id,
                 ))
@@ -39,7 +39,7 @@ class QuizHandler:
     @staticmethod
     def get_random_quiz():
         with DBContext(database) as dao:
-            quiz_data = dao.get(SQLQueries.GET_RANDOM_QUIZ, only_one=True)
+            quiz_data = dao.read(SQLQueries.GET_RANDOM_QUIZ, only_one=True)
 
         if not quiz_data:
             return None
@@ -50,8 +50,8 @@ class QuizHandler:
     @accessed_by(UserRole.CREATOR)
     def get_user_quizzes(self):
         with DBContext(database) as dao:
-            all_quizzes_data = dao.get(SQLQueries.GET_USER_QUIZZES,
-                                            (self.user.user_id, ))
+            all_quizzes_data = dao.read(SQLQueries.GET_USER_QUIZZES,
+                                        (self.user.user_id, ))
         all_quizzes = [
             Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
         ]
@@ -61,7 +61,7 @@ class QuizHandler:
     @accessed_by(UserRole.ADMIN)
     def get_all_quizzes(self):
         with DBContext(database) as dao:
-            all_quizzes_data = dao.get(SQLQueries.GET_ALL_QUIZZES)
+            all_quizzes_data = dao.read(SQLQueries.GET_ALL_QUIZZES)
         all_quizzes = [
             Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
         ]
@@ -71,7 +71,7 @@ class QuizHandler:
     @staticmethod
     def filter_all_quizzes(search_key):
         with DBContext(database) as dao:
-            all_quizzes_data = dao.get(SQLQueries.FILTER_ALL_QUIZZES, (
+            all_quizzes_data = dao.read(SQLQueries.FILTER_ALL_QUIZZES, (
                 Strings.FILTER.format(search_key=search_key),
                 Strings.FILTER.format(search_key=search_key),
             ))
@@ -88,12 +88,12 @@ class QuizHandler:
             raise ValueError
 
         with DBContext(database) as dao:
-            dao.remove(SQLQueries.REMOVE_QUIZ, (self.quiz.quiz_id, ))
+            dao.write(SQLQueries.REMOVE_QUIZ, (self.quiz.quiz_id,))
 
     @staticmethod
     def defined_quiz_types():
         with DBContext(database) as dao:
-            all_types_data = dao.get(SQLQueries.GET_ALL_TYPES)
+            all_types_data = dao.read(SQLQueries.GET_ALL_TYPES)
         all_types = [QuizType(*each_type) for each_type in all_types_data]
 
         return all_types

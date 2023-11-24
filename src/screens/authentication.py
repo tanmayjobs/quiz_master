@@ -44,7 +44,6 @@ class AuthenticationScreen:
     def menu_screen():
         print()
         user_choice = input(ScreenTexts.AUTHENTICATION)
-
         if user_choice.isdigit():
             user_choice = int(user_choice)
             match user_choice:

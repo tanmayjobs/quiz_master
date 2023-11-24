@@ -21,7 +21,7 @@ class AuthHandler:
             return None
 
         with DBContext(database) as dao:
-            user_data = dao.get(SQLQueries.GET_USER, (self.username, ), True)
+            user_data = dao.read(SQLQueries.GET_USER, (self.username,), True)
 
         if not user_data:
             return None
@@ -39,7 +39,7 @@ class AuthHandler:
 
         try:
             with DBContext(database) as dao:
-                is_user_added = dao.add(
+                is_user_added = dao.write(
                     SQLQueries.ADD_USER,
                     (self.username, password_hash, UserRole.PLAYER))
         except IntegrityError:

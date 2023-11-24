@@ -49,7 +49,7 @@ def test_add_quiz_positive(user, quiz, mock_db_context):
 
 def test_get_random_quiz_negative(mock_db_context):
     with patch("src.handler.quiz.DBContext", mock_db_context):
-        mock_db_context.get.return_value = None
+        mock_db_context.read.return_value = None
         expected_value = None
         assert expected_value == QuizHandler.get_random_quiz()
 
@@ -57,7 +57,7 @@ def test_get_random_quiz_negative(mock_db_context):
 def test_get_random_quiz_positive(mock_db_context):
     with patch("src.handler.quiz.DBContext", mock_db_context):
         quiz_data = (1, "Quiz Name", 1, "Creator Name", '{"type_id":1,"type_name":"Movie"}')
-        mock_db_context.get.return_value = quiz_data
+        mock_db_context.read.return_value = quiz_data
         expected_value = Quiz.parse_json(quiz_data)
         assert expected_value == QuizHandler.get_random_quiz()
 
