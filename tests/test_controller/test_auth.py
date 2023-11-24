@@ -20,19 +20,19 @@ def mock_db_context():
 
 def get_mock_db_context_positive(mock_db_context, username="batman", password="Batman@123"):
     mock_db_context_positive = mock_db_context
-    mock_db_context_positive.get.return_value = (
+    mock_db_context_positive.read.return_value = (
         0, username,
         hash_password(password),
         UserRole.PLAYER)
-    mock_db_context_positive.add.return_value = True
+    mock_db_context_positive.write.return_value = True
     return mock_db_context_positive
 
 
 @pytest.fixture()
 def mock_db_context_negative(mock_db_context):
     mock_db_context_negative = mock_db_context
-    mock_db_context_negative.get.return_value = ()
-    mock_db_context_negative.add.return_value = False
+    mock_db_context_negative.read.return_value = ()
+    mock_db_context_negative.write.return_value = False
     return mock_db_context_negative
 
 
