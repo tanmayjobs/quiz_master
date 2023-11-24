@@ -25,6 +25,12 @@ screens:
   manage_quizzes: "Press:\n- '1' to Add quiz\n- '2' to Remove quiz\n- '3' to Modify a Quiz\n- '4' to Go Back\nEnter your choice:"
   manage_quiz: "Press:\n- '1' to List questions\n- '2' to Add question\n- '3' to Remove question\n- '4' to Go Back\nEnter your choice:"
 
+regex_patterns:
+  password: '^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!#$%&? "]).*$'
+  username: '[a-zA-Z]+[a-zA-Z0-9]*'
+  alpha_num_q3: '[a-zA-Z0-9]+[a-zA-Z0-9\"\?]*'
+  correct_option: '[1-4]'
+
 strings:
   admin: "Admin"
   creator: "Creator"
@@ -56,8 +62,6 @@ strings:
   filter: "%{search_key}%"
   played_at: "Played At"
   result_percentage: "{0:.2f}%"
-  password_regex: '^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!#$%&? "]).*$'
-
 
 numbers:
   zero: 0
@@ -133,6 +137,7 @@ errors:
   performer_required: "Performer is required for this action!"
   permission: "You do not have enough permissions to perform this action!"
   unexpected_error: "Unexpected Error Occurred!!\nExiting the System. Please contact the administrator."
+  invalid_input: "Invalid input!"
 
 sql_queries:
   create_auth_table: |

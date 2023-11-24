@@ -8,6 +8,7 @@ from helpers.log.logger import Logger
 from screens.home import home_screen
 from utils.crypt import validate_password
 from utils.menu_loop import menu_loop
+from utils.validators import Validators
 
 
 class AuthenticationScreen:
@@ -15,25 +16,14 @@ class AuthenticationScreen:
     @staticmethod
     def sign_in():
         print()
-        username, password = input(
-            InputTexts.USERNAME).strip(), pwinput.pwinput(InputTexts.PASSWORD)
-
-        if not username:
-            print(Errors.USERNAME_EMPTY)
-            return
-
-        if not password:
-            print(Errors.PASSWORD_EMPTY)
-            return
+        username, password = Validators.get_username(), Validators.get_password()
 
         user = AuthHandler(username, password).sign_in()
-
         if user:
             print()
             print()
             print(Messages.GREET.format(username=user.username))
             home_screen(user)
-
         else:
             Logger.log(WARN, LogText.INVALID_CREDENTIALS.format(username))
             print(Errors.INVALID_CREDENTIALS)
@@ -41,20 +31,9 @@ class AuthenticationScreen:
     @staticmethod
     def sign_up():
         print()
-        username, password = input(InputTexts.USERNAME), pwinput.pwinput(
-            InputTexts.PASSWORD)
-        username = username.strip()
-
-        if not username:
-            print(Errors.USERNAME_EMPTY)
-            return
-
-        if not validate_password(password):
-            print(Errors.WEAK_PASSWORD)
-            return
+        username, password = Validators.get_username(), Validators.get_password()
 
         is_user_added = AuthHandler(username, password).sign_up()
-
         if is_user_added:
             print(OutputTexts.USER_ADDED)
         else:
@@ -68,22 +47,16 @@ class AuthenticationScreen:
 
         if user_choice.isdigit():
             user_choice = int(user_choice)
-
             match user_choice:
                 case 1:
                     AuthenticationScreen.sign_in()
-
                 case 2:
                     AuthenticationScreen.sign_up()
-
                 case 3:
-                    print()
-                    print("Bye!")
+                    print("\nBye!")
                     sys.exit(0)
-
                 case other:
                     print(OutputTexts.INVALID_CHOICE)
-
         else:
             print(OutputTexts.INVALID_CHOICE)
 

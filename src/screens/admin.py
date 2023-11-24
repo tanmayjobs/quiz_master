@@ -6,6 +6,7 @@ from helpers.constants import ScreenTexts, OutputTexts, Messages, InputTexts, Er
 from screens.common import CommonScreens
 from utils.crypt import validate_password
 from utils.menu_loop import menu_loop
+from utils.validators import Validators
 
 
 class AdminScreen:
@@ -16,15 +17,7 @@ class AdminScreen:
     def add_creator_screen(self):
         print()
         print(Messages.CREATOR_INFO)
-        username, password = input(InputTexts.USERNAME), pwinput.pwinput(
-            InputTexts.PASSWORD)
-
-        if not username:
-            print(Errors.USERNAME_EMPTY)
-            return
-        if not validate_password(password):
-            print(Errors.WEAK_PASSWORD)
-            return
+        username, password = Validators.get_username(), Validators.get_password()
 
         is_user_added = UserHandler(self.user).add_user(username, password)
         if is_user_added:

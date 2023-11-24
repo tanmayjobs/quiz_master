@@ -36,8 +36,6 @@ class Strings:
     PLAYED_AT = None
     RESULT_PERCENTAGE = None
 
-    PASSWORD_REGEX = None
-
     @classmethod
     def __init__(cls, data):
         cls.ADMIN = data["admin"]
@@ -76,5 +74,3 @@ class Strings:
 
         cls.PLAYED_AT = data["played_at"]
         cls.RESULT_PERCENTAGE = data["result_percentage"]
-
-        cls.PASSWORD_REGEX = data["password_regex"]

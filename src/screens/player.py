@@ -26,10 +26,14 @@ class PlayerScreen:
         search_key = input(InputTexts.KEYWORD)
 
         all_quizzes = QuizHandler.filter_all_quizzes(search_key)
+
+        if not all_quizzes:
+            print(OutputTexts.NO_QUIZZES)
+            return
+
         CommonScreens.show_quizzes(all_quizzes)
         selected_quiz = CommonScreens.select_from_list(all_quizzes,
                                                        InputTexts.QUIZ_ID)
-
         if not selected_quiz:
             print(OutputTexts.INVALID_CHOICE)
             return

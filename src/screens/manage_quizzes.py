@@ -4,6 +4,7 @@ from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
 from screens.common import CommonScreens
 from screens.modify_quiz import ModifyQuizScreen
 from utils.menu_loop import menu_loop
+from utils.validators import Validators
 
 
 class ManageQuizScreen:
@@ -75,7 +76,7 @@ class ManageQuizScreen:
 
     def _add_quiz_screen(self):
         print()
-        quiz_name = input(InputTexts.QUIZ_NAME)
+        quiz_name = Validators.get_valid_strings(InputTexts.QUIZ_NAME)
         quiz_types = None
 
         while not quiz_types:

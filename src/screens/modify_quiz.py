@@ -3,6 +3,7 @@ from data_containers.question import Option, Question
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts, Numbers
 from screens.common import CommonScreens
 from utils.menu_loop import menu_loop
+from utils.validators import Validators
 
 
 class ModifyQuizScreen:
@@ -45,42 +46,21 @@ class ModifyQuizScreen:
 
     def _add_question_screen(self):
         print()
-        question_text = None
-        while not question_text:
-            question_text = input(InputTexts.QUESTION)
+        question_text = Validators.get_valid_strings(InputTexts.QUESTION)
         options = []
 
         for option_no in range(Numbers.ONE, Numbers.FIVE):
-            option_text = None
-            while not option_text:
-                option_text = input(
-                    InputTexts.OPTION.format(option_no)).strip()
+            option_text = Validators.get_valid_strings(InputTexts.OPTION.format(option_no))
 
             option = Option(option_text, False)
             options.append(option)
 
-        correct_option = None
-        while not correct_option:
-            correct_option = self._correct_option_screen()
-        options[correct_option - Numbers.ONE].is_correct = True
+        correct_option = Validators.get_correct_option()
+        options[correct_option].is_correct = True
 
         question = Question(Numbers.ZERO, question_text, options)
         QuestionHandler(self.quiz.quiz_id, self.user).add_question(question)
         print(OutputTexts.QUESTION_ADDED)
-
-    @staticmethod
-    def _correct_option_screen():
-        print()
-        correct_option = input(InputTexts.CORRECT_OPTION)
-        if correct_option.isdigit():
-            correct_option = int(correct_option)
-            if not Numbers.ONE < correct_option > Numbers.FOUR:
-                return correct_option
-            else:
-                print(OutputTexts.INVALID_CHOICE)
-        else:
-            print(OutputTexts.INVALID_CHOICE)
-        return None
 
     def _remove_question_screen(self):
         print()

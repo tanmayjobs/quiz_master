@@ -2,6 +2,7 @@ import re
 import bcrypt
 
 from helpers.constants import Strings
+from helpers.constants.regex_patterns import RegexPatterns
 
 
 def hash_password(password: str):
@@ -17,4 +18,4 @@ def check_password(password: str, hashed_password):
 
 
 def validate_password(password):
-    return re.match(Strings.PASSWORD_REGEX, password)
+    return re.match(RegexPatterns.PASSWORD, password)

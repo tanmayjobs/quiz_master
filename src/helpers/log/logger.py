@@ -6,9 +6,9 @@ from helpers.constants import Config
 logging.basicConfig(
     level=logging.NOTSET,
     filename=Config.LOGS_FILE_PATH,
-    filemode=Config.LOG_FILEMODE,
-    format=Config.LOG_FORMAT,
-    datefmt=Config.LOG_DATEFMT,
+    filemode=Config.LOGS_FILEMODE,
+    format=Config.LOGS_FORMAT,
+    datefmt=Config.LOGS_DATEFMT,
 )
 
 

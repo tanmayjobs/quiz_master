@@ -6,6 +6,7 @@ from data_containers.user import User
 from database import DBContext
 from helpers.enums import UserRole
 from src.controller.auth import AuthHandler
+from utils.crypt import hash_password
 
 
 @pytest.fixture()
@@ -22,7 +23,7 @@ def mock_db_context_positive(mock_db_context):
     mock_db_context_positive = mock_db_context
     mock_db_context_positive.get.return_value = (
         0, "batman",
-        b"$2b$12$PzZeVB9WVJnMqFexMAc1F.LJokCF.lJU5pPFpT9oOsKzD5nPIigEK",
+        hash_password("Batman@123"),
         UserRole.PLAYER)
     mock_db_context_positive.add.return_value = True
     return mock_db_context_positive
