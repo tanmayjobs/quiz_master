@@ -26,10 +26,10 @@ screens:
   manage_quiz: "Press:\n- '1' to List questions\n- '2' to Add question\n- '3' to Remove question\n- '4' to Go Back\nEnter your choice:"
 
 regex_patterns:
+  username: '^[a-zA-Z]+[a-zA-Z0-9]*$'
   password: '^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!#$%&? "]).*$'
-  username: '[a-zA-Z]+[a-zA-Z0-9]*'
-  alpha_num_q3: '[a-zA-Z0-9]+[a-zA-Z0-9\"\?]*'
-  correct_option: '[1-4]'
+  alpha_num_q2: '^.*[a-zA-Z0-9].*$'
+  correct_option: '^[1-4]$'
 
 strings:
   admin: "Admin"

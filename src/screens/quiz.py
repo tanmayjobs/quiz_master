@@ -1,5 +1,5 @@
-from controller.questions import QuestionHandler
-from controller.quiz_record import QuizRecordHandler
+from handler.questions import QuestionHandler
+from handler.quiz_record import QuizRecordHandler
 from data_containers.question import Option
 from data_containers.quiz_record import QuizRecord
 from helpers.constants import Messages, OutputTexts, Strings, Numbers

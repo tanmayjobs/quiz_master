@@ -1,3 +1,8 @@
+"""
+This __init__.py is used to load all the constants from the constants.yaml file to their respective classes.
+This file is IMPORTANT and should not be removed.
+"""
+
 import os
 import yaml
 

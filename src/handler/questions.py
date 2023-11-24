@@ -6,6 +6,12 @@ from utils.rbac import accessed_by
 
 
 class QuestionHandler:
+    """
+    This handler takes quiz_id and user as parameter.
+        quiz_id: This is required always as any functionality related to question must have a respective quiz_id.
+        user: This is required in the functions which requires a performer or have rbac.
+    This handler implements the functionality of create, add and remove questions.
+    """
 
     def __init__(self, quiz_id, user=None):
         self.quiz_id = quiz_id  # Quiz whose questions are being accessed

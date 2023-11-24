@@ -1,4 +1,4 @@
-from controller.quiz import QuizHandler
+from handler.quiz import QuizHandler
 from data_containers.quiz import Quiz
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
 from screens.common import CommonScreens

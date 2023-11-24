@@ -7,6 +7,14 @@ from utils.rbac import accessed_by
 
 
 class QuizHandler:
+    """
+    This handler requires a user and a quiz as parameters.
+        user:   User is required in every case as quiz is an important entity of our system,
+                so it's important to know which user want to access the quiz functionalities.
+
+        quiz:   Quiz is required in adding, removing otherwise it will be None by default.
+    This handler implements add, get, remove and filter quizzes.
+    """
 
     def __init__(self, user, quiz=None):
         self.user = user  # User whose trying to perform the operation
@@ -14,6 +22,9 @@ class QuizHandler:
 
     @accessed_by(UserRole.CREATOR)
     def add_quiz(self):
+        if not self.quiz:
+            raise ValueError
+
         with DBContext(database) as dao:
             quiz_id = dao.add(SQLQueries.ADD_QUIZ,
                                    (self.user.user_id, self.quiz.quiz_name))
@@ -34,7 +45,6 @@ class QuizHandler:
             return None
 
         quiz = Quiz.parse_json(quiz_data)
-
         return quiz
 
     @accessed_by(UserRole.CREATOR)

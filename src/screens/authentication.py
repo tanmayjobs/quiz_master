@@ -1,12 +1,10 @@
 import sys
 from logging import WARN
-import pwinput
 
-from controller.auth import AuthHandler
-from helpers.constants import ScreenTexts, OutputTexts, InputTexts, Errors, Messages, LogText
-from helpers.log.logger import Logger
+from handler.auth import AuthHandler
+from helpers.constants import ScreenTexts, OutputTexts, Errors, Messages, LogText
+from helpers.log.logger import Logger, INFO
 from screens.home import home_screen
-from utils.crypt import validate_password
 from utils.menu_loop import menu_loop
 from utils.validators import Validators
 
@@ -16,7 +14,8 @@ class AuthenticationScreen:
     @staticmethod
     def sign_in():
         print()
-        username, password = Validators.get_username(), Validators.get_password()
+        username = Validators.get_username()
+        password = Validators.get_password()
 
         user = AuthHandler(username, password).sign_in()
         if user:
@@ -31,7 +30,8 @@ class AuthenticationScreen:
     @staticmethod
     def sign_up():
         print()
-        username, password = Validators.get_username(), Validators.get_password()
+        username = Validators.get_username()
+        password = Validators.get_password()
 
         is_user_added = AuthHandler(username, password).sign_up()
         if is_user_added:

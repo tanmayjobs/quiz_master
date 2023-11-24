@@ -1,4 +1,4 @@
-from controller.questions import QuestionHandler
+from handler.questions import QuestionHandler
 from data_containers.question import Option, Question
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts, Numbers
 from screens.common import CommonScreens
@@ -51,7 +51,6 @@ class ModifyQuizScreen:
 
         for option_no in range(Numbers.ONE, Numbers.FIVE):
             option_text = Validators.get_valid_strings(InputTexts.OPTION.format(option_no))
-
             option = Option(option_text, False)
             options.append(option)
 

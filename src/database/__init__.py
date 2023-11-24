@@ -1,6 +1,17 @@
 """
-Don't import the Database class as long as you don't need a separate instance.
-Use the 'database' variable to access the Database class and it's functionalities.
+This file is responsible to create the required folders for storing database file.
+And also responsible to create the databases.
+
+IMPORTANT: Don't import the Database class as long as you don't need a separate instance.
+IMPORTANT: Use the 'database' variable to access the Database object.
+
+Example:
+    from database import database, DBContext
+    with DBContext(database) as database_access_object:
+        database_access_object.add(...)
+        database_access_object.remove(...)
+        ...
+
 """
 
 import os
