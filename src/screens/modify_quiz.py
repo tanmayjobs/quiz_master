@@ -51,7 +51,6 @@ class ModifyQuizScreen:
 
         for option_no in range(Numbers.ONE, Numbers.FIVE):
             option_text = Validators.get_valid_strings(InputTexts.OPTION.format(option_no))
-
             option = Option(option_text, False)
             options.append(option)
 

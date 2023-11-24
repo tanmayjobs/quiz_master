@@ -14,7 +14,8 @@ class AuthenticationScreen:
     @staticmethod
     def sign_in():
         print()
-        username, password = Validators.get_username(), Validators.get_password()
+        username = Validators.get_username()
+        password = Validators.get_password()
 
         user = AuthHandler(username, password).sign_in()
         if user:
@@ -29,7 +30,8 @@ class AuthenticationScreen:
     @staticmethod
     def sign_up():
         print()
-        username, password = Validators.get_username(), Validators.get_password()
+        username = Validators.get_username()
+        password = Validators.get_password()
 
         is_user_added = AuthHandler(username, password).sign_up()
         if is_user_added:
@@ -40,7 +42,6 @@ class AuthenticationScreen:
     @staticmethod
     @menu_loop
     def menu_screen():
-        Logger.log(INFO, __name__)
         print()
         user_choice = input(ScreenTexts.AUTHENTICATION)
 

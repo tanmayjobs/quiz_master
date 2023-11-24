@@ -17,7 +17,8 @@ class AdminScreen:
     def add_creator_screen(self):
         print()
         print(Messages.CREATOR_INFO)
-        username, password = Validators.get_username(), Validators.get_password()
+        username = Validators.get_username()
+        password = Validators.get_password()
 
         is_user_added = UserHandler(self.user).add_user(username, password)
         if is_user_added:

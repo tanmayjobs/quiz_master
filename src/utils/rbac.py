@@ -5,7 +5,6 @@ from data_containers.user import UserRole, User
 def accessed_by(*roles: tuple[UserRole]):
     """
     accessed_by is used as a decorator to apply rbac on any methods.
-
     :param roles: requires the User Roles which can access any function.
     :return: returns the secured function.
 
@@ -35,12 +34,15 @@ def accessed_by(*roles: tuple[UserRole]):
             :param kwargs: Again you know.
             :return: Returns the decorated secured function.
             """
+
+            # TODO: Here rather than taking the user object it will be better to use user_id and check the role in db
+            # TODO: Here rather than raising error we will send suitable response
+
             if not isinstance(self.user, User):
-                # TODO: Here rather than raising error we will send response with performer not send
                 raise ValueError(Errors.PERFORMER_REQUIRED)
             if self.user.role not in roles:
-                # TODO: Here rather than raising error we will send response with permission error
                 raise PermissionError(Errors.PERMISSION)
+
             return func(self, *args, **kwargs)
         return secured_function
     return wrapper

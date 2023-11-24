@@ -22,6 +22,9 @@ class QuizHandler:
 
     @accessed_by(UserRole.CREATOR)
     def add_quiz(self):
+        if not self.quiz:
+            raise ValueError
+
         with DBContext(database) as dao:
             quiz_id = dao.add(SQLQueries.ADD_QUIZ,
                                    (self.user.user_id, self.quiz.quiz_name))
@@ -42,7 +45,6 @@ class QuizHandler:
             return None
 
         quiz = Quiz.parse_json(quiz_data)
-
         return quiz
 
     @accessed_by(UserRole.CREATOR)
