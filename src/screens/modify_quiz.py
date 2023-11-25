@@ -2,8 +2,8 @@ from handler.questions import QuestionHandler
 from data_containers.question import Option, Question
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts, Numbers
 from screens.common import CommonScreens
+from utils.inputs import get_string, get_correct_option
 from utils.menu_loop import menu_loop
-from utils.validators import Validators
 
 
 class ModifyQuizScreen:
@@ -46,15 +46,15 @@ class ModifyQuizScreen:
 
     def _add_question_screen(self):
         print()
-        question_text = Validators.get_valid_strings(InputTexts.QUESTION)
+        question_text = get_string(InputTexts.QUESTION)
         options = []
 
         for option_no in range(Numbers.ONE, Numbers.FIVE):
-            option_text = Validators.get_valid_strings(InputTexts.OPTION.format(option_no))
+            option_text = get_string(InputTexts.OPTION.format(option_no))
             option = Option(option_text, False)
             options.append(option)
 
-        correct_option = Validators.get_correct_option()
+        correct_option = get_correct_option()
         options[correct_option].is_correct = True
 
         question = Question(Numbers.ZERO, question_text, options)
