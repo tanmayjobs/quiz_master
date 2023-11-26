@@ -6,6 +6,9 @@ from utils.menu_loop import menu_loop
 
 class CreatorScreen(PlayerScreen):
 
+    def _manage_quiz_screen(self):
+        return ManageQuizScreen(self.user).manage_quizzes_screen()
+
     @menu_loop
     def home_screen(self):
         print()
@@ -26,7 +29,7 @@ class CreatorScreen(PlayerScreen):
                     self._show_player_records_screen()
 
                 case 4:
-                    ManageQuizScreen(self.user).manage_quizzes_screen()
+                    self._manage_quiz_screen()
 
                 case 5:
                     return True

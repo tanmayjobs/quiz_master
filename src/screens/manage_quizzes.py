@@ -12,6 +12,38 @@ class ManageQuizScreen:
     def __init__(self, user):
         self.user = user
 
+    def _remove_quiz_screen(self):
+        quiz_to_remove = self._select_quiz_screen()
+        if not quiz_to_remove:
+            return
+
+        QuizHandler(self.user, quiz_to_remove).remove_quiz()
+        print()
+        print(OutputTexts.QUIZ_REMOVED)
+
+    def _add_quiz_screen(self):
+        print()
+        quiz_name = get_string(InputTexts.QUIZ_NAME)
+        quiz_types = None
+
+        while not quiz_types:
+            quiz_types = self._select_quiz_type()
+
+        quiz = Quiz(quiz_id=None,
+                    quiz_name=quiz_name,
+                    creator_id=self.user.user_id,
+                    creator_name=self.user.username,
+                    types=quiz_types)
+
+        QuizHandler(self.user, quiz).add_quiz()
+
+        print()
+        print(OutputTexts.QUIZ_ADDED)
+
+
+    def _modify_quiz_screen(self, selected_quiz):
+        return ModifyQuizScreen(self.user, selected_quiz).modify_quiz_screen()
+
     @menu_loop
     def manage_quizzes_screen(self):
         print()
@@ -23,12 +55,11 @@ class ManageQuizScreen:
                 case 1:
                     self._add_quiz_screen()
                 case 2:
-                    self.remove_quiz_screen()
+                    self._remove_quiz_screen()
                 case 3:
                     selected_quiz = self._select_quiz_screen()
                     if selected_quiz:
-                        ModifyQuizScreen(self.user,
-                                         selected_quiz).modify_quiz_screen()
+                        self._modify_quiz_screen(selected_quiz)
                 case 4:
                     return True
                 case other:
@@ -64,31 +95,3 @@ class ManageQuizScreen:
             print()
             return None
         return selected_types
-
-    def remove_quiz_screen(self):
-        quiz_to_remove = self._select_quiz_screen()
-        if not quiz_to_remove:
-            return
-
-        QuizHandler(self.user, quiz_to_remove).remove_quiz()
-        print()
-        print(OutputTexts.QUIZ_REMOVED)
-
-    def _add_quiz_screen(self):
-        print()
-        quiz_name = get_string(InputTexts.QUIZ_NAME)
-        quiz_types = None
-
-        while not quiz_types:
-            quiz_types = self._select_quiz_type()
-
-        quiz = Quiz(quiz_id=None,
-                    quiz_name=quiz_name,
-                    creator_id=self.user.user_id,
-                    creator_name=self.user.username,
-                    types=quiz_types)
-
-        QuizHandler(self.user, quiz).add_quiz()
-
-        print()
-        print(OutputTexts.QUIZ_ADDED)

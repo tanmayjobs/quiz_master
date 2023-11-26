@@ -11,7 +11,7 @@ class AdminScreen:
     def __init__(self, user):
         self.user = user
 
-    def add_creator_screen(self):
+    def _add_creator_screen(self):
         print()
         print(Messages.CREATOR_INFO)
         username = get_username()
@@ -23,7 +23,7 @@ class AdminScreen:
         else:
             print(Errors.USERNAME_ALREADY_EXISTS)
 
-    def remove_user_screen(self):
+    def _remove_user_screen(self):
         print()
         user_handler = UserHandler(self.user)
         all_users = user_handler.get_all_users()
@@ -42,7 +42,7 @@ class AdminScreen:
         user_handler.remove_user(user_for_removal.user_id)
         print(OutputTexts.USER_REMOVED)
 
-    def remove_quiz_screen(self):
+    def _remove_quiz_screen(self):
         all_quizzes = QuizHandler(self.user).get_all_quizzes()
         CommonScreens.show_quizzes(all_quizzes)
         quiz_to_remove = CommonScreens.select_from_list(
@@ -64,11 +64,11 @@ class AdminScreen:
             user_choice = int(user_choice)
             match user_choice:
                 case 1:
-                    self.add_creator_screen()
+                    self._add_creator_screen()
                 case 2:
-                    self.remove_user_screen()
+                    self._remove_user_screen()
                 case 3:
-                    self.remove_quiz_screen()
+                    self._remove_quiz_screen()
                 case 4:
                     return True
                 case other:

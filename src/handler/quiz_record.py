@@ -15,13 +15,13 @@ class QuizRecordHandler:
         with DBContext(database) as dao:
             dao.write(SQLQueries.ADD_QUIZ_SCORE,
                       (quiz_record.player_id, quiz_record.quiz_id,
-                      quiz_record.player_score, quiz_record.total_score))
+                       quiz_record.player_score, quiz_record.total_score))
 
     @staticmethod
     def get_user_records(user):
         with DBContext(database) as dao:
             player_scores_data = dao.read(SQLQueries.GET_PLAYER_SCORES,
-                                          (user.user_id, ))
+                                          (user.user_id,))
         player_scores = [
             QuizRecord(*score_data) for score_data in player_scores_data
         ]

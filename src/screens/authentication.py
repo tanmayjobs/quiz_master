@@ -12,7 +12,7 @@ from utils.menu_loop import menu_loop
 class AuthenticationScreen:
 
     @staticmethod
-    def sign_in():
+    def _sign_in():
         print()
         username = get_username()
         password = get_password()
@@ -28,7 +28,7 @@ class AuthenticationScreen:
             print(Errors.INVALID_CREDENTIALS)
 
     @staticmethod
-    def sign_up():
+    def _sign_up():
         print()
         username = get_username()
         password = get_password()
@@ -48,9 +48,9 @@ class AuthenticationScreen:
             user_choice = int(user_choice)
             match user_choice:
                 case 1:
-                    AuthenticationScreen.sign_in()
+                    AuthenticationScreen._sign_in()
                 case 2:
-                    AuthenticationScreen.sign_up()
+                    AuthenticationScreen._sign_up()
                 case 3:
                     print("\nBye!")
                     sys.exit(0)
