@@ -2,6 +2,8 @@ import sqlite3
 
 import pytest
 from unittest.mock import MagicMock, patch
+
+from data_containers.last_transaction import LastTransaction
 from data_containers.user import User
 from database import DBContext
 from helpers.enums import UserRole
@@ -24,7 +26,9 @@ def get_mock_db_context_positive(mock_db_context, username="batman", password="B
         0, username,
         hash_password(password),
         UserRole.PLAYER)
-    mock_db_context_positive.write.return_value = True
+    mock_last_transaction = MagicMock(spec=LastTransaction)
+    mock_last_transaction.rows_changed = 1
+    mock_db_context_positive.write.return_value = mock_last_transaction
     return mock_db_context_positive
 
 
@@ -32,7 +36,9 @@ def get_mock_db_context_positive(mock_db_context, username="batman", password="B
 def mock_db_context_negative(mock_db_context):
     mock_db_context_negative = mock_db_context
     mock_db_context_negative.read.return_value = ()
-    mock_db_context_negative.write.return_value = False
+    mock_last_transaction = MagicMock(spec=LastTransaction)
+    mock_last_transaction.rows_changed = 0
+    mock_db_context_negative.write.return_value = mock_last_transaction
     return mock_db_context_negative
 
 

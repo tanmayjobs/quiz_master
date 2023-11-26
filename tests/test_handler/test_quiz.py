@@ -4,6 +4,7 @@ from unittest.mock import Mock, MagicMock, patch
 import pytest
 from pytest import raises
 
+from data_containers.last_transaction import LastTransaction
 from data_containers.quiz import Quiz
 from data_containers.user import User
 from database import DBContext
@@ -44,6 +45,10 @@ def test_add_quiz_negative(mock_user):
 
 def test_add_quiz_positive(mock_user, mock_quiz, mock_db_context):
     with patch("src.handler.quiz.DBContext", mock_db_context):
+        mock_last_transaction = MagicMock(spec=LastTransaction)
+        mock_last_transaction.rows_changed = 1
+        mock_last_transaction.last_id = 1
+        mock_db_context.write.return_value = mock_last_transaction
         QuizHandler(mock_user, mock_quiz).add_quiz()
 
 

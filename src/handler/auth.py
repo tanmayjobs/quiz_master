@@ -41,7 +41,7 @@ class AuthHandler:
             with DBContext(database) as dao:
                 is_user_added = dao.write(
                     SQLQueries.ADD_USER,
-                    (self.username, password_hash, UserRole.PLAYER))
+                    (self.username, password_hash, UserRole.PLAYER)).rows_changed > 0
         except IntegrityError:
             is_user_added = False
 
