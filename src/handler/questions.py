@@ -1,7 +1,7 @@
-from helpers.constants import SQLQueries
 from data_containers.question import Question
 from data_containers.user import UserRole
 from database import database, DBContext
+from helpers.constants import SQLQueries
 from utils.rbac import accessed_by
 
 
@@ -31,7 +31,7 @@ class QuestionHandler:
     def get_quiz_questions(self):
         with DBContext(database) as dao:
             questions_data = dao.read(SQLQueries.GET_QUIZ_QUESTIONS,
-                                      (self.quiz_id, ))
+                                      (self.quiz_id,))
         questions = [
             Question.parse_json(question_data)
             for question_data in questions_data

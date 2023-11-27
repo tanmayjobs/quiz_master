@@ -10,19 +10,19 @@ from database import DBContext
 from helpers.enums import UserRole
 from src.handler.questions import QuestionHandler
 
-
 questions_data = [
-            (
-                1,
-                'who is the batman?',
-                '{"option":"bruce wayne","is_correct":1},{"option":"alfred","is_correct":0},{"option":"joker","is_correct":0},{"option":"edward nigma","is_correct":0}'
-             ),
-            (
-                2,
-                'who killed the batman?',
-                '{"option":"the riddler","is_correct":0},{"option":"joker","is_correct":0},{"option":"batman who laughs","is_correct":1},{"option":"obito","is_correct":0}'
-            )
-        ]
+    (
+        1,
+        'who is the batman?',
+        '{"option":"bruce wayne","is_correct":1},{"option":"alfred","is_correct":0},{"option":"joker","is_correct":0},{"option":"edward nigma","is_correct":0}'
+    ),
+    (
+        2,
+        'who killed the batman?',
+        '{"option":"the riddler","is_correct":0},{"option":"joker","is_correct":0},{"option":"batman who laughs","is_correct":1},{"option":"obito","is_correct":0}'
+    )
+]
+
 
 @pytest.fixture()
 def mock_db_context():

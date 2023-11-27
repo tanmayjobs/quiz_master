@@ -1,5 +1,6 @@
-import src.utils.validators as Validators
 import pytest
+
+import src.utils.validators as Validators
 
 
 @pytest.mark.parametrize("username", ["", "1", "111", "??121", "batman?123", "2pac"])

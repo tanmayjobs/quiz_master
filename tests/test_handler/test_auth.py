@@ -1,7 +1,7 @@
 import sqlite3
+from unittest.mock import MagicMock, patch
 
 import pytest
-from unittest.mock import MagicMock, patch
 
 from data_containers.last_transaction import LastTransaction
 from data_containers.user import User
@@ -64,8 +64,9 @@ def test_sign_in_positive(username, password, mock_db_context):
         assert isinstance(user, User)
 
 
-@pytest.mark.parametrize("username, password", [("", "Batman@123"), ("batman", ""), ("batman1", "batman@123"), ("batman", "batman@123")])
-def test_sign_in_negative(username, password,mock_db_context_negative):
+@pytest.mark.parametrize("username, password",
+                         [("", "Batman@123"), ("batman", ""), ("batman1", "batman@123"), ("batman", "batman@123")])
+def test_sign_in_negative(username, password, mock_db_context_negative):
     with patch('src.handler.auth.DBContext', mock_db_context_negative):
         auth_handler = AuthHandler(username, password)
         user = auth_handler.sign_in()

@@ -1,8 +1,8 @@
 import pwinput
 
+import utils.validators as Validators
 from helpers.constants import InputTexts, Errors
 from utils.until_not_valid import until_not_valid
-import utils.validators as Validators
 
 
 @until_not_valid
@@ -12,6 +12,7 @@ def get_username():
         print(Errors.INVALID_INPUT)
 
     return username
+
 
 @until_not_valid
 def get_password():

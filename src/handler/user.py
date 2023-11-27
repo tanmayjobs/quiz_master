@@ -1,9 +1,8 @@
-from helpers.constants import SQLQueries
-from database import database, DBContext
-from utils.crypt import hash_password
-
-from utils.rbac import accessed_by
 from data_containers.user import *
+from database import database, DBContext
+from helpers.constants import SQLQueries
+from utils.crypt import hash_password
+from utils.rbac import accessed_by
 
 
 class UserHandler:
@@ -20,7 +19,6 @@ class UserHandler:
                  username,
                  password,
                  role: UserRole = UserRole.CREATOR) -> bool:
-
         password_hash = hash_password(password)
         with DBContext(database) as dao:
             is_user_added = dao.write(SQLQueries.ADD_USER,

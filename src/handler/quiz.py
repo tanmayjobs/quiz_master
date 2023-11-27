@@ -1,8 +1,8 @@
-from helpers.constants import Strings, SQLQueries
 from data_containers.quiz import Quiz
 from data_containers.types import QuizType
 from data_containers.user import UserRole
 from database import database, DBContext
+from helpers.constants import Strings, SQLQueries
 from utils.rbac import accessed_by
 
 
@@ -51,7 +51,7 @@ class QuizHandler:
     def get_user_quizzes(self):
         with DBContext(database) as dao:
             all_quizzes_data = dao.read(SQLQueries.GET_USER_QUIZZES,
-                                        (self.user.user_id, ))
+                                        (self.user.user_id,))
         all_quizzes = [
             Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
         ]

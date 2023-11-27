@@ -2,7 +2,7 @@ from handler.quiz import QuizHandler
 from handler.quiz_record import QuizRecordHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
 from screens.common import CommonScreens
-from screens.quiz import QuizScreen
+from screens.quiz_screen import QuizScreen
 from utils.menu_loop import menu_loop
 
 

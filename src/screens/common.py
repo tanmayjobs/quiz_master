@@ -1,7 +1,7 @@
-from helpers.constants import OutputTexts, InputTexts, Strings
 from data_containers.question import Question
 from data_containers.quiz_record import QuizRecord
 from data_containers.user import UserRole
+from helpers.constants import OutputTexts, InputTexts, Strings
 
 
 class CommonScreens:

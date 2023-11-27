@@ -1,7 +1,8 @@
-import pytest
-
 from unittest.mock import patch
+
+import pytest
 from pytest import raises
+
 from screens.authentication import AuthenticationScreen
 
 

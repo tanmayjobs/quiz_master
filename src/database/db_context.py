@@ -7,6 +7,7 @@ class DBContext:
     To perform any operation on the database a context manager is required.
     The context manager provides the CRUD operations for the database, check __init__.py of database package for more.
     """
+
     def __init__(self, database: Database):
         self.database = database
 

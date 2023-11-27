@@ -1,5 +1,5 @@
-from handler.questions import QuestionHandler
 from data_containers.question import Option, Question
+from handler.questions import QuestionHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts, Numbers
 from screens.common import CommonScreens
 from utils.inputs import get_string, get_correct_option

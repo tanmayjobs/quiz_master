@@ -1,5 +1,5 @@
-from handler.quiz import QuizHandler
 from data_containers.quiz import Quiz
+from handler.quiz import QuizHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
 from screens.common import CommonScreens
 from screens.modify_quiz import ModifyQuizScreen
@@ -40,9 +40,10 @@ class ManageQuizScreen:
         print()
         print(OutputTexts.QUIZ_ADDED)
 
-
-    def _modify_quiz_screen(self, selected_quiz):
-        return ModifyQuizScreen(self.user, selected_quiz).modify_quiz_screen()
+    def _modify_quiz_screen(self):
+        selected_quiz = self._select_quiz_screen()
+        if selected_quiz:
+            return ModifyQuizScreen(self.user, selected_quiz).modify_quiz_screen()
 
     @menu_loop
     def manage_quizzes_screen(self):
@@ -57,9 +58,7 @@ class ManageQuizScreen:
                 case 2:
                     self._remove_quiz_screen()
                 case 3:
-                    selected_quiz = self._select_quiz_screen()
-                    if selected_quiz:
-                        self._modify_quiz_screen(selected_quiz)
+                    self._modify_quiz_screen()
                 case 4:
                     return True
                 case other:

@@ -1,6 +1,6 @@
-from helpers.constants import SQLQueries
 from data_containers.quiz_record import QuizRecord
 from database import database, DBContext
+from helpers.constants import SQLQueries
 
 
 class QuizRecordHandler:

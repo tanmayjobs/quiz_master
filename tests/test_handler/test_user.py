@@ -6,8 +6,8 @@ import pytest
 from data_containers.last_transaction import LastTransaction
 from data_containers.user import User
 from database import DBContext
-from src.handler.user import UserHandler
 from helpers.enums import UserRole
+from src.handler.user import UserHandler
 
 
 @pytest.fixture()

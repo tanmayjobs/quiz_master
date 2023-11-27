@@ -1,7 +1,7 @@
-from handler.questions import QuestionHandler
-from handler.quiz_record import QuizRecordHandler
 from data_containers.question import Option
 from data_containers.quiz_record import QuizRecord
+from handler.questions import QuestionHandler
+from handler.quiz_record import QuizRecordHandler
 from helpers.constants import Messages, OutputTexts, Strings, Numbers
 
 
@@ -68,7 +68,7 @@ class QuizScreen:
         print(
             OutputTexts.QUIZ_RESULT.format(
                 result=(quiz_record.player_score / quiz_record.total_score) *
-                100,
+                       100,
                 quiz_name=quiz_record.quiz_name))
         print()
 

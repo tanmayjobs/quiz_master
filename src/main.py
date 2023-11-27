@@ -7,8 +7,8 @@ To run the program:
 """
 
 from helpers.constants import LogText, Errors
-from screens.authentication import AuthenticationScreen
 from helpers.log.logger import Logger, INFO, ERROR
+from screens.authentication import AuthenticationScreen
 
 
 def main():

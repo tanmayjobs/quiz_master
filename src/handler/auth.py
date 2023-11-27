@@ -1,8 +1,8 @@
 from sqlite3 import IntegrityError
 
-from helpers.constants import SQLQueries
 from data_containers.user import *
 from database import database, DBContext
+from helpers.constants import SQLQueries
 from utils.crypt import check_password, hash_password
 
 

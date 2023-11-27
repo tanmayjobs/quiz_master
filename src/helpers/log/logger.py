@@ -1,7 +1,7 @@
 import logging
-from logging import INFO, DEBUG, WARN, CRITICAL, ERROR
 
 from helpers.constants import Config
+from logging import INFO, DEBUG, WARN, ERROR
 
 logging.basicConfig(
     level=logging.NOTSET,
