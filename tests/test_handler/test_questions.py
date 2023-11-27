@@ -5,22 +5,21 @@ import pytest
 
 from data_containers.last_transaction import LastTransaction
 from data_containers.question import Question
-from data_containers.user import User
+from data_containers.user import User, UserRole
 from database import DBContext
-from helpers.enums import UserRole
 from src.handler.questions import QuestionHandler
 
 questions_data = [
     (
         1,
-        'who is the batman?',
-        '{"option":"bruce wayne","is_correct":1},{"option":"alfred","is_correct":0},{"option":"joker","is_correct":0},{"option":"edward nigma","is_correct":0}'
+        "who is the batman?",
+        '{"option":"bruce wayne","is_correct":1},{"option":"alfred","is_correct":0},{"option":"joker","is_correct":0},{"option":"edward nigma","is_correct":0}',
     ),
     (
         2,
-        'who killed the batman?',
-        '{"option":"the riddler","is_correct":0},{"option":"joker","is_correct":0},{"option":"batman who laughs","is_correct":1},{"option":"obito","is_correct":0}'
-    )
+        "who killed the batman?",
+        '{"option":"the riddler","is_correct":0},{"option":"joker","is_correct":0},{"option":"batman who laughs","is_correct":1},{"option":"obito","is_correct":0}',
+    ),
 ]
 
 
@@ -62,8 +61,7 @@ def test_get_quiz_question(mock_db_context):
     with patch("src.handler.questions.DBContext", mock_db_context):
         mock_db_context.read.return_value = questions_data
         expected = [
-            Question.parse_json(question_data)
-            for question_data in questions_data
+            Question.parse_json(question_data) for question_data in questions_data
         ]
         assert expected == QuestionHandler(1).get_quiz_questions()
 

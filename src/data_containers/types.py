@@ -10,7 +10,6 @@ class QuizType:
 
     @staticmethod
     def parse_json(json_data):
-        quiz_type = QuizType(json_data[Strings.TYPE_ID],
-                             json_data[Strings.TYPE_NAME])
+        quiz_type = QuizType(json_data[Strings.TYPE_ID], json_data[Strings.TYPE_NAME])
 
         return quiz_type

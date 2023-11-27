@@ -4,9 +4,8 @@ from unittest.mock import MagicMock, Mock, patch
 import pytest
 
 from data_containers.last_transaction import LastTransaction
-from data_containers.user import User
+from data_containers.user import User, UserRole
 from database import DBContext
-from helpers.enums import UserRole
 from src.handler.user import UserHandler
 
 
@@ -43,7 +42,9 @@ def test_add_user_positive(mock_user, mock_db_context):
         assert UserHandler(mock_user).add_user("", "")
 
 
-@pytest.mark.parametrize("all_users", [[], [(1, "username", "hashed_password", UserRole.PLAYER)]])
+@pytest.mark.parametrize(
+    "all_users", [[], [(1, "username", "hashed_password", UserRole.PLAYER)]]
+)
 def test_get_all_users(all_users, mock_user, mock_db_context):
     with patch("src.handler.user.DBContext", mock_db_context):
         mock_db_context.read.return_value = all_users

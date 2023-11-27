@@ -26,15 +26,19 @@ class QuizHandler:
             raise ValueError
 
         with DBContext(database) as dao:
-            quiz_id = dao.write(SQLQueries.ADD_QUIZ,
-                                (self.user.user_id, self.quiz.quiz_name))
+            quiz_id = dao.write(
+                SQLQueries.ADD_QUIZ, (self.user.user_id, self.quiz.quiz_name)
+            )
             quiz_id = quiz_id.last_id
 
             for quiz_type in self.quiz.types:
-                dao.write(SQLQueries.ADD_QUIZ_TYPE, (
-                    quiz_id,
-                    quiz_type.type_id,
-                ))
+                dao.write(
+                    SQLQueries.ADD_QUIZ_TYPE,
+                    (
+                        quiz_id,
+                        quiz_type.type_id,
+                    ),
+                )
 
     @staticmethod
     def get_random_quiz():
@@ -50,11 +54,10 @@ class QuizHandler:
     @accessed_by(UserRole.CREATOR)
     def get_user_quizzes(self):
         with DBContext(database) as dao:
-            all_quizzes_data = dao.read(SQLQueries.GET_USER_QUIZZES,
-                                        (self.user.user_id,))
-        all_quizzes = [
-            Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
-        ]
+            all_quizzes_data = dao.read(
+                SQLQueries.GET_USER_QUIZZES, (self.user.user_id,)
+            )
+        all_quizzes = [Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data]
 
         return all_quizzes
 
@@ -62,23 +65,22 @@ class QuizHandler:
     def get_all_quizzes(self):
         with DBContext(database) as dao:
             all_quizzes_data = dao.read(SQLQueries.GET_ALL_QUIZZES)
-        all_quizzes = [
-            Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
-        ]
+        all_quizzes = [Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data]
 
         return all_quizzes
 
     @staticmethod
     def filter_all_quizzes(search_key):
         with DBContext(database) as dao:
-            all_quizzes_data = dao.read(SQLQueries.FILTER_ALL_QUIZZES, (
-                Strings.FILTER.format(search_key=search_key),
-                Strings.FILTER.format(search_key=search_key),
-            ))
+            all_quizzes_data = dao.read(
+                SQLQueries.FILTER_ALL_QUIZZES,
+                (
+                    Strings.FILTER.format(search_key=search_key),
+                    Strings.FILTER.format(search_key=search_key),
+                ),
+            )
 
-        all_quizzes = [
-            Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data
-        ]
+        all_quizzes = [Quiz.parse_json(quiz_data) for quiz_data in all_quizzes_data]
 
         return all_quizzes
 

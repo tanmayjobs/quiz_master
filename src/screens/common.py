@@ -5,7 +5,6 @@ from helpers.constants import OutputTexts, InputTexts, Strings
 
 
 class CommonScreens:
-
     @staticmethod
     def select_multiple_from_list(items):
         indexes = input(InputTexts.TYPE_IDS).split(",")
@@ -42,60 +41,65 @@ class CommonScreens:
                 quiz_id=Strings.ID,
                 quiz_name=Strings.QUIZ,
                 quiz_types=Strings.TYPE,
-            ))
+            )
+        )
 
         for index, quiz in enumerate(quizzes, start=1):
             print(
                 OutputTexts.QUIZ_INFO.format(
                     quiz_id=str(index),
                     quiz_name=quiz.quiz_name,
-                    quiz_types=','.join(quiz_type.type_name
-                                        for quiz_type in quiz.types),
-                ))
+                    quiz_types=",".join(
+                        quiz_type.type_name for quiz_type in quiz.types
+                    ),
+                )
+            )
 
     @staticmethod
     def show_all_types(all_types):
-        print(
-            OutputTexts.TYPE_INFO.format(type_id=Strings.ID,
-                                         type_name=Strings.TYPE))
+        print(OutputTexts.TYPE_INFO.format(type_id=Strings.ID, type_name=Strings.TYPE))
 
         for index, each_type in enumerate(all_types, start=1):
             print(
-                OutputTexts.TYPE_INFO.format(type_id=str(index),
-                                             type_name=each_type.type_name))
+                OutputTexts.TYPE_INFO.format(
+                    type_id=str(index), type_name=each_type.type_name
+                )
+            )
 
     @staticmethod
     def show_questions(questions):
         info_message = OutputTexts.QUESTION_INFO
 
         print(
-            info_message.format(question_id=Strings.ID,
-                                question_text=Strings.QUESTION))
+            info_message.format(question_id=Strings.ID, question_text=Strings.QUESTION)
+        )
         for index, question in enumerate(questions, start=1):
             print(
                 OutputTexts.QUESTION_INFO.format(
-                    question_id=str(index),
-                    question_text=question.question_text))
+                    question_id=str(index), question_text=question.question_text
+                )
+            )
 
     @staticmethod
     def show_users(users):
         print(
-            OutputTexts.USER_INFO.format(user_id=Strings.ID,
-                                         username=Strings.USERNAME,
-                                         user_role=Strings.ROLE))
+            OutputTexts.USER_INFO.format(
+                user_id=Strings.ID, username=Strings.USERNAME, user_role=Strings.ROLE
+            )
+        )
 
         for index, user in enumerate(users, start=1):
             print(
-                OutputTexts.USER_INFO.format(user_id=str(index),
-                                             username=user.username,
-                                             user_role=UserRole.to_string(
-                                                 user.role)))
+                OutputTexts.USER_INFO.format(
+                    user_id=str(index),
+                    username=user.username,
+                    user_role=UserRole.to_string(user.role),
+                )
+            )
 
     @staticmethod
     def show_questions_all_info(index, question: Question):
-        correct_option = [
-            option for option in question.options if option.is_correct
-        ]
+        correct_option = [option for option in question.options if option.is_correct]
         correct_option = correct_option[0]
 
         print(
@@ -106,7 +110,9 @@ class CommonScreens:
                 option_2=question.options[1].option_text,
                 option_3=question.options[2].option_text,
                 option_4=question.options[3].option_text,
-                correct_option=correct_option.option_text))
+                correct_option=correct_option.option_text,
+            )
+        )
 
     @staticmethod
     def show_records(records: list[QuizRecord]):
@@ -117,7 +123,8 @@ class CommonScreens:
                 player_name=Strings.PLAYER,
                 result=Strings.RESULT,
                 played_at=Strings.PLAYED_AT,
-            ))
+            )
+        )
         for index, record in enumerate(records, start=1):
             result = (record.player_score / record.total_score) * 100
             print(
@@ -126,4 +133,6 @@ class CommonScreens:
                     quiz_name=record.quiz_name,
                     player_name=record.player_name,
                     result=Strings.RESULT_PERCENTAGE.format(result),
-                    played_at=record.played_at))
+                    played_at=record.played_at,
+                )
+            )

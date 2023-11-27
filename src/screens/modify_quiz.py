@@ -7,7 +7,6 @@ from utils.menu_loop import menu_loop
 
 
 class ModifyQuizScreen:
-
     def __init__(self, user, quiz):
         self.user = user
         self.quiz = quiz
@@ -70,12 +69,14 @@ class ModifyQuizScreen:
 
         CommonScreens.show_questions(all_questions)
         selected_question = CommonScreens.select_from_list(
-            all_questions, InputTexts.QUESTION_ID)
+            all_questions, InputTexts.QUESTION_ID
+        )
         if not selected_question:
             print(OutputTexts.INVALID_CHOICE)
             return
 
         QuestionHandler(self.quiz.quiz_id, self.user).remove_question(
-            selected_question.question_id)
+            selected_question.question_id
+        )
         print()
         print(OutputTexts.QUESTION_REMOVED)

@@ -403,3 +403,5 @@ log_text:
   system_exit: "System Exit..."
   system_error: "System had an unexpected error...\n{}"
   invalid_credentials: "Invalid credentials tried by user {}"
+  reading_data: "reading data from database {} and {}"
+  writing_data: "reading data from database {} and {}"

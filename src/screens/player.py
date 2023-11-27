@@ -7,7 +7,6 @@ from utils.menu_loop import menu_loop
 
 
 class PlayerScreen:
-
     def __init__(self, user):
         self.user = user
 
@@ -32,8 +31,7 @@ class PlayerScreen:
             return
 
         CommonScreens.show_quizzes(all_quizzes)
-        selected_quiz = CommonScreens.select_from_list(all_quizzes,
-                                                       InputTexts.QUIZ_ID)
+        selected_quiz = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
         if not selected_quiz:
             print(OutputTexts.INVALID_CHOICE)
             return

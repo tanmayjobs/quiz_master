@@ -13,7 +13,6 @@ logging.basicConfig(
 
 
 class Logger:
-
     @staticmethod
     def log(lvl: int, msg: str, specific_name="server"):
         spc_logger = logging.getLogger(specific_name)

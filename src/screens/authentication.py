@@ -10,7 +10,6 @@ from utils.menu_loop import menu_loop
 
 
 class AuthenticationScreen:
-
     @staticmethod
     def _sign_in():
         print()

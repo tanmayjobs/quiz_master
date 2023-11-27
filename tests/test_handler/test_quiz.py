@@ -6,9 +6,8 @@ from pytest import raises
 
 from data_containers.last_transaction import LastTransaction
 from data_containers.quiz import Quiz
-from data_containers.user import User
+from data_containers.user import User, UserRole
 from database import DBContext
-from helpers.enums import UserRole
 from src.handler.quiz import QuizHandler
 
 
@@ -62,14 +61,25 @@ def test_get_random_quiz_negative(mock_db_context):
 
 def test_get_random_quiz_positive(mock_db_context):
     with patch("src.handler.quiz.DBContext", mock_db_context):
-        quiz_data = (1, "Quiz Name", 1, "Creator Name", '{"type_id":1,"type_name":"Movie"}')
+        quiz_data = (
+            1,
+            "Quiz Name",
+            1,
+            "Creator Name",
+            '{"type_id":1,"type_name":"Movie"}',
+        )
         mock_db_context.read.return_value = quiz_data
         expected_value = Quiz.parse_json(quiz_data)
         assert expected_value == QuizHandler.get_random_quiz()
 
 
-@pytest.mark.parametrize("quizzes_data", [tuple(), ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,'
-                                                                                        '"type_name":"Movie"}'),)])
+@pytest.mark.parametrize(
+    "quizzes_data",
+    [
+        tuple(),
+        ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,' '"type_name":"Movie"}'),),
+    ],
+)
 def test_get_user_quizzes(quizzes_data, mock_user, mock_db_context):
     with patch("src.handler.quiz.DBContext", mock_db_context):
         mock_db_context.read.return_value = quizzes_data
@@ -77,8 +87,13 @@ def test_get_user_quizzes(quizzes_data, mock_user, mock_db_context):
         assert expected_value == QuizHandler(mock_user).get_user_quizzes()
 
 
-@pytest.mark.parametrize("quizzes_data", [tuple(), ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,'
-                                                                                        '"type_name":"Movie"}'),)])
+@pytest.mark.parametrize(
+    "quizzes_data",
+    [
+        tuple(),
+        ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,' '"type_name":"Movie"}'),),
+    ],
+)
 def test_get_all_quizzes(quizzes_data, mock_user, mock_db_context):
     mock_user.role = UserRole.ADMIN
     with patch("src.handler.quiz.DBContext", mock_db_context):
@@ -87,8 +102,13 @@ def test_get_all_quizzes(quizzes_data, mock_user, mock_db_context):
         assert expected_value == QuizHandler(mock_user).get_all_quizzes()
 
 
-@pytest.mark.parametrize("quizzes_data", [tuple(), ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,'
-                                                                                        '"type_name":"Movie"}'),)])
+@pytest.mark.parametrize(
+    "quizzes_data",
+    [
+        tuple(),
+        ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,' '"type_name":"Movie"}'),),
+    ],
+)
 def test_filter_all_quizzes(quizzes_data, mock_user, mock_db_context):
     mock_user.role = UserRole.ADMIN
     with patch("src.handler.quiz.DBContext", mock_db_context):

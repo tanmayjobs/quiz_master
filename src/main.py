@@ -15,7 +15,7 @@ def main():
     AuthenticationScreen.menu_screen()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Logger.log(INFO, LogText.SYSTEM_START)
     try:
         main()

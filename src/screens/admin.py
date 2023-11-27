@@ -1,13 +1,19 @@
 from handler.quiz import QuizHandler
 from handler.user import UserHandler
-from helpers.constants import ScreenTexts, OutputTexts, Messages, InputTexts, Errors, Strings
+from helpers.constants import (
+    ScreenTexts,
+    OutputTexts,
+    Messages,
+    InputTexts,
+    Errors,
+    Strings,
+)
 from screens.common import CommonScreens
 from utils.inputs import get_username, get_password
 from utils.menu_loop import menu_loop
 
 
 class AdminScreen:
-
     def __init__(self, user):
         self.user = user
 
@@ -33,8 +39,7 @@ class AdminScreen:
             return
 
         CommonScreens.show_users(all_users)
-        user_for_removal = CommonScreens.select_from_list(
-            all_users, InputTexts.USER_ID)
+        user_for_removal = CommonScreens.select_from_list(all_users, InputTexts.USER_ID)
 
         if not user_for_removal:
             print(OutputTexts.INVALID_CHOICE)
@@ -45,8 +50,7 @@ class AdminScreen:
     def _remove_quiz_screen(self):
         all_quizzes = QuizHandler(self.user).get_all_quizzes()
         CommonScreens.show_quizzes(all_quizzes)
-        quiz_to_remove = CommonScreens.select_from_list(
-            all_quizzes, InputTexts.QUIZ_ID)
+        quiz_to_remove = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
 
         if not quiz_to_remove:
             print(OutputTexts.INVALID_CHOICE)

@@ -28,6 +28,9 @@ def test_get_valid_string_negative(string, monkeypatch):
     assert not Validators.get_valid_strings(string)
 
 
-@pytest.mark.parametrize("string", ["So, how was your day", "Don't think this is the end?", "All of the Above."])
+@pytest.mark.parametrize(
+    "string",
+    ["So, how was your day", "Don't think this is the end?", "All of the Above."],
+)
 def test_get_valid_string_positive(string, monkeypatch):
     assert Validators.get_valid_strings(string)

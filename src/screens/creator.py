@@ -5,7 +5,6 @@ from utils.menu_loop import menu_loop
 
 
 class CreatorScreen(PlayerScreen):
-
     def _manage_quiz_screen(self):
         return ManageQuizScreen(self.user).manage_quizzes_screen()
 
@@ -15,10 +14,8 @@ class CreatorScreen(PlayerScreen):
         user_choice = input(ScreenTexts.CREATOR_HOME)
 
         if user_choice.isdigit():
-
             user_choice = int(user_choice)
             match user_choice:
-
                 case 1:
                     self._play_random_quiz()
 

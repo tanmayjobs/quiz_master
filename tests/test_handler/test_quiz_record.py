@@ -17,8 +17,16 @@ def mock_db_context():
     return mock_db_ctx
 
 
-@pytest.mark.parametrize("quiz_records", [tuple(), ((8, 'pain', 10, 'python', 0, 2, '2023-11-27 04:24:04'),
-                                                    (8, 'pain', 6, 'cyber security', 3, 3, '2023-11-22 09:44:13'),)])
+@pytest.mark.parametrize(
+    "quiz_records",
+    [
+        tuple(),
+        (
+            (8, "pain", 10, "python", 0, 2, "2023-11-27 04:24:04"),
+            (8, "pain", 6, "cyber security", 3, 3, "2023-11-22 09:44:13"),
+        ),
+    ],
+)
 def test_get_user_records(quiz_records, mock_db_context):
     with patch("src.handler.quiz_record.DBContext", mock_db_context):
         mock_user = MagicMock()
@@ -28,10 +36,18 @@ def test_get_user_records(quiz_records, mock_db_context):
             assert isinstance(each_record, QuizRecord)
 
 
-@pytest.mark.parametrize("quiz_records", [tuple(), ((4, 'riddler', 6, 'cyber security', 3, 3, '2023-11-23 07:52:13'),
-                                                    (8, 'pain', 6, 'cyber security', 3, 3, '2023-11-22 09:44:13'),
-                                                    (2, 'batman', 6, 'cyber security', 2, 3, '2023-11-20 06:47:40'),
-                                                    (11, 'bad_guy', 6, 'cyber security', 1, 3, '2023-11-20 06:43:15'))])
+@pytest.mark.parametrize(
+    "quiz_records",
+    [
+        tuple(),
+        (
+            (4, "riddler", 6, "cyber security", 3, 3, "2023-11-23 07:52:13"),
+            (8, "pain", 6, "cyber security", 3, 3, "2023-11-22 09:44:13"),
+            (2, "batman", 6, "cyber security", 2, 3, "2023-11-20 06:47:40"),
+            (11, "bad_guy", 6, "cyber security", 1, 3, "2023-11-20 06:43:15"),
+        ),
+    ],
+)
 def test_quiz_top_records(quiz_records, mock_db_context):
     with patch("src.handler.quiz_record.DBContext", mock_db_context):
         mock_db_context.read.return_value = quiz_records
