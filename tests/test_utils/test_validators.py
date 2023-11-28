@@ -22,11 +22,11 @@ class TestValidators:
 
     @pytest.mark.parametrize("string", ["", "??", "!!!@!"])
     def test_get_valid_string_negative(self, string, monkeypatch):
-        assert not Validators.get_valid_strings(string)
+        assert not Validators.get_valid_string(string)
 
     @pytest.mark.parametrize(
         "string",
         ["So, how was your day", "Don't think this is the end?", "All of the Above."],
     )
     def test_get_valid_string_positive(self, string, monkeypatch):
-        assert Validators.get_valid_strings(string)
+        assert Validators.get_valid_string(string)

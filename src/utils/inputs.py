@@ -25,11 +25,11 @@ def get_password():
 
 @until_not_valid
 def get_string(prompt):
-    string = Validators.get_valid_strings(input(prompt))
+    string = Validators.get_valid_string(input(prompt))
     if not string:
         print(Errors.INVALID_INPUT)
 
-    return None
+    return string
 
 
 @until_not_valid

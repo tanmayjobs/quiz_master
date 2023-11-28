@@ -20,7 +20,7 @@ def get_password(password):
     return password
 
 
-def get_valid_strings(string):
+def get_valid_string(string):
     if not re.match(RegexPatterns.ALPHA_NUM_Q2, string):
         return None
     return string
