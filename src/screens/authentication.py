@@ -1,9 +1,8 @@
 import sys
-from logging import WARN
 
 from handler.auth import AuthHandler
 from helpers.constants import ScreenTexts, OutputTexts, Errors, Messages, LogText
-from helpers.log.logger import Logger
+from helpers.log import logger
 from screens.home import home_screen
 from utils.inputs import get_username, get_password
 from utils.menu_loop import menu_loop
@@ -12,6 +11,7 @@ from utils.menu_loop import menu_loop
 class AuthenticationScreen:
     @staticmethod
     def _sign_in():
+        logger.info("Sign In Screen")
         print()
         username = get_username()
         password = get_password()
@@ -23,11 +23,12 @@ class AuthenticationScreen:
             print(Messages.GREET.format(username=user.username))
             home_screen(user)
         else:
-            Logger.log(WARN, LogText.INVALID_CREDENTIALS.format(username))
+            logger.info(LogText.INVALID_CREDENTIALS.format(username))
             print(Errors.INVALID_CREDENTIALS)
 
     @staticmethod
     def _sign_up():
+        logger.info("Sign Up Screen")
         print()
         username = get_username()
         password = get_password()
@@ -41,6 +42,7 @@ class AuthenticationScreen:
     @staticmethod
     @menu_loop
     def menu_screen():
+        logger.info("Authentication Screen")
         print()
         user_choice = input(ScreenTexts.AUTHENTICATION)
         if user_choice.isdigit():

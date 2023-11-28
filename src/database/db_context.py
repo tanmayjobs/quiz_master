@@ -1,7 +1,7 @@
 from data_containers.last_transaction import LastTransaction
 from database import Database
 from helpers.constants import LogText
-from helpers.log.logger import Logger, INFO
+from helpers.log import logger
 
 
 class DBContext:
@@ -22,13 +22,13 @@ class DBContext:
             self.database.connection.commit()
 
     def read(self, query, params=(), only_one=False):
-        Logger.log(INFO, LogText.READING_DATA.format(query, params))
+        logger.info(LogText.READING_DATA)
         data = self.cursor.execute(query, params)
         data = data.fetchone() if only_one else data.fetchall()
 
         return data
 
     def write(self, query, params=()):
-        Logger.log(INFO, LogText.WRITING_DATA.format(query, params))
+        logger.info(LogText.WRITING_DATA)
         self.cursor.execute(query, params)
         return LastTransaction.from_cursor(self.cursor)

@@ -1,6 +1,7 @@
 from data_containers.quiz import Quiz
 from handler.quiz import QuizHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
+from helpers.log import logger
 from screens.common import CommonScreens
 from screens.modify_quiz import ModifyQuizScreen
 from utils.inputs import get_string
@@ -12,6 +13,7 @@ class ManageQuizScreen:
         self.user = user
 
     def _remove_quiz_screen(self):
+        logger.info("Remove Quiz Screen")
         quiz_to_remove = self._select_quiz_screen()
         if not quiz_to_remove:
             return
@@ -21,6 +23,7 @@ class ManageQuizScreen:
         print(OutputTexts.QUIZ_REMOVED)
 
     def _add_quiz_screen(self):
+        logger.info("Add Quiz Screen")
         print()
         quiz_name = get_string(InputTexts.QUIZ_NAME)
         quiz_types = None
@@ -48,6 +51,7 @@ class ManageQuizScreen:
 
     @menu_loop
     def manage_quizzes_screen(self):
+        logger.info("Manage Quizzes Screen")
         print()
         user_choice = input(ScreenTexts.MANAGE_QUIZZES)
 

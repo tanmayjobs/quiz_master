@@ -1,7 +1,7 @@
 import logging
 
 from helpers.constants import Config
-from logging import INFO, DEBUG, WARN, ERROR
+
 
 logging.basicConfig(
     level=logging.NOTSET,
@@ -12,8 +12,4 @@ logging.basicConfig(
 )
 
 
-class Logger:
-    @staticmethod
-    def log(lvl: int, msg: str, specific_name="server"):
-        spc_logger = logging.getLogger(specific_name)
-        spc_logger.log(lvl, msg)
+logger = logging.getLogger()

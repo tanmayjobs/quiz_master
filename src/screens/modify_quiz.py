@@ -1,6 +1,7 @@
 from data_containers.question import Option, Question
 from handler.questions import QuestionHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts, Numbers
+from helpers.log import logger
 from screens.common import CommonScreens
 from utils.inputs import get_string, get_correct_option
 from utils.menu_loop import menu_loop
@@ -13,6 +14,7 @@ class ModifyQuizScreen:
 
     @menu_loop
     def modify_quiz_screen(self):
+        logger.info("Modify Quiz Screen")
         print()
         user_choice = input(ScreenTexts.MANAGE_QUIZ)
         if user_choice.isdigit():
@@ -33,6 +35,7 @@ class ModifyQuizScreen:
         return False
 
     def _list_all_questions_screen(self):
+        logger.info("List all Question Screen")
         print()
         all_questions = QuestionHandler(self.quiz.quiz_id).get_quiz_questions()
         if not all_questions:
@@ -44,6 +47,7 @@ class ModifyQuizScreen:
         print()
 
     def _add_question_screen(self):
+        logger.info("Add Question Screen")
         print()
         question_text = get_string(InputTexts.QUESTION)
         options = []
@@ -61,6 +65,7 @@ class ModifyQuizScreen:
         print(OutputTexts.QUESTION_ADDED)
 
     def _remove_question_screen(self):
+        logger.info("Remove Question Screen")
         print()
         all_questions = QuestionHandler(self.quiz.quiz_id).get_quiz_questions()
         if not all_questions:

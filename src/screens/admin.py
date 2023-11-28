@@ -8,6 +8,7 @@ from helpers.constants import (
     Errors,
     Strings,
 )
+from helpers.log import logger
 from screens.common import CommonScreens
 from utils.inputs import get_username, get_password
 from utils.menu_loop import menu_loop
@@ -18,6 +19,7 @@ class AdminScreen:
         self.user = user
 
     def _add_creator_screen(self):
+        logger.info("Add Creator Screen")
         print()
         print(Messages.CREATOR_INFO)
         username = get_username()
@@ -30,6 +32,7 @@ class AdminScreen:
             print(Errors.USERNAME_ALREADY_EXISTS)
 
     def _remove_user_screen(self):
+        logger.info("Remove User Screen")
         print()
         user_handler = UserHandler(self.user)
         all_users = user_handler.get_all_users()
@@ -48,6 +51,7 @@ class AdminScreen:
         print(OutputTexts.USER_REMOVED)
 
     def _remove_quiz_screen(self):
+        logger.info("Remove Quiz Screen")
         all_quizzes = QuizHandler(self.user).get_all_quizzes()
         CommonScreens.show_quizzes(all_quizzes)
         quiz_to_remove = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
@@ -61,6 +65,7 @@ class AdminScreen:
 
     @menu_loop
     def home_screen(self):
+        logger.info("Admin Home Screen")
         print()
         user_choice = input(ScreenTexts.ADMIN_HOME)
 

@@ -1,4 +1,5 @@
 from helpers.constants import ScreenTexts, OutputTexts
+from helpers.log import logger
 from screens.manage_quizzes import ManageQuizScreen
 from screens.player import PlayerScreen
 from utils.menu_loop import menu_loop
@@ -10,6 +11,7 @@ class CreatorScreen(PlayerScreen):
 
     @menu_loop
     def home_screen(self):
+        logger.info("Creator Home Screen")
         print()
         user_choice = input(ScreenTexts.CREATOR_HOME)
 

@@ -1,7 +1,5 @@
 import sqlite3
 
-from helpers.log.logger import Logger, DEBUG
-
 
 class Database:
     """
@@ -10,7 +8,6 @@ class Database:
     """
 
     def __init__(self, db_path, uri):
-        Logger.log(DEBUG, db_path)
         self.db_path = db_path
         self.uri = uri
         self.connection = sqlite3.connect(db_path, uri=uri)

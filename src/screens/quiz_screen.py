@@ -3,6 +3,7 @@ from data_containers.quiz_record import QuizRecord
 from handler.questions import QuestionHandler
 from handler.quiz_record import QuizRecordHandler
 from helpers.constants import Messages, OutputTexts, Strings, Numbers
+from helpers.log import logger
 
 
 class QuizScreen:
@@ -42,6 +43,7 @@ class QuizScreen:
 
     @staticmethod
     def play_screen(user, quiz):
+        logger.info("Play Quiz Screen")
         print()
         print()
         print(

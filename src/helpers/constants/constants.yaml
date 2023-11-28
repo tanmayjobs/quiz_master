@@ -12,7 +12,7 @@ config:
   logs:
     file_path: "helpers/log/server.log"
     filemode: "a+"
-    format: "%(asctime)s %(levelname)-10s %(message)s"
+    format: "%(asctime)s %(levelname)-10s [%(filename)s:%(lineno)d] %(message)s"
     datefmt: "%d-%m-%Y %H:%M:%S"
 
 screens:
@@ -403,5 +403,5 @@ log_text:
   system_exit: "System Exit..."
   system_error: "System had an unexpected error...\n{}"
   invalid_credentials: "Invalid credentials tried by user {}"
-  reading_data: "reading data from database {} and {}"
-  writing_data: "reading data from database {} and {}"
+  reading_data: "reading data from database..."
+  writing_data: "reading data from database..."

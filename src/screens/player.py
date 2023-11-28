@@ -1,6 +1,7 @@
 from handler.quiz import QuizHandler
 from handler.quiz_record import QuizRecordHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts
+from helpers.log import logger
 from screens.common import CommonScreens
 from screens.quiz_screen import QuizScreen
 from utils.menu_loop import menu_loop
@@ -11,6 +12,7 @@ class PlayerScreen:
         self.user = user
 
     def _play_random_quiz(self):
+        logger.info("Play Random Quiz Screen")
         quiz = QuizHandler.get_random_quiz()
 
         if not quiz:
@@ -21,6 +23,7 @@ class PlayerScreen:
         QuizScreen.play_screen(self.user, quiz)
 
     def _explore_quiz(self):
+        logger.info("Explore Quiz Screen")
         print()
         search_key = input(InputTexts.KEYWORD)
 
@@ -39,6 +42,7 @@ class PlayerScreen:
         QuizScreen.play_screen(self.user, selected_quiz)
 
     def _show_player_records_screen(self):
+        logger.info("Show Player Attempts Screen")
         print()
         player_records = QuizRecordHandler.get_user_records(self.user)
 
@@ -50,6 +54,7 @@ class PlayerScreen:
 
     @menu_loop
     def home_screen(self):
+        logger.info("Player Home Screen")
         print()
         user_choice = input(ScreenTexts.PLAYER_HOME)
         if user_choice.isdigit():
