@@ -48,26 +48,25 @@ def mock_question():
     return mocked_question
 
 
-def test_add_question(mock_user, mock_question, mock_db_context):
-    with patch("src.handler.questions.DBContext", mock_db_context):
-        mock_last_transaction = MagicMock(spec=LastTransaction)
-        mock_last_transaction.rows_changed = 1
-        mock_last_transaction.last_id = 1
-        mock_db_context.write.return_value = mock_last_transaction
-        QuestionHandler(1, mock_user).add_question(mock_question)
+class TestQuestionHandler:
+    def test_add_question(self, mock_user, mock_question, mock_db_context):
+        with patch("src.handler.questions.DBContext", mock_db_context):
+            mock_last_transaction = MagicMock(spec=LastTransaction)
+            mock_last_transaction.rows_changed = 1
+            mock_last_transaction.last_id = 1
+            mock_db_context.write.return_value = mock_last_transaction
+            QuestionHandler(1, mock_user).add_question(mock_question)
 
+    def test_get_quiz_question(self, mock_db_context):
+        with patch("src.handler.questions.DBContext", mock_db_context):
+            mock_db_context.read.return_value = questions_data
+            expected = [
+                Question.parse_json(question_data) for question_data in questions_data
+            ]
+            assert expected == QuestionHandler(1).get_quiz_questions()
 
-def test_get_quiz_question(mock_db_context):
-    with patch("src.handler.questions.DBContext", mock_db_context):
-        mock_db_context.read.return_value = questions_data
-        expected = [
-            Question.parse_json(question_data) for question_data in questions_data
-        ]
-        assert expected == QuestionHandler(1).get_quiz_questions()
-
-
-def test_remove_question(mock_user, mock_db_context):
-    with patch("src.handler.questions.DBContext", mock_db_context):
-        mock_db_context.write = Mock()
-        mock_db_context.write.return_value = True
-        QuestionHandler(1, mock_user).remove_question(1)
+    def test_remove_question(self, mock_user, mock_db_context):
+        with patch("src.handler.questions.DBContext", mock_db_context):
+            mock_db_context.write = Mock()
+            mock_db_context.write.return_value = True
+            QuestionHandler(1, mock_user).remove_question(1)

@@ -26,42 +26,39 @@ def mock_user():
     return mocked_user
 
 
-def test_add_user_negative(mock_user, mock_db_context):
-    with patch("src.handler.user.DBContext", mock_db_context):
-        mock_last_transaction = MagicMock(spec=LastTransaction)
-        mock_last_transaction.rows_changed = 0
-        mock_db_context.write.return_value = mock_last_transaction
-        assert not UserHandler(mock_user).add_user("", "")
+class TestUserHandler:
+    def test_add_user_negative(self, mock_user, mock_db_context):
+        with patch("src.handler.user.DBContext", mock_db_context):
+            mock_last_transaction = MagicMock(spec=LastTransaction)
+            mock_last_transaction.rows_changed = 0
+            mock_db_context.write.return_value = mock_last_transaction
+            assert not UserHandler(mock_user).add_user("", "")
 
+    def test_add_user_positive(self, mock_user, mock_db_context):
+        with patch("src.handler.user.DBContext", mock_db_context):
+            mock_last_transaction = MagicMock(spec=LastTransaction)
+            mock_last_transaction.rows_changed = 1
+            mock_db_context.write.return_value = mock_last_transaction
+            assert UserHandler(mock_user).add_user("", "")
 
-def test_add_user_positive(mock_user, mock_db_context):
-    with patch("src.handler.user.DBContext", mock_db_context):
-        mock_last_transaction = MagicMock(spec=LastTransaction)
-        mock_last_transaction.rows_changed = 1
-        mock_db_context.write.return_value = mock_last_transaction
-        assert UserHandler(mock_user).add_user("", "")
+    @pytest.mark.parametrize(
+        "all_users", [[], [(1, "username", "hashed_password", UserRole.PLAYER)]]
+    )
+    def test_get_all_users(self, all_users, mock_user, mock_db_context):
+        with patch("src.handler.user.DBContext", mock_db_context):
+            mock_db_context.read.return_value = all_users
+            assert len(all_users) == len(UserHandler(mock_user).get_all_users())
 
+    def test_remove_user_negative(self, mock_user, mock_db_context):
+        with patch("src.handler.user.DBContext", mock_db_context):
+            mock_last_transaction = MagicMock(spec=LastTransaction)
+            mock_last_transaction.rows_changed = 0
+            mock_db_context.write.return_value = mock_last_transaction
+            assert not UserHandler(mock_user).remove_user(mock_user())
 
-@pytest.mark.parametrize(
-    "all_users", [[], [(1, "username", "hashed_password", UserRole.PLAYER)]]
-)
-def test_get_all_users(all_users, mock_user, mock_db_context):
-    with patch("src.handler.user.DBContext", mock_db_context):
-        mock_db_context.read.return_value = all_users
-        assert len(all_users) == len(UserHandler(mock_user).get_all_users())
-
-
-def test_remove_user_negative(mock_user, mock_db_context):
-    with patch("src.handler.user.DBContext", mock_db_context):
-        mock_last_transaction = MagicMock(spec=LastTransaction)
-        mock_last_transaction.rows_changed = 0
-        mock_db_context.write.return_value = mock_last_transaction
-        assert not UserHandler(mock_user).remove_user(mock_user())
-
-
-def test_remove_user_positive(mock_user, mock_db_context):
-    with patch("src.handler.user.DBContext", mock_db_context):
-        mock_last_transaction = MagicMock(spec=LastTransaction)
-        mock_last_transaction.rows_changed = 1
-        mock_db_context.write.return_value = mock_last_transaction
-        assert UserHandler(mock_user).remove_user(mock_user())
+    def test_remove_user_positive(self, mock_user, mock_db_context):
+        with patch("src.handler.user.DBContext", mock_db_context):
+            mock_last_transaction = MagicMock(spec=LastTransaction)
+            mock_last_transaction.rows_changed = 1
+            mock_db_context.write.return_value = mock_last_transaction
+            assert UserHandler(mock_user).remove_user(mock_user())
