@@ -55,7 +55,7 @@ class AuthenticationScreen:
                 case 3:
                     print("\nBye!")
                     sys.exit(0)
-                case other:
+                case _:
                     print(OutputTexts.INVALID_CHOICE)
         else:
             print(OutputTexts.INVALID_CHOICE)

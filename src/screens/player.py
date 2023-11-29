@@ -68,7 +68,7 @@ class PlayerScreen:
                     self._show_player_records_screen()
                 case 4:
                     return True
-                case other:
+                case _:
                     print(OutputTexts.INVALID_CHOICE)
         else:
             print(OutputTexts.INVALID_CHOICE)

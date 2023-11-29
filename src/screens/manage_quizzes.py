@@ -66,7 +66,7 @@ class ManageQuizScreen:
                     self._modify_quiz_screen()
                 case 4:
                     return True
-                case other:
+                case _:
                     print(OutputTexts.INVALID_CHOICE)
         else:
             print(OutputTexts.INVALID_CHOICE)
