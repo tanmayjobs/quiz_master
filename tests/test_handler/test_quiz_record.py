@@ -8,15 +8,6 @@ from handler.quiz_record import QuizRecordHandler
 from src.database import DBContext
 
 
-@pytest.fixture()
-def mock_db_context():
-    mock_db_ctx = MagicMock(spec=DBContext)
-    mock_db_ctx.connection = MagicMock(spec=sqlite3.Connection)
-    mock_db_ctx.return_value = mock_db_ctx
-    mock_db_ctx.__enter__.return_value = mock_db_ctx
-    return mock_db_ctx
-
-
 class TestQuizRecordHandler:
     @pytest.mark.parametrize(
         "quiz_records",

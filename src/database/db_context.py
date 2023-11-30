@@ -31,4 +31,5 @@ class DBContext:
     def write(self, query, params=()):
         logger.info(LogText.WRITING_DATA)
         self.cursor.execute(query, params)
+
         return LastTransaction.from_cursor(self.cursor)

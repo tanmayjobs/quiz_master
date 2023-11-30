@@ -10,15 +10,6 @@ from src.handler.auth import AuthHandler
 from utils.crypt import hash_password
 
 
-@pytest.fixture()
-def mock_db_context():
-    mock_db_ctx = MagicMock(spec=DBContext)
-    mock_db_ctx.connection = MagicMock(spec=sqlite3.Connection)
-    mock_db_ctx.return_value = mock_db_ctx
-    mock_db_ctx.__enter__.return_value = mock_db_ctx
-    return mock_db_ctx
-
-
 def get_mock_db_context_positive(
     mock_db_context, username="batman", password="Batman@123"
 ):

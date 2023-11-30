@@ -10,7 +10,7 @@ config:
     db_path: "/storage/data.sqlite3"
 
   logs:
-    file_path: "helpers/log/server.log"
+    file_path: "/server.log"
     filemode: "a+"
     format: "%(asctime)s %(levelname)-10s [%(filename)s:%(lineno)d] %(message)s"
     datefmt: "%d-%m-%Y %H:%M:%S"
