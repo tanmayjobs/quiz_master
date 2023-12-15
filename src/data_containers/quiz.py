@@ -1,8 +1,8 @@
 import json
 from dataclasses import dataclass
 
-from helpers.constants import Strings
 from data_containers.types import QuizType
+from helpers.constants import Strings
 
 
 @dataclass
@@ -21,10 +21,7 @@ class Quiz:
         types = Strings.ARRAY.format(types)
         types_json = json.loads(types)
 
-        types = [
-            QuizType.parse_json(each_type_json)
-            for each_type_json in types_json
-        ]
+        types = [QuizType.parse_json(each_type_json) for each_type_json in types_json]
 
         quiz = Quiz(quiz_id, quiz_name, creator_id, creator_name, types)
         return quiz

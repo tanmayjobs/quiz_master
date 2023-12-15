@@ -1,7 +1,7 @@
-from helpers.constants import SQLQueries
 from data_containers.question import Question
 from data_containers.user import UserRole
 from database import database, DBContext
+from helpers.constants import SQLQueries
 from utils.rbac import accessed_by
 
 
@@ -20,21 +20,22 @@ class QuestionHandler:
     @accessed_by(UserRole.CREATOR)
     def add_question(self, question):
         with DBContext(database) as dao:
-            question_id = dao.write(SQLQueries.ADD_QUESTION,
-                                    (self.quiz_id, question.question_text))
+            question_id = dao.write(
+                SQLQueries.ADD_QUESTION, (self.quiz_id, question.question_text)
+            )
             question_id = question_id.last_id
 
             for option in question.options:
-                dao.write(SQLQueries.ADD_OPTION,
-                          (question_id, option.option_text, option.is_correct))
+                dao.write(
+                    SQLQueries.ADD_OPTION,
+                    (question_id, option.option_text, option.is_correct),
+                )
 
     def get_quiz_questions(self):
         with DBContext(database) as dao:
-            questions_data = dao.read(SQLQueries.GET_QUIZ_QUESTIONS,
-                                      (self.quiz_id, ))
+            questions_data = dao.read(SQLQueries.GET_QUIZ_QUESTIONS, (self.quiz_id,))
         questions = [
-            Question.parse_json(question_data)
-            for question_data in questions_data
+            Question.parse_json(question_data) for question_data in questions_data
         ]
 
         return questions

@@ -1,19 +1,20 @@
-from handler.questions import QuestionHandler
 from data_containers.question import Option, Question
+from handler.questions import QuestionHandler
 from helpers.constants import ScreenTexts, OutputTexts, Strings, InputTexts, Numbers
+from helpers.log import logger
 from screens.common import CommonScreens
+from utils.inputs import get_string, get_correct_option
 from utils.menu_loop import menu_loop
-from utils.validators import Validators
 
 
 class ModifyQuizScreen:
-
     def __init__(self, user, quiz):
         self.user = user
         self.quiz = quiz
 
     @menu_loop
     def modify_quiz_screen(self):
+        logger.info("Modify Quiz Screen")
         print()
         user_choice = input(ScreenTexts.MANAGE_QUIZ)
         if user_choice.isdigit():
@@ -27,13 +28,14 @@ class ModifyQuizScreen:
                     self._remove_question_screen()
                 case 4:
                     return True
-                case other:
+                case _:
                     print(OutputTexts.INVALID_CHOICE)
         else:
             print(OutputTexts.INVALID_CHOICE)
         return False
 
     def _list_all_questions_screen(self):
+        logger.info("List all Question Screen")
         print()
         all_questions = QuestionHandler(self.quiz.quiz_id).get_quiz_questions()
         if not all_questions:
@@ -45,16 +47,17 @@ class ModifyQuizScreen:
         print()
 
     def _add_question_screen(self):
+        logger.info("Add Question Screen")
         print()
-        question_text = Validators.get_valid_strings(InputTexts.QUESTION)
+        question_text = get_string(InputTexts.QUESTION)
         options = []
 
         for option_no in range(Numbers.ONE, Numbers.FIVE):
-            option_text = Validators.get_valid_strings(InputTexts.OPTION.format(option_no))
+            option_text = get_string(InputTexts.OPTION.format(option_no))
             option = Option(option_text, False)
             options.append(option)
 
-        correct_option = Validators.get_correct_option()
+        correct_option = get_correct_option()
         options[correct_option].is_correct = True
 
         question = Question(Numbers.ZERO, question_text, options)
@@ -62,6 +65,7 @@ class ModifyQuizScreen:
         print(OutputTexts.QUESTION_ADDED)
 
     def _remove_question_screen(self):
+        logger.info("Remove Question Screen")
         print()
         all_questions = QuestionHandler(self.quiz.quiz_id).get_quiz_questions()
         if not all_questions:
@@ -70,12 +74,14 @@ class ModifyQuizScreen:
 
         CommonScreens.show_questions(all_questions)
         selected_question = CommonScreens.select_from_list(
-            all_questions, InputTexts.QUESTION_ID)
+            all_questions, InputTexts.QUESTION_ID
+        )
         if not selected_question:
             print(OutputTexts.INVALID_CHOICE)
             return
 
         QuestionHandler(self.quiz.quiz_id, self.user).remove_question(
-            selected_question.question_id)
+            selected_question.question_id
+        )
         print()
         print(OutputTexts.QUESTION_REMOVED)

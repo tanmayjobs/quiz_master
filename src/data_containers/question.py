@@ -25,14 +25,10 @@ class Question:
 
     @staticmethod
     def parse_json(json_data):
-        question_id = json_data[Numbers.ZERO]
-        question_text = json_data[Strings.QUESTION_TEXT]
-        options_json = json.loads(
-            Strings.ARRAY.format(json_data[Strings.OPTIONS_JSON]))
+        question_id, question_text, option_json = json_data
+        options_json = json.loads(Strings.ARRAY.format(option_json))
 
-        options = [
-            Option.parse_json(option_json) for option_json in options_json
-        ]
+        options = [Option.parse_json(option_json) for option_json in options_json]
 
         question = Question(question_id, question_text, options)
         return question

@@ -1,5 +1,5 @@
-from helpers.constants import Errors
 from data_containers.user import UserRole, User
+from helpers.constants import Errors
 
 
 def accessed_by(*roles: tuple[UserRole]):
@@ -24,6 +24,7 @@ def accessed_by(*roles: tuple[UserRole]):
         accessed_by decorator is applied on a instance method of a class and the class must have a defined user instance.
 
     """
+
     def wrapper(func):
         def secured_function(self, *args, **kwargs):
             """
@@ -44,5 +45,7 @@ def accessed_by(*roles: tuple[UserRole]):
                 raise PermissionError(Errors.PERMISSION)
 
             return func(self, *args, **kwargs)
+
         return secured_function
+
     return wrapper

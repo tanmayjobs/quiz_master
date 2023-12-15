@@ -1,24 +1,29 @@
-import pwinput
-
 from handler.quiz import QuizHandler
 from handler.user import UserHandler
-from helpers.constants import ScreenTexts, OutputTexts, Messages, InputTexts, Errors, Strings
+from helpers.constants import (
+    ScreenTexts,
+    OutputTexts,
+    Messages,
+    InputTexts,
+    Errors,
+    Strings,
+)
+from helpers.log import logger
 from screens.common import CommonScreens
-from utils.crypt import validate_password
+from utils.inputs import get_username, get_password
 from utils.menu_loop import menu_loop
-from utils.validators import Validators
 
 
 class AdminScreen:
-
     def __init__(self, user):
         self.user = user
 
-    def add_creator_screen(self):
+    def _add_creator_screen(self):
+        logger.info("Add Creator Screen")
         print()
         print(Messages.CREATOR_INFO)
-        username = Validators.get_username()
-        password = Validators.get_password()
+        username = get_username()
+        password = get_password()
 
         is_user_added = UserHandler(self.user).add_user(username, password)
         if is_user_added:
@@ -26,7 +31,8 @@ class AdminScreen:
         else:
             print(Errors.USERNAME_ALREADY_EXISTS)
 
-    def remove_user_screen(self):
+    def _remove_user_screen(self):
+        logger.info("Remove User Screen")
         print()
         user_handler = UserHandler(self.user)
         all_users = user_handler.get_all_users()
@@ -36,8 +42,7 @@ class AdminScreen:
             return
 
         CommonScreens.show_users(all_users)
-        user_for_removal = CommonScreens.select_from_list(
-            all_users, InputTexts.USER_ID)
+        user_for_removal = CommonScreens.select_from_list(all_users, InputTexts.USER_ID)
 
         if not user_for_removal:
             print(OutputTexts.INVALID_CHOICE)
@@ -45,11 +50,11 @@ class AdminScreen:
         user_handler.remove_user(user_for_removal.user_id)
         print(OutputTexts.USER_REMOVED)
 
-    def remove_quiz_screen(self):
+    def _remove_quiz_screen(self):
+        logger.info("Remove Quiz Screen")
         all_quizzes = QuizHandler(self.user).get_all_quizzes()
         CommonScreens.show_quizzes(all_quizzes)
-        quiz_to_remove = CommonScreens.select_from_list(
-            all_quizzes, InputTexts.QUIZ_ID)
+        quiz_to_remove = CommonScreens.select_from_list(all_quizzes, InputTexts.QUIZ_ID)
 
         if not quiz_to_remove:
             print(OutputTexts.INVALID_CHOICE)
@@ -60,6 +65,7 @@ class AdminScreen:
 
     @menu_loop
     def home_screen(self):
+        logger.info("Admin Home Screen")
         print()
         user_choice = input(ScreenTexts.ADMIN_HOME)
 
@@ -67,14 +73,14 @@ class AdminScreen:
             user_choice = int(user_choice)
             match user_choice:
                 case 1:
-                    self.add_creator_screen()
+                    self._add_creator_screen()
                 case 2:
-                    self.remove_user_screen()
+                    self._remove_user_screen()
                 case 3:
-                    self.remove_quiz_screen()
+                    self._remove_quiz_screen()
                 case 4:
                     return True
-                case other:
+                case _:
                     print(OutputTexts.INVALID_CHOICE)
         else:
             print(OutputTexts.INVALID_CHOICE)
