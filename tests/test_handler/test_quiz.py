@@ -65,7 +65,15 @@ class TestQuizHandler:
         "quizzes_data",
         [
             tuple(),
-            ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,' '"type_name":"Movie"}'),),
+            (
+                (
+                    1,
+                    "Quiz Name",
+                    1,
+                    "Creator Name",
+                    '{"type_id":1,' '"type_name":"Movie"}',
+                ),
+            ),
         ],
     )
     def test_get_user_quizzes(self, quizzes_data, mock_user, mock_db_context):
@@ -78,7 +86,15 @@ class TestQuizHandler:
         "quizzes_data",
         [
             tuple(),
-            ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,' '"type_name":"Movie"}'),),
+            (
+                (
+                    1,
+                    "Quiz Name",
+                    1,
+                    "Creator Name",
+                    '{"type_id":1,' '"type_name":"Movie"}',
+                ),
+            ),
         ],
     )
     def test_get_all_quizzes(self, quizzes_data, mock_user, mock_db_context):
@@ -92,7 +108,15 @@ class TestQuizHandler:
         "quizzes_data",
         [
             tuple(),
-            ((1, "Quiz Name", 1, "Creator Name", '{"type_id":1,' '"type_name":"Movie"}'),),
+            (
+                (
+                    1,
+                    "Quiz Name",
+                    1,
+                    "Creator Name",
+                    '{"type_id":1,' '"type_name":"Movie"}',
+                ),
+            ),
         ],
     )
     def test_filter_all_quizzes(self, quizzes_data, mock_user, mock_db_context):

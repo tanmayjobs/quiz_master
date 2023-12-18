@@ -1,10 +1,11 @@
 import pytest
-
 import src.utils.validators as Validators
 
 
 class TestValidators:
-    @pytest.mark.parametrize("username", ["", "1", "111", "??121", "batman?123", "2pac"])
+    @pytest.mark.parametrize(
+        "username", ["", "1", "111", "??121", "batman?123", "2pac"]
+    )
     def test_get_username_negative(self, username):
         assert not Validators.get_username(username)
 

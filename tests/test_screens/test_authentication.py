@@ -7,7 +7,9 @@ from screens.authentication import AuthenticationScreen
 
 
 class TestAuthenticationScreen:
-    @pytest.mark.parametrize("user_choice, func", [("1", "_sign_in"), ("2", "_sign_up")])
+    @pytest.mark.parametrize(
+        "user_choice, func", [("1", "_sign_in"), ("2", "_sign_up")]
+    )
     def test_authentication_home_screen_positive(self, user_choice, func):
         with raises(SystemExit):
             with patch.object(AuthenticationScreen, func) as mocked_func:

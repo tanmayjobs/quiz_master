@@ -8,6 +8,11 @@ from screens.common import CommonScreens
 items = ["0", "1", "2", "3", "4", "5"]
 
 
+def test_select_multiple_from_list():
+    with patch("builtins.input", return_value="1,2,3,4"):
+        assert CommonScreens.select_multiple_from_list(items) == items[:4]
+
+
 @pytest.mark.parametrize("user_input", ["10", "@", "a", ".", "0.0", "0"])
 def test_select_from_list_negative(user_input):
     with patch("builtins.input") as mock_input:
