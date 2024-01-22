@@ -16,7 +16,7 @@ def get_username():
 
 @until_not_valid
 def get_password():
-    password = Validators.get_password(pwinput.pwinput(InputTexts.PASSWORD))
+    password = Validators.get_password(input(InputTexts.PASSWORD))
     if not password:
         print(Errors.WEAK_PASSWORD)
 

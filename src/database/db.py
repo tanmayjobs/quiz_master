@@ -1,4 +1,10 @@
-import sqlite3
+from pymysql.cursors import DictCursor
+import pymysql
+import os
+import dotenv
+
+
+dotenv.load_dotenv()
 
 
 class Database:
@@ -10,7 +16,12 @@ class Database:
     def __init__(self, db_path, uri):
         self.db_path = db_path
         self.uri = uri
-        self.connection = sqlite3.connect(db_path, uri=uri)
+        self.connection = pymysql.connect(
+            user=os.getenv("DATABASE_USER"),
+            password=os.getenv("DATABASE_PASSWORD"),
+            database=os.getenv("DATABASE_NAME"),
+            cursorclass=DictCursor,
+        )
 
     def __del__(self):
         self.connection.close()

@@ -5,6 +5,8 @@ from database import database, DBContext
 from helpers.constants import SQLQueries
 from utils.crypt import check_password, hash_password
 
+import uuid
+
 
 class AuthHandler:
     """
@@ -26,7 +28,7 @@ class AuthHandler:
         if not user_data:
             return None
 
-        user = User.parse_database(user_data)
+        user = User(**user_data)
         if not check_password(self.password, user.password_hash):
             return None
 
@@ -42,7 +44,7 @@ class AuthHandler:
                 is_user_added = (
                     dao.write(
                         SQLQueries.ADD_USER,
-                        (self.username, password_hash, UserRole.PLAYER),
+                        (uuid.uuid4(), self.username, password_hash, UserRole.PLAYER.name),
                     ).rows_changed
                     > 0
                 )

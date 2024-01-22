@@ -1,7 +1,8 @@
 from helpers.constants import Strings
+from enum import Enum
 
 
-class UserRole:
+class UserRole(Enum):
     ADMIN = 0
     CREATOR = 1
     PLAYER = 2

@@ -2,7 +2,7 @@ from data_containers.user import UserRole, User
 from helpers.constants import Errors
 
 
-def accessed_by(*roles: tuple[UserRole]):
+def accessed_by(*roles: str):
     """
     accessed_by is used as a decorator to apply rbac on any methods.
     :param roles: requires the User Roles which can access any function.

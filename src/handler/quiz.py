@@ -5,6 +5,7 @@ from database import database, DBContext
 from helpers.constants import Strings, SQLQueries
 from utils.rbac import accessed_by
 
+import uuid
 
 class QuizHandler:
     """
@@ -20,23 +21,24 @@ class QuizHandler:
         self.user = user  # User whose trying to perform the operation
         self.quiz = quiz  # Quiz on which the operations are performed
 
-    @accessed_by(UserRole.CREATOR)
+    @accessed_by(UserRole.CREATOR.name)
     def add_quiz(self):
         if not self.quiz:
             raise ValueError
 
         with DBContext(database) as dao:
-            quiz_id = dao.write(
-                SQLQueries.ADD_QUIZ, (self.user.user_id, self.quiz.quiz_name)
+            quiz_id = uuid.uuid4()
+            dao.write(
+                SQLQueries.ADD_QUIZ, (quiz_id, self.quiz.quiz_name, self.user.user_id)
             )
-            quiz_id = quiz_id.last_id
-
+            quiz_id = quiz_id
             for quiz_type in self.quiz.types:
                 dao.write(
                     SQLQueries.ADD_QUIZ_TYPE,
                     (
+                        uuid.uuid4(),
                         quiz_id,
-                        quiz_type.type_id,
+                        quiz_type.id,
                     ),
                 )
 
@@ -51,7 +53,7 @@ class QuizHandler:
         quiz = Quiz.parse_json(quiz_data)
         return quiz
 
-    @accessed_by(UserRole.CREATOR)
+    @accessed_by(UserRole.CREATOR.name)
     def get_user_quizzes(self):
         with DBContext(database) as dao:
             all_quizzes_data = dao.read(
@@ -96,6 +98,6 @@ class QuizHandler:
     def defined_quiz_types():
         with DBContext(database) as dao:
             all_types_data = dao.read(SQLQueries.GET_ALL_TYPES)
-        all_types = [QuizType(*each_type) for each_type in all_types_data]
+        all_types = [QuizType(**each_type) for each_type in all_types_data]
 
         return all_types

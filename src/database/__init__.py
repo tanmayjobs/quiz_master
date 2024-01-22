@@ -16,6 +16,7 @@ Example:
 """
 
 import os
+import uuid
 
 from helpers.constants import SQLQueries, Strings, Config
 from .db import Database
@@ -48,23 +49,6 @@ def _init_database():
         dao.write(SQLQueries.CREATE_QUIZ_SCORE_TABLE)
         dao.write(SQLQueries.CREATE_TYPE_TABLE)
         dao.write(SQLQueries.CREATE_QUIZ_TYPE_MAPPING_TABLE)
-
-        dao.write(
-            SQLQueries.ADD_TYPE,
-            (Strings.MOVIE,),
-        )
-        dao.write(
-            SQLQueries.ADD_TYPE,
-            (Strings.BOOK,),
-        )
-        dao.write(
-            SQLQueries.ADD_TYPE,
-            (Strings.MUSIC,),
-        )
-        dao.write(
-            SQLQueries.ADD_TYPE,
-            (Strings.OTHER,),
-        )
 
 
 _create_database_folder()

@@ -7,11 +7,11 @@ from screens.player import PlayerScreen
 
 def home_screen(user):
     match user.role:
-        case UserRole.PLAYER:
+        case UserRole.PLAYER.name:
             PlayerScreen(user).home_screen()
-        case UserRole.CREATOR:
+        case UserRole.CREATOR.name:
             CreatorScreen(user).home_screen()
-        case UserRole.ADMIN:
+        case UserRole.ADMIN.name:
             AdminScreen(user).home_screen()
 
     print()

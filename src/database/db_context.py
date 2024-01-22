@@ -20,16 +20,13 @@ class DBContext:
     def __exit__(self, *error_details):
         if not any(error_details):
             self.database.connection.commit()
+        else:
+            logger.warn(LogText.SYSTEM_ERROR)
 
     def read(self, query, params=(), only_one=False):
-        logger.info(LogText.READING_DATA)
-        data = self.cursor.execute(query, params)
-        data = data.fetchone() if only_one else data.fetchall()
-
-        return data
+        self.cursor.execute(query, params)
+        return self.cursor.fetchone() if only_one else self.cursor.fetchall()
 
     def write(self, query, params=()):
-        logger.info(LogText.WRITING_DATA)
         self.cursor.execute(query, params)
-
         return LastTransaction.from_cursor(self.cursor)

@@ -14,7 +14,7 @@ def hash_password(password: str):
 
 
 def check_password(password: str, hashed_password):
-    return bcrypt.checkpw(password.encode(), hashed_password)
+    return bcrypt.checkpw(password.encode(), hashed_password.encode())
 
 
 def validate_password(password):

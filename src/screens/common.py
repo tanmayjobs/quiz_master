@@ -50,7 +50,7 @@ class CommonScreens:
                     quiz_id=str(index),
                     quiz_name=quiz.quiz_name,
                     quiz_types=",".join(
-                        quiz_type.type_name for quiz_type in quiz.types
+                        quiz_type.tag_name for quiz_type in quiz.types
                     ),
                 )
             )
@@ -62,7 +62,7 @@ class CommonScreens:
         for index, each_type in enumerate(all_types, start=1):
             print(
                 OutputTexts.TYPE_INFO.format(
-                    type_id=str(index), type_name=each_type.type_name
+                    type_id=str(index), type_name=each_type.tag_name
                 )
             )
 

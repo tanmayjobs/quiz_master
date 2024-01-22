@@ -141,171 +141,183 @@ errors:
 
 sql_queries:
   create_auth_table: |
-    CREATE TABLE IF NOT EXISTS authentication(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL UNIQUE,
-        password_hash TEXT NOT NULL,
-        user_role INTEGER CHECK (user_role IN (0, 1, 2)) DEFAULT 1,
-        is_deleted BOOL NOT NULL DEFAULT False,
-        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );
+    CREATE TABLE IF NOT EXISTS `auth` (
+      `id` varchar(255) NOT NULL,
+      `username` varchar(255) NOT NULL,
+      `hash_password` varchar(255) NOT NULL,
+      `user_role` enum('ADMIN','CREATOR','PLAYER') NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `username` (`username`),
+      UNIQUE KEY `email` (`email`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_quiz_table: |
-    CREATE TABLE IF NOT EXISTS quizzes(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        creator_id INTEGER NOT NULL,
-        name TEXT NOT NULL,
-        is_deleted BOOL NOT NULL DEFAULT False,
-        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY(creator_id) REFERENCES authentication(id)
-    );
+    CREATE TABLE IF NOT EXISTS `quizzes` (
+      `id` varchar(255) NOT NULL,
+      `quiz_name` varchar(30) NOT NULL,
+      `creator_id` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `quiz_name` (`quiz_name`),
+      KEY `creator_id` (`creator_id`),
+      CONSTRAINT `quizzes_ibfk_1` FOREIGN KEY (`creator_id`) REFERENCES `auth` (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_question_table: |
-    CREATE TABLE IF NOT EXISTS questions(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        quiz_id INTEGER NOT NULL,
-        question TEXT NOT NULL,
-        FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
-    );
+    CREATE TABLE IF NOT EXISTS `questions` (
+      `id` varchar(255) NOT NULL,
+      `question_text` varchar(255) NOT NULL,
+      `quiz_id` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`),
+      KEY `quiz_id` (`quiz_id`),
+      CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_option_table: |
-    CREATE TABLE IF NOT EXISTS options(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        question_id INTEGER NOT NULL,
-        option INTEGER NOT NULL,
-        is_correct BOOL NOT NULL DEFAULT FALSE,
-        FOREIGN KEY(question_id) REFERENCES questions(id)
-    );
+    CREATE TABLE IF NOT EXISTS `options` (
+      `id` varchar(255) NOT NULL,
+      `option_text` varchar(255) NOT NULL,
+      `is_correct` tinyint(1) NOT NULL,
+      `question_id` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`),
+      KEY `question_id` (`question_id`),
+      CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_quiz_score_table: |
-    CREATE TABLE IF NOT EXISTS quiz_score_table(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        player_id INTEGER NOT NULL,
-        quiz_id INTEGER NOT NULL,
-        player_score INTEGER NOT NULL DEFAULT 0,
-        total_score INTEGER NOT NULL DEFAULT 0,
-        played_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY(player_id) REFERENCES authentication(id),
-        FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
-    );
+    CREATE TABLE IF NOT EXISTS `score_table` (
+      `id` varchar(255) NOT NULL,
+      `player_id` varchar(255) NOT NULL,
+      `quiz_id` varchar(255) NOT NULL,
+      `score` decimal(3,2) NOT NULL,
+      `played_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (`id`),
+      KEY `player_id` (`player_id`),
+      KEY `quiz_id` (`quiz_id`),
+      CONSTRAINT `score_table_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `auth` (`id`),
+      CONSTRAINT `score_table_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_type_table: |
-    CREATE TABLE IF NOT EXISTS types(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT UNIQUE NOT NULL
-    );
+    CREATE TABLE IF NOT EXISTS `tags` (
+      `id` varchar(255) NOT NULL,
+      `tag_name` varchar(20) NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `tag_name` (`tag_name`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_quiz_type_mapping_table: |
-    CREATE TABLE IF NOT EXISTS quiz_type_mapping(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        quiz_id INTEGER NOT NULL,
-        type_id INTEGER NOT NULL,
-        FOREIGN KEY(quiz_id) REFERENCES quizzes(id),
-        FOREIGN KEY(type_id) REFERENCES types(id)
-    );
+    CREATE TABLE IF NOT EXISTS `quiz_tags` (
+      `id` varchar(255) NOT NULL,
+      `quiz_id` varchar(255) NOT NULL,
+      `tag_id` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`),
+      KEY `quiz_id` (`quiz_id`),
+      KEY `tag_id` (`tag_id`),
+      CONSTRAINT `quiz_tags_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`),
+      CONSTRAINT `quiz_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   get_all_users: |
-    SELECT * FROM authentication
-    WHERE user_role != 0 and is_deleted != True;
+    SELECT * FROM auth
+    WHERE user_role != 0;
 
   get_user: |
-    SELECT * FROM authentication
-    WHERE username = ? AND is_deleted = False;
+    SELECT * FROM auth
+    WHERE username = %s;
 
   add_user: |
-    INSERT INTO authentication(username, password_hash, user_role)
-    VALUES(?, ?, ?);
+    INSERT INTO auth(id, username, hash_password, user_role)
+    VALUES(%s, %s, %s, %s);
 
   remove_user: |
     UPDATE authentication
     SET is_deleted = True
-    WHERE id = ?;
+    WHERE id = %s;
 
   get_random_quiz: |
     SELECT
     quiz.id,
-    quiz.name,
+    quiz.quiz_name,
     quiz.creator_id,
     auth.username,
     GROUP_CONCAT(
         json_object(
-            'type_id', t.id,
-            'type_name', t.name
+            'type_id', tag.id,
+            'type_name', tag.tag_name
         )
     ) AS concatenated_types
     FROM quizzes AS quiz
-    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
-    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
-    INNER JOIN types AS t ON t.id = qt.type_id
-    WHERE quiz.is_deleted = False
-    GROUP BY quiz.id
-    ORDER BY RANDOM() LIMIT 1;
+    INNER JOIN auth AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
+    INNER JOIN tags AS tag ON tag.id = quiz_tag.tag_id
+    GROUP BY quiz.id LIMIT 1;
 
   add_quiz: |
-    INSERT INTO quizzes(creator_id, name)
-    VALUES(?, ?);
+    INSERT INTO quizzes(id, quiz_name, creator_id)
+    VALUES(%s, %s, %s);
 
   remove_quiz: |
     UPDATE quizzes
     SET is_deleted = True
-    WHERE id = ?;
+    WHERE id = %s;
 
   add_question: |
     INSERT INTO questions(quiz_id, question)
-    VALUES(?, ?);
+    VALUES(%s, %s);
 
   add_option: |
     INSERT INTO options(question_id, option, is_correct)
-    VALUES(?, ?, ?);
+    VALUES(%s, %s, %s);
 
   add_quiz_type: |
-    INSERT INTO quiz_type_mapping(quiz_id, type_id)
-    VALUES(?, ?);
+    INSERT INTO quiz_tags(id, quiz_id, tag_id)
+    VALUES(%s, %s, %s);
 
   get_all_types: |
-    SELECT * FROM types;
+    SELECT * FROM tags;
 
   add_type: |
-    INSERT OR IGNORE INTO types (name)
-    VALUES (?);
+    INSERT IGNORE INTO tags (id, tag_name)
+    VALUES (%s, %s);
 
   remove_question_by_quiz: |
     DELETE FROM questions
-    WHERE quiz_id = ?;
+    WHERE quiz_id = %s;
 
   remove_question: |
     DELETE FROM questions
-    WHERE id = ?;
+    WHERE id = %s;
 
   remove_option_by_question: |
     DELETE FROM options
-    WHERE question_id = ?;
+    WHERE question_id = %s;
 
   get_user_quizzes: |
     SELECT
     quiz.id,
-    quiz.name,
+    quiz.quiz_name,
     quiz.creator_id,
     auth.username,
     GROUP_CONCAT(
         json_object(
             'type_id', t.id,
-            'type_name', t.name
+            'type_name', t.tag_name
         )
     ) AS concatenated_types
     FROM quizzes AS quiz
-    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
-    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
-    INNER JOIN types AS t ON t.id = qt.type_id
-    WHERE quiz.creator_id = ? AND quiz.is_deleted = False
+    INNER JOIN auth AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_tags AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN tags AS t ON t.id = qt.type_id
+    WHERE quiz.creator_id = %s AND quiz.is_deleted = False
     GROUP BY quiz.id
     ORDER BY quiz.created_at;
 
   get_quiz_types: |
-    SELECT types.* FROM quiz_type_mapping
-    INNER JOIN types ON type_id = types.id
+    SELECT tags.*
+    FROM quiz_tags
+    INNER JOIN tags ON tag_id = tags.id
     INNER JOIN quizzes ON quiz_id = quizzes.id
-    WHERE quizzes.id = ? AND quizzes.is_deleted = False;
+    WHERE = %s AND quizzes.is_deleted = False;
 
   get_quiz_questions: |
     SELECT
@@ -320,57 +332,57 @@ sql_queries:
     FROM questions AS q
     INNER JOIN options AS o ON q.id = o.question_id
     INNER JOIN quizzes AS quiz ON q.quiz_id = quiz.id
-    WHERE quiz.id = ? GROUP BY q.id
+    WHERE quiz.id = %s GROUP BY q.id
     ORDER BY RANDOM();
 
   get_all_quizzes: |
     SELECT
     quiz.id,
-    quiz.name,
+    quiz.quiz_name,
     quiz.creator_id,
     auth.username,
     GROUP_CONCAT(
         json_object(
             'type_id', t.id,
-            'type_name', t.name
+            'type_name', t.tag_name
         )
     ) AS concatenated_types
     FROM quizzes AS quiz
-    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
-    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
-    INNER JOIN types AS t ON t.id = qt.type_id
+    INNER JOIN auth AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_tags AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN tags AS t ON t.id = qt.type_id
     WHERE quiz.is_deleted = False
     GROUP BY quiz.id;
 
   filter_all_quizzes: |
     SELECT
     quiz.id,
-    quiz.name,
+    quiz.quiz_name,
     quiz.creator_id,
     auth.username,
     GROUP_CONCAT(
         json_object(
             'type_id', t.id,
-            'type_name', t.name
+            'type_name', t.tag_name
         )
     ) AS concatenated_types
     FROM quizzes AS quiz
-    INNER JOIN authentication AS auth ON quiz.creator_id = auth.id
-    INNER JOIN quiz_type_mapping AS qt ON qt.quiz_id = quiz.id
-    INNER JOIN types AS t ON t.id = qt.type_id
+    INNER JOIN auth AS auth ON quiz.creator_id = auth.id
+    INNER JOIN quiz_tags AS qt ON qt.quiz_id = quiz.id
+    INNER JOIN tags AS t ON t.id = qt.type_id
     WHERE quiz.is_deleted = False
-    AND (quiz.name LIKE ? OR t.name LIKE ?)
+    AND (quiz.quiz_name LIKE %s OR t.tag_name LIKE %s)
     GROUP BY quiz.id
     ORDER BY quiz.created_at DESC;
 
   add_quiz_score: |
     INSERT INTO quiz_score_table(player_id, quiz_id, player_score, total_score)
-    VALUES(?, ?, ?, ?);
+    VALUES(%s, %s, %s, %s);
 
   get_player_scores: |
     SELECT
-    authentication.id,
-    authentication.username,
+    auth.id,
+    auth.username,
     quizzes.id,
     quizzes.name,
     player_score,
@@ -378,14 +390,14 @@ sql_queries:
     played_at
     FROM quiz_score_table
     INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
-    INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
-    WHERE player_id = ?
+    INNER JOIN auth ON auth.id = quiz_score_table.player_id
+    WHERE player_id = %s
     ORDER BY played_at DESC;
 
   top_quiz_scores: |
     SELECT
-    authentication.id,
-    authentication.username,
+    auth.id,
+    auth.username,
     quizzes.id,
     quizzes.name,
     MAX(player_score),
@@ -393,10 +405,10 @@ sql_queries:
     played_at
     FROM quiz_score_table
     INNER JOIN quizzes ON quizzes.id = quiz_score_table.quiz_id
-    INNER JOIN authentication ON authentication.id = quiz_score_table.player_id
-    WHERE quizzes.id = ?
-    GROUP BY quizzes.id, authentication.id
-    ORDER BY player_score DESC LIMIT ?;
+    INNER JOIN auth ON auth.id = quiz_score_table.player_id
+    WHERE quizzes.id = %s
+    GROUP BY quizzes.id, auth.id
+    ORDER BY player_score DESC LIMIT %s;
 
 log_text:
   system_start: "Initializing System..."
@@ -405,3 +417,21 @@ log_text:
   invalid_credentials: "Invalid credentials tried by user {}"
   reading_data: "reading data from database..."
   writing_data: "reading data from database..."
+
+
+correct_question_options: |
+  SELECT questions.id AS question_id, options.id AS option_id FROM quizzes
+  INNER JOIN questions ON questions.quiz_id = quizzes.id
+  INNER JOIN options ON options.question_id = questions.id
+  WHERE quizzes.id = 1;
+
+correct_options: |
+  SELECT questions.id AS question_id,
+  group_concat(
+  options.id
+  ) AS correct_options
+  FROM quizzes
+  INNER JOIN questions ON questions.quiz_id = quizzes.id
+  INNER JOIN options ON options.question_id = questions.id
+  WHERE quizzes.id = 1 and is_correct
+  GROUP BY question_id;
