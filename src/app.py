@@ -1,10 +1,14 @@
 from flask import Flask
 from flask_smorest import Api
+from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
 from blueprints import AuthBlp, QuizzesBlp, UsersBlp, RecordsBlp, QuestionsBlp, OptionBlp
 
 import os
+
+from helpers.exceptions import NotEnoughPermission
+from utils.json_encoder import CustomJSONEncoder
 
 
 def create_app():
@@ -24,6 +28,32 @@ def create_app():
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     app.config["OPENAPI_RAPIDOC_PATH"] = "/rapidoc"
     app.config["OPENAPI_RAPIDOC_URL"] = "https://unpkg.com/rapidoc/dist/rapidoc-min.js"
+
+    app.register_error_handler(NotEnoughPermission, lambda err: (err.dump(), err.code))
+
+    app.json = CustomJSONEncoder(app)
+    app.json_provider_class = CustomJSONEncoder
+
+    jwt = JWTManager(app)
+
+    @jwt.expired_token_loader
+    def expired_token(jwt_header, jwt_payload):
+        return {
+            "error": "token expired"
+        }, 401
+
+    @jwt.invalid_token_loader
+    def invalid_token(error):
+        return {
+            "error": "invalid token"
+        }, 401
+
+    @jwt.unauthorized_loader
+    def unauthorized(error):
+        return {
+            "error": "token not provided"
+        }, 401
+
     api = Api(app)
     api.register_blueprint(AuthBlp)
     api.register_blueprint(QuizzesBlp)

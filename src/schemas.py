@@ -10,13 +10,12 @@ class AuthRequest(Schema):
 
 
 class SignInResponse(Schema):
-    result = String(dump_only=True)
     access_token = String(dump_only=True)
 
 
 class ErrorResponse(Schema):
     code = Integer(required=True, dump_only=True)
-    status = String(required=True, dump_only=True)
+    error = String(required=True, dump_only=True)
     message = String(required=True, dump_only=True)
 
 
@@ -24,9 +23,17 @@ class OkResponse(Schema):
     result = String(dump_default="ok")
 
 
-class Tag(Schema):
+class TagId(Schema):
     id = Integer(required=True, dump_only=True)
+
+
+class Tag(TagId):
     name = String(required=True, dump_only=True)
+
+
+class QuizRequest(Schema):
+    quiz_name = String(required=True, load_only=True)
+    tags = List(String, required=True)
 
 
 class Quiz(Schema):
@@ -80,7 +87,7 @@ class UsersResponse(Schema):
 
 class ErrorSchema(Schema):
     code = Integer()
-    status = String()
+    error = String()
     message = String()
     hint = String()
 
@@ -88,12 +95,12 @@ class ErrorSchema(Schema):
 class ErrorExamples:
     @staticmethod
     def error404(resource):
-        return {"code": 404, "status": "Not Found", "message": f"{resource} not found!"}
+        return {"code": 404, "error": "Not Found", "message": f"{resource} not found!"}
 
     @staticmethod
     def error409(resource):
-        return {"code": 409, "status": "Conflict", "message": f"conflict arise for {resource}", "hint": f"maybe {resource} is not following unique constrains."}
+        return {"code": 409, "error": "Conflict", "message": f"conflict arise for {resource}"}
 
     @staticmethod
     def error401():
-        return {"code": 401, "status": "Unauthorize", "message": "invalid credentials"}
+        return {"code": 401, "error": "Unauthorize", "message": "invalid credentials"}

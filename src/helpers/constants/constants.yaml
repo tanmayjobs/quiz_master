@@ -257,9 +257,8 @@ sql_queries:
     VALUES(%s, %s, %s);
 
   remove_quiz: |
-    UPDATE quizzes
-    SET is_deleted = True
-    WHERE id = %s;
+    DELETE FROM quizzes
+    WHERE id = %s and creator_id = %s;
 
   add_question: |
     INSERT INTO questions(quiz_id, question)

@@ -1,17 +1,15 @@
 from data_containers.last_transaction import LastTransaction
 from database import Database
+from database.database_access import DatabaseAccess
 from helpers.constants import LogText
 from helpers.log import logger
 
 
-class DBContext:
+class MysqlAccess(DatabaseAccess):
     """
     To perform any operation on the database a context manager is required.
     The context manager provides the CRUD operations for the database, check __init__.py of database package for more.
     """
-
-    def __init__(self, database: Database):
-        self.database = database
 
     def __enter__(self):
         self.cursor = self.database.connection.cursor()
@@ -21,6 +19,7 @@ class DBContext:
         if not any(error_details):
             self.database.connection.commit()
         else:
+            self.database.connection.rollback()
             logger.warn(LogText.SYSTEM_ERROR)
 
     def read(self, query, params=(), only_one=False):

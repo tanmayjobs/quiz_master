@@ -1,27 +1,27 @@
 import json
 from dataclasses import dataclass
 
-from data_containers.types import QuizType
+from data_containers.types import QuizTag
 from helpers.constants import Strings
 
 
 @dataclass
 class Quiz:
-    quiz_id: int | None
+    quiz_id: str | None
     quiz_name: str
 
     creator_id: int
-    creator_name: str
+    creator_name: str | None
 
-    types: [QuizType]
+    tags: [QuizTag]
 
     @staticmethod
     def parse_json(json_data):
-        quiz_id, quiz_name, creator_id, creator_name, types = json_data
-        types = Strings.ARRAY.format(types)
-        types_json = json.loads(types)
+        quiz_id, quiz_name, creator_id, creator_name, tags = json_data
+        tags = Strings.ARRAY.format(tags)
+        tags_json = json.loads(tags)
 
-        types = [QuizType.parse_json(each_type_json) for each_type_json in types_json]
+        tags = [QuizTag.parse_json(each_tag_json) for each_tag_json in tags_json]
 
-        quiz = Quiz(quiz_id, quiz_name, creator_id, creator_name, types)
+        quiz = Quiz(quiz_id, quiz_name, creator_id, creator_name, tags)
         return quiz

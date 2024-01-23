@@ -1,5 +1,5 @@
 from data_containers.quiz import Quiz
-from data_containers.types import QuizType
+from data_containers.types import QuizTag
 from data_containers.user import UserRole
 from database import database, DBContext
 from helpers.constants import Strings, SQLQueries
@@ -32,7 +32,7 @@ class QuizHandler:
                 SQLQueries.ADD_QUIZ, (quiz_id, self.quiz.quiz_name, self.user.user_id)
             )
             quiz_id = quiz_id
-            for quiz_type in self.quiz.types:
+            for quiz_type in self.quiz.tags:
                 dao.write(
                     SQLQueries.ADD_QUIZ_TYPE,
                     (
@@ -98,6 +98,6 @@ class QuizHandler:
     def defined_quiz_types():
         with DBContext(database) as dao:
             all_types_data = dao.read(SQLQueries.GET_ALL_TYPES)
-        all_types = [QuizType(**each_type) for each_type in all_types_data]
+        all_types = [QuizTag(**each_type) for each_type in all_types_data]
 
         return all_types

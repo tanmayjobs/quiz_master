@@ -50,7 +50,7 @@ class CommonScreens:
                     quiz_id=str(index),
                     quiz_name=quiz.quiz_name,
                     quiz_types=",".join(
-                        quiz_type.tag_name for quiz_type in quiz.types
+                        quiz_type.tag_name for quiz_type in quiz.tags
                     ),
                 )
             )

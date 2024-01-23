@@ -36,7 +36,7 @@ class ManageQuizScreen:
             quiz_name=quiz_name,
             creator_id=self.user.user_id,
             creator_name=self.user.username,
-            types=quiz_types,
+            tags=quiz_types,
         )
 
         QuizHandler(self.user, quiz).add_quiz()

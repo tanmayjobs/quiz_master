@@ -13,7 +13,7 @@ class Database:
     Don't create objects of this class unnecessarily, see the __init__.py file of database package.
     """
 
-    def __init__(self, db_path, uri):
+    def __init__(self, db_path=None, uri=None):
         self.db_path = db_path
         self.uri = uri
         self.connection = pymysql.connect(

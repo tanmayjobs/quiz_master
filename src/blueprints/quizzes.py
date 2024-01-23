@@ -1,7 +1,10 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
-from schemas import QuizzesResponse, OkResponse, QuizResponse, QuestionsResponse, ErrorSchema, ErrorExamples
+from controllers.quiz.add_quiz import AddQuizController
+from schemas import QuizzesResponse, OkResponse, QuizResponse, QuestionsResponse, ErrorSchema, ErrorExamples, \
+    QuizRequest
+from services.quiz import QuizService
 
 blp = Blueprint("Quizzes", __name__)
 
@@ -15,13 +18,12 @@ class QuizzesView(MethodView):
         """
         ...
 
-    @blp.response(201, OkResponse)
+    @blp.arguments(QuizRequest)
+    @blp.alt_response(201, schema=OkResponse)
     @blp.doc(parameters=[{'name': 'Authorization', 'in': 'header', 'description': 'Bearer <access_token>', 'required': 'true'}])
-    def post(self):
-        """
-        Used to create a new quiz.
-        """
-        ...
+    def post(self, json_data):
+        add_quiz = AddQuizController(json_data)
+        return add_quiz()
 
 
 @blp.route("/quizzes/<int:quiz_id>")
