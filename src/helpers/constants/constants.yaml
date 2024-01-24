@@ -56,8 +56,8 @@ strings:
   question_id: 0
   is_correct: "is_correct"
   array: "[{}]"
-  type_id: "type_id"
-  type_name: "type_name"
+  type_id: "tag_id"
+  type_name: "tag_name"
   user: "User"
   filter: "%{search_key}%"
   played_at: "Played At"
@@ -112,7 +112,7 @@ outputs:
   sign_out: "Signed out from the system..."
   invalid_choice: "Invalid Choice."
   user_info: "{user_id:5}\t{username:20}\t{user_role:20}"
-  type_info: "{type_id:5}\t{type_name:20}"
+  type_info: "{tag_id:5}\t{tag_name:20}"
   quiz_info: "{quiz_id:5}\t{quiz_name:20}\t{quiz_types:40}"
   question_info: "{question_id:5}\t{question_text:80}"
   question_all_info: "Question {question_id}.{question_text}\nOption 1.{option_1}\nOption 2.{option_2}\nOption 3.{option_3}\nOption 4.{option_4}\nCorrect Option.{correct_option}"
@@ -145,21 +145,20 @@ sql_queries:
       `id` varchar(255) NOT NULL,
       `username` varchar(255) NOT NULL,
       `hash_password` varchar(255) NOT NULL,
-      `user_role` enum('ADMIN','CREATOR','PLAYER') NOT NULL,
+      `user_role` enum('0','1','2') NOT NULL,
       PRIMARY KEY (`id`),
-      UNIQUE KEY `username` (`username`),
-      UNIQUE KEY `email` (`email`)
+      UNIQUE KEY `username` (`username`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_quiz_table: |
     CREATE TABLE IF NOT EXISTS `quizzes` (
-      `id` varchar(255) NOT NULL,
-      `quiz_name` varchar(30) NOT NULL,
-      `creator_id` varchar(255) NOT NULL,
-      PRIMARY KEY (`id`),
-      UNIQUE KEY `quiz_name` (`quiz_name`),
-      KEY `creator_id` (`creator_id`),
-      CONSTRAINT `quizzes_ibfk_1` FOREIGN KEY (`creator_id`) REFERENCES `auth` (`id`)
+    `id` varchar(255) NOT NULL,
+    `quiz_name` varchar(30) NOT NULL,
+    `creator_id` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `quiz_name` (`quiz_name`),
+    KEY `creator_id` (`creator_id`),
+    CONSTRAINT `quizzes_ibfk_1` FOREIGN KEY (`creator_id`) REFERENCES `auth` (`id`) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_question_table: |
@@ -169,7 +168,7 @@ sql_queries:
       `quiz_id` varchar(255) NOT NULL,
       PRIMARY KEY (`id`),
       KEY `quiz_id` (`quiz_id`),
-      CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`)
+      CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_option_table: |
@@ -180,7 +179,7 @@ sql_queries:
       `question_id` varchar(255) NOT NULL,
       PRIMARY KEY (`id`),
       KEY `question_id` (`question_id`),
-      CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
+      CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_quiz_score_table: |
@@ -193,8 +192,8 @@ sql_queries:
       PRIMARY KEY (`id`),
       KEY `player_id` (`player_id`),
       KEY `quiz_id` (`quiz_id`),
-      CONSTRAINT `score_table_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `auth` (`id`),
-      CONSTRAINT `score_table_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`)
+      CONSTRAINT `score_table_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `auth` (`id`) ON DELETE NO ACTION,
+      CONSTRAINT `score_table_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE NO ACTION
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   create_type_table: |
@@ -213,8 +212,8 @@ sql_queries:
       PRIMARY KEY (`id`),
       KEY `quiz_id` (`quiz_id`),
       KEY `tag_id` (`tag_id`),
-      CONSTRAINT `quiz_tags_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`),
-      CONSTRAINT `quiz_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`)
+      CONSTRAINT `quiz_tags_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE,
+      CONSTRAINT `quiz_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   get_all_users: |
@@ -234,6 +233,25 @@ sql_queries:
     SET is_deleted = True
     WHERE id = %s;
 
+  get_quiz: |
+    SELECT
+    quiz.id,
+    quiz.quiz_name,
+    quiz.creator_id,
+    auth.username,
+    GROUP_CONCAT(
+        json_object(
+            'tag_id', tag.id,
+            'tag_name', tag.tag_name
+        )
+    ) AS tags
+    FROM quizzes AS quiz
+    INNER JOIN auth AS auth ON quiz.creator_id = auth.id
+    LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
+    LEFT JOIN tags AS tag ON tag.id = quiz_tag.tag_id
+    WHERE quiz.id = %s
+    GROUP BY quiz.id;
+
   get_random_quiz: |
     SELECT
     quiz.id,
@@ -242,10 +260,10 @@ sql_queries:
     auth.username,
     GROUP_CONCAT(
         json_object(
-            'type_id', tag.id,
-            'type_name', tag.tag_name
+            'tag_id', tag.id,
+            'tag_name', tag.tag_name
         )
-    ) AS concatenated_types
+    ) AS tags
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
     INNER JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
@@ -272,11 +290,15 @@ sql_queries:
     INSERT INTO quiz_tags(id, quiz_id, tag_id)
     VALUES(%s, %s, %s);
 
-  get_all_types: |
+  remove_quiz_type: |
+    DELETE FROM quiz_tags
+    WHERE quiz_id = %s AND tag_id = %s;
+
+  get_all_tags: |
     SELECT * FROM tags;
 
-  add_type: |
-    INSERT IGNORE INTO tags (id, tag_name)
+  create_tag: |
+    INSERT INTO tags (id, tag_name)
     VALUES (%s, %s);
 
   remove_question_by_quiz: |
@@ -299,14 +321,14 @@ sql_queries:
     auth.username,
     GROUP_CONCAT(
         json_object(
-            'type_id', t.id,
-            'type_name', t.tag_name
+            'tag_id', t.id,
+            'tag_name', t.tag_name
         )
-    ) AS concatenated_types
+    ) AS tags
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
     INNER JOIN quiz_tags AS qt ON qt.quiz_id = quiz.id
-    INNER JOIN tags AS t ON t.id = qt.type_id
+    INNER JOIN tags AS t ON t.id = qt.tag_id
     WHERE quiz.creator_id = %s AND quiz.is_deleted = False
     GROUP BY quiz.id
     ORDER BY quiz.created_at;
@@ -335,22 +357,21 @@ sql_queries:
     ORDER BY RANDOM();
 
   get_all_quizzes: |
-    SELECT
-    quiz.id,
-    quiz.quiz_name,
-    quiz.creator_id,
-    auth.username,
+   SELECT
+    quiz.id as quiz_id,
+    quiz.quiz_name as quiz_name,
+    quiz.creator_id as creator_id,
+    auth.username as creator_name,
     GROUP_CONCAT(
-        json_object(
-            'type_id', t.id,
-            'type_name', t.tag_name
-        )
-    ) AS concatenated_types
+      json_object(
+          'tag_id', tag.id,
+          'tag_name', tag.tag_name
+      )
+    ) as tags
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
-    INNER JOIN quiz_tags AS qt ON qt.quiz_id = quiz.id
-    INNER JOIN tags AS t ON t.id = qt.type_id
-    WHERE quiz.is_deleted = False
+    LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
+    LEFT JOIN tags AS tag ON tag.id = quiz_tag.tag_id
     GROUP BY quiz.id;
 
   filter_all_quizzes: |
@@ -361,14 +382,14 @@ sql_queries:
     auth.username,
     GROUP_CONCAT(
         json_object(
-            'type_id', t.id,
-            'type_name', t.tag_name
+            'tag_id', t.id,
+            'tag_name', t.tag_name
         )
-    ) AS concatenated_types
+    ) AS tags
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
     INNER JOIN quiz_tags AS qt ON qt.quiz_id = quiz.id
-    INNER JOIN tags AS t ON t.id = qt.type_id
+    INNER JOIN tags AS t ON t.id = qt.tag_id
     WHERE quiz.is_deleted = False
     AND (quiz.quiz_name LIKE %s OR t.tag_name LIKE %s)
     GROUP BY quiz.id
@@ -409,6 +430,44 @@ sql_queries:
     GROUP BY quizzes.id, auth.id
     ORDER BY player_score DESC LIMIT %s;
 
+  correct_question_options: |
+    SELECT questions.id AS question_id, options.id AS option_id FROM quizzes
+    INNER JOIN questions ON questions.quiz_id = quizzes.id
+    INNER JOIN options ON options.question_id = questions.id
+    WHERE quizzes.id = 1;
+
+  correct_options: |
+    SELECT questions.id AS question_id,
+    group_concat(
+    options.id
+    ) AS correct_options
+    FROM quizzes
+    INNER JOIN questions ON questions.quiz_id = quizzes.id
+    INNER JOIN options ON options.question_id = questions.id
+    WHERE quizzes.id = 1 and is_correct
+    GROUP BY question_id;
+
+  get_user_by_id: |
+    SELECT * FROM auth
+    WHERE id = %s;
+
+  get_quiz_by_id: |
+    SELECT * FROM quizzes
+    WHERE id = %s;
+
+  get_tag_by_id: |
+    SELECT * FROM tags
+    WHERE id = %s;
+
+  get_question_by_id: |
+    SELECT * FROM questions
+    WHERE id = %s;
+
+  get_option_by_id: |
+    SELECT * FROM options
+    WHERE id = %s;
+
+
 log_text:
   system_start: "Initializing System..."
   system_exit: "System Exit..."
@@ -417,20 +476,3 @@ log_text:
   reading_data: "reading data from database..."
   writing_data: "reading data from database..."
 
-
-correct_question_options: |
-  SELECT questions.id AS question_id, options.id AS option_id FROM quizzes
-  INNER JOIN questions ON questions.quiz_id = quizzes.id
-  INNER JOIN options ON options.question_id = questions.id
-  WHERE quizzes.id = 1;
-
-correct_options: |
-  SELECT questions.id AS question_id,
-  group_concat(
-  options.id
-  ) AS correct_options
-  FROM quizzes
-  INNER JOIN questions ON questions.quiz_id = quizzes.id
-  INNER JOIN options ON options.question_id = questions.id
-  WHERE quizzes.id = 1 and is_correct
-  GROUP BY question_id;

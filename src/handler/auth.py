@@ -44,7 +44,7 @@ class AuthHandler:
                 is_user_added = (
                     dao.write(
                         SQLQueries.ADD_USER,
-                        (uuid.uuid4(), self.username, password_hash, UserRole.PLAYER.name),
+                        (uuid.uuid4(), self.username, password_hash, UserRole.PLAYER.value),
                     ).rows_changed
                     > 0
                 )

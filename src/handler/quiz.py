@@ -97,7 +97,7 @@ class QuizHandler:
     @staticmethod
     def defined_quiz_types():
         with DBContext(database) as dao:
-            all_types_data = dao.read(SQLQueries.GET_ALL_TYPES)
+            all_types_data = dao.read(SQLQueries.GET_ALL_TAGS)
         all_types = [QuizTag(**each_type) for each_type in all_types_data]
 
         return all_types

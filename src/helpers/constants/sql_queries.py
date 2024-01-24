@@ -7,9 +7,16 @@ class SQLQueries:
     CREATE_TYPE_TABLE = None
     CREATE_QUIZ_TYPE_MAPPING_TABLE = None
 
-    GET_ALL_TYPES = None
+    GET_USER_BY_ID = None
+    GET_QUIZ_BY_ID = None
+    GET_TAG_BY_ID = None
+    GET_QUESTION_BY_ID = None
+    GET_OPTION_BY_ID = None
+
+    GET_ALL_TAGS = None
     ADD_QUIZ_TYPE = None
-    ADD_TYPE = None
+    REMOVE_QUIZ_TYPE = None
+    CREATE_TAG = None
 
     GET_ALL_USERS = None
     GET_USER = None
@@ -22,6 +29,7 @@ class SQLQueries:
     REMOVE_QUIZ = None
 
     GET_USER_QUIZZES = None
+    GET_QUIZ = None
     GET_QUIZ_TYPES = None
     GET_QUIZ_QUESTIONS = None
     GET_RANDOM_QUIZ = None
@@ -46,9 +54,16 @@ class SQLQueries:
         cls.CREATE_TYPE_TABLE = data["create_type_table"]
         cls.CREATE_QUIZ_TYPE_MAPPING_TABLE = data["create_quiz_type_mapping_table"]
 
-        cls.GET_ALL_TYPES = data["get_all_types"]
+        cls.GET_USER_BY_ID = data["get_user_by_id"]
+        cls.GET_QUIZ_BY_ID = data["get_quiz_by_id"]
+        cls.GET_QUESTION_BY_ID = data["get_question_by_id"]
+        cls.GET_OPTION_BY_ID = data["get_option_by_id"]
+        cls.GET_TAG_BY_ID = data["get_tag_by_id"]
+
+        cls.GET_ALL_TAGS = data["get_all_tags"]
         cls.ADD_QUIZ_TYPE = data["add_quiz_type"]
-        cls.ADD_TYPE = data["add_type"]
+        cls.REMOVE_QUIZ_TYPE = data["remove_quiz_type"]
+        cls.CREATE_TAG = data["create_tag"]
 
         cls.GET_ALL_USERS = data["get_all_users"]
         cls.GET_USER = data["get_user"]
@@ -57,6 +72,7 @@ class SQLQueries:
         cls.REMOVE_QUIZ = data["remove_quiz"]
         cls.REMOVE_USER = data["remove_user"]
 
+        cls.GET_QUIZ = data["get_quiz"]
         cls.GET_USER_QUIZZES = data["get_user_quizzes"]
         cls.GET_QUIZ_TYPES = data["get_quiz_types"]
         cls.GET_QUIZ_QUESTIONS = data["get_quiz_questions"]

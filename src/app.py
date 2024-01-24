@@ -3,18 +3,19 @@ from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
-from blueprints import AuthBlp, QuizzesBlp, UsersBlp, RecordsBlp, QuestionsBlp, OptionBlp
+from blueprints import AuthBlp, QuizzesBlp, UsersBlp, RecordsBlp, QuestionsBlp, OptionBlp, TagsBlp
 
 import os
 
 from helpers.exceptions import NotEnoughPermission
-from utils.json_encoder import CustomJSONEncoder
+from schemas import ValidationCustomException
 
 
 def create_app():
     load_dotenv()
     app = Flask(__name__)
     app.secret_key = os.getenv("APP_SECRET_KEY")
+    app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = "Quizzes"
     app.config["API_VERSION"] = "v1"
     app.config["OPENAPI_VERSION"] = "3.0.2"
@@ -30,9 +31,7 @@ def create_app():
     app.config["OPENAPI_RAPIDOC_URL"] = "https://unpkg.com/rapidoc/dist/rapidoc-min.js"
 
     app.register_error_handler(NotEnoughPermission, lambda err: (err.dump(), err.code))
-
-    app.json = CustomJSONEncoder(app)
-    app.json_provider_class = CustomJSONEncoder
+    app.register_error_handler(ValidationCustomException, lambda err: ({"error": str(err)}, 422))
 
     jwt = JWTManager(app)
 
@@ -61,6 +60,7 @@ def create_app():
     api.register_blueprint(OptionBlp)
     api.register_blueprint(RecordsBlp)
     api.register_blueprint(UsersBlp)
+    api.register_blueprint(TagsBlp)
 
     return app
 

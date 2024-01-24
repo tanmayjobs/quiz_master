@@ -1,11 +1,25 @@
-from marshmallow import Schema
-from marshmallow.fields import Integer, String, List, Enum, Boolean, Nested
+import typing
+
+from marshmallow import Schema, ValidationError
+from marshmallow.fields import Integer, String, List, Enum, Boolean, Nested, validate
 
 from helpers.enum.user_role import UserRole
 
 
-class AuthRequest(Schema):
-    username = String(required=True)
+class ValidationCustomException(Exception):
+    def __init__(self, error):
+        self.error = error
+
+
+class CustomSchema(Schema):
+    def handle_error(
+            self, error: ValidationError, data: typing.Any, *, many: bool, **kwargs
+    ):
+        raise ValidationCustomException(error)
+
+
+class AuthRequest(CustomSchema):
+    username = String(required=True, validate=validate.Regexp("^[a-zA-Z]+[a-zA-Z0-9]*$"))
     password = String(required=True, load_only=True)
 
 
@@ -24,11 +38,19 @@ class OkResponse(Schema):
 
 
 class TagId(Schema):
-    id = Integer(required=True, dump_only=True)
+    tag_id = String(required=True, dump_only=True)
 
 
-class Tag(TagId):
-    name = String(required=True, dump_only=True)
+class TagName(Schema):
+    tag_name = String(required=True)
+
+
+class Tag(TagId, TagName):
+    ...
+
+
+class TagsResponse(Schema):
+    tags = List(Nested(Tag()), required=True)
 
 
 class QuizRequest(Schema):
@@ -36,10 +58,11 @@ class QuizRequest(Schema):
     tags = List(String, required=True)
 
 
-class Quiz(Schema):
-    id = Integer(required=True, dump_only=True)
-    name = String(required=True, dump_only=True)
-    creator_id = Integer(required=True, dump_only=True)
+class QuizSchema(Schema):
+    quiz_id = String(required=True, dump_only=True)
+    quiz_name = String(required=True, dump_only=True)
+    creator_id = String(required=True, dump_only=True)
+    creator_name = String(required=True, dump_only=True)
     tags = List(Nested(Tag()), required=True, dump_only=True)
 
 
@@ -49,7 +72,7 @@ class Option(Schema):
 
 
 class Question(Schema):
-    id = Integer(required=True, dump_only=True)
+    id = String(required=True, dump_only=True)
     text = String(required=True, dump_only=True)
     answers = List(Nested(Option()), required=True, dump_only=True)
 
@@ -58,13 +81,12 @@ class TagResponse(Schema):
     tag = Nested(Tag(), required=True)
 
 
-class QuizResponse(Schema):
-    quiz = Nested(Quiz(), required=True, dump_only=True)
+class QuizResponse(QuizSchema):
     questions = List(Nested(Question()))
 
 
 class QuizzesResponse(Schema):
-    quizzes = List(Nested(Quiz()), required=True, dump_only=True)
+    quizzes = List(Nested(QuizSchema()), required=True, dump_only=True)
 
 
 class QuestionsResponse(Schema):
