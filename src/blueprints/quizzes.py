@@ -5,9 +5,7 @@ from controllers.quiz.add_quiz import AddQuizController
 from controllers.quiz.get_quiz import GetQuizController
 from controllers.quiz.get_quizzes import GetQuizzesController
 from controllers.quiz.remove_quiz import RemoveQuizController
-from schemas import QuizzesResponse, OkResponse, QuizResponse, QuestionsResponse, ErrorSchema, ErrorExamples, \
-    QuizRequest, QuizSchema
-from services.quiz import QuizService
+from schemas import QuizzesResponse, OkResponse, ErrorSchema, ErrorExamples, QuizRequest, QuizSchema
 
 blp = Blueprint("Quizzes", __name__)
 

@@ -7,17 +7,15 @@ from utils.rbac import accessed_by
 
 
 @accessed_by(UserRole.CREATOR.value)
-class AddQuizController:
+class AddQuestionController:
     def __init__(self, json_data, quiz_service=None):
+        
         self.performer_id = get_jwt_identity()
-        self.quiz_name = json_data["quiz_name"]
-        self.tags = json_data["tags"]
-        self.questions = json_data["questions"]
         self.quiz_service = quiz_service or QuizService()
 
     def __call__(self):
         try:
-            self.quiz_service.add_quiz(self.quiz_name, self.performer_id, self.tags, self.questions)
+            self.quiz_service.add_quiz(self.quiz_name, self.performer_id, self.tags)
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:

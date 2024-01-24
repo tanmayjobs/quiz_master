@@ -23,12 +23,3 @@ class TagsView(MethodView):
     def post(self, json_data):
         create_tag = CreateTagController(json_data)
         return create_tag()
-
-
-@blp.route("/tags/<string:tag_id>")
-class TagView(MethodView):
-    def put(self):
-        ...
-
-    def delete(self):
-        ...

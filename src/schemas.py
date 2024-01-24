@@ -53,9 +53,14 @@ class TagsResponse(Schema):
     tags = List(Nested(Tag()), required=True)
 
 
-class QuizRequest(Schema):
-    quiz_name = String(required=True, load_only=True)
-    tags = List(String, required=True)
+class Option(Schema):
+    option = String(required=True)
+    is_correct = Boolean(required=True, load_only=True)
+
+
+class Question(Schema):
+    question = String(required=True)
+    options = List(Nested(Option()), required=True, validate=validate.Length(min=1))
 
 
 class QuizSchema(Schema):
@@ -64,25 +69,11 @@ class QuizSchema(Schema):
     creator_id = String(required=True, dump_only=True)
     creator_name = String(required=True, dump_only=True)
     tags = List(Nested(Tag()), required=True, dump_only=True)
-
-
-class Option(Schema):
-    text = String(required=True)
-    is_correct = Boolean(required=True)
-
-
-class Question(Schema):
-    id = String(required=True, dump_only=True)
-    text = String(required=True, dump_only=True)
-    answers = List(Nested(Option()), required=True, dump_only=True)
+    questions = List(Nested(Question()), required=True, validate=validate.Length(min=1))
 
 
 class TagResponse(Schema):
     tag = Nested(Tag(), required=True)
-
-
-class QuizResponse(QuizSchema):
-    questions = List(Nested(Question()))
 
 
 class QuizzesResponse(Schema):
@@ -126,3 +117,9 @@ class ErrorExamples:
     @staticmethod
     def error401():
         return {"code": 401, "error": "Unauthorize", "message": "invalid credentials"}
+
+
+class QuizRequest(Schema):
+    quiz_name = String(required=True, load_only=True)
+    tags = List(String, required=True, validate=validate.Length(min=1))
+    questions = List(Nested(Question()), required=True, validate=validate.Length(min=1))

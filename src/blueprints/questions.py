@@ -8,8 +8,8 @@ blp = Blueprint("Questions", __name__)
 
 @blp.route("/quizzes/<int:quiz_id>/questions")
 class QuestionsView(MethodView):
-    @blp.response(404, ErrorSchema, example=ErrorExamples.error404("quiz"))
-    @blp.response(200, OkResponse)
+    @blp.alt_response(404, schema=ErrorSchema, example=ErrorExamples.error404("quiz"))
+    @blp.alt_response(200, schema=OkResponse)
     @blp.doc(parameters=[{'name': 'Authorization', 'in': 'header', 'description': 'Bearer <access_token>', 'required': 'true'}])
     def post(self, quiz_id):
         """

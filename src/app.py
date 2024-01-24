@@ -3,7 +3,7 @@ from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
-from blueprints import AuthBlp, QuizzesBlp, UsersBlp, RecordsBlp, QuestionsBlp, OptionBlp, TagsBlp
+from blueprints import AuthBlp, QuizzesBlp, UsersBlp, RecordsBlp, TagsBlp
 
 import os
 
@@ -56,11 +56,9 @@ def create_app():
     api = Api(app)
     api.register_blueprint(AuthBlp)
     api.register_blueprint(QuizzesBlp)
-    api.register_blueprint(QuestionsBlp)
-    api.register_blueprint(OptionBlp)
+    api.register_blueprint(TagsBlp)
     api.register_blueprint(RecordsBlp)
     api.register_blueprint(UsersBlp)
-    api.register_blueprint(TagsBlp)
 
     return app
 

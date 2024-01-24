@@ -17,22 +17,22 @@ class QuizService:
     def get_quizzes(self):
         with self.database_access as dao:
             quizzes_data = dao.read(SQLQueries.GET_ALL_QUIZZES)
-        return [{**quiz_data, "tags": json.loads(f"[{quiz_data['tags']}]")} for quiz_data in quizzes_data]
+        return [{**quiz_data, "tags": json.loads(f"[{quiz_data['tags']}]"), "questions": json.loads(quiz_data["questions"] or "[]")} for quiz_data in quizzes_data]
 
     def get_quiz(self, quiz_id):
         with self.database_access as dao:
             quiz_data = dao.read(SQLQueries.GET_QUIZ, (quiz_id,), only_one=True)
         if not quiz_data:
             raise DoNotExists(HTTPStatuses.NOT_FOUND.code, HTTPStatuses.NOT_FOUND.status, f"quiz with quiz id {quiz_id} not found!")
-        return {**quiz_data, "tags": json.loads(f"[{quiz_data['tags']}]")}
+        return {**quiz_data, "tags": json.loads(f"[{quiz_data['tags']}]"), "questions": json.loads(quiz_data["questions"] or "[]")}
 
-    def add_quiz(self, quiz_name, creator_id, tags):
+    def add_quiz(self, quiz_name, creator_id, tags, questions):
         try:
             quiz_id = uuid.uuid4()
             with self.database_access as dao:
-                dao.write(SQLQueries.ADD_QUIZ, (quiz_id, quiz_name, creator_id))
+                dao.write(SQLQueries.ADD_QUIZ, (quiz_id, quiz_name, creator_id, json.dumps(questions)))
                 for tag_id in tags:
-                    dao.write(SQLQueries.ADD_QUIZ_TYPE, (uuid, quiz_id, tag_id))
+                    dao.write(SQLQueries.ADD_QUIZ_TYPE, (uuid.uuid4(), quiz_id, tag_id))
         except IntegrityError as error:
             if "quiz_name" in error.args[1]:
                 raise AlreadyExists(HTTPStatuses.CONFLICT.code, HTTPStatuses.CONFLICT.status, f"quiz with name {quiz_name} already exists!")

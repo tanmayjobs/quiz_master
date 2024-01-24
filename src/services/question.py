@@ -1,6 +1,3 @@
-from database import database, DBContext
-
-
 class QuestionService:
     def add_question(self):
         ...

@@ -244,7 +244,8 @@ sql_queries:
             'tag_id', tag.id,
             'tag_name', tag.tag_name
         )
-    ) AS tags
+    ) AS tags,
+    quiz.questions as questions
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
     LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
@@ -271,8 +272,8 @@ sql_queries:
     GROUP BY quiz.id LIMIT 1;
 
   add_quiz: |
-    INSERT INTO quizzes(id, quiz_name, creator_id)
-    VALUES(%s, %s, %s);
+    INSERT INTO quizzes(id, quiz_name, creator_id, questions)
+    VALUES(%s, %s, %s, %s);
 
   remove_quiz: |
     DELETE FROM quizzes
@@ -367,7 +368,8 @@ sql_queries:
           'tag_id', tag.id,
           'tag_name', tag.tag_name
       )
-    ) as tags
+    ) as tags,
+    quiz.questions as questions
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
     LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id

@@ -1,6 +1,3 @@
-from database import database, DBContext
-
-
 class OptionService:
     def add_option(self):
         ...
