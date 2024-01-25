@@ -7,7 +7,7 @@ from database import MysqlAccess, database, DatabaseAccess
 from helpers.constants import SQLQueries
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
-from helpers.exceptions import DBException, InvalidCredentials, AlreadyExists
+from helpers.exceptions import InvalidCredentials, AlreadyExists
 from utils.crypt import check_password, hash_password
 
 

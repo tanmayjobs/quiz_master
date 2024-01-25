@@ -279,12 +279,12 @@ sql_queries:
     WHERE id = %s and creator_id = %s;
 
   add_question: |
-    INSERT INTO questions(id, quiz_id, question)
+    INSERT INTO questions
     VALUES(%s, %s, %s);
 
   add_option: |
-    INSERT INTO options(question_id, option, is_correct)
-    VALUES(%s, %s, %s);
+    INSERT INTO options
+    VALUES(%s, %s, %s, %s);
 
   add_quiz_type: |
     INSERT INTO quiz_tags(id, quiz_id, tag_id)
@@ -343,18 +343,32 @@ sql_queries:
   get_quiz_questions: |
     SELECT
     q.id AS question_id,
-    q.question AS question_text,
+    q.question_text AS question_text,
     GROUP_CONCAT(
         json_object(
-            'option', o.option,
+            'option', o.option_text,
             'is_correct', o.is_correct
         )
-    ) AS options_json
+    ) AS options
     FROM questions AS q
     INNER JOIN options AS o ON q.id = o.question_id
-    INNER JOIN quizzes AS quiz ON q.quiz_id = quiz.id
     WHERE quiz.id = %s GROUP BY q.id
-    ORDER BY RANDOM();
+    ORDER BY RAND();
+
+  get_quiz_question: |
+    SELECT
+    q.id AS question_id,
+    q.question_text AS question_text,
+    GROUP_CONCAT(
+        json_object(
+            'option', o.option_text,
+            'is_correct', o.is_correct
+        )
+    ) AS options
+    FROM questions AS q
+    INNER JOIN options AS o ON q.id = o.question_id
+    WHERE q.id = %s
+    GROUP BY q.id;
 
   get_all_quizzes: |
    SELECT
@@ -462,14 +476,20 @@ sql_queries:
   get_question_by_id: |
     SELECT
     questions.id as question_id,
+    questions.question_text as question_text,
     quizzes.id as quiz_id,
     quizzes.creator_id as creator_id
     FROM questions
     INNER JOIN quizzes ON quizzes.id = questions.quiz_id
-    WHERE id = %s;
+    WHERE questions.id = %s;
 
   get_option_by_id: |
     SELECT * FROM options
+    WHERE id = %s;
+
+  update_question: |
+    UPDATE questions
+    SET question_text = %s
     WHERE id = %s;
 
 

@@ -25,6 +25,7 @@ class SQLQueries:
 
     ADD_QUIZ = None
     ADD_QUESTION = None
+    UPDATE_QUESTION = None
     ADD_OPTION = None
     REMOVE_QUIZ = None
 
@@ -32,6 +33,7 @@ class SQLQueries:
     GET_QUIZ = None
     GET_QUIZ_TYPES = None
     GET_QUIZ_QUESTIONS = None
+    GET_QUIZ_QUESTION = None
     GET_RANDOM_QUIZ = None
 
     REMOVE_QUESTION = None
@@ -90,3 +92,6 @@ class SQLQueries:
         cls.GET_PLAYER_SCORES = data["get_player_scores"]
 
         cls.FILTER_ALL_QUIZZES = data["filter_all_quizzes"]
+        cls.UPDATE_QUESTION = data["update_question"]
+
+        cls.GET_QUIZ_QUESTION = data["get_quiz_question"]

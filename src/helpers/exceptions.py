@@ -18,10 +18,6 @@ class CustomException(Exception):
         }
 
 
-class DBException(CustomException):
-    ...
-
-
 class ValidationException(CustomException):
     ...
 
