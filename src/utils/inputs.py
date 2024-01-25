@@ -2,10 +2,10 @@ import pwinput
 
 import utils.validators as Validators
 from helpers.constants import InputTexts, Errors
-from utils.until_not_valid import until_not_valid
+from utils.until_not_valid import until_none
 
 
-@until_not_valid
+@until_none
 def get_username():
     username = Validators.get_username(input(InputTexts.USERNAME))
     if not username:
@@ -14,7 +14,7 @@ def get_username():
     return username
 
 
-@until_not_valid
+@until_none
 def get_password():
     password = Validators.get_password(input(InputTexts.PASSWORD))
     if not password:
@@ -23,7 +23,7 @@ def get_password():
     return password
 
 
-@until_not_valid
+@until_none
 def get_string(prompt):
     string = Validators.get_valid_string(input(prompt))
     if not string:
@@ -32,7 +32,7 @@ def get_string(prompt):
     return string
 
 
-@until_not_valid
+@until_none
 def get_correct_option():
     correct_option = Validators.get_correct_option(input(InputTexts.CORRECT_OPTION))
     if not correct_option:

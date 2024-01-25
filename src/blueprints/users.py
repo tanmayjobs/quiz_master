@@ -1,7 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
-from schemas import UsersResponse, OkResponse, ErrorResponse, UserDetail, UserResponse, ErrorSchema, ErrorExamples
+from schemas import UsersResponse, OkResponse, ErrorResponse, UserResponse, ErrorExamples
 
 blp = Blueprint("Users", __name__)
 
@@ -18,7 +18,7 @@ class UsersView(MethodView):
 
 @blp.route("/users/<int:user_id>")
 class UserView(MethodView):
-    @blp.response(404, ErrorSchema, example=ErrorExamples.error404("user"))
+    @blp.response(404, ErrorResponse, example=ErrorExamples.error404("user"))
     @blp.response(200, UserResponse)
     @blp.doc(parameters=[{'name': 'Authorization', 'in': 'header', 'description': 'Bearer <access_token>', 'required': 'true'}])
     def get(self):
@@ -27,7 +27,7 @@ class UserView(MethodView):
         """
         ...
 
-    @blp.response(404, ErrorSchema, example=ErrorExamples.error404("options"))
+    @blp.response(404, ErrorResponse, example=ErrorExamples.error404("options"))
     @blp.response(200, OkResponse)
     @blp.doc(parameters=[{'name': 'Authorization', 'in': 'header', 'description': 'Bearer <access_token>', 'required': 'true'}])
     def put(self):
@@ -36,7 +36,7 @@ class UserView(MethodView):
         """
         ...
 
-    @blp.response(404, ErrorSchema, example=ErrorExamples.error404("options"))
+    @blp.response(404, ErrorResponse, example=ErrorExamples.error404("options"))
     @blp.response(200, OkResponse)
     @blp.doc(parameters=[{'name': 'Authorization', 'in': 'header', 'description': 'Bearer <access_token>', 'required': 'true'}])
     def delete(self):

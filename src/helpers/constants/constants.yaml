@@ -238,14 +238,13 @@ sql_queries:
     quiz.id,
     quiz.quiz_name,
     quiz.creator_id,
-    auth.username,
+    auth.username as creator_name,
     GROUP_CONCAT(
         json_object(
             'tag_id', tag.id,
             'tag_name', tag.tag_name
         )
-    ) AS tags,
-    quiz.questions as questions
+    ) AS tags
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
     LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
@@ -258,7 +257,7 @@ sql_queries:
     quiz.id,
     quiz.quiz_name,
     quiz.creator_id,
-    auth.username,
+    auth.username as creator_name,
     GROUP_CONCAT(
         json_object(
             'tag_id', tag.id,
@@ -272,16 +271,16 @@ sql_queries:
     GROUP BY quiz.id LIMIT 1;
 
   add_quiz: |
-    INSERT INTO quizzes(id, quiz_name, creator_id, questions)
-    VALUES(%s, %s, %s, %s);
+    INSERT INTO quizzes(id, quiz_name, creator_id)
+    VALUES(%s, %s, %s);
 
   remove_quiz: |
     DELETE FROM quizzes
     WHERE id = %s and creator_id = %s;
 
   add_question: |
-    INSERT INTO questions(quiz_id, question)
-    VALUES(%s, %s);
+    INSERT INTO questions(id, quiz_id, question)
+    VALUES(%s, %s, %s);
 
   add_option: |
     INSERT INTO options(question_id, option, is_correct)
@@ -319,7 +318,7 @@ sql_queries:
     quiz.id,
     quiz.quiz_name,
     quiz.creator_id,
-    auth.username,
+    auth.username as creator_name,
     GROUP_CONCAT(
         json_object(
             'tag_id', t.id,
@@ -368,8 +367,7 @@ sql_queries:
           'tag_id', tag.id,
           'tag_name', tag.tag_name
       )
-    ) as tags,
-    quiz.questions as questions
+    ) as tags
     FROM quizzes AS quiz
     INNER JOIN auth AS auth ON quiz.creator_id = auth.id
     LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
@@ -381,7 +379,7 @@ sql_queries:
     quiz.id,
     quiz.quiz_name,
     quiz.creator_id,
-    auth.username,
+    auth.username as creator_name,
     GROUP_CONCAT(
         json_object(
             'tag_id', t.id,
@@ -462,7 +460,12 @@ sql_queries:
     WHERE id = %s;
 
   get_question_by_id: |
-    SELECT * FROM questions
+    SELECT
+    questions.id as question_id,
+    quizzes.id as quiz_id,
+    quizzes.creator_id as creator_id
+    FROM questions
+    INNER JOIN quizzes ON quizzes.id = questions.quiz_id
     WHERE id = %s;
 
   get_option_by_id: |

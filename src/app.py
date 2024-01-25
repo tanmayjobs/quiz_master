@@ -7,8 +7,7 @@ from blueprints import AuthBlp, QuizzesBlp, UsersBlp, RecordsBlp, TagsBlp
 
 import os
 
-from helpers.exceptions import NotEnoughPermission
-from schemas import ValidationCustomException
+from helpers.exceptions import NotEnoughPermission, ValidationCustomException
 
 
 def create_app():
@@ -31,7 +30,7 @@ def create_app():
     app.config["OPENAPI_RAPIDOC_URL"] = "https://unpkg.com/rapidoc/dist/rapidoc-min.js"
 
     app.register_error_handler(NotEnoughPermission, lambda err: (err.dump(), err.code))
-    app.register_error_handler(ValidationCustomException, lambda err: ({"error": str(err)}, 422))
+    app.register_error_handler(ValidationCustomException, lambda err: (err.dump(), 422))
 
     jwt = JWTManager(app)
 

@@ -1,4 +1,4 @@
-def until_not_valid(input_func):
+def until_none(input_func):
     def get_until_not_valid(*args):
         while not (valid_result := input_func(*args)):
             continue
