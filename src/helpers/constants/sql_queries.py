@@ -26,6 +26,7 @@ class SQLQueries:
     ADD_QUIZ = None
     ADD_QUESTION = None
     UPDATE_QUESTION = None
+    UPDATE_OPTION = None
     ADD_OPTION = None
     REMOVE_QUIZ = None
 
@@ -38,6 +39,8 @@ class SQLQueries:
 
     REMOVE_QUESTION = None
     REMOVE_OPTION_BY_QUESTION = None
+    REMOVE_OPTION = None
+    CAN_MODIFY_OPTION = None
 
     GET_ALL_QUIZZES = None
     FILTER_ALL_QUIZZES = None
@@ -82,10 +85,13 @@ class SQLQueries:
 
         cls.ADD_QUESTION = data["add_question"]
         cls.ADD_OPTION = data["add_option"]
+        cls.UPDATE_OPTION = data["update_option"]
         cls.TOP_QUIZ_SCORES = data["top_quiz_scores"]
 
         cls.REMOVE_QUESTION = data["remove_question"]
+        cls.REMOVE_OPTION = data["remove_option"]
         cls.REMOVE_OPTION_BY_QUESTION = data["remove_option_by_question"]
+        cls.CAN_MODIFY_OPTION = data["can_modify_option"]
 
         cls.GET_ALL_QUIZZES = data["get_all_quizzes"]
         cls.ADD_QUIZ_SCORE = data["add_quiz_score"]

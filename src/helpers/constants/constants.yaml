@@ -286,6 +286,22 @@ sql_queries:
     INSERT INTO options
     VALUES(%s, %s, %s, %s);
 
+  update_option: |
+    UPDATE options
+    SET option_text = %s
+    WHERE id = %s;
+
+  can_modify_option: |
+    SELECT creator_id
+    FROM options
+    INNER JOIN questions ON questions.id = options.question_id
+    INNER JOIN quizzes ON quizzes.id = questions.id
+    WHERE options.id = %s;
+
+  remove_option: |
+    DELETE FROM options
+    WHERE id = %s;
+
   add_quiz_type: |
     INSERT INTO quiz_tags(id, quiz_id, tag_id)
     VALUES(%s, %s, %s);
