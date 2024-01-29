@@ -5,6 +5,7 @@ from pymysql import IntegrityError
 
 from database import MysqlAccess, database
 from helpers.constants import SQLQueries
+from helpers.enum.user_role import UserRole
 from helpers.exceptions import DoNotExists, NotEnoughPermission
 
 
@@ -12,12 +13,17 @@ class QuestionService:
     def __init__(self, database_access=None):
         self.database_access = database_access or MysqlAccess(database)
 
-    def get_questions(self, quiz_id):
+    def get_questions(self, quiz_id, user_role):
         with self.database_access as dao:
-            quiz = dao.read(SQLQueries.GET_QUIZ_QUESTIONS, (quiz_id,))
+            quiz = dao.read(SQLQueries.GET_QUIZ_BY_ID, (quiz_id,))
             if not quiz:
                 raise DoNotExists(f"quiz with quiz id {quiz_id} not found!")
-            questions = dao.read(SQLQueries.GET_QUIZ_QUESTIONS, (quiz_id,))
+
+            get_questions_query = SQLQueries.GET_QUESTIONS_AS_PLAYER \
+                if user_role == UserRole.PLAYER.value \
+                else SQLQueries.GET_QUIZ_QUESTIONS
+
+            questions = dao.read(get_questions_query, (quiz_id,))
         return [{**question, "options": json.loads(f'[{question["options"]}]')} for question in questions]
 
     def get_question(self, question_id):

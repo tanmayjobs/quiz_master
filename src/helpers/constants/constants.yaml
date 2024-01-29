@@ -154,7 +154,7 @@ sql_queries:
     CREATE TABLE IF NOT EXISTS `quizzes` (
     `id` varchar(255) NOT NULL,
     `quiz_name` varchar(30) NOT NULL,
-    `creator_id` varchar(255) NOT NULL,
+    `creator_id` varchar(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `quiz_name` (`quiz_name`),
     KEY `creator_id` (`creator_id`),
@@ -185,14 +185,14 @@ sql_queries:
   create_quiz_score_table: |
     CREATE TABLE IF NOT EXISTS `score_table` (
       `id` varchar(255) NOT NULL,
-      `player_id` varchar(255) NOT NULL,
-      `quiz_id` varchar(255) NOT NULL,
+      `user_id` varchar(255),
+      `quiz_id` varchar(255),
       `score` decimal(3,2) NOT NULL,
       `played_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY (`id`),
-      KEY `player_id` (`player_id`),
+      KEY `user_id` (`user_id`),
       KEY `quiz_id` (`quiz_id`),
-      CONSTRAINT `score_table_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `auth` (`id`) ON DELETE SET NULL,
+      CONSTRAINT `score_table_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `auth` (`id`) ON DELETE SET NULL,
       CONSTRAINT `score_table_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE SET NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -510,6 +510,24 @@ sql_queries:
     SET question_text = %s
     WHERE id = %s;
 
+  get_questions_as_player: |
+    SELECT
+    question.id AS question_id,
+    question.question_text AS question_text,
+    GROUP_CONCAT(
+        json_object(
+            'id', options.id,
+            'option', options.option_text
+        )
+    ) AS options
+    FROM questions AS question
+    INNER JOIN options ON question.id = options.question_id
+    WHERE question.quiz_id = %s
+    GROUP BY question.id;
+
+  get_records: |
+    SELECT * FROM score_table
+    WHERE {};
 
 log_text:
   system_start: "Initializing System..."

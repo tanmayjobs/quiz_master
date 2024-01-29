@@ -20,3 +20,22 @@ class QuizResponse(CustomSchema):
 
 class QuizzesResponse(CustomSchema):
     quizzes = List(Nested(QuizResponse()), required=True)
+
+
+class RecordFilter(CustomSchema):
+    quiz_id = String()
+    user_id = String()
+
+
+class Records(CustomSchema):
+    records = List(Nested(RecordFilter()), dump_only=True)
+
+
+class Answer(CustomSchema):
+    question_id = String(required=True)
+    selected_option_ids = List(String, required=True, validate=validate.Length(min=1))
+
+
+class CreateRecord(CustomSchema):
+    quiz_id = String(required=True)
+    answers = List(Nested(Answer()), required=True)

@@ -10,4 +10,4 @@ class OptionRequest(CustomSchema):
 class OptionResponse(CustomSchema):
     id = String(required=True)
     option_text = String(required=True)
-    is_correct = Boolean(required=True)
+    is_correct = Boolean()

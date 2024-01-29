@@ -1,8 +1,6 @@
 from helpers.constants.http_statuses import HTTPStatuses
-from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.tag import TagService
-from utils.rbac import accessed_by
 
 
 class GetTagsController:

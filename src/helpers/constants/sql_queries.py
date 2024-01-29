@@ -17,6 +17,7 @@ class SQLQueries:
     ADD_QUIZ_TYPE = None
     REMOVE_QUIZ_TYPE = None
     CREATE_TAG = None
+    GET_RECORDS = None
 
     GET_ALL_USERS = None
     GET_USER = None
@@ -34,6 +35,7 @@ class SQLQueries:
     GET_QUIZ = None
     GET_QUIZ_TYPES = None
     GET_QUIZ_QUESTIONS = None
+    GET_QUESTIONS_AS_PLAYER = None
     GET_QUIZ_QUESTION = None
     GET_RANDOM_QUIZ = None
 
@@ -101,3 +103,5 @@ class SQLQueries:
         cls.UPDATE_QUESTION = data["update_question"]
 
         cls.GET_QUIZ_QUESTION = data["get_quiz_question"]
+        cls.GET_QUESTIONS_AS_PLAYER = data["get_questions_as_player"]
+        cls.GET_RECORDS = data["get_records"]
