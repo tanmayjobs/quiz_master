@@ -1,5 +1,4 @@
 from data_containers.last_transaction import LastTransaction
-from database import Database
 from database.database_access import DatabaseAccess
 from helpers.constants import LogText
 from helpers.log import logger

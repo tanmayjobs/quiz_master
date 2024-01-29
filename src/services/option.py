@@ -27,11 +27,11 @@ class OptionService:
                 raise NotEnoughPermission
             dao.write(SQLQueries.REMOVE_OPTION, (option_id,))
 
-    def update_option(self, option_id, performer_id, option_text):
+    def update_option(self, option_id, performer_id, option_text, is_correct):
         with self.database_access as dao:
             option = dao.read(SQLQueries.CAN_MODIFY_OPTION, (option_id,), only_one=True)
             if not option:
                 raise DoNotExists(f"option with option id {option_id} not found!")
             if option["creator_id"] != performer_id:
                 raise NotEnoughPermission
-            dao.write(SQLQueries.UPDATE_OPTION, (option_text, option_id))
+            dao.write(SQLQueries.UPDATE_OPTION, (option_text, is_correct, option_id))

@@ -1,6 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
+from controllers.users.remove_user import RemoveUserController
 from schemas import UsersResponse, OkResponse, ErrorResponse, UserResponse, ErrorExamples
 
 blp = Blueprint("Users", __name__)
@@ -16,7 +17,7 @@ class UsersView(MethodView):
         ...
 
 
-@blp.route("/users/<int:user_id>")
+@blp.route("/users/<string:user_id>")
 class UserView(MethodView):
     @blp.response(404, ErrorResponse, example=ErrorExamples.error404("user"))
     @blp.response(200, UserResponse)
@@ -40,7 +41,5 @@ class UserView(MethodView):
     @blp.response(200, OkResponse)
     @blp.doc(parameters=[{'name': 'Authorization', 'in': 'header', 'description': 'Bearer <access_token>', 'required': 'true'}])
     def delete(self):
-        """
-        Delete a user.
-        """
-        ...
+        remove_user = RemoveUserController()
+        return remove_user()

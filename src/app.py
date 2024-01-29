@@ -27,6 +27,7 @@ def create_app():
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     app.config["OPENAPI_RAPIDOC_PATH"] = "/rapidoc"
     app.config["OPENAPI_RAPIDOC_URL"] = "https://unpkg.com/rapidoc/dist/rapidoc-min.js"
+    app.json.sort_keys = False
 
     app.register_error_handler(NotEnoughPermission, lambda err: (err.dump(), err.code))
     app.register_error_handler(ValidationCustomException, lambda err: (err.dump(), 422))

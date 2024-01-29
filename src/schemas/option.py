@@ -8,6 +8,6 @@ class OptionRequest(CustomSchema):
 
 
 class OptionResponse(CustomSchema):
-    option_id = String(required=True)
+    id = String(required=True)
     option_text = String(required=True)
     is_correct = Boolean(required=True)

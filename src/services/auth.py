@@ -2,7 +2,6 @@ import uuid
 
 from pymysql import IntegrityError
 
-from data_containers.user import User
 from database import MysqlAccess, database, DatabaseAccess
 from helpers.constants import SQLQueries
 from helpers.constants.http_statuses import HTTPStatuses
@@ -22,8 +21,7 @@ class AuthServices:
         if not user_data or not check_password(password, user_data["hash_password"]):
             raise InvalidCredentials(HTTPStatuses.UNAUTHORIZED.code, HTTPStatuses.UNAUTHORIZED.status, "username and password do not match!")
 
-        user = User(**user_data)
-        return user
+        return user_data
 
     def sign_up(self, username, password):
         password_hash = hash_password(password)

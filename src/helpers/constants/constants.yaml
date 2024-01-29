@@ -288,14 +288,14 @@ sql_queries:
 
   update_option: |
     UPDATE options
-    SET option_text = %s
+    SET option_text = %s, is_correct = %s
     WHERE id = %s;
 
   can_modify_option: |
     SELECT creator_id
     FROM options
     INNER JOIN questions ON questions.id = options.question_id
-    INNER JOIN quizzes ON quizzes.id = questions.id
+    INNER JOIN quizzes ON quizzes.id = questions.quiz_id
     WHERE options.id = %s;
 
   remove_option: |
@@ -358,33 +358,35 @@ sql_queries:
 
   get_quiz_questions: |
     SELECT
-    q.id AS question_id,
-    q.question_text AS question_text,
+    question.id AS question_id,
+    question.question_text AS question_text,
     GROUP_CONCAT(
         json_object(
-            'option', o.option_text,
-            'is_correct', o.is_correct
+            'id', options.id,
+            'option', options.option_text,
+            'is_correct', options.is_correct
         )
     ) AS options
-    FROM questions AS q
-    INNER JOIN options AS o ON q.id = o.question_id
-    WHERE quiz.id = %s GROUP BY q.id
-    ORDER BY RAND();
+    FROM questions AS question
+    INNER JOIN options ON question.id = options.question_id
+    WHERE question.quiz_id = %s
+    GROUP BY question.id;
 
   get_quiz_question: |
     SELECT
-    q.id AS question_id,
-    q.question_text AS question_text,
+    question.id AS question_id,
+    question.question_text AS question_text,
     GROUP_CONCAT(
         json_object(
-            'option', o.option_text,
-            'is_correct', o.is_correct
+            'id', options.id,
+            'option', options.option_text,
+            'is_correct', options.is_correct
         )
     ) AS options
-    FROM questions AS q
-    INNER JOIN options AS o ON q.id = o.question_id
-    WHERE q.id = %s
-    GROUP BY q.id;
+    FROM questions AS question
+    INNER JOIN options ON question.id = options.question_id
+    WHERE question.id = %s
+    GROUP BY question.id;
 
   get_all_quizzes: |
    SELECT
