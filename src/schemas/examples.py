@@ -5,7 +5,11 @@ class ErrorExamples:
 
     @staticmethod
     def error409(resource):
-        return {"code": 409, "error": "Conflict", "message": f"conflict arise for {resource}"}
+        return {
+            "code": 409,
+            "error": "Conflict",
+            "message": f"conflict arise for {resource}",
+        }
 
     @staticmethod
     def error401():

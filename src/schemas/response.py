@@ -1,6 +1,5 @@
-from helpers.constants import RegexPatterns
 from .custom_schema import CustomSchema
-from marshmallow.fields import Integer, String, List, Dict, validate
+from marshmallow.fields import Integer, String, List, Dict
 
 
 class ErrorResponse(CustomSchema):

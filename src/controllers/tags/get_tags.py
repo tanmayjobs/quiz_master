@@ -1,3 +1,4 @@
+from helpers.constants import Strings
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import CustomException
 from services.tag import TagService
@@ -13,4 +14,4 @@ class GetTagsController:
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:
-            return {"tags": tags}, HTTPStatuses.OK.code
+            return {Strings.TAGS: tags}, HTTPStatuses.OK.code

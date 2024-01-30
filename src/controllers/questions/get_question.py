@@ -1,3 +1,4 @@
+from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.question import QuestionService
@@ -16,4 +17,4 @@ class GetQuestionController:
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:
-            return question, 201
+            return question, HTTPStatuses.OK.code

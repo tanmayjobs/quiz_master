@@ -3,7 +3,7 @@ import uuid
 from pymysql import IntegrityError
 
 from database import MysqlAccess, database
-from helpers.constants import SQLQueries
+from helpers.constants import SQLQueries, Errors
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import AlreadyExists
 
@@ -22,7 +22,7 @@ class TagService:
             with self.database_access as dao:
                 dao.write(SQLQueries.CREATE_TAG, (uuid.uuid4(), tag_name))
         except IntegrityError:
-            raise AlreadyExists(HTTPStatuses.CONFLICT.code, HTTPStatuses.CONFLICT.status, f"tag with name {tag_name} already exists!")
+            raise AlreadyExists(Errors.TAG_ALREADY_EXISTS.format(tag_name))
 
     def delete_tag(self):
         ...

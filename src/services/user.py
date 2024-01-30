@@ -1,5 +1,5 @@
 from database import MysqlAccess, database
-from helpers.constants import SQLQueries
+from helpers.constants import SQLQueries, Errors
 from helpers.exceptions import DoNotExists
 
 
@@ -11,5 +11,5 @@ class UserServices:
         with self.database_access as dao:
             user = dao.read(SQLQueries.GET_USER_BY_ID, (user_id,), only_one=True)
             if not user:
-                raise DoNotExists(f"user with user id {user_id} not found!")
+                raise DoNotExists(Errors.USER_NOT_FOUND.format(id=user_id))
             dao.write(SQLQueries.REMOVE_USER, (user_id,))

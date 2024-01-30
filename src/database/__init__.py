@@ -8,19 +8,17 @@ IMPORTANT: Use the 'database' variable to access the Database object.
 
 Example:
     from database import database, DBContext
-    with DBContext(database) as database_access_object:
-        database_access_object.add(...)
-        database_access_object.remove(...)
+    with DatabaseAccess(database) as database_access_object:
+        database_access_object.read(...)
+        database_access_object.write(...)
         ...
 
 """
-
 
 from helpers.constants import SQLQueries
 from .db import Database
 from .database_access import DatabaseAccess
 from .mysql_access import MysqlAccess
-
 
 database = Database()
 

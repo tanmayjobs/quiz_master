@@ -10,7 +10,7 @@ def accessed_by(*roles: str):
             verify_jwt_in_request()
             role = get_jwt()["role"]
             if role not in roles:
-                raise NotEnoughPermission(403, "Forbidden", "you don't have enough permissions!")
+                raise NotEnoughPermission()
             return init(self, *args, **kwargs)
 
         cls.__init__ = secured_init

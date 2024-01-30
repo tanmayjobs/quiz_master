@@ -6,7 +6,9 @@ from .option import OptionRequest, OptionResponse
 
 class QuestionRequest(CustomSchema):
     question_text = String(required=True)
-    options = List(Nested(OptionRequest()), required=True, validate=validate.Length(min=2, max=5))
+    options = List(
+        Nested(OptionRequest()), required=True, validate=validate.Length(min=2, max=5)
+    )
 
 
 class UpdateQuestionRequest(CustomSchema):

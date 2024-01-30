@@ -4,27 +4,29 @@ import uuid
 from pymysql import IntegrityError
 
 from database import MysqlAccess, database
-from helpers.constants import SQLQueries
+from helpers.constants import SQLQueries, Strings, Errors
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import DoNotExists, AlreadyExists, NotEnoughPermission
 
 
 class QuizService:
-
     def __init__(self, database_access=None):
         self.database_access = database_access or MysqlAccess(database)
 
     def get_quizzes(self):
         with self.database_access as dao:
             quizzes_data = dao.read(SQLQueries.GET_ALL_QUIZZES)
-        return [{**quiz_data, "tags": json.loads(f"[{quiz_data['tags']}]")} for quiz_data in quizzes_data]
+        return [
+            {**quiz_data, Strings.TAGS: json.loads(f"[{quiz_data[Strings.TAGS]}]")}
+            for quiz_data in quizzes_data
+        ]
 
     def get_quiz(self, quiz_id):
         with self.database_access as dao:
             quiz_data = dao.read(SQLQueries.GET_QUIZ, (quiz_id,), only_one=True)
         if not quiz_data:
-            raise DoNotExists(f"quiz with quiz id {quiz_id} not found!")
-        return {**quiz_data, "tags": json.loads(f"[{quiz_data['tags']}]")}
+            raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
+        return {**quiz_data, Strings.TAGS: json.loads(f"[{quiz_data[Strings.TAGS]}]")}
 
     def add_quiz(self, quiz_name, creator_id, tags):
         try:
@@ -32,30 +34,30 @@ class QuizService:
             with self.database_access as dao:
                 dao.write(SQLQueries.ADD_QUIZ, (quiz_id, quiz_name, creator_id))
                 for tag_id in tags:
-                    dao.write(SQLQueries.ADD_QUIZ_TYPE, (uuid.uuid4(), quiz_id, tag_id))
+                    dao.write(SQLQueries.ADD_QUIZ_TAG, (uuid.uuid4(), quiz_id, tag_id))
         except IntegrityError as error:
-            if "quiz_name" in error.args[1]:
-                raise AlreadyExists(HTTPStatuses.CONFLICT.code, HTTPStatuses.CONFLICT.status, f"quiz with name {quiz_name} already exists!")
-            raise DoNotExists(f"tag with tag id {tag_id} not found!")
+            if Strings.QUIZ_NAME in error.args[1]:
+                raise AlreadyExists(Errors.QUIZ_ALREADY_EXISTS.format(quiz_name))
+            raise DoNotExists(Errors.TAG_NOT_FOUND.format(tag_id))
 
     def remove_quiz(self, quiz_id, user_id, is_admin):
         with self.database_access as dao:
             quiz = dao.read(SQLQueries.GET_QUIZ_BY_ID, (quiz_id,), only_one=True)
             if not quiz:
-                raise DoNotExists(f"quiz with quiz id {quiz_id} not found!")
-            if not is_admin and not quiz["creator_id"] == user_id:
-                raise NotEnoughPermission(HTTPStatuses.FORBIDDEN.code, HTTPStatuses.FORBIDDEN.status, "you don't have enough permission to modify this quiz!")
+                raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
+            if not is_admin and not quiz[Strings.CREATOR_ID] == user_id:
+                raise NotEnoughPermission()
             dao.write(SQLQueries.REMOVE_QUIZ, (quiz_id, user_id))
 
     def add_tag(self, quiz_id, tag_id):
         try:
             with self.database_access as dao:
-                dao.write(SQLQueries.ADD_QUIZ_TYPE, (uuid, quiz_id, tag_id))
+                dao.write(SQLQueries.ADD_QUIZ_TAG, (uuid, quiz_id, tag_id))
         except IntegrityError as error:
-            if "quiz_id" in error.args[1]:
-                raise DoNotExists(f"quiz with quiz id {quiz_id} not found!")
-            raise DoNotExists(f"tag with tag id {tag_id} not found!")
+            if Strings.QUIZ_ID in error.args[1]:
+                raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
+            raise DoNotExists(Errors.TAG_NOT_FOUND.format(id=tag_id))
 
     def remove_tag(self, quiz_id, tag_id):
         with self.database_access as dao:
-            dao.write(SQLQueries.REMOVE_QUIZ_TYPE, (quiz_id, tag_id))
+            dao.write(SQLQueries.REMOVE_QUIZ_TAG, (quiz_id, tag_id))

@@ -1,5 +1,6 @@
 from flask_jwt_extended import get_jwt_identity
 
+from helpers.constants import Strings
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.user import UserServices
@@ -19,4 +20,4 @@ class RemoveUserController:
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:
-            return {"result": "removed"}, 200
+            return {Strings.RESULT: Strings.REMOVED}, 200

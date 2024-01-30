@@ -1,5 +1,7 @@
 from flask_jwt_extended import get_jwt_identity
 
+from helpers.constants import Strings
+from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.question import QuestionService
@@ -19,4 +21,4 @@ class RemoveQuestionController:
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:
-            return {"result": "removed"}, 201
+            return {Strings.RESULT: Strings.REMOVED}, HTTPStatuses.OK.code

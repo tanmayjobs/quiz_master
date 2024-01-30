@@ -3,7 +3,7 @@ import uuid
 from pymysql import IntegrityError
 
 from database import MysqlAccess, database
-from helpers.constants import SQLQueries
+from helpers.constants import SQLQueries, Errors, Strings
 from helpers.exceptions import DoNotExists, NotEnoughPermission
 
 
@@ -14,24 +14,27 @@ class OptionService:
     def add_option(self, question_id, option_text, is_correct):
         try:
             with self.database_access as dao:
-                dao.write(SQLQueries.ADD_OPTION, (uuid.uuid4(), option_text, is_correct, question_id))
+                dao.write(
+                    SQLQueries.ADD_OPTION,
+                    (uuid.uuid4(), option_text, is_correct, question_id),
+                )
         except IntegrityError:
-            raise DoNotExists(f"question with question id {question_id} not found!")
+            raise DoNotExists(Errors.QUESTION_NOT_FOUND.format(id=question_id))
 
     def remove_option(self, option_id, performer_id):
         with self.database_access as dao:
             option = dao.read(SQLQueries.CAN_MODIFY_OPTION, (option_id,), only_one=True)
             if not option:
-                raise DoNotExists(f"option with option id {option_id} not found!")
-            if option["creator_id"] != performer_id:
-                raise NotEnoughPermission
+                raise DoNotExists(Errors.OPTION_NOT_FOUND.format(id=option_id))
+            if option[Strings.CREATOR_ID] != performer_id:
+                raise NotEnoughPermission(Errors.NOT_CREATOR_OF_QUIZ)
             dao.write(SQLQueries.REMOVE_OPTION, (option_id,))
 
     def update_option(self, option_id, performer_id, option_text, is_correct):
         with self.database_access as dao:
             option = dao.read(SQLQueries.CAN_MODIFY_OPTION, (option_id,), only_one=True)
             if not option:
-                raise DoNotExists(f"option with option id {option_id} not found!")
-            if option["creator_id"] != performer_id:
-                raise NotEnoughPermission
+                raise DoNotExists(Errors.OPTION_NOT_FOUND.format(id=option_id))
+            if option[Strings.CREATOR_ID] != performer_id:
+                raise NotEnoughPermission(Errors.NOT_CREATOR_OF_QUIZ)
             dao.write(SQLQueries.UPDATE_OPTION, (option_text, is_correct, option_id))

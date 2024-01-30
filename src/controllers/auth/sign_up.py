@@ -1,11 +1,13 @@
+from helpers.constants import Strings
+from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import CustomException
 from services.auth import AuthServices
 
 
 class SignUpController:
     def __init__(self, json_data, auth_service=None):
-        self.username = json_data["username"]
-        self.password = json_data["password"]
+        self.username = json_data[Strings.USERNAME]
+        self.password = json_data[Strings.PASSWORD]
         self.auth_service = auth_service or AuthServices()
 
     def __call__(self):
@@ -14,4 +16,4 @@ class SignUpController:
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:
-            return {"created": "ok"}, 200
+            return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code

@@ -1,3 +1,4 @@
+from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import CustomException
 from services.quiz import QuizService
 
@@ -13,4 +14,4 @@ class GetQuizController:
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:
-            return quiz, 200
+            return quiz, HTTPStatuses.OK.code

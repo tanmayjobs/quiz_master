@@ -3,7 +3,14 @@ from flask_smorest import Blueprint
 
 from controllers.auth.sign_in import SignInController
 from controllers.auth.sign_up import SignUpController
-from schemas import AuthRequest, SignInResponse, ErrorResponse, OkResponse, ErrorExamples
+from helpers.constants import Strings
+from schemas import (
+    AuthRequest,
+    SignInResponse,
+    ErrorResponse,
+    OkResponse,
+    ErrorExamples,
+)
 
 blp = Blueprint("Auth", __name__, url_prefix="/auth")
 
@@ -22,7 +29,9 @@ class SignIn(MethodView):
 class SignUp(MethodView):
     @blp.arguments(AuthRequest)
     @blp.alt_response(201, schema=OkResponse)
-    @blp.alt_response(409, schema=ErrorResponse, example=ErrorExamples.error409("username"))
+    @blp.alt_response(
+        409, schema=ErrorResponse, example=ErrorExamples.error409(Strings.USERNAME)
+    )
     def post(self, json_data):
         sign_up = SignUpController(json_data)
         return sign_up()
