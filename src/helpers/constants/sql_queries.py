@@ -100,6 +100,19 @@ class SQLQueries:
         INSERT INTO tags (id, tag_name)
         VALUES (%s, %s);
     """
+    GET_TAG = """
+        SELECT * FROM tags
+        WHERE id = %s;
+    """
+    REMOVE_TAG = """
+        DELETE FROM tags
+        WHERE id = %s;
+    """
+    UPDATE_TAG = """
+        UPDATE tags
+        SET tag_name = %s
+        WHERE id = %s;
+    """
     ADD_QUIZ_TAG = """
         INSERT INTO quiz_tags(id, quiz_id, tag_id)
         VALUES(%s, %s, %s);

@@ -5,7 +5,7 @@ from pymysql import IntegrityError
 from database import MysqlAccess, database
 from helpers.constants import SQLQueries, Errors
 from helpers.constants.http_statuses import HTTPStatuses
-from helpers.exceptions import AlreadyExists
+from helpers.exceptions import AlreadyExists, DoNotExists
 
 
 class TagService:
@@ -24,8 +24,16 @@ class TagService:
         except IntegrityError:
             raise AlreadyExists(Errors.TAG_ALREADY_EXISTS.format(tag_name))
 
-    def delete_tag(self):
-        ...
+    def delete_tag(self, tag_id):
+        with self.database_access as dao:
+            tag = dao.read(SQLQueries.GET_TAG, (tag_id,))
+            if not tag:
+                raise DoNotExists(Errors.TAG_NOT_FOUND.format(id=tag_id))
+            dao.write(SQLQueries.REMOVE_TAG, (tag_id,))
 
-    def update_tag(self):
-        ...
+    def update_tag(self, tag_id, tag_name):
+        with self.database_access as dao:
+            tag = dao.read(SQLQueries.GET_TAG, (tag_id,))
+            if not tag:
+                raise DoNotExists(Errors.TAG_NOT_FOUND.format(id=tag_id))
+            dao.write(SQLQueries.UPDATE_TAG, (tag_name, tag_id,))

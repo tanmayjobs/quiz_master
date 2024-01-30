@@ -3,7 +3,7 @@ from .custom_schema import CustomSchema
 from marshmallow.fields import String, List, Nested, validate
 
 
-class AddTagRequest(CustomSchema):
+class TagRequest(CustomSchema):
     tag_name = String(
         required=True, validate=validate.Regexp(RegexPatterns.ALPHA_NUM_Q2)
     )

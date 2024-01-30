@@ -48,16 +48,3 @@ class QuizService:
             if not is_admin and not quiz[Strings.CREATOR_ID] == user_id:
                 raise NotEnoughPermission()
             dao.write(SQLQueries.REMOVE_QUIZ, (quiz_id, user_id))
-
-    def add_tag(self, quiz_id, tag_id):
-        try:
-            with self.database_access as dao:
-                dao.write(SQLQueries.ADD_QUIZ_TAG, (uuid, quiz_id, tag_id))
-        except IntegrityError as error:
-            if Strings.QUIZ_ID in error.args[1]:
-                raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
-            raise DoNotExists(Errors.TAG_NOT_FOUND.format(id=tag_id))
-
-    def remove_tag(self, quiz_id, tag_id):
-        with self.database_access as dao:
-            dao.write(SQLQueries.REMOVE_QUIZ_TAG, (quiz_id, tag_id))
