@@ -3,7 +3,7 @@ import uuid
 
 from pymysql import IntegrityError
 
-from database import MysqlAccess, database
+from database import MysqlAccess, resource_database
 from helpers.constants import SQLQueries, Errors, Strings
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import DoNotExists, NotEnoughPermission
@@ -11,7 +11,7 @@ from helpers.exceptions import DoNotExists, NotEnoughPermission
 
 class QuestionService:
     def __init__(self, database_access=None):
-        self.database_access = database_access or MysqlAccess(database)
+        self.database_access = database_access or MysqlAccess(resource_database)
 
     def get_questions(self, quiz_id, user_role):
         with self.database_access as dao:

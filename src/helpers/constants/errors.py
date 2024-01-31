@@ -13,3 +13,6 @@ class Errors:
     QUESTION_NOT_FOUND = NOT_FOUND.format_map({"res": Strings.QUESTION, "id": "{id}"})
     OPTION_NOT_FOUND = NOT_FOUND.format_map({"res": Strings.OPTION, "id": "{id}"})
     NOT_CREATOR_OF_QUIZ = "you are not the creator of the quiz!"
+    NOT_ENOUGH_PERMISSIONS = "you don't have enough permissions"
+    TOKEN_NOT_FRESH = "you need to re-authenticate yourself!"
+    BLOCKED_TOKEN = "token is blocked"

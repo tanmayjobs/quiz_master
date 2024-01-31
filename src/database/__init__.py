@@ -17,13 +17,17 @@ Example:
 
 from helpers.constants import SQLQueries
 from .db import Database
+from database.mysql.mysql_db import MySQLDatabase
+from database.sqlite.sqlite_db import SqliteDatabase
 from .database_access import DatabaseAccess
-from .mysql_access import MysqlAccess
+from database.mysql.mysql_access import MysqlAccess
+from .sqlite.sqlite_access import SqliteAccess
 
-database = Database()
+token_database = SqliteDatabase()
+resource_database = MySQLDatabase()
 
 
-def _init_database(database_access):
+def _init_resource_database(database_access):
     with database_access as dao:
         dao.write(SQLQueries.CREATE_AUTH_TABLE)
         dao.write(SQLQueries.CREATE_QUIZ_TABLE)
@@ -34,4 +38,10 @@ def _init_database(database_access):
         dao.write(SQLQueries.CREATE_QUIZ_TYPE_MAPPING_TABLE)
 
 
-_init_database(MysqlAccess(database))
+def _init_token_database(database_access):
+    with database_access as dao:
+        dao.write(SQLQueries.CREATE_TOKEN_TABLE)
+
+
+_init_resource_database(MysqlAccess(resource_database))
+_init_token_database(SqliteAccess(token_database))

@@ -3,10 +3,10 @@ from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.tag import TagService
-from utils.rbac import accessed_by
+from utils.rbac import validate_token_details
 
 
-@accessed_by(UserRole.ADMIN.value)
+@validate_token_details(UserRole.ADMIN.value)
 class UpdateTagController:
     def __init__(self, tag_id, json_data, tag_service=None):
         self.tag_id = tag_id

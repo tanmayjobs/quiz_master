@@ -3,6 +3,8 @@ from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
+import atexit
+
 from blueprints import (
     AuthBlp,
     QuizzesBlp,
@@ -14,15 +16,16 @@ from blueprints import (
 )
 import os
 
-from helpers.constants.http_statuses import HTTPStatuses
-from helpers.exceptions import NotEnoughPermission, ValidationCustomException
-
+from helpers.exceptions import NotEnoughPermission, ValidationCustomException, BlockedToken
+from services.tokens import TokenService
 
 def create_app():
     load_dotenv()
     app = Flask(__name__)
+
     app.secret_key = os.getenv("APP_SECRET_KEY")
-    app.config["PORT"] = 9000
+    app.json.sort_keys = False
+
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = os.getenv("API_TITLE")
     app.config["API_VERSION"] = os.getenv("API_VERSION")
@@ -35,15 +38,10 @@ def create_app():
     app.config["OPENAPI_SWAGGER_UI_URL"] = os.getenv("OPENAPI_SWAGGER_UI_URL")
     app.config["OPENAPI_RAPIDOC_PATH"] = os.getenv("OPENAPI_RAPIDOC_PATH")
     app.config["OPENAPI_RAPIDOC_URL"] = os.getenv("OPENAPI_RAPIDOC_URL")
-    app.json.sort_keys = False
 
-    app.register_error_handler(
-        NotEnoughPermission, lambda err: (err.dump(), HTTPStatuses.FORBIDDEN.code)
-    )
-    app.register_error_handler(
-        ValidationCustomException,
-        lambda err: (err.dump(), HTTPStatuses.UNPROCCESSABLE_ENTITY.code),
-    )
+    app.register_error_handler(NotEnoughPermission, lambda err: err.generate_response())
+    app.register_error_handler(BlockedToken, lambda err: err.generate_response())
+    app.register_error_handler(ValidationCustomException, lambda err: err.generate_response())
 
     jwt = JWTManager(app)
 
@@ -67,6 +65,9 @@ def create_app():
     api.register_blueprint(TagsBlp)
     api.register_blueprint(RecordsBlp)
     api.register_blueprint(UsersBlp)
+
+    TokenService.load_tokens()
+    atexit.register(TokenService.save_tokens)
 
     return app
 

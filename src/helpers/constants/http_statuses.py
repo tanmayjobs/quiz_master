@@ -23,6 +23,7 @@ class HTTPStatuses:
     METHOD_NOT_ALLOWED = HTTPStatus(405, "Method Not Allowed")
     CONFLICT = HTTPStatus(409, "Conflict")
     UNPROCCESSABLE_ENTITY = HTTPStatus(422, "Unprocessable Entity")
+    INVALID_TOKEN = HTTPStatus(498, "Invalid Token")
     INTERNAL_SERVER_ERROR = HTTPStatus(500, "Internal Server Error")
     NOT_IMPLEMENTED = HTTPStatus(501, "Not Implemented")
     SERVICE_UNAVAILABLE = HTTPStatus(503, "Service Unavailable")

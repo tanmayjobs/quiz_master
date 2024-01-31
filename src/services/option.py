@@ -2,14 +2,14 @@ import uuid
 
 from pymysql import IntegrityError
 
-from database import MysqlAccess, database
+from database import MysqlAccess, resource_database
 from helpers.constants import SQLQueries, Errors, Strings
 from helpers.exceptions import DoNotExists, NotEnoughPermission
 
 
 class OptionService:
     def __init__(self, database_access=None):
-        self.database_access = database_access or MysqlAccess(database)
+        self.database_access = database_access or MysqlAccess(resource_database)
 
     def add_option(self, question_id, option_text, is_correct):
         try:

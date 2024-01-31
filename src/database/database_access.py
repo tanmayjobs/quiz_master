@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from database import Database
+from .db import Database
 
 
 class DatabaseAccess(ABC):

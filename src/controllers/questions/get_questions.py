@@ -5,10 +5,10 @@ from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.question import QuestionService
-from utils.rbac import accessed_by
+from utils.rbac import validate_token_details
 
 
-@accessed_by(UserRole.CREATOR.value, UserRole.PLAYER.value)
+@validate_token_details(UserRole.CREATOR.value, UserRole.PLAYER.value)
 class GetQuestionsController:
     def __init__(self, quiz_id, question_service=None):
         self.quiz_id = quiz_id

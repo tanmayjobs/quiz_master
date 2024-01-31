@@ -6,10 +6,10 @@ from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.question import QuestionService
 from services.quiz import QuizService
-from utils.rbac import accessed_by
+from utils.rbac import validate_token_details
 
 
-@accessed_by(UserRole.CREATOR.value)
+@validate_token_details(UserRole.CREATOR.value)
 class AddQuestionController:
     def __init__(self, quiz_id, json_data, question_service=None):
         self.performer_id = get_jwt_identity()

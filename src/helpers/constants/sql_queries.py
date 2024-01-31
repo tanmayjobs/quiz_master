@@ -1,4 +1,11 @@
 class SQLQueries:
+    CREATE_TOKEN_TABLE = """
+    CREATE TABLE IF NOT EXISTS tokens (
+        token_pair_id varchar(255) PRIMARY KEY,
+        user_id VARCHAR(255) NOT NULL,
+        exp VARCHAR(255) NOT NULL
+    );
+    """
     CREATE_AUTH_TABLE = """
         CREATE TABLE IF NOT EXISTS `auth` (
             `id` varchar(255) NOT NULL,
@@ -93,6 +100,15 @@ class SQLQueries:
         FROM questions
         INNER JOIN quizzes ON quizzes.id = questions.quiz_id
         WHERE questions.id = %s;
+    """
+
+    LOAD_TOKEN = """
+        SELECT * FROM tokens;
+    """
+
+    SAVE_TOKEN = """
+        INSERT OR IGNORE INTO tokens
+        VALUES(?, ?, ?);
     """
 
     GET_ALL_TAGS = "SELECT * FROM tags;"
@@ -295,4 +311,20 @@ class SQLQueries:
         WHERE quiz.is_deleted = False
         AND (quiz.quiz_name LIKE %s OR tag.tag_name LIKE %s)
         GROUP BY quiz.id;
+    """
+
+    GET_QUESTION_IDS = """
+        SELECT id as question_id FROM questions
+        WHERE quiz_id = %s;
+    """
+
+    GET_ALL_OPTIONS_IDS = """
+        SELECT * FROM options
+        INNER JOIN questions ON questions.id = options.question_id
+        WHERE questions.quiz_id = %s;
+    """
+
+    ADD_SCORE = """
+        INSERT INTO score_table(id, user_id, quiz_id, score)
+        VALUES(%s, %s, %s, %s);
     """

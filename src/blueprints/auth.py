@@ -1,6 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
+from controllers.auth.refresh import RefreshTokenController
 from controllers.auth.sign_in import SignInController
 from controllers.auth.sign_up import SignUpController
 from helpers.constants import Strings
@@ -35,3 +36,10 @@ class SignUp(MethodView):
     def post(self, json_data):
         sign_up = SignUpController(json_data)
         return sign_up()
+
+
+@blp.route("/refresh")
+class Refresh(MethodView):
+    def post(self):
+        refresh_token = RefreshTokenController()
+        return refresh_token()

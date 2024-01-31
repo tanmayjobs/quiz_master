@@ -5,10 +5,10 @@ from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from services.quiz import QuizService
-from utils.rbac import accessed_by
+from utils.rbac import validate_token_details
 
 
-@accessed_by(UserRole.ADMIN.value, UserRole.CREATOR.value)
+@validate_token_details(UserRole.ADMIN.value, UserRole.CREATOR.value)
 class RemoveQuizController:
     def __init__(self, quiz_id, quiz_service=None):
         self.performer_id = get_jwt_identity()

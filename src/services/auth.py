@@ -2,9 +2,8 @@ import uuid
 
 from pymysql import IntegrityError
 
-from database import MysqlAccess, database, DatabaseAccess
+from database import MysqlAccess, resource_database, DatabaseAccess
 from helpers.constants import SQLQueries, Strings, Errors
-from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import InvalidCredentials, AlreadyExists
 from utils.crypt import check_password, hash_password
@@ -12,7 +11,7 @@ from utils.crypt import check_password, hash_password
 
 class AuthServices:
     def __init__(self, database_access=None):
-        self.database_access: DatabaseAccess = database_access or MysqlAccess(database)
+        self.database_access: DatabaseAccess = database_access or MysqlAccess(resource_database)
 
     def sign_in(self, username, password):
         with self.database_access as dao:
