@@ -15,4 +15,6 @@ class Errors:
     NOT_CREATOR_OF_QUIZ = "you are not the creator of the quiz!"
     NOT_ENOUGH_PERMISSIONS = "you don't have enough permissions"
     TOKEN_NOT_FRESH = "you need to re-authenticate yourself!"
-    BLOCKED_TOKEN = "token is blocked"
+    BLOCKED_TOKEN = "provided token is blocked"
+    TOKEN_NOT_PROVIDED = "token not provided!"
+    EXPIRED_TOKEN = "provided token is expired!"

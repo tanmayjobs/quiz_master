@@ -37,33 +37,26 @@ class InvalidCredentials(CustomException):
 
 
 class AlreadyExists(CustomException):
-    def __init__(
-            self,
-            message,
-            code=HTTPStatuses.CONFLICT.code,
-            status=HTTPStatuses.CONFLICT.status,
-    ):
-        super().__init__(code, status, message)
+    def __init__(self, message):
+        super().__init__(
+            HTTPStatuses.CONFLICT.code,
+            HTTPStatuses.CONFLICT.status,
+            message
+        )
 
 
 class DoNotExists(CustomException):
-    def __init__(
-            self,
-            message,
-            code=HTTPStatuses.NOT_FOUND.code,
-            status=HTTPStatuses.NOT_FOUND.status,
-    ):
-        super().__init__(code, status, message)
+    def __init__(self, message):
+        super().__init__(HTTPStatuses.NOT_FOUND.code, HTTPStatuses.NOT_FOUND.status, message)
 
 
 class NotEnoughPermission(CustomException):
-    def __init__(
-            self,
-            message=Errors.NOT_ENOUGH_PERMISSIONS,
-            code=HTTPStatuses.FORBIDDEN.code,
-            status=HTTPStatuses.FORBIDDEN.status,
-    ):
-        super().__init__(code, status, message)
+    def __init__(self):
+        super().__init__(
+            HTTPStatuses.FORBIDDEN.code,
+            HTTPStatuses.FORBIDDEN.status,
+            Errors.NOT_ENOUGH_PERMISSIONS
+        )
 
 
 class ValidationCustomException(CustomException):
@@ -90,4 +83,26 @@ class TokenNotFresh(CustomException):
 
 class BlockedToken(CustomException):
     def __init__(self):
-        super().__init__(HTTPStatuses.INVALID_TOKEN.code, HTTPStatuses.INVALID_TOKEN.status, Errors.BLOCKED_TOKEN)
+        super().__init__(
+            HTTPStatuses.INVALID_TOKEN.code,
+            HTTPStatuses.INVALID_TOKEN.status,
+            Errors.BLOCKED_TOKEN
+        )
+
+
+class TokenNotProvided(CustomException):
+    def __init__(self):
+        super().__init__(
+            HTTPStatuses.UNAUTHORIZED.code,
+            HTTPStatuses.UNAUTHORIZED.status,
+            Errors.TOKEN_NOT_PROVIDED
+        )
+
+
+class TokenExpired(CustomException):
+    def __init__(self):
+        super().__init__(
+            HTTPStatuses.INVALID_TOKEN.code,
+            HTTPStatuses.INVALID_TOKEN.status,
+            Errors.EXPIRED_TOKEN
+        )

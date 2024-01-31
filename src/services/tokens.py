@@ -26,7 +26,8 @@ class TokenService:
         self.invalidate_token_pair(jwt[Strings.TOKEN_PAIR_ID], user_id, jwt[Strings.EXP])
         return self.generate_tokens(user, fresh=False)
 
-    def generate_tokens(self, user, fresh=False):
+    @classmethod
+    def generate_tokens(cls, user, fresh=False):
         token_pair_id = uuid.uuid4()
         return {
             Strings.ACCESS_TOKEN: create_access_token(

@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
 import atexit
+import os
 
 from blueprints import (
     AuthBlp,
@@ -14,10 +15,16 @@ from blueprints import (
     QuestionsBlp,
     OptionBlp,
 )
-import os
 
-from helpers.exceptions import NotEnoughPermission, ValidationCustomException, BlockedToken
+from helpers.exceptions import (
+    NotEnoughPermission,
+    ValidationCustomException,
+    BlockedToken,
+    TokenNotProvided,
+    TokenExpired
+)
 from services.tokens import TokenService
+
 
 def create_app():
     load_dotenv()
@@ -25,7 +32,6 @@ def create_app():
 
     app.secret_key = os.getenv("APP_SECRET_KEY")
     app.json.sort_keys = False
-
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = os.getenv("API_TITLE")
     app.config["API_VERSION"] = os.getenv("API_VERSION")
@@ -45,17 +51,9 @@ def create_app():
 
     jwt = JWTManager(app)
 
-    @jwt.expired_token_loader
-    def expired_token(jwt_header, jwt_payload):
-        return {"error": "token expired"}, 401
-
-    @jwt.invalid_token_loader
-    def invalid_token(error):
-        return {"error": "invalid token"}, 401
-
-    @jwt.unauthorized_loader
-    def unauthorized(error):
-        return {"error": "token not provided"}, 401
+    jwt.expired_token_loader(lambda *_: TokenExpired().generate_response())
+    jwt.invalid_token_loader(lambda *_: BlockedToken().generate_response())
+    jwt.unauthorized_loader(lambda *_: TokenNotProvided().generate_response())
 
     api = Api(app)
     api.register_blueprint(AuthBlp)
