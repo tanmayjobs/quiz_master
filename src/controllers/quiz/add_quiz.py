@@ -4,6 +4,7 @@ from helpers.constants import Strings
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
+from helpers.log import logger
 from services.quiz import QuizService
 from utils.rbac import validate_token_details
 
@@ -20,6 +21,7 @@ class AddQuizController:
         try:
             self.quiz_service.add_quiz(self.quiz_name, self.performer_id, self.tags)
         except CustomException as custom_error:
+            logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
             return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code

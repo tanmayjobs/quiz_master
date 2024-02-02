@@ -73,7 +73,7 @@ class QuestionService:
             if not question:
                 raise DoNotExists(Errors.QUESTION_NOT_FOUND.format(id=question_id))
             if question[Strings.CREATOR_ID] != performer_id:
-                raise NotEnoughPermission(Errors.NOT_CREATOR_OF_QUIZ)
+                raise NotEnoughPermission()
             dao.write(SQLQueries.REMOVE_QUESTION, (question_id,))
 
     def update_question(self, performer_id, question_id, question_text):
@@ -84,7 +84,7 @@ class QuestionService:
             if not question:
                 raise DoNotExists(Errors.QUESTION_NOT_FOUND.format(id=question_id))
             if question[Strings.CREATOR_ID] != performer_id:
-                raise NotEnoughPermission(Errors.NOT_CREATOR_OF_QUIZ)
+                raise NotEnoughPermission()
             dao.write(
                 SQLQueries.UPDATE_QUESTION,
                 (

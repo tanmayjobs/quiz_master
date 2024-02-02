@@ -5,8 +5,12 @@ This file contains config_app method which takes the flask app and set it's conf
 from dotenv import load_dotenv
 import os
 
+from helpers.constants import LogText
+from helpers.log import logger
+
 
 def config_app(app):
+    logger.info(LogText.SETTING_UP_CONFIGS)
     load_dotenv()
 
     app.secret_key = os.getenv("APP_SECRET_KEY")
@@ -23,3 +27,5 @@ def config_app(app):
     app.config["OPENAPI_SWAGGER_UI_URL"] = os.getenv("OPENAPI_SWAGGER_UI_URL")
     app.config["OPENAPI_RAPIDOC_PATH"] = os.getenv("OPENAPI_RAPIDOC_PATH")
     app.config["OPENAPI_RAPIDOC_URL"] = os.getenv("OPENAPI_RAPIDOC_URL")
+
+    logger.info(LogText.SETTING_UP_CONFIG_COMPLETED)

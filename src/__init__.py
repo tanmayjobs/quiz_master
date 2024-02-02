@@ -16,6 +16,10 @@ The implementation contains not only the core functionality of the app but also 
     3. Password Hashing
     And many more.
 
+Doc-Strings are only provided where they are necessary and required to understand the functionality working.
+Don't use Doc-Strings such as,
+    This class will handle authentication logic.
+Use such a class name that it's already understood.
 
 For each package in this project __init__ files are used for,
     1. Explaining usage of the package or the sub files in the package.
@@ -36,6 +40,7 @@ Rules for this project:
     8. If you are not patient and calm while writing code, then you are not ready yet to code.
     9. Python is flexible for our benefit, use it in good way and don't just do random stupid things.
     10. Just because it could be done, don't mean it should be done.
+    NOTE: These conventions I talk of are nothing but the underlying pattern in each module of this project.
 
 Always remember this project is created in such a way that each package, module and class is following OOPS and SOLID.
 In some places OOPS and SOLID may not be followed but those places are exceptions and following OOPS and SOLID will only

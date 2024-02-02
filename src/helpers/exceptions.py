@@ -1,8 +1,9 @@
 import json
 from dataclasses import dataclass
 
-from helpers.constants import Errors
+from helpers.constants import Errors, LogText
 from helpers.constants.http_statuses import HTTPStatuses
+from helpers.log import logger
 
 
 @dataclass
@@ -20,6 +21,9 @@ class CustomException(Exception):
 
     def generate_response(self):
         return self.dump(), self.code
+
+    def __repr__(self):
+        return f"{self.code}, {self.error}, {self.message}"
 
 
 class ValidationException(CustomException):
@@ -109,8 +113,10 @@ class TokenExpired(CustomException):
 
 
 def register_error_handlers(app):
+    logger.info(LogText.REGISTER_ERROR_HANDLERS)
     app.register_error_handler(NotEnoughPermission, lambda err: err.generate_response())
     app.register_error_handler(BlockedToken, lambda err: err.generate_response())
     app.register_error_handler(
         ValidationCustomException, lambda err: err.generate_response()
     )
+    logger.info(LogText.REGISTER_ERROR_HANDLERS_COMPLETED)

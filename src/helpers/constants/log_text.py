@@ -7,3 +7,6 @@ class LogText:
     INVALID_CREDENTIALS = "someone attempted to log in with invalid credentials."
     BLOCKED_TOKEN = "someone used blocked token."
     NOT_ENOUGH_PERMISSIONS = "someone tried to access {} without enough permissions."
+
+    def __getattr__(self, item: str):
+        return item.upper()

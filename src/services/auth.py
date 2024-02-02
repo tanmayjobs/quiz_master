@@ -6,6 +6,7 @@ from database import MysqlAccess, resource_database, DatabaseAccess
 from helpers.constants import SQLQueries, Strings, Errors
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import InvalidCredentials, AlreadyExists
+from helpers.log import logger
 from utils.hashing import check_password, hash_password
 
 
@@ -34,5 +35,6 @@ class AuthServices:
                     SQLQueries.ADD_USER,
                     (uuid.uuid4(), username, password_hash, UserRole.PLAYER.value),
                 )
-        except IntegrityError:
+        except IntegrityError as error:
+            logger.info(error)
             raise AlreadyExists(Errors.USERNAME_ALREADY_EXISTS)

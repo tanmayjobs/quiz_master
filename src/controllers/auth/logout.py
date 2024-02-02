@@ -1,9 +1,10 @@
 from flask_jwt_extended import get_jwt, get_jwt_identity
 
-from helpers.constants import Strings
+from helpers.constants import Strings, LogText
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
+from helpers.log import logger
 from utils.rbac import validate_token_details
 from services.tokens import TokenService
 
@@ -25,6 +26,7 @@ class LogoutController:
                 self.token_pair_id, self.user_id, self.exp
             )
         except CustomException as custom_error:
+            logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
             return {Strings.RESULT: Strings.LOGOUT}, HTTPStatuses.OK.code

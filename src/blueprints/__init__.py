@@ -5,6 +5,8 @@ which is used to register the necessary blueprints of the application.
 
 from flask_smorest import Api
 
+from helpers.constants import LogText
+from helpers.log import logger
 from .auth import blp as AuthBlp
 from .quizzes import blp as QuizzesBlp
 from .users import blp as UsersBlp
@@ -20,6 +22,7 @@ def register_blueprints(app):
     :param app: Flask app
     :return: None
     """
+    logger.info(LogText.REGISTERING_BLUEPRINTS)
     api = Api(app)
     api.register_blueprint(AuthBlp)
     api.register_blueprint(QuizzesBlp)
@@ -28,6 +31,7 @@ def register_blueprints(app):
     api.register_blueprint(TagsBlp)
     api.register_blueprint(RecordsBlp)
     api.register_blueprint(UsersBlp)
+    logger.info(LogText.REGISTERING_BLUEPRINTS_COMPLETED)
 
 
 __all__ = ["register_blueprints"]

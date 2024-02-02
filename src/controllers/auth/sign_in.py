@@ -1,6 +1,7 @@
 from helpers.constants import Strings
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import CustomException
+from helpers.log import logger
 from services.auth import AuthServices
 from services.tokens import TokenService
 
@@ -17,6 +18,7 @@ class SignInController:
             user = self.auth_service.sign_in(self.username, self.password)
             tokens_json = self.token_service.generate_tokens(user, fresh=True)
         except CustomException as custom_error:
+            logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
             return tokens_json, HTTPStatuses.OK.code
