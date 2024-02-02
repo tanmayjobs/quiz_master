@@ -7,7 +7,9 @@ from services.tokens import TokenService
 from utils.rbac import validate_token_details
 
 
-@validate_token_details(UserRole.PLAYER.value, UserRole.ADMIN.value, UserRole.CREATOR.value, refresh=True)
+@validate_token_details(
+    UserRole.PLAYER.value, UserRole.ADMIN.value, UserRole.CREATOR.value, refresh=True
+)
 class RefreshTokenController:
     def __init__(self, token_service=None):
         self.user_id = get_jwt_identity()
@@ -16,7 +18,9 @@ class RefreshTokenController:
 
     def __call__(self):
         try:
-            tokens_json = self.token_service.refresh_access_token(self.user_id, self.jwt)
+            tokens_json = self.token_service.refresh_access_token(
+                self.user_id, self.jwt
+            )
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:

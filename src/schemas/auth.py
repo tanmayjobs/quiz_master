@@ -8,5 +8,6 @@ class AuthRequest(CustomSchema):
     password = String(required=True, load_only=True)
 
 
-class SignInResponse(CustomSchema):
+class TokensResponse(CustomSchema):
     access_token = String(dump_only=True)
+    refresh_token = String(dump_only=True)

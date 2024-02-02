@@ -7,7 +7,7 @@ from controllers.auth.sign_up import SignUpController
 from helpers.constants import Strings
 from schemas import (
     AuthRequest,
-    SignInResponse,
+    TokensResponse,
     ErrorResponse,
     OkResponse,
     ErrorExamples,
@@ -20,7 +20,7 @@ blp = Blueprint("Auth", __name__, url_prefix="/auth")
 class SignIn(MethodView):
     @blp.arguments(AuthRequest)
     @blp.alt_response(401, schema=ErrorResponse, example=ErrorExamples.error401())
-    @blp.alt_response(200, schema=SignInResponse)
+    @blp.alt_response(200, schema=TokensResponse)
     def post(self, json_data):
         sign_in = SignInController(json_data)
         return sign_in()
@@ -40,6 +40,7 @@ class SignUp(MethodView):
 
 @blp.route("/refresh")
 class Refresh(MethodView):
+    @blp.alt_response(200, schema=TokensResponse)
     def post(self):
         refresh_token = RefreshTokenController()
         return refresh_token()

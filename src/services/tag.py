@@ -36,4 +36,10 @@ class TagService:
             tag = dao.read(SQLQueries.GET_TAG, (tag_id,))
             if not tag:
                 raise DoNotExists(Errors.TAG_NOT_FOUND.format(id=tag_id))
-            dao.write(SQLQueries.UPDATE_TAG, (tag_name, tag_id,))
+            dao.write(
+                SQLQueries.UPDATE_TAG,
+                (
+                    tag_name,
+                    tag_id,
+                ),
+            )

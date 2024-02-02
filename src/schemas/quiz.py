@@ -6,7 +6,9 @@ from .tags import TagResponse
 
 
 class QuizRequest(CustomSchema):
-    quiz_name = String(required=True, validate=validate.Regexp(RegexPatterns.ALPHA_NUM_Q2))
+    quiz_name = String(
+        required=True, validate=validate.Regexp(RegexPatterns.ALPHA_NUM_Q2)
+    )
     tag_ids = List(String, validate=validate.Length(min=1))
 
 

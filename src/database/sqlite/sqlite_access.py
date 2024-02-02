@@ -5,7 +5,6 @@ from helpers.log import logger
 
 
 class SqliteAccess(DatabaseAccess):
-
     def __enter__(self):
         self.cursor = self.database.connection.cursor()
         return self

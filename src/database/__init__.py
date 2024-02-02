@@ -7,8 +7,8 @@ IMPORTANT: Don't import the Database class as long as you don't need a separate 
 IMPORTANT: Use the 'database' variable to access the Database object.
 
 Example:
-    from database import database, DBContext
-    with DatabaseAccess(database) as database_access_object:
+    from database import database, DatabaseAccess
+    with DatabaseAccess(database) as dao:
         database_access_object.read(...)
         database_access_object.write(...)
         ...
@@ -23,7 +23,7 @@ from .database_access import DatabaseAccess
 from database.mysql.mysql_access import MysqlAccess
 from .sqlite.sqlite_access import SqliteAccess
 
-token_database = SqliteDatabase()
+token_database = MySQLDatabase()
 resource_database = MySQLDatabase()
 
 

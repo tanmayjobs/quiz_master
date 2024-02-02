@@ -8,7 +8,9 @@ from utils.rbac import validate_token_details
 from services.tokens import TokenService
 
 
-@validate_token_details(UserRole.PLAYER.value, UserRole.ADMIN.value, UserRole.CREATOR.value)
+@validate_token_details(
+    UserRole.PLAYER.value, UserRole.ADMIN.value, UserRole.CREATOR.value
+)
 class LogoutController:
     def __init__(self, token_service=None):
         jwt = get_jwt()
@@ -19,7 +21,9 @@ class LogoutController:
 
     def __call__(self):
         try:
-            self.token_service.invalidate_token_pair(self.token_pair_id, self.user_id, self.exp)
+            self.token_service.invalidate_token_pair(
+                self.token_pair_id, self.user_id, self.exp
+            )
         except CustomException as custom_error:
             return custom_error.dump(), custom_error.code
         else:

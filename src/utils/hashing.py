@@ -1,8 +1,8 @@
-import re
+"""
+This file provides method to hash and check hashed password for authentication purposes.
+"""
 
 import bcrypt
-
-from helpers.constants.regex_patterns import RegexPatterns
 
 
 def hash_password(password: str):
@@ -15,7 +15,3 @@ def hash_password(password: str):
 
 def check_password(password: str, hashed_password):
     return bcrypt.checkpw(password.encode(), hashed_password.encode())
-
-
-def validate_password(password):
-    return re.match(RegexPatterns.PASSWORD, password)

@@ -1,10 +1,11 @@
 class SQLQueries:
     CREATE_TOKEN_TABLE = """
     CREATE TABLE IF NOT EXISTS tokens (
-        token_pair_id varchar(255) PRIMARY KEY,
-        user_id VARCHAR(255) NOT NULL,
-        exp VARCHAR(255) NOT NULL
-    );
+        `token_pair_id` varchar(255),
+        `user_id` VARCHAR(255) NOT NULL,
+        `exp` VARCHAR(255) NOT NULL,
+        PRIMARY KEY (`token_pair_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     """
     CREATE_AUTH_TABLE = """
         CREATE TABLE IF NOT EXISTS `auth` (
@@ -103,12 +104,13 @@ class SQLQueries:
     """
 
     LOAD_TOKEN = """
-        SELECT * FROM tokens;
+        SELECT * FROM tokens
+        WHERE token_pair_id = %s;
     """
 
     SAVE_TOKEN = """
         INSERT OR IGNORE INTO tokens
-        VALUES(?, ?, ?);
+        VALUES(%s, %s, %s);
     """
 
     GET_ALL_TAGS = "SELECT * FROM tags;"
