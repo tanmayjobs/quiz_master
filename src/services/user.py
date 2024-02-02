@@ -1,11 +1,11 @@
-from database import MysqlAccess, resource_database
+from database import MysqlAccess
 from helpers.constants import SQLQueries, Errors
 from helpers.exceptions import DoNotExists
 
 
 class UserServices:
     def __init__(self, database_access=None):
-        self.database_access = database_access or MysqlAccess(resource_database)
+        self.database_access = database_access or MysqlAccess()
 
     def remove_user(self, user_id):
         with self.database_access as dao:

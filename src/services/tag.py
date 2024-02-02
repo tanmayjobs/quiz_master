@@ -2,7 +2,7 @@ import uuid
 
 from pymysql import IntegrityError
 
-from database import MysqlAccess, resource_database
+from database import MysqlAccess
 from helpers.constants import SQLQueries, Errors
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import AlreadyExists, DoNotExists
@@ -10,7 +10,7 @@ from helpers.exceptions import AlreadyExists, DoNotExists
 
 class TagService:
     def __init__(self, database_access=None):
-        self.database_access = database_access or MysqlAccess(resource_database)
+        self.database_access = database_access or MysqlAccess()
 
     def get_tags(self):
         with self.database_access as dao:

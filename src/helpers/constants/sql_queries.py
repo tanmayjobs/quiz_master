@@ -109,7 +109,7 @@ class SQLQueries:
     """
 
     SAVE_TOKEN = """
-        INSERT OR IGNORE INTO tokens
+        INSERT INTO tokens
         VALUES(%s, %s, %s);
     """
 

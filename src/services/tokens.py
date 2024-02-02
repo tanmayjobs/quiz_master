@@ -2,7 +2,7 @@ import uuid
 
 from flask_jwt_extended import create_access_token, create_refresh_token
 
-from database import DatabaseAccess, token_database, MysqlAccess
+from database import DatabaseAccess, MysqlAccess
 from helpers.constants import LogText, SQLQueries, Strings
 from helpers.log import logger
 
@@ -11,9 +11,7 @@ class TokenService:
     blocked_tokens = set()
 
     def __init__(self, database_access=None):
-        self.database_access: DatabaseAccess = database_access or MysqlAccess(
-            token_database
-        )
+        self.database_access: DatabaseAccess = database_access or MysqlAccess()
 
     def is_blocked(self, token_pair_id):
         with self.database_access as dao:

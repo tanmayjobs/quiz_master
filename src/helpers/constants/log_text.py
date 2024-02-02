@@ -7,6 +7,11 @@ class LogText:
     INVALID_CREDENTIALS = "someone attempted to log in with invalid credentials."
     BLOCKED_TOKEN = "someone used blocked token."
     NOT_ENOUGH_PERMISSIONS = "someone tried to access {} without enough permissions."
-
-    def __getattr__(self, item: str):
-        return item.upper()
+    SETTING_UP_CONFIGS = "setting up configs"
+    SETTING_UP_CONFIG_COMPLETED = "setting up config completed"
+    REGISTER_ERROR_HANDLERS = "registering error handlers"
+    REGISTER_ERROR_HANDLERS_COMPLETED = "registering error handlers completed"
+    REGISTERING_BLUEPRINTS = "registering blueprints"
+    REGISTERING_BLUEPRINTS_COMPLETED = "registering blueprints completed"
+    REGISTERING_JWT = "registering jwt system"
+    REGISTERING_JWT_COMPLETED = "registering jwt system completed"

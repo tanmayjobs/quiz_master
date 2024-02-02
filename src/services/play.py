@@ -1,5 +1,4 @@
-from database import MysqlAccess, resource_database
-from helpers.constants import Strings, SQLQueries
+from helpers.constants import Strings
 
 
 class PlayService:

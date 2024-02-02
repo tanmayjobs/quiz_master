@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from .db import Database
+
+from .mysql.mysql_db import MySQLDatabase
 
 
 class DatabaseAccess(ABC):
@@ -8,8 +9,8 @@ class DatabaseAccess(ABC):
     The context manager provides the CRUD operations for the database, check __init__.py of database package for more.
     """
 
-    def __init__(self, database: Database):
-        self.database = database
+    def __init__(self):
+        self.database = MySQLDatabase()
 
     @abstractmethod
     def __enter__(self):

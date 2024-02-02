@@ -48,4 +48,12 @@ degrade the code quality.
 OOPS and SOLID are used to make better project architecture, they are not be followed just for the sake of following.
 
 LIFE RULE: In case of any confusion try to understand the pattern. Or contact the creator.
+
+LEARNINGS:
+    1. Using pythonic singleton approach is quite good and have its own benefits.
+        But remember that it is really hard to control its creation.
+        You should have control over things when they are created and when they are destroyed.
+    2. Even if you like to try new things out always try to see the bigger picture.
+    3. Yes, some approaches may look good and easy to implement, but they can create a lot of problems later on.
+    4. Experience is what's you'll get when doing various things.
 """

@@ -23,9 +23,6 @@ from .database_access import DatabaseAccess
 from database.mysql.mysql_access import MysqlAccess
 from .sqlite.sqlite_access import SqliteAccess
 
-token_database = MySQLDatabase()
-resource_database = MySQLDatabase()
-
 
 def _init_resource_database(database_access):
     with database_access as dao:
@@ -43,5 +40,5 @@ def _init_token_database(database_access):
         dao.write(SQLQueries.CREATE_TOKEN_TABLE)
 
 
-_init_resource_database(MysqlAccess(resource_database))
-_init_token_database(SqliteAccess(token_database))
+_init_resource_database(MysqlAccess())
+_init_token_database(MysqlAccess())
