@@ -1,7 +1,10 @@
+from flask import current_app
+
+from database import MySQLDatabase
 from database.last_transaction import LastTransaction
 from database.database_access import DatabaseAccess
 from helpers.constants import LogText
-from helpers.log import logger
+from helpers.log import request_logger
 
 
 class MysqlAccess(DatabaseAccess):
@@ -10,8 +13,12 @@ class MysqlAccess(DatabaseAccess):
     The context manager provides the CRUD operations for the database, check __init__.py of database package for more.
     """
 
+    def __init__(self):
+        self.database = MySQLDatabase()
+
     def __enter__(self):
-        self.cursor = self.database.connection.cursor()
+        self.database.connect()
+        self.cursor = self.database.get_cursor()
         return self
 
     def __exit__(self, *error_details):
@@ -19,7 +26,9 @@ class MysqlAccess(DatabaseAccess):
             self.database.connection.commit()
         else:
             self.database.connection.rollback()
-            logger.warn(LogText.SYSTEM_ERROR)
+            current_app.logger.warning(LogText.SYSTEM_ERROR)
+            request_logger.warning(LogText.SYSTEM_ERROR)
+        self.database.close()
 
     def read(self, query, params=(), only_one=False):
         self.cursor.execute(query, params)

@@ -9,8 +9,9 @@ class DatabaseAccess(ABC):
     The context manager provides the CRUD operations for the database, check __init__.py of database package for more.
     """
 
+    @abstractmethod
     def __init__(self):
-        self.database = MySQLDatabase()
+        ...
 
     @abstractmethod
     def __enter__(self):

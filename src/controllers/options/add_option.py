@@ -4,7 +4,7 @@ from helpers.constants import Strings
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
-from helpers.log import logger
+from helpers.log import request_logger
 from services.option import OptionService
 from utils.rbac import validate_token_details
 
@@ -24,7 +24,7 @@ class AddOptionController:
                 self.question_id, self.option_text, self.is_correct
             )
         except CustomException as custom_error:
-            logger.info(custom_error)
+            request_logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
             return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code

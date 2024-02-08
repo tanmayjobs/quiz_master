@@ -3,7 +3,7 @@ from flask_jwt_extended import get_jwt, get_jwt_identity
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
-from helpers.log import logger
+from helpers.log import request_logger
 from services.tokens import TokenService
 from utils.rbac import validate_token_details
 
@@ -23,7 +23,7 @@ class RefreshTokenController:
                 self.user_id, self.jwt
             )
         except CustomException as custom_error:
-            logger.info(custom_error)
+            request_logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
             return tokens_json, HTTPStatuses.OK.code

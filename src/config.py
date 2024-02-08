@@ -1,16 +1,19 @@
 """
 This file contains config_app method which takes the flask app and set it's configurations based on the .env file.
 """
+import uuid
 
 from dotenv import load_dotenv
 import os
 
+from flask import request
+
 from helpers.constants import LogText
-from helpers.log import logger
+from helpers.log import request_logger
 
 
 def config_app(app):
-    logger.info(LogText.SETTING_UP_CONFIGS)
+    app.logger.info(LogText.SETTING_UP_CONFIGS)
     load_dotenv()
 
     app.secret_key = os.getenv("APP_SECRET_KEY")
@@ -28,4 +31,8 @@ def config_app(app):
     app.config["OPENAPI_RAPIDOC_PATH"] = os.getenv("OPENAPI_RAPIDOC_PATH")
     app.config["OPENAPI_RAPIDOC_URL"] = os.getenv("OPENAPI_RAPIDOC_URL")
 
-    logger.info(LogText.SETTING_UP_CONFIG_COMPLETED)
+    @app.before_request
+    def attach_request_id():
+        request.request_id = uuid.uuid4()
+
+    app.logger.info(LogText.SETTING_UP_CONFIG_COMPLETED)

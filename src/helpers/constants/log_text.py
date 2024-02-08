@@ -1,6 +1,7 @@
 class LogText:
     STARTING_SYSTEM = "starting the system..."
     SYSTEM_ERROR = "Some unknown error occurred. Please contact the administrator!"
+    INITIALIZING_APP = "initializing the flask app"
     EXITING_SYSTEM = "exiting the system"
     LOADING_TOKEN = "loading invalid tokens from database"
     SAVING_TOKEN = "saving invalid tokens to database"

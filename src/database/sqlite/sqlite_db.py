@@ -12,9 +12,17 @@ class SqliteDatabase(Database):
     def __init__(self, db_path=None, uri=False):
         self.db_path = db_path
         self.uri = uri
+
+    def connect(self):
         self.connection = sqlite3.connect(
-            db_path or os.getenv("TOKEN_DATABASE"), uri, check_same_thread=False
+            self.db_path or os.getenv("TOKEN_DATABASE"),
+            uri=self.uri,
+            check_same_thread=False
         )
 
-    def __del__(self):
+    def get_cursor(self):
+        return self.connection.cursor()
+
+    def close(self, commit=True):
+        self.connection.commit() if commit else self.connection.rollback()
         self.connection.close()

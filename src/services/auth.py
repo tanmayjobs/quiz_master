@@ -3,10 +3,10 @@ import uuid
 from pymysql import IntegrityError
 
 from database import MysqlAccess, DatabaseAccess
-from helpers.constants import SQLQueries, Strings, Errors
+from helpers.constants import SQLQueries, Strings, Errors, LogText
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import InvalidCredentials, AlreadyExists
-from helpers.log import logger
+from helpers.log import request_logger
 from utils.hashing import check_password, hash_password
 
 
@@ -22,7 +22,6 @@ class AuthServices:
             password, user_data[Strings.HASH_PASSWORD]
         ):
             raise InvalidCredentials(Errors.INVALID_CREDENTIALS)
-
         return user_data
 
     def sign_up(self, username, password):
@@ -34,5 +33,5 @@ class AuthServices:
                     (uuid.uuid4(), username, password_hash, UserRole.PLAYER.value),
                 )
         except IntegrityError as error:
-            logger.info(error)
-            raise AlreadyExists(Errors.USERNAME_ALREADY_EXISTS)
+            request_logger.info(error)
+            raise AlreadyExists(Errors.USERNAME_ALREADY_EXISTS.format(username))

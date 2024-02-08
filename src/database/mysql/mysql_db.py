@@ -17,12 +17,17 @@ class MySQLDatabase(Database):
     def __init__(self, db_path=None, uri=None):
         self.db_path = db_path
         self.uri = uri
+
+    def connect(self):
         self.connection = pymysql.connect(
             user=os.getenv("DATABASE_USER"),
             password=os.getenv("DATABASE_PASSWORD"),
-            database=db_path or os.getenv("DATABASE_NAME"),
+            database=self.db_path or os.getenv("DATABASE_NAME"),
             cursorclass=DictCursor,
         )
 
-    def __del__(self):
+    def get_cursor(self):
+        return self.connection.cursor()
+
+    def close(self):
         self.connection.close()

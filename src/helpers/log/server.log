@@ -1,0 +1,224 @@
+08-02-2024 13:20:07 INFO       [config.py:16] setting up configs
+08-02-2024 13:20:14 INFO       [config.py:16] setting up configs
+08-02-2024 13:20:14 INFO       [config.py:39] setting up config completed
+08-02-2024 13:20:14 INFO       [exceptions.py:116] registering error handlers
+08-02-2024 13:20:14 INFO       [exceptions.py:122] registering error handlers completed
+08-02-2024 13:20:14 INFO       [__init__.py:25] registering blueprints
+08-02-2024 13:20:14 INFO       [__init__.py:34] registering blueprints completed
+08-02-2024 13:20:14 INFO       [jwt.py:9] registering jwt system
+08-02-2024 13:20:14 INFO       [jwt.py:14] registering jwt system completed
+08-02-2024 13:20:14 INFO       [_internal.py:187] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+08-02-2024 13:20:14 INFO       [_internal.py:187] [33mPress CTRL+C to quit[0m
+08-02-2024 13:20:14 INFO       [_internal.py:187]  * Restarting with stat
+08-02-2024 13:20:15 INFO       [config.py:16] setting up configs
+08-02-2024 13:20:15 INFO       [config.py:39] setting up config completed
+08-02-2024 13:20:15 INFO       [exceptions.py:116] registering error handlers
+08-02-2024 13:20:15 INFO       [exceptions.py:122] registering error handlers completed
+08-02-2024 13:20:15 INFO       [__init__.py:25] registering blueprints
+08-02-2024 13:20:15 INFO       [__init__.py:34] registering blueprints completed
+08-02-2024 13:20:15 INFO       [jwt.py:9] registering jwt system
+08-02-2024 13:20:15 INFO       [jwt.py:14] registering jwt system completed
+08-02-2024 13:20:15 WARNING    [_internal.py:187]  * Debugger is active!
+08-02-2024 13:20:15 INFO       [_internal.py:187]  * Debugger PIN: 710-236-009
+08-02-2024 13:20:25 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:25] "[33mGET / HTTP/1.1[0m" 404 -
+08-02-2024 13:20:43 WARNING    [mysql_access.py:29] Some unknown error occurred. Please contact the administrator!
+08-02-2024 13:20:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:43] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 409 -
+08-02-2024 13:20:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:43] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:20:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:43] "POST /auth/refresh HTTP/1.1" 200 -
+08-02-2024 13:20:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:43] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+08-02-2024 13:20:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:43] "GET /quizzes HTTP/1.1" 200 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "[35m[1mPOST /quizzes/1d3f6028-28c9-49b6-a5a4-6f3ce1d53a9c/questions HTTP/1.1[0m" 201 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "GET /quizzes/1d3f6028-28c9-49b6-a5a4-6f3ce1d53a9c/questions HTTP/1.1" 200 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "[35m[1mPOST /questions/3818f54a-7d97-4c43-9552-e4ec2f663a90/options HTTP/1.1[0m" 201 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "GET /questions/3818f54a-7d97-4c43-9552-e4ec2f663a90 HTTP/1.1" 200 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "GET /quizzes/1d3f6028-28c9-49b6-a5a4-6f3ce1d53a9c HTTP/1.1" 200 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "[31m[1mPUT /options/0ee13598-0c34-4c59-92ab-0decd17d64ce HTTP/1.1[0m" 400 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "DELETE /options/0ee13598-0c34-4c59-92ab-0decd17d64ce HTTP/1.1" 200 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "PUT /questions/3818f54a-7d97-4c43-9552-e4ec2f663a90 HTTP/1.1" 200 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "DELETE /questions/3818f54a-7d97-4c43-9552-e4ec2f663a90 HTTP/1.1" 200 -
+08-02-2024 13:20:44 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:44] "DELETE /quizzes/1d3f6028-28c9-49b6-a5a4-6f3ce1d53a9c HTTP/1.1" 200 -
+08-02-2024 13:20:45 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:45] "GET /tags HTTP/1.1" 200 -
+08-02-2024 13:20:45 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:20:45] "GET /records?user_id=1 HTTP/1.1" 200 -
+08-02-2024 13:21:35 INFO       [_internal.py:187]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\config.py', reloading
+08-02-2024 13:21:35 INFO       [_internal.py:187]  * Restarting with stat
+08-02-2024 13:21:36 WARNING    [_internal.py:187]  * Debugger is active!
+08-02-2024 13:21:36 INFO       [_internal.py:187]  * Debugger PIN: 128-587-955
+08-02-2024 13:22:02 INFO       [_internal.py:187]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\config.py', reloading
+08-02-2024 13:22:02 INFO       [_internal.py:187]  * Restarting with stat
+08-02-2024 13:22:03 INFO       [config.py:16] setting up configs
+08-02-2024 13:22:03 INFO       [config.py:39] setting up config completed
+08-02-2024 13:22:03 INFO       [exceptions.py:116] registering error handlers
+08-02-2024 13:22:03 INFO       [exceptions.py:122] registering error handlers completed
+08-02-2024 13:22:03 INFO       [__init__.py:25] registering blueprints
+08-02-2024 13:22:03 INFO       [__init__.py:34] registering blueprints completed
+08-02-2024 13:22:03 INFO       [jwt.py:9] registering jwt system
+08-02-2024 13:22:03 INFO       [jwt.py:14] registering jwt system completed
+08-02-2024 13:22:03 WARNING    [_internal.py:187]  * Debugger is active!
+08-02-2024 13:22:03 INFO       [_internal.py:187]  * Debugger PIN: 710-236-009
+08-02-2024 13:22:06 WARNING    [mysql_access.py:29] Some unknown error occurred. Please contact the administrator!
+08-02-2024 13:22:06 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:06] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 409 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "POST /auth/refresh HTTP/1.1" 200 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "GET /quizzes HTTP/1.1" 200 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "[35m[1mPOST /quizzes/179742bc-f701-49ff-9887-1982c5f6b94c/questions HTTP/1.1[0m" 201 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "GET /quizzes/179742bc-f701-49ff-9887-1982c5f6b94c/questions HTTP/1.1" 200 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "[35m[1mPOST /questions/eae15b87-54af-4e86-b2aa-3d73bb9653c8/options HTTP/1.1[0m" 201 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "GET /questions/eae15b87-54af-4e86-b2aa-3d73bb9653c8 HTTP/1.1" 200 -
+08-02-2024 13:22:07 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:07] "GET /quizzes/179742bc-f701-49ff-9887-1982c5f6b94c HTTP/1.1" 200 -
+08-02-2024 13:22:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:08] "[31m[1mPUT /options/8b5d933e-e174-4b32-a514-d4297a88dcca HTTP/1.1[0m" 400 -
+08-02-2024 13:22:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:08] "DELETE /options/8b5d933e-e174-4b32-a514-d4297a88dcca HTTP/1.1" 200 -
+08-02-2024 13:22:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:08] "PUT /questions/eae15b87-54af-4e86-b2aa-3d73bb9653c8 HTTP/1.1" 200 -
+08-02-2024 13:22:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:08] "DELETE /questions/eae15b87-54af-4e86-b2aa-3d73bb9653c8 HTTP/1.1" 200 -
+08-02-2024 13:22:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:08] "DELETE /quizzes/179742bc-f701-49ff-9887-1982c5f6b94c HTTP/1.1" 200 -
+08-02-2024 13:22:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:08] "GET /tags HTTP/1.1" 200 -
+08-02-2024 13:22:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:08] "GET /records?user_id=1 HTTP/1.1" 200 -
+08-02-2024 13:22:35 INFO       [_internal.py:187]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\helpers\\log\\request_log_handler.py', reloading
+08-02-2024 13:22:35 INFO       [_internal.py:187]  * Restarting with stat
+08-02-2024 13:22:36 INFO       [config.py:16] setting up configs
+08-02-2024 13:22:36 INFO       [config.py:39] setting up config completed
+08-02-2024 13:22:36 INFO       [exceptions.py:116] registering error handlers
+08-02-2024 13:22:36 INFO       [exceptions.py:122] registering error handlers completed
+08-02-2024 13:22:36 INFO       [__init__.py:25] registering blueprints
+08-02-2024 13:22:36 INFO       [__init__.py:34] registering blueprints completed
+08-02-2024 13:22:36 INFO       [jwt.py:9] registering jwt system
+08-02-2024 13:22:36 INFO       [jwt.py:14] registering jwt system completed
+08-02-2024 13:22:36 WARNING    [_internal.py:187]  * Debugger is active!
+08-02-2024 13:22:36 INFO       [_internal.py:187]  * Debugger PIN: 710-236-009
+08-02-2024 13:22:41 WARNING    [mysql_access.py:29] Some unknown error occurred. Please contact the administrator!
+08-02-2024 13:22:41 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:41] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 409 -
+08-02-2024 13:22:41 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:41] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:22:41 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:41] "POST /auth/refresh HTTP/1.1" 200 -
+08-02-2024 13:22:41 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:41] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "GET /quizzes HTTP/1.1" 200 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "[35m[1mPOST /quizzes/21e7f190-e7f5-4ce0-badc-3c9791b72b91/questions HTTP/1.1[0m" 201 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "GET /quizzes/21e7f190-e7f5-4ce0-badc-3c9791b72b91/questions HTTP/1.1" 200 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "[35m[1mPOST /questions/889810fc-5013-472c-a88d-0ad814e21ac3/options HTTP/1.1[0m" 201 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "GET /questions/889810fc-5013-472c-a88d-0ad814e21ac3 HTTP/1.1" 200 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "GET /quizzes/21e7f190-e7f5-4ce0-badc-3c9791b72b91 HTTP/1.1" 200 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "[31m[1mPUT /options/50c5acf9-81d3-43da-9eba-904460857521 HTTP/1.1[0m" 400 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "DELETE /options/50c5acf9-81d3-43da-9eba-904460857521 HTTP/1.1" 200 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "PUT /questions/889810fc-5013-472c-a88d-0ad814e21ac3 HTTP/1.1" 200 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "DELETE /questions/889810fc-5013-472c-a88d-0ad814e21ac3 HTTP/1.1" 200 -
+08-02-2024 13:22:42 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:42] "DELETE /quizzes/21e7f190-e7f5-4ce0-badc-3c9791b72b91 HTTP/1.1" 200 -
+08-02-2024 13:22:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:43] "GET /tags HTTP/1.1" 200 -
+08-02-2024 13:22:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:22:43] "GET /records?user_id=1 HTTP/1.1" 200 -
+08-02-2024 13:25:08 WARNING    [mysql_access.py:29] Some unknown error occurred. Please contact the administrator!
+08-02-2024 13:25:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:25:08] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 409 -
+08-02-2024 13:26:23 INFO       [_internal.py:187]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\helpers\\log\\request_log_handler.py', reloading
+08-02-2024 13:26:23 INFO       [_internal.py:187]  * Restarting with stat
+08-02-2024 13:26:25 INFO       [config.py:16] setting up configs
+08-02-2024 13:26:25 INFO       [config.py:39] setting up config completed
+08-02-2024 13:26:25 INFO       [exceptions.py:116] registering error handlers
+08-02-2024 13:26:25 INFO       [exceptions.py:122] registering error handlers completed
+08-02-2024 13:26:25 INFO       [__init__.py:25] registering blueprints
+08-02-2024 13:26:25 INFO       [__init__.py:34] registering blueprints completed
+08-02-2024 13:26:25 INFO       [jwt.py:9] registering jwt system
+08-02-2024 13:26:25 INFO       [jwt.py:14] registering jwt system completed
+08-02-2024 13:26:25 WARNING    [_internal.py:187]  * Debugger is active!
+08-02-2024 13:26:25 INFO       [_internal.py:187]  * Debugger PIN: 710-236-009
+08-02-2024 13:26:29 INFO       [_internal.py:187]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\config.py', reloading
+08-02-2024 13:26:30 INFO       [_internal.py:187]  * Restarting with stat
+08-02-2024 13:26:30 INFO       [config.py:16] setting up configs
+08-02-2024 13:26:30 INFO       [config.py:38] setting up config completed
+08-02-2024 13:26:30 INFO       [exceptions.py:116] registering error handlers
+08-02-2024 13:26:30 INFO       [exceptions.py:122] registering error handlers completed
+08-02-2024 13:26:30 INFO       [__init__.py:25] registering blueprints
+08-02-2024 13:26:30 INFO       [__init__.py:34] registering blueprints completed
+08-02-2024 13:26:30 INFO       [jwt.py:9] registering jwt system
+08-02-2024 13:26:30 INFO       [jwt.py:14] registering jwt system completed
+08-02-2024 13:26:30 WARNING    [_internal.py:187]  * Debugger is active!
+08-02-2024 13:26:30 INFO       [_internal.py:187]  * Debugger PIN: 710-236-009
+08-02-2024 13:27:04 WARNING    [mysql_access.py:29] Some unknown error occurred. Please contact the administrator!
+08-02-2024 13:27:04 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:27:04] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 409 -
+08-02-2024 13:27:33 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:27:33] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 400 -
+08-02-2024 13:27:58 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:27:58] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:29:16 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:16] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 422 -
+08-02-2024 13:29:16 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:16] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:29:16 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:16] "POST /auth/refresh HTTP/1.1" 200 -
+08-02-2024 13:29:16 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:16] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+08-02-2024 13:29:16 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:16] "GET /quizzes HTTP/1.1" 200 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "[35m[1mPOST /quizzes/919375b6-bf80-46d6-9597-c70719fea095/questions HTTP/1.1[0m" 201 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "GET /quizzes/919375b6-bf80-46d6-9597-c70719fea095/questions HTTP/1.1" 200 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "[35m[1mPOST /questions/94ba8f9e-e995-4d92-a040-c0505e79938f/options HTTP/1.1[0m" 201 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "GET /questions/94ba8f9e-e995-4d92-a040-c0505e79938f HTTP/1.1" 200 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "GET /quizzes/919375b6-bf80-46d6-9597-c70719fea095 HTTP/1.1" 200 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "[31m[1mPUT /options/b10b9dcc-4953-4d44-b2c5-5a434dc32462 HTTP/1.1[0m" 400 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "DELETE /options/b10b9dcc-4953-4d44-b2c5-5a434dc32462 HTTP/1.1" 200 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "PUT /questions/94ba8f9e-e995-4d92-a040-c0505e79938f HTTP/1.1" 200 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "DELETE /questions/94ba8f9e-e995-4d92-a040-c0505e79938f HTTP/1.1" 200 -
+08-02-2024 13:29:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:17] "DELETE /quizzes/919375b6-bf80-46d6-9597-c70719fea095 HTTP/1.1" 200 -
+08-02-2024 13:29:18 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:18] "GET /tags HTTP/1.1" 200 -
+08-02-2024 13:29:18 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:18] "GET /records?user_id=1 HTTP/1.1" 200 -
+08-02-2024 13:29:38 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:38] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 422 -
+08-02-2024 13:29:49 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:29:49] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 422 -
+08-02-2024 13:30:02 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:02] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:30:11 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:11] "[31m[1mPOST /auth/sign_up HTTP/1.1[0m" 422 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "POST /auth/refresh HTTP/1.1" 200 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "GET /quizzes HTTP/1.1" 200 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "[35m[1mPOST /quizzes/0713824d-6783-4fd5-91df-7dd636da46a6/questions HTTP/1.1[0m" 201 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "GET /quizzes/0713824d-6783-4fd5-91df-7dd636da46a6/questions HTTP/1.1" 200 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "[35m[1mPOST /questions/221eccab-5db0-436c-8034-5a9eff16acb9/options HTTP/1.1[0m" 201 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "GET /questions/221eccab-5db0-436c-8034-5a9eff16acb9 HTTP/1.1" 200 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "GET /quizzes/0713824d-6783-4fd5-91df-7dd636da46a6 HTTP/1.1" 200 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "[31m[1mPUT /options/458c3e3b-d683-4fd6-86bc-bdfa36977b6c HTTP/1.1[0m" 400 -
+08-02-2024 13:30:12 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:12] "DELETE /options/458c3e3b-d683-4fd6-86bc-bdfa36977b6c HTTP/1.1" 200 -
+08-02-2024 13:30:13 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:13] "PUT /questions/221eccab-5db0-436c-8034-5a9eff16acb9 HTTP/1.1" 200 -
+08-02-2024 13:30:13 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:13] "DELETE /questions/221eccab-5db0-436c-8034-5a9eff16acb9 HTTP/1.1" 200 -
+08-02-2024 13:30:13 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:13] "DELETE /quizzes/0713824d-6783-4fd5-91df-7dd636da46a6 HTTP/1.1" 200 -
+08-02-2024 13:30:13 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:13] "GET /tags HTTP/1.1" 200 -
+08-02-2024 13:30:13 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:13] "GET /records?user_id=1 HTTP/1.1" 200 -
+08-02-2024 13:30:38 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:38] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:30:38 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:38] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "POST /auth/refresh HTTP/1.1" 200 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "GET /quizzes HTTP/1.1" 200 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "[35m[1mPOST /quizzes/aa86f4cb-bb3f-445b-b8fa-ad5570cf05ef/questions HTTP/1.1[0m" 201 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "GET /quizzes/aa86f4cb-bb3f-445b-b8fa-ad5570cf05ef/questions HTTP/1.1" 200 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "[35m[1mPOST /questions/df07b247-4924-4084-b3f8-f4de2ad9ae05/options HTTP/1.1[0m" 201 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "GET /questions/df07b247-4924-4084-b3f8-f4de2ad9ae05 HTTP/1.1" 200 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "GET /quizzes/aa86f4cb-bb3f-445b-b8fa-ad5570cf05ef HTTP/1.1" 200 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "[31m[1mPUT /options/90f6f47b-c091-48cc-9e28-d45fb37192d6 HTTP/1.1[0m" 400 -
+08-02-2024 13:30:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:39] "DELETE /options/90f6f47b-c091-48cc-9e28-d45fb37192d6 HTTP/1.1" 200 -
+08-02-2024 13:30:40 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:40] "PUT /questions/df07b247-4924-4084-b3f8-f4de2ad9ae05 HTTP/1.1" 200 -
+08-02-2024 13:30:40 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:40] "DELETE /questions/df07b247-4924-4084-b3f8-f4de2ad9ae05 HTTP/1.1" 200 -
+08-02-2024 13:30:40 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:40] "DELETE /quizzes/aa86f4cb-bb3f-445b-b8fa-ad5570cf05ef HTTP/1.1" 200 -
+08-02-2024 13:30:40 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:40] "GET /tags HTTP/1.1" 200 -
+08-02-2024 13:30:40 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:30:40] "GET /records?user_id=1 HTTP/1.1" 200 -
+08-02-2024 13:32:53 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:32:53] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:35:43 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:35:43] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:35:54 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:35:54] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:36:08 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:36:08] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:37:17 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:37:17] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:40:34 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:40:34] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:40:51 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:40:51] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:41:21 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:41:21] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:42:27 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:42:27] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:43:10 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:43:10] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:43:20 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:43:20] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:43:39 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:43:39] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:43:59 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:43:59] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:44:29 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:44:29] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
+08-02-2024 13:44:36 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:44:36] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:45:01 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:45:01] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:45:26 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:45:26] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:46:28 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:46:28] "POST /auth/sign_in HTTP/1.1" 200 -
+08-02-2024 13:52:35 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:52:35] "[33mPOST /sign_in HTTP/1.1[0m" 404 -
+08-02-2024 13:52:48 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:52:48] "[33mPOST /sign_in HTTP/1.1[0m" 404 -
+08-02-2024 13:52:53 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:52:53] "[33mPOST /sign_in HTTP/1.1[0m" 404 -
+08-02-2024 13:53:13 INFO       [_internal.py:187] 127.0.0.1 - - [08/Feb/2024 13:53:13] "[33mPOST /sign_in HTTP/1.1[0m" 404 -
+08-02-2024 14:26:00 INFO       [_internal.py:187]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\config.py', reloading
+08-02-2024 14:26:01 INFO       [_internal.py:187]  * Restarting with stat
+08-02-2024 14:26:04 INFO       [config.py:16] setting up configs
+08-02-2024 14:26:04 INFO       [config.py:38] setting up config completed
+08-02-2024 14:26:04 INFO       [exceptions.py:116] registering error handlers
+08-02-2024 14:26:04 INFO       [exceptions.py:122] registering error handlers completed
+08-02-2024 14:26:04 INFO       [__init__.py:25] registering blueprints
+08-02-2024 14:26:04 INFO       [__init__.py:34] registering blueprints completed
+08-02-2024 14:26:04 INFO       [jwt.py:9] registering jwt system
+08-02-2024 14:26:04 INFO       [jwt.py:14] registering jwt system completed
+08-02-2024 14:26:04 WARNING    [_internal.py:187]  * Debugger is active!
+08-02-2024 14:26:04 INFO       [_internal.py:187]  * Debugger PIN: 710-236-009

@@ -1,6 +1,6 @@
 from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import CustomException
-from helpers.log import logger
+from helpers.log import request_logger
 from services.quiz import QuizService
 
 
@@ -13,7 +13,7 @@ class GetQuizController:
         try:
             quiz = self.quiz_service.get_quiz(self.quiz_id)
         except CustomException as custom_error:
-            logger.info(custom_error)
+            request_logger.warn(custom_error)
             return custom_error.dump(), custom_error.code
         else:
             return quiz, HTTPStatuses.OK.code

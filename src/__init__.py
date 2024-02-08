@@ -8,7 +8,7 @@ It includes features such as filtering of quizzes, leaderboards of other users a
 There are three roles:
     1. Player: Can play quizzes.
     2. Creator: Can manage their own quizzes.
-    3. Admin: Will manage users.
+    3. Admin: Will manage users(and maybe quizzes in the future, like can remove them).
 
 The implementation contains not only the core functionality of the app but also security of the application with,
     1. RBAC
@@ -19,7 +19,7 @@ The implementation contains not only the core functionality of the app but also 
 Doc-Strings are only provided where they are necessary and required to understand the functionality working.
 Don't use Doc-Strings such as,
     This class will handle authentication logic.
-Use such a class name that it's already understood.
+Use such a class name that it's self understood.
 
 For each package in this project __init__ files are used for,
     1. Explaining usage of the package or the sub files in the package.
@@ -45,7 +45,7 @@ Rules for this project:
 Always remember this project is created in such a way that each package, module and class is following OOPS and SOLID.
 In some places OOPS and SOLID may not be followed but those places are exceptions and following OOPS and SOLID will only
 degrade the code quality.
-OOPS and SOLID are used to make better project architecture, they are not be followed just for the sake of following.
+OOPS, and SOLID are used to make better project architecture, they are not be followed just for the sake of following.
 
 LIFE RULE: In case of any confusion try to understand the pattern. Or contact the creator.
 
@@ -55,5 +55,8 @@ LEARNINGS:
         You should have control over things when they are created and when they are destroyed.
     2. Even if you like to try new things out always try to see the bigger picture.
     3. Yes, some approaches may look good and easy to implement, but they can create a lot of problems later on.
-    4. Experience is what's you'll get when doing various things.
+    4. Experience is what's you'll get while doing various things.
+
+Future Scope:
+    I want to create a framework on the top of flask which will provide a structured architecture for Flask Web APIs.
 """
