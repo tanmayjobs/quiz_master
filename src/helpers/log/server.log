@@ -1367,3 +1367,28 @@
 13-02-2024 14:36:08 INFO       [_internal.py:96]  * Restarting with stat
 13-02-2024 14:36:08 WARNING    [_internal.py:96]  * Debugger is active!
 13-02-2024 14:36:08 INFO       [_internal.py:96]  * Debugger PIN: 705-532-299
+13-02-2024 14:57:09 INFO       [config.py:15] setting up configs
+13-02-2024 14:57:09 INFO       [config.py:37] setting up config completed
+13-02-2024 14:57:09 INFO       [exceptions.py:126] registering error handlers
+13-02-2024 14:57:09 INFO       [exceptions.py:132] registering error handlers completed
+13-02-2024 14:57:09 INFO       [__init__.py:25] registering blueprints
+13-02-2024 14:57:09 INFO       [__init__.py:34] registering blueprints completed
+13-02-2024 14:57:09 INFO       [jwt.py:9] registering jwt system
+13-02-2024 14:57:09 INFO       [jwt.py:14] registering jwt system completed
+13-02-2024 14:57:09 INFO       [_internal.py:96] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+13-02-2024 14:57:09 INFO       [_internal.py:96] [33mPress CTRL+C to quit[0m
+13-02-2024 14:57:09 INFO       [_internal.py:96]  * Restarting with stat
+13-02-2024 14:57:10 INFO       [config.py:15] setting up configs
+13-02-2024 14:57:10 INFO       [config.py:37] setting up config completed
+13-02-2024 14:57:10 INFO       [exceptions.py:126] registering error handlers
+13-02-2024 14:57:10 INFO       [exceptions.py:132] registering error handlers completed
+13-02-2024 14:57:10 INFO       [__init__.py:25] registering blueprints
+13-02-2024 14:57:10 INFO       [__init__.py:34] registering blueprints completed
+13-02-2024 14:57:10 INFO       [jwt.py:9] registering jwt system
+13-02-2024 14:57:10 INFO       [jwt.py:14] registering jwt system completed
+13-02-2024 14:57:10 WARNING    [_internal.py:96]  * Debugger is active!
+13-02-2024 14:57:10 INFO       [_internal.py:96]  * Debugger PIN: 482-885-147
+13-02-2024 14:57:24 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 14:57:24] "[33mPOST /auth/sign_in HTTP/1.1[0m" 404 -
+13-02-2024 14:57:24 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 14:57:24] "POST /auth/refresh HTTP/1.1" 200 -
+13-02-2024 14:57:25 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 14:57:25] "[35m[1mPOST /quizzes HTTP/1.1[0m" 500 -
