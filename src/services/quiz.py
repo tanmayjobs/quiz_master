@@ -3,14 +3,14 @@ import uuid
 
 from pymysql import IntegrityError
 
-from database import MysqlAccess
+from database import MysqlAccess, SqliteAccess
 from helpers.constants import SQLQueries, Strings, Errors
 from helpers.exceptions import DoNotExists, AlreadyExists, NotEnoughPermission
 
 
 class QuizService:
     def __init__(self, database_access=None):
-        self.database_access = database_access or MysqlAccess()
+        self.database_access = database_access or SqliteAccess()
 
     def get_quizzes(self):
         with self.database_access as dao:

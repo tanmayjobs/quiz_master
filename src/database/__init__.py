@@ -40,5 +40,5 @@ def _init_token_database(database_access):
         dao.write(SQLQueries.CREATE_TOKEN_TABLE)
 
 
-_init_resource_database(MysqlAccess())
-_init_token_database(MysqlAccess())
+_init_resource_database(SqliteAccess())
+_init_token_database(SqliteAccess())

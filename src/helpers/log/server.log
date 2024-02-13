@@ -1305,3 +1305,65 @@
 13-02-2024 13:35:10 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 13:35:10] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
 13-02-2024 13:35:10 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 13:35:10] "POST /auth/sign_in HTTP/1.1" 200 -
 13-02-2024 13:35:10 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 13:35:10] "[31m[1mPOST /auth/refresh HTTP/1.1[0m" 498 -
+13-02-2024 14:35:04 INFO       [config.py:15] setting up configs
+13-02-2024 14:35:04 INFO       [config.py:37] setting up config completed
+13-02-2024 14:35:04 INFO       [exceptions.py:126] registering error handlers
+13-02-2024 14:35:04 INFO       [exceptions.py:132] registering error handlers completed
+13-02-2024 14:35:04 INFO       [__init__.py:25] registering blueprints
+13-02-2024 14:35:04 INFO       [__init__.py:34] registering blueprints completed
+13-02-2024 14:35:04 INFO       [jwt.py:9] registering jwt system
+13-02-2024 14:35:04 INFO       [jwt.py:14] registering jwt system completed
+13-02-2024 14:35:04 INFO       [_internal.py:96] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+13-02-2024 14:35:04 INFO       [_internal.py:96] [33mPress CTRL+C to quit[0m
+13-02-2024 14:35:04 INFO       [_internal.py:96]  * Restarting with stat
+13-02-2024 14:35:05 INFO       [config.py:15] setting up configs
+13-02-2024 14:35:05 INFO       [config.py:37] setting up config completed
+13-02-2024 14:35:05 INFO       [exceptions.py:126] registering error handlers
+13-02-2024 14:35:05 INFO       [exceptions.py:132] registering error handlers completed
+13-02-2024 14:35:05 INFO       [__init__.py:25] registering blueprints
+13-02-2024 14:35:05 INFO       [__init__.py:34] registering blueprints completed
+13-02-2024 14:35:05 INFO       [jwt.py:9] registering jwt system
+13-02-2024 14:35:05 INFO       [jwt.py:14] registering jwt system completed
+13-02-2024 14:35:05 WARNING    [_internal.py:96]  * Debugger is active!
+13-02-2024 14:35:05 INFO       [_internal.py:96]  * Debugger PIN: 482-885-147
+13-02-2024 14:35:13 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 14:35:13] "[35m[1mPOST /auth/sign_in HTTP/1.1[0m" 500 -
+13-02-2024 14:35:36 INFO       [_internal.py:96]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\helpers\\constants\\sql_queries.py', reloading
+13-02-2024 14:35:36 INFO       [_internal.py:96]  * Restarting with stat
+13-02-2024 14:35:37 INFO       [config.py:15] setting up configs
+13-02-2024 14:35:37 INFO       [config.py:37] setting up config completed
+13-02-2024 14:35:37 INFO       [exceptions.py:126] registering error handlers
+13-02-2024 14:35:37 INFO       [exceptions.py:132] registering error handlers completed
+13-02-2024 14:35:37 INFO       [__init__.py:25] registering blueprints
+13-02-2024 14:35:37 INFO       [__init__.py:34] registering blueprints completed
+13-02-2024 14:35:37 INFO       [jwt.py:9] registering jwt system
+13-02-2024 14:35:37 INFO       [jwt.py:14] registering jwt system completed
+13-02-2024 14:35:37 WARNING    [_internal.py:96]  * Debugger is active!
+13-02-2024 14:35:37 INFO       [_internal.py:96]  * Debugger PIN: 482-885-147
+13-02-2024 14:35:42 INFO       [config.py:15] setting up configs
+13-02-2024 14:35:42 INFO       [config.py:37] setting up config completed
+13-02-2024 14:35:42 INFO       [exceptions.py:126] registering error handlers
+13-02-2024 14:35:42 INFO       [exceptions.py:132] registering error handlers completed
+13-02-2024 14:35:42 INFO       [__init__.py:25] registering blueprints
+13-02-2024 14:35:42 INFO       [__init__.py:34] registering blueprints completed
+13-02-2024 14:35:42 INFO       [jwt.py:9] registering jwt system
+13-02-2024 14:35:42 INFO       [jwt.py:14] registering jwt system completed
+13-02-2024 14:35:42 INFO       [_internal.py:96] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+13-02-2024 14:35:42 INFO       [_internal.py:96] [33mPress CTRL+C to quit[0m
+13-02-2024 14:35:42 INFO       [_internal.py:96]  * Restarting with stat
+13-02-2024 14:35:43 INFO       [config.py:15] setting up configs
+13-02-2024 14:35:43 INFO       [config.py:37] setting up config completed
+13-02-2024 14:35:43 INFO       [exceptions.py:126] registering error handlers
+13-02-2024 14:35:43 INFO       [exceptions.py:132] registering error handlers completed
+13-02-2024 14:35:43 INFO       [__init__.py:25] registering blueprints
+13-02-2024 14:35:43 INFO       [__init__.py:34] registering blueprints completed
+13-02-2024 14:35:43 INFO       [jwt.py:9] registering jwt system
+13-02-2024 14:35:43 INFO       [jwt.py:14] registering jwt system completed
+13-02-2024 14:35:43 WARNING    [_internal.py:96]  * Debugger is active!
+13-02-2024 14:35:43 INFO       [_internal.py:96]  * Debugger PIN: 482-885-147
+13-02-2024 14:35:45 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 14:35:45] "[35m[1mPOST /auth/sign_in HTTP/1.1[0m" 500 -
+13-02-2024 14:36:07 INFO       [_internal.py:96]  * Detected change in 'C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\quiz_master\\src\\database\\__init__.py', reloading
+13-02-2024 14:36:08 INFO       [_internal.py:96]  * Restarting with stat
+13-02-2024 14:36:08 WARNING    [_internal.py:96]  * Debugger is active!
+13-02-2024 14:36:08 INFO       [_internal.py:96]  * Debugger PIN: 705-532-299

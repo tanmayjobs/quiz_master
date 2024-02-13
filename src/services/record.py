@@ -1,12 +1,12 @@
 import uuid
 
-from database import MysqlAccess
+from database import MysqlAccess, SqliteAccess
 from helpers.constants import SQLQueries
 
 
 class RecordService:
     def __init__(self, database_access=None):
-        self.database_access = database_access or MysqlAccess()
+        self.database_access = database_access or SqliteAccess()
 
     def get_records(self, args):
         with self.database_access as dao:

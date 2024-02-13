@@ -2,7 +2,7 @@ import uuid
 
 from pymysql import IntegrityError
 
-from database import MysqlAccess
+from database import MysqlAccess, SqliteAccess
 from helpers.constants import SQLQueries, Errors, Strings
 from helpers.exceptions import DoNotExists, NotEnoughPermission
 from helpers.log import request_logger
@@ -10,7 +10,7 @@ from helpers.log import request_logger
 
 class OptionService:
     def __init__(self, database_access=None):
-        self.database_access = database_access or MysqlAccess()
+        self.database_access = database_access or SqliteAccess()
 
     def add_option(self, question_id, option_text, is_correct):
         try:

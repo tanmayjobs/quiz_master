@@ -5,7 +5,7 @@ class SQLQueries:
         `user_id` VARCHAR(255) NOT NULL,
         `exp` VARCHAR(255) NOT NULL,
         PRIMARY KEY (`token_pair_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    )?;
     """
     CREATE_AUTH_TABLE = """
         CREATE TABLE IF NOT EXISTS `auth` (
@@ -15,7 +15,7 @@ class SQLQueries:
             `user_role` enum('0','1','2') NOT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `username` (`username`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        );
     """
     CREATE_QUIZ_TABLE = """
         CREATE TABLE IF NOT EXISTS `quizzes` (
@@ -26,7 +26,7 @@ class SQLQueries:
             UNIQUE KEY `quiz_name` (`quiz_name`),
             KEY `creator_id` (`creator_id`),
             CONSTRAINT `quizzes_ibfk_1` FOREIGN KEY (`creator_id`) REFERENCES `auth` (`id`) ON DELETE SET NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        )?;
     """
     CREATE_QUESTION_TABLE = """
         CREATE TABLE IF NOT EXISTS `questions` (
@@ -36,7 +36,7 @@ class SQLQueries:
             PRIMARY KEY (`id`),
             KEY `quiz_id` (`quiz_id`),
             CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        )?;
     """
     CREATE_OPTION_TABLE = """
         CREATE TABLE IF NOT EXISTS `options` (
@@ -47,7 +47,7 @@ class SQLQueries:
             PRIMARY KEY (`id`),
             KEY `question_id` (`question_id`),
             CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        )?;
     """
     CREATE_QUIZ_SCORE_TABLE = """
         CREATE TABLE IF NOT EXISTS `score_table` (
@@ -61,7 +61,7 @@ class SQLQueries:
             KEY `quiz_id` (`quiz_id`),
             CONSTRAINT `score_table_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `auth` (`id`) ON DELETE SET NULL,
             CONSTRAINT `score_table_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE SET NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        )?;
     """
     CREATE_TYPE_TABLE = """
         CREATE TABLE IF NOT EXISTS `tags` (
@@ -69,7 +69,7 @@ class SQLQueries:
             `tag_name` varchar(20) NOT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `tag_name` (`tag_name`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        )?;
     """
     CREATE_QUIZ_TYPE_MAPPING_TABLE = """
         CREATE TABLE IF NOT EXISTS `quiz_tags` (
@@ -81,16 +81,16 @@ class SQLQueries:
             KEY `tag_id` (`tag_id`),
             CONSTRAINT `quiz_tags_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE,
             CONSTRAINT `quiz_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        )?;
     """
 
     GET_USER_BY_ID = """
         SELECT * FROM auth
-        WHERE id = %s;
+        WHERE id = ?;
     """
     GET_QUIZ_BY_ID = """
         SELECT * FROM quizzes
-        WHERE id = %s;
+        WHERE id = ?;
     """
     GET_QUESTION_BY_ID = """
         SELECT
@@ -100,44 +100,44 @@ class SQLQueries:
         quizzes.creator_id as creator_id
         FROM questions
         INNER JOIN quizzes ON quizzes.id = questions.quiz_id
-        WHERE questions.id = %s;
+        WHERE questions.id = ?;
     """
 
     LOAD_TOKEN = """
         SELECT * FROM tokens
-        WHERE token_pair_id = %s;
+        WHERE token_pair_id = ?;
     """
 
     SAVE_TOKEN = """
         INSERT INTO tokens
-        VALUES(%s, %s, %s);
+        VALUES(?, ?, ?);
     """
 
     GET_ALL_TAGS = "SELECT * FROM tags;"
     CREATE_TAG = """
         INSERT INTO tags (id, tag_name)
-        VALUES (%s, %s);
+        VALUES (?, ?);
     """
     GET_TAG = """
         SELECT * FROM tags
-        WHERE id = %s;
+        WHERE id = ?;
     """
     REMOVE_TAG = """
         DELETE FROM tags
-        WHERE id = %s;
+        WHERE id = ?;
     """
     UPDATE_TAG = """
         UPDATE tags
-        SET tag_name = %s
-        WHERE id = %s;
+        SET tag_name = ?
+        WHERE id = ?;
     """
     ADD_QUIZ_TAG = """
         INSERT INTO quiz_tags(id, quiz_id, tag_id)
-        VALUES(%s, %s, %s);
+        VALUES(?, ?, ?);
     """
     REMOVE_QUIZ_TAG = """
         DELETE FROM quiz_tags
-        WHERE quiz_id = %s AND tag_id = %s;
+        WHERE quiz_id = ? AND tag_id = ?;
     """
 
     GET_RECORDS = """
@@ -151,42 +151,42 @@ class SQLQueries:
     """
     GET_USER = """
         SELECT * FROM auth
-        WHERE username = %s;
+        WHERE username = ?;
     """
     ADD_USER = """
         INSERT INTO auth(id, username, hash_password, user_role)
-        VALUES(%s, %s, %s, %s);
+        VALUES(?, ?, ?, ?);
     """
     REMOVE_USER = """
         DELETE FROM authentication
-        WHERE id = %s;
+        WHERE id = ?;
     """
 
     ADD_QUIZ = """
         INSERT INTO quizzes(id, quiz_name, creator_id)
-        VALUES(%s, %s, %s);
+        VALUES(?, ?, ?);
     """
     ADD_QUESTION = """
         INSERT INTO questions
-        VALUES(%s, %s, %s);
+        VALUES(?, ?, ?);
     """
     UPDATE_QUESTION = """
         UPDATE questions
-        SET question_text = %s
-        WHERE id = %s;
+        SET question_text = ?
+        WHERE id = ?;
     """
     ADD_OPTION = """
         INSERT INTO options
-        VALUES(%s, %s, %s, %s);
+        VALUES(?, ?, ?, ?);
     """
     UPDATE_OPTION = """
         UPDATE options
-        SET option_text = %s, is_correct = %s
-        WHERE id = %s;
+        SET option_text = ?, is_correct = ?
+        WHERE id = ?;
     """
     REMOVE_QUIZ = """
         DELETE FROM quizzes
-        WHERE id = %s and creator_id = %s;
+        WHERE id = ? and creator_id = ?;
     """
 
     GET_QUIZ = """
@@ -205,7 +205,7 @@ class SQLQueries:
         INNER JOIN auth AS auth ON quiz.creator_id = auth.id
         LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
         LEFT JOIN tags AS tag ON tag.id = quiz_tag.tag_id
-        WHERE quiz.id = %s
+        WHERE quiz.id = ?
         GROUP BY quiz.id;
     """
     GET_QUESTIONS_AS_CREATOR = """
@@ -221,7 +221,7 @@ class SQLQueries:
         ) AS options
         FROM questions AS question
         INNER JOIN options ON question.id = options.question_id
-        WHERE question.quiz_id = %s
+        WHERE question.quiz_id = ?
         GROUP BY question.id;
     """
     GET_QUESTIONS_AS_PLAYER = """
@@ -236,7 +236,7 @@ class SQLQueries:
         ) AS options
         FROM questions AS question
         INNER JOIN options ON question.id = options.question_id
-        WHERE question.quiz_id = %s
+        WHERE question.quiz_id = ?
         GROUP BY question.id;
     """
     GET_QUIZ_QUESTION = """
@@ -252,28 +252,28 @@ class SQLQueries:
         ) AS options
         FROM questions AS question
         INNER JOIN options ON question.id = options.question_id
-        WHERE question.id = %s
+        WHERE question.id = ?
         GROUP BY question.id;
     """
 
     REMOVE_QUESTION = """
         DELETE FROM questions
-        WHERE id = %s;
+        WHERE id = ?;
     """
     REMOVE_OPTION_BY_QUESTION = """
         DELETE FROM options
-        WHERE question_id = %s;
+        WHERE question_id = ?;
     """
     REMOVE_OPTION = """
         DELETE FROM options
-        WHERE id = %s;
+        WHERE id = ?;
     """
     CAN_MODIFY_OPTION = """
         SELECT creator_id
         FROM options
         INNER JOIN questions ON questions.id = options.question_id
         INNER JOIN quizzes ON quizzes.id = questions.quiz_id
-        WHERE options.id = %s;
+        WHERE options.id = ?;
     """
 
     GET_ALL_QUIZZES = """
@@ -311,22 +311,22 @@ class SQLQueries:
         LEFT JOIN quiz_tags AS quiz_tag ON quiz_tag.quiz_id = quiz.id
         LEFT JOIN tags AS tag ON tag.id = quiz_tag.tag_id
         WHERE quiz.is_deleted = False
-        AND (quiz.quiz_name LIKE %s OR tag.tag_name LIKE %s)
+        AND (quiz.quiz_name LIKE ? OR tag.tag_name LIKE ?)
         GROUP BY quiz.id;
     """
 
     GET_QUESTION_IDS = """
         SELECT id as question_id FROM questions
-        WHERE quiz_id = %s;
+        WHERE quiz_id = ?;
     """
 
     GET_ALL_OPTIONS_IDS = """
         SELECT * FROM options
         INNER JOIN questions ON questions.id = options.question_id
-        WHERE questions.quiz_id = %s;
+        WHERE questions.quiz_id = ?;
     """
 
     ADD_SCORE = """
         INSERT INTO score_table(id, user_id, quiz_id, score)
-        VALUES(%s, %s, %s, %s);
+        VALUES(?, ?, ?, ?);
     """
