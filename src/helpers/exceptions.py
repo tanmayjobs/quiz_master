@@ -112,6 +112,16 @@ class TokenExpired(CustomException):
         )
 
 
+class InvalidQuizResponse(CustomException):
+    def __init__(self, message):
+        super().__init__(
+            HTTPStatuses.BAD_REQUEST.code,
+            HTTPStatuses.BAD_REQUEST.status,
+            message
+        )
+
+
+
 def register_error_handlers(app):
     app.logger.info(LogText.REGISTER_ERROR_HANDLERS)
     app.register_error_handler(NotEnoughPermission, lambda err: err.generate_response())

@@ -1,5 +1,5 @@
 """
-This file contains config_app method which takes the flask app and set it's configurations based on the .env file.
+This file contains config_app method which takes the flask app and set its configurations based on the .env file.
 """
 import uuid
 
@@ -9,7 +9,6 @@ import os
 from flask import request
 
 from helpers.constants import LogText
-from helpers.log import request_logger
 
 
 def config_app(app):

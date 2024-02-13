@@ -1,4 +1,5 @@
-from helpers.constants import Strings
+from helpers.constants import Strings, Errors
+from helpers.exceptions import DoNotExists, InvalidQuizResponse
 
 
 class PlayService:
@@ -7,7 +8,7 @@ class PlayService:
         answer_question_ids = [answer[Strings.QUESTION_ID] for answer in answers]
 
         if answer_question_ids != question_ids:
-            raise NotImplemented
+            raise InvalidQuizResponse(Errors.INVALID_QUIZ_ANSWERS)
 
         question_correct_options = {
             question[Strings.QUESTION_ID]: {

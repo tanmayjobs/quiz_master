@@ -1,6 +1,6 @@
 from helpers.constants import RegexPatterns
 from .custom_schema import CustomSchema
-from marshmallow.fields import String, List, Nested, validate
+from marshmallow.fields import String, List, Nested, validate, Integer
 
 from .tags import TagResponse
 
@@ -9,7 +9,7 @@ class QuizRequest(CustomSchema):
     quiz_name = String(
         required=True, validate=validate.Regexp(RegexPatterns.ALPHA_NUM_Q2)
     )
-    tag_ids = List(String, validate=validate.Length(min=1))
+    tag_ids = List(String, required=True, validate=validate.Length(min=1))
 
 
 class QuizResponse(CustomSchema):
@@ -29,8 +29,14 @@ class RecordFilter(CustomSchema):
     user_id = String()
 
 
+class Record(CustomSchema):
+    quiz_id = String()
+    user_id = String()
+    score = Integer()
+
+
 class Records(CustomSchema):
-    records = List(Nested(RecordFilter()), dump_only=True)
+    records = List(Nested(Record()), dump_only=True)
 
 
 class Answer(CustomSchema):

@@ -59,4 +59,5 @@ LEARNINGS:
 
 Future Scope:
     I want to create a framework on the top of flask which will provide a structured architecture for Flask Web APIs.
+    There is no reason to pretend to be cool. Let's show our lame sides. That's who we really are, after all.
 """

@@ -11,6 +11,7 @@ class Errors:
     QUIZ_NOT_FOUND = NOT_FOUND.format_map({"res": Strings.QUIZ, "id": "{id}"})
     TAG_NOT_FOUND = NOT_FOUND.format_map({"res": Strings.TAG, "id": "{id}"})
     QUESTION_NOT_FOUND = NOT_FOUND.format_map({"res": Strings.QUESTION, "id": "{id}"})
+    INVALID_QUIZ_ANSWERS = "the quiz response is invalid!"
     OPTION_NOT_FOUND = NOT_FOUND.format_map({"res": Strings.OPTION, "id": "{id}"})
     NOT_CREATOR_OF_QUIZ = "you are not the creator of the quiz!"
     NOT_ENOUGH_PERMISSIONS = "you don't have enough permissions"

@@ -6,7 +6,7 @@ from services.question import QuestionService
 from utils.rbac import validate_token_details
 
 
-@validate_token_details(UserRole.CREATOR.value)
+@validate_token_details(UserRole.CREATOR.value, UserRole.PLAYER.value)
 class GetQuestionController:
     def __init__(self, question_id, question_service=None):
         self.question_id = question_id

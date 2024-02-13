@@ -14,7 +14,6 @@ blp = Blueprint("Tags", __name__)
 @blp.route("/tags")
 class TagsView(MethodView):
     @blp.alt_response(HTTPStatuses.OK.code, schema=TagsResponse)
-    @blp.doc(parameters=[AUTHORIZATION_HEADER])
     def get(self):
         get_tags = GetTagsController()
         return get_tags()

@@ -1,6 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
+from controllers.auth.logout import LogoutController
 from controllers.auth.refresh import RefreshTokenController
 from controllers.auth.sign_in import SignInController
 from controllers.auth.sign_up import SignUpController
@@ -44,3 +45,10 @@ class Refresh(MethodView):
     def post(self):
         refresh_token = RefreshTokenController()
         return refresh_token()
+
+
+@blp.route("/logout")
+class Logout(MethodView):
+    def post(self):
+        logout = LogoutController()
+        return logout()

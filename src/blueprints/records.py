@@ -1,8 +1,9 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
+from controllers.quiz.play_quiz import PlayQuizController
 from controllers.records.get_records import GetRecordsController
-from schemas import RecordFilter, Records
+from schemas import RecordFilter, Records, CreateRecord, Record
 
 blp = Blueprint("Records", __name__)
 
@@ -17,3 +18,9 @@ class RecordsView(MethodView):
         """
         get_records = GetRecordsController(args)
         return get_records()
+
+    @blp.arguments(CreateRecord)
+    @blp.alt_response(200, schema=Record)
+    def post(self, answers):
+        play_quiz = PlayQuizController(answers)
+        return play_quiz()

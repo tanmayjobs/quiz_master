@@ -2,6 +2,7 @@ from flask_jwt_extended import get_jwt_identity
 
 from helpers.constants import Strings
 from helpers.enum.user_role import UserRole
+from helpers.exceptions import CustomException
 from services.play import PlayService
 from services.question import QuestionService
 from services.record import RecordService
@@ -21,12 +22,14 @@ class PlayQuizController:
         self.record_service = record_service or RecordService()
 
     def __call__(self):
-        questions = self.question_service.get_questions(
-            self.quiz_id, UserRole.CREATOR.value
-        )
-        total_score = self.play_service.play(questions, self.answers)
-        self.record_service.add_record(self.quiz_id, self.user_id, total_score)
-
+        try:
+            questions = self.question_service.get_questions(
+                self.quiz_id, UserRole.CREATOR.value
+            )
+            total_score = self.play_service.play(questions, self.answers)
+            self.record_service.add_record(self.quiz_id, self.user_id, total_score)
+        except CustomException as error:
+            return error.generate_response()
         return {
             Strings.QUIZ_ID: self.quiz_id,
             Strings.USER_ID: self.user_id,

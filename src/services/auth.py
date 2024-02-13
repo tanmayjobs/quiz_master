@@ -5,7 +5,7 @@ from pymysql import IntegrityError
 from database import MysqlAccess, DatabaseAccess
 from helpers.constants import SQLQueries, Strings, Errors, LogText
 from helpers.enum.user_role import UserRole
-from helpers.exceptions import InvalidCredentials, AlreadyExists
+from helpers.exceptions import InvalidCredentials, AlreadyExists, DoNotExists
 from helpers.log import request_logger
 from utils.hashing import check_password, hash_password
 
@@ -18,7 +18,9 @@ class AuthServices:
         with self.database_access as dao:
             user_data = dao.read(SQLQueries.GET_USER, (username,), True)
 
-        if not user_data or not check_password(
+        if not user_data:
+            raise DoNotExists("")
+        if not check_password(
             password, user_data[Strings.HASH_PASSWORD]
         ):
             raise InvalidCredentials(Errors.INVALID_CREDENTIALS)
