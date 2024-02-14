@@ -1305,3 +1305,60 @@
 13-02-2024 13:35:10 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 13:35:10] "[35m[1mPOST /auth/sign_up HTTP/1.1[0m" 201 -
 13-02-2024 13:35:10 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 13:35:10] "POST /auth/sign_in HTTP/1.1" 200 -
 13-02-2024 13:35:10 INFO       [_internal.py:96] 127.0.0.1 - - [13/Feb/2024 13:35:10] "[31m[1mPOST /auth/refresh HTTP/1.1[0m" 498 -
+14-02-2024 11:20:06 INFO       [config.py:15] setting up configs
+14-02-2024 11:20:06 INFO       [config.py:37] setting up config completed
+14-02-2024 11:20:06 INFO       [exceptions.py:126] registering error handlers
+14-02-2024 11:20:06 INFO       [exceptions.py:132] registering error handlers completed
+14-02-2024 11:20:06 INFO       [__init__.py:25] registering blueprints
+14-02-2024 11:20:06 INFO       [__init__.py:34] registering blueprints completed
+14-02-2024 11:20:06 INFO       [jwt.py:9] registering jwt system
+14-02-2024 11:20:06 INFO       [jwt.py:14] registering jwt system completed
+14-02-2024 11:20:06 INFO       [_internal.py:96] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+14-02-2024 11:20:06 INFO       [_internal.py:96] [33mPress CTRL+C to quit[0m
+14-02-2024 11:20:06 INFO       [_internal.py:96]  * Restarting with stat
+14-02-2024 11:20:07 INFO       [config.py:15] setting up configs
+14-02-2024 11:20:07 INFO       [config.py:37] setting up config completed
+14-02-2024 11:20:07 INFO       [exceptions.py:126] registering error handlers
+14-02-2024 11:20:07 INFO       [exceptions.py:132] registering error handlers completed
+14-02-2024 11:20:07 INFO       [__init__.py:25] registering blueprints
+14-02-2024 11:20:07 INFO       [__init__.py:34] registering blueprints completed
+14-02-2024 11:20:07 INFO       [jwt.py:9] registering jwt system
+14-02-2024 11:20:07 INFO       [jwt.py:14] registering jwt system completed
+14-02-2024 11:20:07 WARNING    [_internal.py:96]  * Debugger is active!
+14-02-2024 11:20:07 INFO       [_internal.py:96]  * Debugger PIN: 482-885-147
+14-02-2024 11:20:10 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:10] "POST /auth/sign_in HTTP/1.1" 200 -
+14-02-2024 11:20:30 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:30] "[33mPOST /auth/sign_in HTTP/1.1[0m" 404 -
+14-02-2024 11:20:30 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:30] "POST /auth/refresh HTTP/1.1" 200 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "GET /quizzes HTTP/1.1" 200 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "[35m[1mPOST /quizzes/119fd176-ca83-4778-bd2f-9c8dd615ee22/questions HTTP/1.1[0m" 201 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "GET /quizzes/119fd176-ca83-4778-bd2f-9c8dd615ee22/questions HTTP/1.1" 200 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "[35m[1mPOST /questions/0935733e-f9a0-4a0c-9e06-d9d7ecb6f443/options HTTP/1.1[0m" 201 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "GET /quizzes/119fd176-ca83-4778-bd2f-9c8dd615ee22 HTTP/1.1" 200 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "GET /questions/0935733e-f9a0-4a0c-9e06-d9d7ecb6f443 HTTP/1.1" 200 -
+14-02-2024 11:20:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:31] "PUT /options/0ecd5e7f-6b20-48f6-83d2-849efabb63ff HTTP/1.1" 200 -
+14-02-2024 11:20:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:32] "DELETE /options/0ecd5e7f-6b20-48f6-83d2-849efabb63ff HTTP/1.1" 200 -
+14-02-2024 11:20:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:32] "PUT /questions/0935733e-f9a0-4a0c-9e06-d9d7ecb6f443 HTTP/1.1" 200 -
+14-02-2024 11:20:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:32] "DELETE /questions/0935733e-f9a0-4a0c-9e06-d9d7ecb6f443 HTTP/1.1" 200 -
+14-02-2024 11:20:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:32] "DELETE /quizzes/119fd176-ca83-4778-bd2f-9c8dd615ee22 HTTP/1.1" 200 -
+14-02-2024 11:20:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:32] "GET /tags HTTP/1.1" 200 -
+14-02-2024 11:20:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:20:32] "GET /records?user_id=1 HTTP/1.1" 200 -
+14-02-2024 11:21:30 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:30] "[33mPOST /auth/sign_in HTTP/1.1[0m" 404 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "POST /auth/refresh HTTP/1.1" 200 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "[35m[1mPOST /quizzes HTTP/1.1[0m" 201 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "GET /quizzes HTTP/1.1" 200 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "[35m[1mPOST /quizzes/cba9444d-94c0-468c-835d-34ec7935d3a2/questions HTTP/1.1[0m" 201 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "GET /quizzes/cba9444d-94c0-468c-835d-34ec7935d3a2/questions HTTP/1.1" 200 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "[35m[1mPOST /questions/32ffc7f9-9e1c-491c-88b2-8b0ac094e4a2/options HTTP/1.1[0m" 201 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "GET /quizzes/cba9444d-94c0-468c-835d-34ec7935d3a2 HTTP/1.1" 200 -
+14-02-2024 11:21:31 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:31] "GET /questions/32ffc7f9-9e1c-491c-88b2-8b0ac094e4a2 HTTP/1.1" 200 -
+14-02-2024 11:21:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:32] "PUT /options/74fa9e46-da7c-4385-8950-2956fc6584f5 HTTP/1.1" 200 -
+14-02-2024 11:21:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:32] "DELETE /options/74fa9e46-da7c-4385-8950-2956fc6584f5 HTTP/1.1" 200 -
+14-02-2024 11:21:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:32] "PUT /questions/32ffc7f9-9e1c-491c-88b2-8b0ac094e4a2 HTTP/1.1" 200 -
+14-02-2024 11:21:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:32] "DELETE /questions/32ffc7f9-9e1c-491c-88b2-8b0ac094e4a2 HTTP/1.1" 200 -
+14-02-2024 11:21:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:32] "DELETE /quizzes/cba9444d-94c0-468c-835d-34ec7935d3a2 HTTP/1.1" 200 -
+14-02-2024 11:21:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:32] "GET /tags HTTP/1.1" 200 -
+14-02-2024 11:21:32 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:32] "GET /records?user_id=1 HTTP/1.1" 200 -
+14-02-2024 11:21:48 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:21:48] "[33mPOST /auth/sign_in HTTP/1.1[0m" 404 -
+14-02-2024 11:22:26 INFO       [_internal.py:96] 127.0.0.1 - - [14/Feb/2024 11:22:26] "POST /auth/sign_in HTTP/1.1" 200 -

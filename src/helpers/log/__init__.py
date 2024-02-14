@@ -23,5 +23,4 @@ def set_request_logger():
 
 
 request_logger = set_request_logger()
-
 __all__ = ['request_logger']
