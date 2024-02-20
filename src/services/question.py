@@ -15,7 +15,7 @@ class QuestionService:
 
     def get_questions(self, quiz_id, user_role):
         with self.database_access as dao:
-            quiz = dao.read(SQLQueries.GET_QUIZ_BY_ID, (quiz_id,))
+            quiz = dao.read(SQLQueries.GET_QUIZ_BY_ID, (quiz_id,), only_one=True)
             if not quiz:
                 raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
 

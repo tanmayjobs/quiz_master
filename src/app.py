@@ -28,6 +28,7 @@ def create_app():
     """
     app = Flask(__name__)
 
+    app.database = "database"
     config_app(app)
     register_error_handlers(app)
     register_blueprints(app)

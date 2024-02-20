@@ -1,5 +1,6 @@
 from helpers.constants import Strings, Errors
 from helpers.exceptions import DoNotExists, InvalidQuizResponse
+from helpers.log import request_logger
 
 
 class PlayService:
@@ -11,11 +12,11 @@ class PlayService:
             raise InvalidQuizResponse(Errors.INVALID_QUIZ_ANSWERS)
 
         question_correct_options = {
-            question[Strings.QUESTION_ID]: {
-                option
+            question[Strings.QUESTION_ID]: [
+                option[Strings.ID]
                 for option in question[Strings.OPTIONS]
                 if option[Strings.IS_CORRECT]
-            }
+            ]
             for question in questions
         }
 
@@ -23,11 +24,10 @@ class PlayService:
         for answer in answers:
             selected_options = set(answer[Strings.SELECT_OPTION_IDS])
             correct_options = set(question_correct_options[answer[Strings.QUESTION_ID]])
-            correct_selected = correct_options - selected_options
+            correct_selected = correct_options.intersection(selected_options)
             incorrect_selected = selected_options - correct_selected
             each_question_score = (
                 len(correct_selected) - len(incorrect_selected)
-            ) / len(questions[answer[Strings.QUESTION_ID]][Strings.OPTIONS])
+            ) / len(question_correct_options[answer[Strings.QUESTION_ID]])
             total_score += each_question_score
-
         return total_score
