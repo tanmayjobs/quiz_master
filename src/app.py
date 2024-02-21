@@ -9,9 +9,9 @@ Handles the creation of flask app and registering various other things for it su
 
 from flask import Flask
 
-from database import init_db
 from blueprints import register_blueprints
 from config import config_app
+from database import init_db
 from helpers.exceptions import register_error_handlers
 from helpers.jwt import register_jwt
 

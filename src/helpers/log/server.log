@@ -377,3 +377,26 @@
 21-02-2024 11:55:49 INFO       [jwt.py:14] registering jwt system completed
 21-02-2024 11:55:49 WARNING    [_internal.py:96]  * Debugger is active!
 21-02-2024 11:55:49 INFO       [_internal.py:96]  * Debugger PIN: 482-885-147
+21-02-2024 14:07:01 INFO       [config.py:15] setting up configs
+21-02-2024 14:07:01 INFO       [config.py:37] setting up config completed
+21-02-2024 14:07:01 INFO       [exceptions.py:129] registering error handlers
+21-02-2024 14:07:01 INFO       [exceptions.py:133] registering error handlers completed
+21-02-2024 14:07:01 INFO       [__init__.py:25] registering blueprints
+21-02-2024 14:07:01 INFO       [__init__.py:34] registering blueprints completed
+21-02-2024 14:07:01 INFO       [jwt.py:9] registering jwt system
+21-02-2024 14:07:01 INFO       [jwt.py:14] registering jwt system completed
+21-02-2024 14:07:01 INFO       [_internal.py:96] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+21-02-2024 14:07:01 INFO       [_internal.py:96] [33mPress CTRL+C to quit[0m
+21-02-2024 14:07:01 INFO       [_internal.py:96]  * Restarting with stat
+21-02-2024 14:07:02 INFO       [config.py:15] setting up configs
+21-02-2024 14:07:02 INFO       [config.py:37] setting up config completed
+21-02-2024 14:07:02 INFO       [exceptions.py:129] registering error handlers
+21-02-2024 14:07:02 INFO       [exceptions.py:133] registering error handlers completed
+21-02-2024 14:07:02 INFO       [__init__.py:25] registering blueprints
+21-02-2024 14:07:02 INFO       [__init__.py:34] registering blueprints completed
+21-02-2024 14:07:02 INFO       [jwt.py:9] registering jwt system
+21-02-2024 14:07:02 INFO       [jwt.py:14] registering jwt system completed
+21-02-2024 14:07:02 WARNING    [_internal.py:96]  * Debugger is active!
+21-02-2024 14:07:02 INFO       [_internal.py:96]  * Debugger PIN: 482-885-147
+21-02-2024 14:07:12 INFO       [_internal.py:96] 127.0.0.1 - - [21/Feb/2024 14:07:12] "GET /tags HTTP/1.1" 200 -

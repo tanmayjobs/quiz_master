@@ -3,11 +3,11 @@ The schemas package contains all the schemas for the project, let it be response
 These schemas are used to validate data on request and map the data in response.
 """
 
-from .examples import *
-from .response import *
 from .auth import *
-from .user import *
-from .tags import *
+from .examples import *
 from .option import *
 from .question import *
 from .quiz import *
+from .response import *
+from .tags import *
+from .user import *

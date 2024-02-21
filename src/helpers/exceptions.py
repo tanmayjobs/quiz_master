@@ -1,9 +1,7 @@
-import json
 from dataclasses import dataclass
 
 from helpers.constants import Errors, LogText
 from helpers.constants.http_statuses import HTTPStatuses
-from helpers.log import request_logger
 
 
 @dataclass

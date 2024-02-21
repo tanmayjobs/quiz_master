@@ -1,6 +1,7 @@
+from marshmallow.fields import String, List, Nested, validate
+
 from helpers.constants import RegexPatterns
 from .custom_schema import CustomSchema
-from marshmallow.fields import String, List, Nested, validate
 
 
 class TagRequest(CustomSchema):

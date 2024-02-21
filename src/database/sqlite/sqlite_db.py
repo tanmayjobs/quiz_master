@@ -1,6 +1,6 @@
-from pymysql.cursors import DictCursor
-import sqlite3
 import os
+import sqlite3
+
 import dotenv
 
 from ..db import Database

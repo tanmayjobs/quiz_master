@@ -1,5 +1,6 @@
-from .custom_schema import CustomSchema
 from marshmallow.fields import String, Boolean
+
+from .custom_schema import CustomSchema
 
 
 class OptionRequest(CustomSchema):

@@ -1,11 +1,10 @@
 """
 This file contains config_app method which takes the flask app and set its configurations based on the .env file.
 """
+import os
 import uuid
 
 from dotenv import load_dotenv
-import os
-
 from flask import request
 
 from helpers.constants import LogText

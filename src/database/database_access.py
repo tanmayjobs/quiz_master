@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
 
-from .mysql.mysql_db import MySQLDatabase
-
 
 class DatabaseAccess(ABC):
     """

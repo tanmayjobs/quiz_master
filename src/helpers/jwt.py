@@ -2,7 +2,6 @@ from flask_jwt_extended import JWTManager
 
 from helpers.constants import LogText
 from helpers.exceptions import TokenExpired, BlockedToken, TokenNotProvided
-from helpers.log import request_logger
 
 
 def register_jwt(app):

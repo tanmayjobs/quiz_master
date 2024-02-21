@@ -6,14 +6,13 @@ which is used to register the necessary blueprints of the application.
 from flask_smorest import Api
 
 from helpers.constants import LogText
-from helpers.log import request_logger
 from .auth import blp as AuthBlp
-from .quizzes import blp as QuizzesBlp
-from .users import blp as UsersBlp
-from .records import blp as RecordsBlp
-from .questions import blp as QuestionsBlp
 from .options import blp as OptionBlp
+from .questions import blp as QuestionsBlp
+from .quizzes import blp as QuizzesBlp
+from .records import blp as RecordsBlp
 from .tags import blp as TagsBlp
+from .users import blp as UsersBlp
 
 
 def register_blueprints(app):

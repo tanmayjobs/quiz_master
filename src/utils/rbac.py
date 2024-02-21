@@ -1,9 +1,9 @@
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
 
-from helpers.log import request_logger
-from services.tokens import TokenService
 from helpers.constants import Strings, LogText
 from helpers.exceptions import NotEnoughPermission, BlockedToken
+from helpers.log import request_logger
+from services.tokens import TokenService
 
 
 def validate_token_details(*roles: str, check_fresh=False, refresh=False):
@@ -34,7 +34,7 @@ def validate_token_details(*roles: str, check_fresh=False, refresh=False):
             jwt = get_jwt()
             token_pair_id = jwt[Strings.TOKEN_PAIR_ID]
 
-            if TokenService().is_blocked(token_pair_id):    # Verifying weather the token is blocked or not
+            if TokenService().is_blocked(token_pair_id):  # Verifying weather the token is blocked or not
                 request_logger.warn(LogText.BLOCKED_TOKEN)
                 raise BlockedToken()
 

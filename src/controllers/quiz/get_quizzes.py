@@ -1,12 +1,8 @@
-from flask_jwt_extended import get_jwt_identity
-
 from helpers.constants import Strings
 from helpers.constants.http_statuses import HTTPStatuses
-from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from helpers.log import request_logger
 from services.quiz import QuizService
-from utils.rbac import validate_token_details
 
 
 class GetQuizzesController:

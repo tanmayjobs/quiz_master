@@ -1,8 +1,6 @@
 from database import SqliteDatabase
-from database.last_transaction import LastTransaction
 from database.database_access import DatabaseAccess
-from helpers.constants import LogText
-from helpers.log import request_logger
+from database.last_transaction import LastTransaction
 
 
 class SqliteAccess(DatabaseAccess):

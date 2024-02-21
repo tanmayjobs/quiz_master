@@ -3,8 +3,7 @@ import uuid
 from flask_jwt_extended import create_access_token, create_refresh_token
 
 from database import DatabaseAccess, MysqlAccess
-from helpers.constants import LogText, SQLQueries, Strings
-from helpers.log import request_logger
+from helpers.constants import SQLQueries, Strings
 
 
 class TokenService:

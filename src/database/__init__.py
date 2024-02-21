@@ -15,12 +15,12 @@ Example:
 
 """
 
-from helpers.constants import SQLQueries
-from .db import Database
+from database.mysql.mysql_access import MysqlAccess
 from database.mysql.mysql_db import MySQLDatabase
 from database.sqlite.sqlite_db import SqliteDatabase
+from helpers.constants import SQLQueries
 from .database_access import DatabaseAccess
-from database.mysql.mysql_access import MysqlAccess
+from .db import Database
 from .sqlite.sqlite_access import SqliteAccess
 
 

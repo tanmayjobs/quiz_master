@@ -1,8 +1,8 @@
 from flask import current_app
 
 from database import MySQLDatabase
-from database.last_transaction import LastTransaction
 from database.database_access import DatabaseAccess
+from database.last_transaction import LastTransaction
 from helpers.constants import LogText
 from helpers.log import request_logger
 

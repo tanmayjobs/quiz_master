@@ -1,5 +1,3 @@
-from flask_jwt_extended import get_jwt_identity
-
 from helpers.constants import Strings
 from helpers.exceptions import CustomException
 from helpers.log import request_logger

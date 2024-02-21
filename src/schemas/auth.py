@@ -1,6 +1,7 @@
+from marshmallow.fields import String, validate
+
 from helpers.constants import RegexPatterns
 from .custom_schema import CustomSchema
-from marshmallow.fields import String, validate
 
 
 class AuthRequest(CustomSchema):

@@ -1,10 +1,11 @@
+import os
+
+import dotenv
+import pymysql
 from flask import current_app
 from pymysql.cursors import DictCursor
-import pymysql
-import os
-import dotenv
-from ..db import Database
 
+from ..db import Database
 
 dotenv.load_dotenv()
 

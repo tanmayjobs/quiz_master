@@ -1,5 +1,6 @@
-from .custom_schema import CustomSchema
 from marshmallow.fields import Integer, String, List, Dict
+
+from .custom_schema import CustomSchema
 
 
 class ErrorResponse(CustomSchema):

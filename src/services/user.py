@@ -9,7 +9,7 @@ class UserServices:
 
     def get_users(self):
         with self.database_access as dao:
-            users = dao.read(SQLQueries.GET_USERS,)
+            users = dao.read(SQLQueries.GET_USERS, )
         return users
 
     def remove_user(self, user_id):

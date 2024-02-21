@@ -6,7 +6,6 @@ from helpers.enum.user_role import UserRole
 from helpers.exceptions import CustomException
 from helpers.log import request_logger
 from services.question import QuestionService
-from services.quiz import QuizService
 from utils.rbac import validate_token_details
 
 

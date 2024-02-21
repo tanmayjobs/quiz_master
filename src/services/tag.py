@@ -4,7 +4,6 @@ from pymysql import IntegrityError
 
 from database import MysqlAccess
 from helpers.constants import SQLQueries, Errors
-from helpers.constants.http_statuses import HTTPStatuses
 from helpers.exceptions import AlreadyExists, DoNotExists
 
 

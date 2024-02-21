@@ -1,5 +1,5 @@
 from helpers.constants import Strings, Errors
-from helpers.exceptions import DoNotExists, InvalidQuizResponse
+from helpers.exceptions import InvalidQuizResponse
 
 
 class PlayService:
@@ -35,8 +35,8 @@ class PlayService:
             correct_selected = correct_options - selected_options
             incorrect_selected = selected_options - correct_selected
             each_question_score = (
-                len(correct_selected) - len(incorrect_selected)
-            ) / len(questions[answer[Strings.QUESTION_ID]][Strings.OPTIONS])
+                                          len(correct_selected) - len(incorrect_selected)
+                                  ) / len(questions[answer[Strings.QUESTION_ID]][Strings.OPTIONS])
             total_score += each_question_score
 
         return total_score

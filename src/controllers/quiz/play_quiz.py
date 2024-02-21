@@ -12,7 +12,7 @@ from utils.rbac import validate_token_details
 @validate_token_details(UserRole.PLAYER.value)
 class PlayQuizController:
     def __init__(
-        self, json_data, question_service=None, play_service=None, record_service=None
+            self, json_data, question_service=None, play_service=None, record_service=None
     ):
         self.quiz_id = json_data[Strings.QUIZ_ID]
         self.answers = json_data[Strings.ANSWERS]

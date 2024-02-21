@@ -1,5 +1,6 @@
-from .custom_schema import CustomSchema
 from marshmallow.fields import String, List, Nested
+
+from .custom_schema import CustomSchema
 
 
 class UserResponse(CustomSchema):

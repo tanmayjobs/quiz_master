@@ -3,7 +3,7 @@ import uuid
 from pymysql import IntegrityError
 
 from database import MysqlAccess, DatabaseAccess
-from helpers.constants import SQLQueries, Strings, Errors, LogText
+from helpers.constants import SQLQueries, Strings, Errors
 from helpers.enum.user_role import UserRole
 from helpers.exceptions import InvalidCredentials, AlreadyExists, DoNotExists
 from helpers.log import request_logger
@@ -21,7 +21,7 @@ class AuthServices:
         if not user_data:
             raise DoNotExists("")
         if not check_password(
-            password, user_data[Strings.HASH_PASSWORD]
+                password, user_data[Strings.HASH_PASSWORD]
         ):
             raise InvalidCredentials(Errors.INVALID_CREDENTIALS)
         return user_data
