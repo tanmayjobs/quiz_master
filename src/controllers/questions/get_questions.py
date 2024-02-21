@@ -13,13 +13,14 @@ from utils.rbac import validate_token_details
 class GetQuestionsController:
     def __init__(self, quiz_id, question_service=None):
         self.quiz_id = quiz_id
+        self.user_id = get_jwt_identity()
         self.user_role = get_jwt()[Strings.ROLE]
         self.question_service = question_service or QuestionService()
 
     def __call__(self):
         try:
             questions = self.question_service.get_questions(
-                self.quiz_id, self.user_role
+                self.quiz_id, self.user_id, self.user_role
             )
         except CustomException as custom_error:
             request_logger.info(custom_error)

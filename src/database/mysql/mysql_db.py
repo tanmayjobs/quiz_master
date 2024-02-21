@@ -19,14 +19,16 @@ class MySQLDatabase(Database):
         self.uri = uri
 
     def connect(self):
-        self.connection = pymysql.connect(
-            host=os.getenv("DATABASE_HOST"),
-            user=os.getenv("DATABASE_USER"),
-            password=os.getenv("DATABASE_PASSWORD"),
-            database=self.db_path or os.getenv("DATABASE_NAME"),
-            port=int(os.getenv("DATABASE_PORT")),
-            cursorclass=DictCursor,
-        )
+        try:
+            self.connection = pymysql.connect(
+                host=os.getenv("DATABASE_HOST"),
+                user=os.getenv("DATABASE_USER"),
+                password=os.getenv("DATABASE_PASSWORD"),
+                database=self.db_path or os.getenv("DATABASE_NAME"),
+                cursorclass=DictCursor,
+            )
+        except pymysql.Error:
+            ...
 
     def get_cursor(self):
         return self.connection.cursor()

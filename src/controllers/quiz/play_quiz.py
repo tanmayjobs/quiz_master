@@ -24,7 +24,9 @@ class PlayQuizController:
     def __call__(self):
         try:
             questions = self.question_service.get_questions(
-                self.quiz_id, UserRole.CREATOR.value
+                self.quiz_id,
+                self.user_id,
+                UserRole.CREATOR.value
             )
             total_score = self.play_service.play(questions, self.answers)
             self.record_service.add_record(self.quiz_id, self.user_id, total_score)

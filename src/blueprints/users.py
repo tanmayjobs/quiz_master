@@ -1,6 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
+from controllers.users.get_users import GetUsersController
 from controllers.users.remove_user import RemoveUserController
 from helpers.constants import Strings
 from helpers.constants.http_statuses import AUTHORIZATION_HEADER
@@ -19,10 +20,8 @@ blp = Blueprint("Users", __name__)
 class UsersView(MethodView):
     @blp.response(200, UsersResponse)
     def get(self):
-        """
-        Get all the users from the database.
-        """
-        ...
+        get_users = GetUsersController()
+        return get_users()
 
 
 @blp.route("/users/<string:user_id>")

@@ -114,6 +114,7 @@ class SQLQueries:
     """
 
     GET_ALL_TAGS = "SELECT * FROM tags;"
+
     CREATE_TAG = """
         INSERT INTO tags (id, tag_name)
         VALUES (%s, %s);
@@ -145,8 +146,11 @@ class SQLQueries:
         WHERE {};
     """
 
-    GET_ALL_USERS = """
-        SELECT * FROM auth
+    GET_USERS = """
+        SELECT
+        id as user_id,
+        username
+        FROM auth
         WHERE user_role != 0;
     """
     GET_USER = """

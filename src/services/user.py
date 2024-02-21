@@ -7,6 +7,11 @@ class UserServices:
     def __init__(self, database_access=None):
         self.database_access = database_access or MysqlAccess()
 
+    def get_users(self):
+        with self.database_access as dao:
+            users = dao.read(SQLQueries.GET_USERS,)
+        return users
+
     def remove_user(self, user_id):
         with self.database_access as dao:
             user = dao.read(SQLQueries.GET_USER_BY_ID, (user_id,), only_one=True)

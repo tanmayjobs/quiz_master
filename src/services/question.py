@@ -13,16 +13,16 @@ class QuestionService:
     def __init__(self, database_access=None):
         self.database_access = database_access or MysqlAccess()
 
-    def get_questions(self, quiz_id, user_role):
+    def get_questions(self, quiz_id, user_id, user_role):
         with self.database_access as dao:
-            quiz = dao.read(SQLQueries.GET_QUIZ_BY_ID, (quiz_id,))
+            quiz = dao.read(SQLQueries.GET_QUIZ_BY_ID, (quiz_id,), only_one=True)
             if not quiz:
                 raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
 
             get_questions_query = (
-                SQLQueries.GET_QUESTIONS_AS_PLAYER
-                if user_role == UserRole.PLAYER.value
-                else SQLQueries.GET_QUESTIONS_AS_CREATOR
+                SQLQueries.GET_QUESTIONS_AS_CREATOR
+                if user_role == UserRole.CREATOR.value
+                else SQLQueries.GET_QUESTIONS_AS_PLAYER
             )
 
             questions = dao.read(get_questions_query, (quiz_id,))
@@ -62,7 +62,6 @@ class QuestionService:
                         ),
                     )
         except IntegrityError as error:
-            print(error)
             raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
 
     def remove_question(self, performer_id, question_id):

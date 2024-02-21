@@ -4,18 +4,27 @@ from helpers.exceptions import DoNotExists, InvalidQuizResponse
 
 class PlayService:
     def play(self, questions, answers):
-        question_ids = [question[Strings.QUESTION_ID] for question in questions]
-        answer_question_ids = [answer[Strings.QUESTION_ID] for answer in answers]
+        question_ids = {question[Strings.QUESTION_ID] for question in questions}
+        answer_question_ids = {answer[Strings.QUESTION_ID] for answer in answers}
 
         if answer_question_ids != question_ids:
-            raise InvalidQuizResponse(Errors.INVALID_QUIZ_ANSWERS)
+            raise InvalidQuizResponse(
+                Errors.INVALID_QUIZ_QUESTION, {
+                    Strings.MISSING_QUESTIONS: list(question_ids - answer_question_ids),
+                    Strings.EXTRA_QUESTIONS: list(answer_question_ids - question_ids),
+                }
+            )
 
         question_correct_options = {
-            question[Strings.QUESTION_ID]: {
-                option
+            question[Strings.QUESTION_ID]: [
+                option[Strings.ID]
                 for option in question[Strings.OPTIONS]
                 if option[Strings.IS_CORRECT]
-            }
+            ]
+            for question in questions
+        }
+        questions = {
+            question[Strings.QUESTION_ID]: question
             for question in questions
         }
 

@@ -32,10 +32,10 @@ class ValidationException(CustomException):
 
 class InvalidCredentials(CustomException):
     def __init__(
-        self,
-        message,
-        code=HTTPStatuses.UNAUTHORIZED.code,
-        status=HTTPStatuses.UNAUTHORIZED.status,
+            self,
+            message,
+            code=HTTPStatuses.UNAUTHORIZED.code,
+            status=HTTPStatuses.UNAUTHORIZED.status,
     ):
         super().__init__(code, status, message)
 
@@ -113,20 +113,21 @@ class TokenExpired(CustomException):
 
 
 class InvalidQuizResponse(CustomException):
-    def __init__(self, message):
+    def __init__(self, message, hints):
+        self.hints = hints
         super().__init__(
             HTTPStatuses.BAD_REQUEST.code,
             HTTPStatuses.BAD_REQUEST.status,
             message
         )
 
+    def dump(self):
+        return {**super().dump(), "hints": self.hints}
 
 
 def register_error_handlers(app):
     app.logger.info(LogText.REGISTER_ERROR_HANDLERS)
     app.register_error_handler(NotEnoughPermission, lambda err: err.generate_response())
     app.register_error_handler(BlockedToken, lambda err: err.generate_response())
-    app.register_error_handler(
-        ValidationCustomException, lambda err: err.generate_response()
-    )
+    app.register_error_handler(ValidationCustomException, lambda err: err.generate_response())
     app.logger.info(LogText.REGISTER_ERROR_HANDLERS_COMPLETED)

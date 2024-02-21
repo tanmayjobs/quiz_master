@@ -21,4 +21,4 @@ class RecordService:
 
     def add_record(self, quiz_id, user_id, score):
         with self.database_access as dao:
-            dao.write(SQLQueries.ADD_SCORE, (uuid.uuid4(), quiz_id, user_id, score))
+            dao.write(SQLQueries.ADD_SCORE, (uuid.uuid4(), user_id, quiz_id, score))
