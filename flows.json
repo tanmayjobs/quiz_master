@@ -1,0 +1,96 @@
+[
+    {
+        "flow_name": "creator create a quiz",
+        "username": "riddler",
+        "password": "Riddler@123",
+        "flow": [
+            {
+                "requestId": "sign in",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "add quiz",
+                "expectedStatusCode": 201
+            },
+            {
+                "requestId": "add question",
+                "expectedStatusCode": 201
+            },
+            {
+                "requestId": "add option",
+                "expectedStatusCode": 201
+            }
+        ]
+    },
+    {
+        "flow_name": "player create account and play a quiz",
+        "flow": [
+            {
+                "requestId": "sign up",
+                "expectedStatusCode": 201
+            },
+            {
+                "requestId": "sign in",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "get quizzes",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "get quiz",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "get questions",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "refresh",
+                "expectedStatusCode": 200
+            }
+        ]
+    },
+    {
+        "flow_name": "creator update a quiz",
+        "username": "riddler",
+        "password": "Riddler@123",
+        "flow": [
+            {
+                "requestId": "sign in",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "update question",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "update option",
+                "expectedStatusCode": 200
+            }
+        ]
+    },
+    {
+        "flow_name": "creator delete a quiz, question & option",
+        "username": "riddler",
+        "password": "Riddler@123",
+        "flow": [
+            {
+                "requestId": "sign in",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "delete option",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "delete question",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "delete quiz",
+                "expectedStatusCode": 200
+            }
+        ]
+    }
+]
