@@ -19,9 +19,9 @@ class AddQuizController:
 
     def __call__(self):
         try:
-            self.quiz_service.add_quiz(self.quiz_name, self.performer_id, self.tags)
+            quiz_id = self.quiz_service.add_quiz(self.quiz_name, self.performer_id, self.tags)
         except CustomException as custom_error:
             request_logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
-            return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code
+            return {Strings.RESULT: Strings.CREATED, Strings.QUIZ_ID: quiz_id}, HTTPStatuses.CREATED.code

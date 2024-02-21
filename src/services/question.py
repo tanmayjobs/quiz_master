@@ -63,6 +63,8 @@ class QuestionService:
                     )
         except IntegrityError as error:
             raise DoNotExists(Errors.QUIZ_NOT_FOUND.format(id=quiz_id))
+        else:
+            return question_id
 
     def remove_question(self, performer_id, question_id):
         with self.database_access as dao:

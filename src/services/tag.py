@@ -19,10 +19,13 @@ class TagService:
 
     def create_tag(self, tag_name):
         try:
+            tag_id = uuid.uuid4()
             with self.database_access as dao:
-                dao.write(SQLQueries.CREATE_TAG, (uuid.uuid4(), tag_name))
+                dao.write(SQLQueries.CREATE_TAG, (tag_id, tag_name))
         except IntegrityError:
             raise AlreadyExists(Errors.TAG_ALREADY_EXISTS.format(tag_name))
+        else:
+            return tag_id
 
     def delete_tag(self, tag_id):
         with self.database_access as dao:

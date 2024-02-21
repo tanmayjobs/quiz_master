@@ -27,13 +27,15 @@ class AuthServices:
         return user_data
 
     def sign_up(self, username, password):
+        user_id = uuid.uuid4()
         password_hash = hash_password(password)
         try:
             with self.database_access as dao:
                 dao.write(
                     SQLQueries.ADD_USER,
-                    (uuid.uuid4(), username, password_hash, UserRole.PLAYER.value),
+                    (user_id, username, password_hash, UserRole.PLAYER.value),
                 )
         except IntegrityError as error:
             request_logger.info(error)
             raise AlreadyExists(Errors.USERNAME_ALREADY_EXISTS.format(username))
+        return user_id

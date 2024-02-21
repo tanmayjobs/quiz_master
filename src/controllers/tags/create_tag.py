@@ -15,9 +15,9 @@ class CreateTagController:
 
     def __call__(self):
         try:
-            self.tag_service.create_tag(self.tag_name)
+            tag_id = self.tag_service.create_tag(self.tag_name)
         except CustomException as custom_error:
             request_logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
-            return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code
+            return {Strings.RESULT: Strings.CREATED, Strings.TAG_ID: tag_id}, HTTPStatuses.CREATED.code

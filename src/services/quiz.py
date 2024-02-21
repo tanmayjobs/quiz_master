@@ -38,6 +38,8 @@ class QuizService:
             if Strings.QUIZ_NAME in error.args[1]:
                 raise AlreadyExists(Errors.QUIZ_ALREADY_EXISTS.format(quiz_name))
             raise DoNotExists(Errors.TAG_NOT_FOUND.format(id=tag_id))
+        else:
+            return quiz_id
 
     def remove_quiz(self, quiz_id, user_id, is_admin):
         with self.database_access as dao:

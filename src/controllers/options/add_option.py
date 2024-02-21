@@ -20,11 +20,11 @@ class AddOptionController:
 
     def __call__(self):
         try:
-            self.option_service.add_option(
+            option_id = self.option_service.add_option(
                 self.question_id, self.option_text, self.is_correct
             )
         except CustomException as custom_error:
             request_logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
-            return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code
+            return {Strings.RESULT: Strings.CREATED, Strings.OPTION_ID: option_id}, HTTPStatuses.CREATED.code

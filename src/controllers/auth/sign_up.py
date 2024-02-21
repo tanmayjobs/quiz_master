@@ -13,9 +13,9 @@ class SignUpController:
 
     def __call__(self):
         try:
-            self.auth_service.sign_up(self.username, self.password)
+            user_id = self.auth_service.sign_up(self.username, self.password)
         except CustomException as custom_error:
             request_logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
-            return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code
+            return {Strings.RESULT: Strings.CREATED, Strings.USER_ID: user_id}, HTTPStatuses.CREATED.code

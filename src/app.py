@@ -9,6 +9,7 @@ Handles the creation of flask app and registering various other things for it su
 
 from flask import Flask
 
+from database import init_db
 from blueprints import register_blueprints
 from config import config_app
 from helpers.exceptions import register_error_handlers
@@ -32,6 +33,7 @@ def create_app():
     register_error_handlers(app)
     register_blueprints(app)
     register_jwt(app)
+    init_db(app)
 
     return app
 

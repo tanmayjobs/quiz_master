@@ -16,6 +16,7 @@ class Strings:
     TAGS = "tags"
     TAG = "tag"
     TAG_NAME = "tag_name"
+    TAG_ID = "tag_id"
     TAG_IDS = "tag_ids"
     RECORDS = "records"
     RECORD = "record"

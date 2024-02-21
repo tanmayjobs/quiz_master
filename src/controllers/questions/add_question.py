@@ -21,11 +21,11 @@ class AddQuestionController:
 
     def __call__(self):
         try:
-            self.question_service.add_question(
+            question_id = self.question_service.add_question(
                 self.quiz_id, self.question_text, self.options
             )
         except CustomException as custom_error:
             request_logger.info(custom_error)
             return custom_error.dump(), custom_error.code
         else:
-            return {Strings.RESULT: Strings.CREATED}, HTTPStatuses.CREATED.code
+            return {Strings.RESULT: Strings.CREATED, Strings.QUESTION_ID: question_id}, HTTPStatuses.CREATED.code
