@@ -1,5 +1,24 @@
 [
     {
+        "flow_name": "admin create tag",
+        "username": "alfred",
+        "password": "Alfred@123",
+        "flow": [
+            {
+                "requestId": "sign in",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "all tags",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "add tag",
+                "expectedStatusCode": 201
+            }
+        ]
+    },
+    {
         "flow_name": "creator create a quiz",
         "username": "riddler",
         "password": "Riddler@123",
@@ -89,6 +108,25 @@
             },
             {
                 "requestId": "delete quiz",
+                "expectedStatusCode": 200
+            }
+        ]
+    },
+    {
+        "flow_name": "admin remove user",
+        "username": "alfred",
+        "password": "Alfred@123",
+        "flow": [
+            {
+                "requestId": "sign in",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "get users",
+                "expectedStatusCode": 200
+            },
+            {
+                "requestId": "delete user",
                 "expectedStatusCode": 200
             }
         ]
