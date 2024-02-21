@@ -15,9 +15,9 @@ Example:
 
 """
 
-from database.mysql.mysql_access import MysqlAccess
-from database.mysql.mysql_db import MySQLDatabase
-from database.sqlite.sqlite_db import SqliteDatabase
+from .mysql.mysql_access import MysqlAccess
+from .mysql.mysql_db import MySQLDatabase
+from .sqlite.sqlite_db import SqliteDatabase
 from helpers.constants import SQLQueries
 from .database_access import DatabaseAccess
 from .db import Database

@@ -1,6 +1,6 @@
-from database import SqliteDatabase
-from database.database_access import DatabaseAccess
-from database.last_transaction import LastTransaction
+from .sqlite_db import SqliteDatabase
+from ..database_access import DatabaseAccess
+from ..last_transaction import LastTransaction
 
 
 class SqliteAccess(DatabaseAccess):

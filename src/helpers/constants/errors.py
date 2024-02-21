@@ -1,4 +1,4 @@
-from helpers.constants import Strings
+from .strings import Strings
 
 
 class Errors:
