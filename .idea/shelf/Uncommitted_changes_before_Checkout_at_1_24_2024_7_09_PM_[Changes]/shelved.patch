@@ -1,0 +1,82 @@
+Index: src/.env
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/.env b/src/.env
+new file mode 100644
+--- /dev/null	(date 1705913167095)
++++ b/src/.env	(date 1705913167095)
+@@ -0,0 +1,5 @@
++APP_SECRET_KEY='a4M_AN0W4kshn0_vL2VyASgtL6MTJRhIbI02ribWMC0='
++DATABASE_URI='sqlite:///database.db'
++DATABASE_USER='root'
++DATABASE_PASSWORD='Nothing@123'
++DATABASE_NAME='learning'
+\ No newline at end of file
+Index: src/utils/inputs.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import pwinput\r\n\r\nimport utils.validators as Validators\r\nfrom helpers.constants import InputTexts, Errors\r\nfrom utils.until_not_valid import until_not_valid\r\n\r\n\r\n@until_not_valid\r\ndef get_username():\r\n    username = Validators.get_username(input(InputTexts.USERNAME))\r\n    if not username:\r\n        print(Errors.INVALID_INPUT)\r\n\r\n    return username\r\n\r\n\r\n@until_not_valid\r\ndef get_password():\r\n    password = Validators.get_password(pwinput.pwinput(InputTexts.PASSWORD))\r\n    if not password:\r\n        print(Errors.WEAK_PASSWORD)\r\n\r\n    return password\r\n\r\n\r\n@until_not_valid\r\ndef get_string(prompt):\r\n    string = Validators.get_valid_string(input(prompt))\r\n    if not string:\r\n        print(Errors.INVALID_INPUT)\r\n\r\n    return string\r\n\r\n\r\n@until_not_valid\r\ndef get_correct_option():\r\n    correct_option = Validators.get_correct_option(input(InputTexts.CORRECT_OPTION))\r\n    if not correct_option:\r\n        print(Errors.INVALID_INPUT)\r\n\r\n    return None\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/utils/inputs.py b/src/utils/inputs.py
+--- a/src/utils/inputs.py	(revision addfaa1a5da39d8d268474f67f5132cd90c632dd)
++++ b/src/utils/inputs.py	(date 1706098230983)
+@@ -2,10 +2,10 @@
+ 
+ import utils.validators as Validators
+ from helpers.constants import InputTexts, Errors
+-from utils.until_not_valid import until_not_valid
++from utils.until_not_valid import until_none
+ 
+ 
+-@until_not_valid
++@until_none
+ def get_username():
+     username = Validators.get_username(input(InputTexts.USERNAME))
+     if not username:
+@@ -14,7 +14,7 @@
+     return username
+ 
+ 
+-@until_not_valid
++@until_none
+ def get_password():
+     password = Validators.get_password(pwinput.pwinput(InputTexts.PASSWORD))
+     if not password:
+@@ -23,7 +23,7 @@
+     return password
+ 
+ 
+-@until_not_valid
++@until_none
+ def get_string(prompt):
+     string = Validators.get_valid_string(input(prompt))
+     if not string:
+@@ -32,7 +32,7 @@
+     return string
+ 
+ 
+-@until_not_valid
++@until_none
+ def get_correct_option():
+     correct_option = Validators.get_correct_option(input(InputTexts.CORRECT_OPTION))
+     if not correct_option:
+Index: src/utils/until_not_valid.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>def until_not_valid(input_func):\r\n    def get_until_not_valid(*args):\r\n        while not (valid_result := input_func(*args)):\r\n            continue\r\n        return valid_result\r\n\r\n    return get_until_not_valid\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/utils/until_not_valid.py b/src/utils/until_not_valid.py
+--- a/src/utils/until_not_valid.py	(revision addfaa1a5da39d8d268474f67f5132cd90c632dd)
++++ b/src/utils/until_not_valid.py	(date 1706097870615)
+@@ -1,4 +1,4 @@
+-def until_not_valid(input_func):
++def until_none(input_func):
+     def get_until_not_valid(*args):
+         while not (valid_result := input_func(*args)):
+             continue

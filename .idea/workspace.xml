@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7b7e68a5-4c9a-46e7-bb04-1085f1f6d70d" name="Changes" comment="never use pycharm formatting(still) and flows" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="flask_api_localhost" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tanmayjobs&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="e31d9549-8a6f-4011-b0f9-633b37c7b739" />
+        <option name="url" value="https://github.com/tanmayjobs/quiz_master.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/app.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2Xc5xIooTQQPcwFngu8PLtEgHkf" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python tests.Python tests for test_handler.test_auth.TestAuthHandler.executor": "Run",
+    "Python tests.Python tests for test_screens.test_admin.TestAdminScreen.test_remove_quiz_screen_negative.executor": "Run",
+    "Python tests.Python tests for test_screens.test_admin.TestAdminScreen.test_remove_user_screen_negative.executor": "Run",
+    "Python tests.Python tests for test_screens.test_common.test_select_multiple_from_list.executor": "Run",
+    "Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_negative.executor": "Run",
+    "Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_positive.executor": "Run",
+    "Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_type_negative.executor": "Run",
+    "Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_type_positive.executor": "Run",
+    "Python.python main.py.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tmudgal\OneDrive - WatchGuard Technologies Inc\code\learning\quiz_master\src\database\mysql" />
+      <recent name="C:\Users\tmudgal\OneDrive - WatchGuard Technologies Inc\code\learning\quiz_master\src\database\sqlite" />
+      <recent name="C:\Users\tmudgal\OneDrive - WatchGuard Technologies Inc\code\learning\quiz_master\tests" />
+      <recent name="C:\Users\tmudgal\OneDrive - WatchGuard Technologies Inc\code\learning\quiz_master\src\helpers\enum" />
+      <recent name="C:\Users\tmudgal\OneDrive - WatchGuard Technologies Inc\code\learning\quiz_master\src\screens" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.python main.py">
+    <configuration name="python main.py" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="quiz_master" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (pythonProject)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_negative" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="quiz_master" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_negative&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_positive" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="quiz_master" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_positive&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_type_positive" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="quiz_master" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_type_positive&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest" type="tests" factoryName="py.test">
+      <module name="quiz_master" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\tmudgal\AppData\Local\Microsoft\WindowsApps\python3.11.exe" />
+      <option name="SDK_NAME" value="Python 3.11" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.python main.py" />
+      <item itemvalue="Python tests.pytest" />
+      <item itemvalue="Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_negative" />
+      <item itemvalue="Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_positive" />
+      <item itemvalue="Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_type_positive" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.python main.py" />
+        <item itemvalue="Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_type_positive" />
+        <item itemvalue="Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_positive" />
+        <item itemvalue="Python tests.Python tests for test_screens.test_manage_quizzes.TestManageQuizScreen.test_select_quiz_screen_negative" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b7e68a5-4c9a-46e7-bb04-1085f1f6d70d" name="Changes" comment="" />
+      <created>1698915773209</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698915773209</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Remove Quiz Working">
+      <option name="closed" value="true" />
+      <created>1699959320487</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699959320487</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Better handling">
+      <option name="closed" value="true" />
+      <created>1699960160620</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699960160620</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Quiz Play Working">
+      <option name="closed" value="true" />
+      <created>1700035528850</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1700035528850</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Quiz Record Added!">
+      <option name="closed" value="true" />
+      <created>1700062219138</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1700062219138</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Play Quiz, Quiz Record.">
+      <option name="closed" value="true" />
+      <created>1700064480156</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1700064480156</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Explore Quiz">
+      <option name="closed" value="true" />
+      <created>1700066309833</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1700066309833</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Logging">
+      <option name="closed" value="true" />
+      <created>1700106355834</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1700106355834</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Logging and Exception">
+      <option name="closed" value="true" />
+      <created>1700107028557</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1700107028557</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Trying .exe">
+      <option name="closed" value="true" />
+      <created>1700124162447</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1700124162447</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Working...">
+      <option name="closed" value="true" />
+      <created>1700134758839</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1700134758839</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Top Records...">
+      <option name="closed" value="true" />
+      <created>1700137815773</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1700137815773</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Better Handled.">
+      <option name="closed" value="true" />
+      <created>1700142583869</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1700142583869</updated>
+    </task>
+    <task id="LOCAL-00025" summary="List Questions">
+      <option name="closed" value="true" />
+      <created>1700463334559</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1700463334559</updated>
+    </task>
+    <task id="LOCAL-00026" summary="New Architecture">
+      <option name="closed" value="true" />
+      <created>1700565153986</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1700565153986</updated>
+    </task>
+    <task id="LOCAL-00027" summary="New Architecture Started">
+      <option name="closed" value="true" />
+      <created>1700567664622</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1700567664622</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Screens redefining started">
+      <option name="closed" value="true" />
+      <created>1700583595915</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1700583595915</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Screens redefining working, some bugs">
+      <option name="closed" value="true" />
+      <created>1700583910169</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1700583910169</updated>
+    </task>
+    <task id="LOCAL-00030" summary="src and test working">
+      <option name="closed" value="true" />
+      <created>1700642331748</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1700642331748</updated>
+    </task>
+    <task id="LOCAL-00031" summary="auth_handler testing">
+      <option name="closed" value="true" />
+      <created>1700642701204</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1700642701204</updated>
+    </task>
+    <task id="LOCAL-00032" summary="modify quiz working">
+      <option name="closed" value="true" />
+      <created>1700646836042</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1700646836042</updated>
+    </task>
+    <task id="LOCAL-00033" summary="pytest.ini &amp; db context">
+      <option name="closed" value="true" />
+      <created>1700726630380</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1700726630380</updated>
+    </task>
+    <task id="LOCAL-00034" summary="better mocking">
+      <option name="closed" value="true" />
+      <created>1700730734344</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1700730734344</updated>
+    </task>
+    <task id="LOCAL-00035" summary="validators">
+      <option name="closed" value="true" />
+      <created>1700801541935</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1700801541935</updated>
+    </task>
+    <task id="LOCAL-00036" summary="doc strings">
+      <option name="closed" value="true" />
+      <created>1700804406500</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1700804406500</updated>
+    </task>
+    <task id="LOCAL-00037" summary="validators">
+      <option name="closed" value="true" />
+      <created>1700817635749</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1700817635749</updated>
+    </task>
+    <task id="LOCAL-00038" summary="screen testing started">
+      <option name="closed" value="true" />
+      <created>1700822544754</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1700822544754</updated>
+    </task>
+    <task id="LOCAL-00039" summary="db read &amp; write">
+      <option name="closed" value="true" />
+      <created>1700824559055</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1700824559055</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Segregation of input &amp; validators">
+      <option name="closed" value="true" />
+      <created>1700899427474</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1700899427474</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Segregation of input &amp; validators">
+      <option name="closed" value="true" />
+      <created>1700971879837</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1700971879837</updated>
+    </task>
+    <task id="LOCAL-00042" summary="More Screen Tests">
+      <option name="closed" value="true" />
+      <created>1700979071579</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1700979071579</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Testing">
+      <option name="closed" value="true" />
+      <created>1701063408214</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1701063408214</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Testing">
+      <option name="closed" value="true" />
+      <created>1701101194545</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1701101194545</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Testing with OOPs">
+      <option name="closed" value="true" />
+      <created>1701146754719</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1701146754719</updated>
+    </task>
+    <task id="LOCAL-00046" summary="logging applied">
+      <option name="closed" value="true" />
+      <created>1701160721466</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1701160721466</updated>
+    </task>
+    <task id="LOCAL-00047" summary="more testing &amp; less coverage">
+      <option name="closed" value="true" />
+      <created>1701163889229</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1701163889229</updated>
+    </task>
+    <task id="LOCAL-00048" summary="other">
+      <option name="closed" value="true" />
+      <created>1701256517434</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1701256517434</updated>
+    </task>
+    <task id="LOCAL-00049" summary="some more tests">
+      <option name="closed" value="true" />
+      <created>1702892660873</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1702892660873</updated>
+    </task>
+    <task id="LOCAL-00050" summary="access and refresh tokens">
+      <option name="closed" value="true" />
+      <created>1706687460134</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1706687460135</updated>
+    </task>
+    <task id="LOCAL-00051" summary="temp">
+      <option name="closed" value="true" />
+      <created>1706694747665</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1706694747665</updated>
+    </task>
+    <task id="LOCAL-00052" summary="DOC-Strings">
+      <option name="closed" value="true" />
+      <created>1706850011095</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1706850011095</updated>
+    </task>
+    <task id="LOCAL-00053" summary="logging and doc-strings">
+      <option name="closed" value="true" />
+      <created>1706852040667</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1706852040667</updated>
+    </task>
+    <task id="LOCAL-00054" summary="database approach">
+      <option name="closed" value="true" />
+      <created>1706872470418</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1706872470419</updated>
+    </task>
+    <task id="LOCAL-00055" summary="database approach">
+      <option name="closed" value="true" />
+      <created>1708403069679</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1708403069679</updated>
+    </task>
+    <task id="LOCAL-00056" summary="play quiz work">
+      <option name="closed" value="true" />
+      <created>1708489214585</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489214585</updated>
+    </task>
+    <task id="LOCAL-00057" summary="perfect">
+      <option name="closed" value="true" />
+      <created>1708497073397</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1708497073397</updated>
+    </task>
+    <task id="LOCAL-00058" summary="postman base">
+      <option name="closed" value="true" />
+      <created>1708503852048</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1708503852048</updated>
+    </task>
+    <task id="LOCAL-00059" summary="formatting">
+      <option name="closed" value="true" />
+      <created>1708504681656</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1708504681657</updated>
+    </task>
+    <task id="LOCAL-00060" summary="never use pycharm formatting">
+      <option name="closed" value="true" />
+      <created>1708505433662</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1708505433662</updated>
+    </task>
+    <task id="LOCAL-00061" summary="never use pycharm formatting(still) and flows">
+      <option name="closed" value="true" />
+      <created>1708507284532</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1708507284532</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="postman" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="pytest.ini &amp; db context" />
+    <MESSAGE value="better mocking" />
+    <MESSAGE value="doc strings" />
+    <MESSAGE value="validators" />
+    <MESSAGE value="screen testing started" />
+    <MESSAGE value="db read &amp; write" />
+    <MESSAGE value="Segregation of input &amp; validators" />
+    <MESSAGE value="More Screen Tests" />
+    <MESSAGE value="Testing" />
+    <MESSAGE value="Testing with OOPs" />
+    <MESSAGE value="logging applied" />
+    <MESSAGE value="more testing &amp; less coverage" />
+    <MESSAGE value="other" />
+    <MESSAGE value="some more tests" />
+    <MESSAGE value="access and refresh tokens" />
+    <MESSAGE value="temp" />
+    <MESSAGE value="DOC-Strings" />
+    <MESSAGE value="logging and doc-strings" />
+    <MESSAGE value="database approach" />
+    <MESSAGE value="play quiz work" />
+    <MESSAGE value="perfect" />
+    <MESSAGE value="postman base" />
+    <MESSAGE value="formatting" />
+    <MESSAGE value="never use pycharm formatting" />
+    <MESSAGE value="never use pycharm formatting(still) and flows" />
+    <option name="LAST_COMMIT_MESSAGE" value="never use pycharm formatting(still) and flows" />
+  </component>
+</project>

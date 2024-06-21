@@ -1,0 +1,147 @@
+Index: flows.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[\r\n    {\r\n        \"flow_name\": \"admin create tag\",\r\n        \"username\": \"alfred\",\r\n        \"password\": \"Alfred@123\",\r\n        \"flow\": [\r\n            {\r\n                \"requestId\": \"sign in\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"all tags\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"add tag\",\r\n                \"expectedStatusCode\": 201\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"flow_name\": \"creator create a quiz\",\r\n        \"username\": \"riddler\",\r\n        \"password\": \"Riddler@123\",\r\n        \"flow\": [\r\n            {\r\n                \"requestId\": \"sign in\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"add quiz\",\r\n                \"expectedStatusCode\": 201\r\n            },\r\n            {\r\n                \"requestId\": \"add question\",\r\n                \"expectedStatusCode\": 201\r\n            },\r\n            {\r\n                \"requestId\": \"add option\",\r\n                \"expectedStatusCode\": 201\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"flow_name\": \"player create account and play a quiz\",\r\n        \"flow\": [\r\n            {\r\n                \"requestId\": \"sign up\",\r\n                \"expectedStatusCode\": 201\r\n            },\r\n            {\r\n                \"requestId\": \"sign in\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"get quizzes\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"get quiz\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"get questions\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"refresh\",\r\n                \"expectedStatusCode\": 200\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"flow_name\": \"creator update a quiz\",\r\n        \"username\": \"riddler\",\r\n        \"password\": \"Riddler@123\",\r\n        \"flow\": [\r\n            {\r\n                \"requestId\": \"sign in\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"update question\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"update option\",\r\n                \"expectedStatusCode\": 200\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"flow_name\": \"creator delete a quiz, question & option\",\r\n        \"username\": \"riddler\",\r\n        \"password\": \"Riddler@123\",\r\n        \"flow\": [\r\n            {\r\n                \"requestId\": \"sign in\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"delete option\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"delete question\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"delete quiz\",\r\n                \"expectedStatusCode\": 200\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"flow_name\": \"admin remove user\",\r\n        \"username\": \"alfred\",\r\n        \"password\": \"Alfred@123\",\r\n        \"flow\": [\r\n            {\r\n                \"requestId\": \"sign in\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"get users\",\r\n                \"expectedStatusCode\": 200\r\n            },\r\n            {\r\n                \"requestId\": \"delete user\",\r\n                \"expectedStatusCode\": 200\r\n            }\r\n        ]\r\n    }\r\n]\r\n
+===================================================================
+diff --git a/flows.json b/flows.json
+--- a/flows.json	
++++ b/flows.json	
+@@ -67,6 +67,51 @@
+             {
+                 "requestId": "refresh",
+                 "expectedStatusCode": 200
++            },
++            {
++                "requestId": "play",
++                "expectedStatusCode": 201
++            }
++        ]
++    },
++    {
++        "flow_name": "player unauthorized",
++        "flow": [
++            {
++                "requestId": "delete user",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "add tag",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "add quiz",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "add question",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "add option",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "update question",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "update option",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "delete option",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "delete question",
++                "expectedStatusCode": 403
+             }
+         ]
+     },
+@@ -128,6 +173,86 @@
+             {
+                 "requestId": "delete user",
+                 "expectedStatusCode": 200
++            }
++        ]
++    },
++    {
++        "flow_name": "admin unauthorized",
++        "username": "alfred",
++        "password": "Alfred@123",
++        "flow": [
++            {
++                "requestId": "sign in",
++                "expectedStatusCode": 200
++            },
++            {
++                "requestId": "add quiz",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "add question",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "add option",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "update question",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "update option",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "delete option",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "delete question",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "play",
++                "expectedStatusCode": 403
++            }
++        ]
++    },
++    {
++        "flow_name": "creator unauthorized",
++        "username": "riddler",
++        "password": "Riddler@123",
++        "flow": [
++            {
++                "requestId": "sign in",
++                "expectedStatusCode": 200
++            },
++            {
++                "requestId": "delete user",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "add tag",
++                "expectedStatusCode": 403
++            },
++            {
++                "requestId": "play",
++                "expectedStatusCode": 403
++            }
++        ]
++    },
++    {
++        "flow_name": "un-processable data",
++        "username": "*@!(!",
++        "flow": [
++            {
++                "requestId": "sign up",
++                "expectedStatusCode": 422
++            },
++            {
++                "requestId": "sign in",
++                "expectedStatusCode": 422
+             }
+         ]
+     }
